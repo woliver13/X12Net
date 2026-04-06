@@ -81,12 +81,16 @@ public sealed class X12Reader : IDisposable
     // ── Asynchronous API ──────────────────────────────────────────────────
 
     /// <summary>Asynchronously enumerates all segments in the interchange.</summary>
-    public async IAsyncEnumerable<X12Segment> ReadAllSegmentsAsync()
+    public async IAsyncEnumerable<X12Segment> ReadAllSegmentsAsync(
+        [System.Runtime.CompilerServices.EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
         await Task.Yield();
         foreach (var segment in EnumerateWithCap(ParseSegments(_input, _delimiters)))
+        {
+            cancellationToken.ThrowIfCancellationRequested();
             yield return segment;
+        }
     }
 
     /// <summary>

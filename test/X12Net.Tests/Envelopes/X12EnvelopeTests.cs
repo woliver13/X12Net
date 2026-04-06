@@ -5,6 +5,33 @@ namespace X12Net.Tests.Envelopes;
 
 public class X12EnvelopeTests
 {
+    // ── Cycle 3 (Phase 8) ─────────────────────────────────────────────────
+
+    [Fact]
+    public void Envelope_Parse_extracts_fields_from_builder_output()
+    {
+        var edi = new X12InterchangeBuilder(
+                      senderId: "ACME",
+                      receiverId: "PARTNER",
+                      date: "190901",
+                      time: "1200",
+                      interchangeControlNumber: 42)
+            .BeginFunctionalGroup("FA", "ACME", "PARTNER", "20190901", "005010X231A1")
+            .AddRawSegment("ST*999*0001")
+            .AddRawSegment("SE*2*0001")
+            .EndFunctionalGroup()
+            .Build();
+
+        var envelope = X12Envelope.Parse(edi);
+
+        Assert.Equal("ACME",    envelope.SenderId);
+        Assert.Equal("PARTNER", envelope.ReceiverId);
+        Assert.Equal(42,        envelope.InterchangeControlNumber);
+        Assert.Equal(1,         envelope.DeclaredGroupCount);
+        Assert.True(envelope.IsValid);
+    }
+
+
     private const string FullInterchange =
         "ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *201909*1200*^*00501*000000042*0*P*:~" +
         "GS*FA*SENDER*RECEIVER*20190901*1200*7*X*005010X231A1~" +

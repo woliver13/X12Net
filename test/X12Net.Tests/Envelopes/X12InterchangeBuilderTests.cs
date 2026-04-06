@@ -27,6 +27,73 @@ public class X12InterchangeBuilderTests
         Assert.DoesNotContain("ISA*", edi);
     }
 
+    // ── Cycle 2 (Phase 8) ─────────────────────────────────────────────────
+
+    [Fact]
+    public void Builder_with_two_functional_groups_passes_validation()
+    {
+        var edi = new X12InterchangeBuilder("SENDER", "RECEIVER", "190901", "1200",
+                      interchangeControlNumber: 2)
+            .BeginFunctionalGroup("FA", "SENDER", "RECEIVER", "20190901", "005010X231A1", groupControlNumber: 1)
+            .AddRawSegment("ST*999*0001")
+            .AddRawSegment("SE*2*0001")   // ST + SE = 2
+            .EndFunctionalGroup()
+            .BeginFunctionalGroup("HB", "SENDER", "RECEIVER", "20190901", "005010X279A1", groupControlNumber: 2)
+            .AddRawSegment("ST*271*0001")
+            .AddRawSegment("SE*2*0001")   // ST + SE = 2
+            .EndFunctionalGroup()
+            .Build();
+
+        var result = X12Net.Validation.X12Validator.Validate(edi);
+        var interchange = X12Net.DOM.X12Interchange.Parse(edi);
+
+        Assert.True(result.IsValid, string.Join("; ", result.Errors.Select(e => e.Message)));
+        Assert.Equal(2, interchange.FunctionalGroups.Count);
+        Assert.Equal("999", interchange.FunctionalGroups[0].Transactions[0].ST[1]);
+        Assert.Equal("271", interchange.FunctionalGroups[1].Transactions[0].ST[1]);
+    }
+
+    // ── Cycle 1 (Phase 7) ─────────────────────────────────────────────────
+
+    [Fact]
+    public void Builder_output_passes_full_structural_validation()
+    {
+        var edi = new X12InterchangeBuilder("SENDER", "RECEIVER", "190901", "1200")
+            .BeginFunctionalGroup("FA", "SENDER", "RECEIVER", "20190901", "005010X231A1")
+            .AddRawSegment("ST*999*0001")
+            .AddRawSegment("AK1*FA*1*005010X231A1")
+            .AddRawSegment("AK9*A*1*1*1")
+            .AddRawSegment("SE*4*0001")
+            .EndFunctionalGroup()
+            .Build();
+
+        var result = X12Net.Validation.X12Validator.Validate(edi);
+
+        Assert.True(result.IsValid, string.Join("; ", result.Errors.Select(e => e.Message)));
+    }
+
+    // ── Cycle 4 (Phase 6) ─────────────────────────────────────────────────
+
+    [Fact]
+    public void Custom_delimiter_builder_output_parses_correctly()
+    {
+        var edi = new X12InterchangeBuilder("SENDER", "RECEIVER", "190901", "1200",
+                      elementSeparator: '|', componentSeparator: '>', segmentTerminator: '\n')
+            .BeginFunctionalGroup("FA", "SENDER", "RECEIVER", "20190901", "005010X231A1")
+            .AddRawSegment("ST|999|0001")
+            .AddRawSegment("AK1|FA|1|005010X231A1")
+            .AddRawSegment("SE|3|0001")
+            .EndFunctionalGroup()
+            .Build();
+
+        var interchange = X12Interchange.Parse(edi);
+
+        Assert.Equal("ISA", interchange.ISA.SegmentId);
+        Assert.Single(interchange.FunctionalGroups);
+        Assert.Equal("999", interchange.FunctionalGroups[0].Transactions[0].ST[1]);
+        Assert.Equal('|', interchange.Delimiters.ElementSeparator);
+    }
+
     // ── Cycle 2 (Phase 4) ─────────────────────────────────────────────────
 
     [Fact]

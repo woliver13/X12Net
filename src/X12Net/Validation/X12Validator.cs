@@ -24,6 +24,7 @@ public static class X12Validator
         CheckInterchangeControlNumber(segments, errors);
         CheckGroupControlNumbers(segments, errors);
         CheckIeaGroupCount(segments, errors);
+        CheckGeTransactionCounts(segments, errors);
         CheckSeSegmentCounts(segments, errors);
 
         return new X12ValidationResult(errors);
@@ -100,6 +101,31 @@ public static class X12Validator
             errors.Add(new X12ValidationError(
                 X12ErrorCode.IeaGroupCountMismatch,
                 $"IEA01 declares {declared} functional group(s) but found {actual}."));
+    }
+
+    private static void CheckGeTransactionCounts(
+        List<X12Segment> segments, List<X12ValidationError> errors)
+    {
+        // For each GS/GE pair, GE01 must equal the number of ST segments inside the group.
+        int stCount = 0;
+        bool inGroup = false;
+        X12Segment? currentGe = null;
+
+        foreach (var seg in segments)
+        {
+            if (seg.SegmentId == "GS")  { inGroup = true; stCount = 0; continue; }
+            if (seg.SegmentId == "ST" && inGroup) { stCount++; continue; }
+            if (seg.SegmentId == "GE" && inGroup)
+            {
+                currentGe = seg;
+                int declared = int.Parse(seg[1]);
+                if (declared != stCount)
+                    errors.Add(new X12ValidationError(
+                        X12ErrorCode.GeTransactionCountMismatch,
+                        $"GE01 declares {declared} transaction(s) but group contains {stCount}."));
+                inGroup = false;
+            }
+        }
     }
 
     private static void CheckSeSegmentCounts(

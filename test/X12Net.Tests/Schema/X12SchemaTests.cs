@@ -113,6 +113,31 @@ public class X12SchemaTests
         Assert.Contains("BHT", errors[0].Message);
     }
 
+    // ── Cycle 3 (Phase 7) ─────────────────────────────────────────────────
+
+    [Fact]
+    public void ValidateInterchange_skips_transactions_with_no_registered_schema()
+    {
+        // Registry has no schema for 999 — the transaction should be silently skipped
+        var registry = new X12SchemaRegistry();
+        registry.Register(new X12TransactionSchema("270", "Eligibility Inquiry",
+            new X12SegmentSchema("BHT", new[] { "Code" }, isRequired: true)));
+
+        const string input =
+            "ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *201909*1200*^*00501*000000001*0*P*:~" +
+            "GS*FA*SENDER*RECEIVER*20190901*1200*1*X*005010X231A1~" +
+            "ST*999*0001~" +
+            "AK1*FA*1*005010X231A1~" +
+            "SE*3*0001~" +
+            "GE*1*1~" +
+            "IEA*1*000000001~";
+
+        var interchange = X12Net.DOM.X12Interchange.Parse(input);
+        var errors = X12SchemaValidator.ValidateInterchange(interchange, registry);
+
+        Assert.Empty(errors);
+    }
+
     // ── Cycle 4 (Phase 5) ─────────────────────────────────────────────────
 
     [Fact]
@@ -130,6 +155,22 @@ public class X12SchemaTests
         Assert.Equal("1", allEb[0][1]);  // EB01
         Assert.Equal("C", allEb[1][1]);
         Assert.Equal("W", allEb[2][1]);
+    }
+
+    // ── Cycle 4 (Phase 8) ─────────────────────────────────────────────────
+
+    [Fact]
+    public void DynamicTransaction_AllSegments_returns_empty_for_unregistered_segment()
+    {
+        var schema = new X12TransactionSchema("271", "Eligibility Response",
+            new X12SegmentSchema("EB", new[] { "EligibilityCode" }));
+
+        const string input = "ST*271*0001~EB*1~SE*2*0001~";
+        var tx = X12DynamicTransaction.Parse(input, schema);
+
+        var result = tx.AllSegments("NM1");  // NM1 not in schema or input
+
+        Assert.Empty(result);
     }
 
     // ── Cycle 5 (Phase 4) ─────────────────────────────────────────────────

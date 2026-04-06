@@ -4,6 +4,28 @@ namespace X12Net.Tests.Validation;
 
 public class X12ValidatorTests
 {
+    private const string GE01MismatchInterchange =
+        "ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *201909*1200*^*00501*000000001*0*P*:~" +
+        "GS*FA*SENDER*RECEIVER*20190901*1200*1*X*005010X231A1~" +
+        "ST*999*0001~" +
+        "AK1*FA*1*005010X231A1~" +
+        "AK9*A*1*1*1~" +
+        "SE*4*0001~" +
+        "GE*2*1~" +   // GE01 says 2 transactions but there's only 1
+        "IEA*1*000000001~";
+
+    // ── Cycle 2 (Phase 6) ─────────────────────────────────────────────────
+
+    [Fact]
+    public void Validator_reports_ge01_transaction_count_mismatch()
+    {
+        var result = X12Validator.Validate(GE01MismatchInterchange);
+
+        Assert.False(result.IsValid);
+        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.GeTransactionCountMismatch);
+    }
+
+
     private const string ValidInterchange =
         "ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *201909*1200*^*00501*000000001*0*P*:~" +
         "GS*FA*SENDER*RECEIVER*20190901*1200*1*X*005010X231A1~" +

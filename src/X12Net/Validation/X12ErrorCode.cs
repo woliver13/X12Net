@@ -18,6 +18,9 @@ public enum X12ErrorCode
     /// <summary>IEA01 functional group count does not match the number of GS segments.</summary>
     IeaGroupCountMismatch,
 
+    /// <summary>GE01 transaction set count does not match the number of ST segments in the group.</summary>
+    GeTransactionCountMismatch,
+
     /// <summary>A structurally required segment (ISA, IEA, GS, GE, ST, SE) is absent.</summary>
     MissingRequiredSegment,
 

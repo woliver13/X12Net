@@ -20,8 +20,13 @@ public sealed class X12MutableSegment
     /// <summary>Gets or sets the element at the given 1-based <paramref name="index"/>.</summary>
     public string this[int index]
     {
-        get => _elements[index - 1];
-        set => _elements[index - 1] = value;
+        get => index - 1 < _elements.Count ? _elements[index - 1] : string.Empty;
+        set
+        {
+            while (_elements.Count < index)
+                _elements.Add(string.Empty);
+            _elements[index - 1] = value;
+        }
     }
 
     /// <summary>The number of elements in this segment.</summary>

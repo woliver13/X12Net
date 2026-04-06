@@ -72,6 +72,28 @@ public class X12ReaderTransactionTests
         Assert.Equal("271", txns[1].ST[1]);
     }
 
+    // ── Cycle 1 (Phase 6) ─────────────────────────────────────────────────
+
+    [Fact]
+    public async Task ReadAllSegmentsAsync_respects_cancellation_token()
+    {
+        var cts = new CancellationTokenSource();
+        var delimiters = X12Delimiters.FromIsa(TwoGroupInterchange);
+        using var reader = new X12Reader(TwoGroupInterchange, delimiters);
+
+        var segments = new List<string>();
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+        {
+            await foreach (var seg in reader.ReadAllSegmentsAsync(cts.Token))
+            {
+                segments.Add(seg.SegmentId);
+                if (seg.SegmentId == "ISA") cts.Cancel();
+            }
+        });
+
+        Assert.Single(segments);  // only ISA was yielded before cancellation
+    }
+
     // ── Cycle 1 (Phase 5) ─────────────────────────────────────────────────
 
     [Fact]
