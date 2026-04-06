@@ -1,3 +1,4 @@
+using X12Net.DOM;
 using X12Net.Envelopes;
 using X12Net.IO;
 
@@ -5,6 +6,50 @@ namespace X12Net.Tests.Envelopes;
 
 public class X12InterchangeBuilderTests
 {
+    // ── Cycle 3 (Phase 5) ─────────────────────────────────────────────────
+
+    [Fact]
+    public void Builder_respects_custom_element_separator()
+    {
+        var edi = new X12InterchangeBuilder("SENDER", "RECEIVER", "190901", "1200",
+                      elementSeparator: '|', componentSeparator: '>', segmentTerminator: '\n')
+            .BeginFunctionalGroup("FA", "SENDER", "RECEIVER", "20190901", "005010X231A1")
+            .AddRawSegment("ST|999|0001")
+            .AddRawSegment("SE|2|0001")
+            .EndFunctionalGroup()
+            .Build();
+
+        // ISA element 3 (index 3 in the raw string) should be the custom separator
+        Assert.Equal('|', edi[3]);
+        // Segments should be terminated with newline
+        Assert.Contains('\n', edi);
+        // Default '*' should NOT appear as element separator
+        Assert.DoesNotContain("ISA*", edi);
+    }
+
+    // ── Cycle 2 (Phase 4) ─────────────────────────────────────────────────
+
+    [Fact]
+    public void Builder_output_roundtrips_through_interchange_parse()
+    {
+        var edi = new X12InterchangeBuilder("SENDER", "RECEIVER", "190901", "1200")
+            .BeginFunctionalGroup("FA", "SENDER", "RECEIVER", "20190901", "005010X231A1")
+            .AddRawSegment("ST*999*0001")
+            .AddRawSegment("AK1*FA*1*005010X231A1")
+            .AddRawSegment("AK9*A*1*1*1")
+            .AddRawSegment("SE*4*0001")
+            .EndFunctionalGroup()
+            .Build();
+
+        var interchange = X12Interchange.Parse(edi);
+
+        Assert.Equal("ISA", interchange.ISA.SegmentId);
+        Assert.Equal("IEA", interchange.IEA.SegmentId);
+        Assert.Single(interchange.FunctionalGroups);
+        Assert.Single(interchange.FunctionalGroups[0].Transactions);
+        Assert.Equal("999", interchange.FunctionalGroups[0].Transactions[0].ST[1]);
+    }
+
     // ── Cycle 15 ──────────────────────────────────────────────────────────
 
     [Fact]

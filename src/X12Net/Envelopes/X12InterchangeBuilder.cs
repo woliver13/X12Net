@@ -17,9 +17,9 @@ public sealed class X12InterchangeBuilder
     private readonly string _time;
     private readonly int    _icn;
 
-    private readonly char _elementSep   = '*';
-    private readonly char _componentSep = ':';
-    private readonly char _segmentTerm  = '~';
+    private readonly char _elementSep;
+    private readonly char _componentSep;
+    private readonly char _segmentTerm;
 
     // ── Build state ───────────────────────────────────────────────────────
 
@@ -56,15 +56,21 @@ public sealed class X12InterchangeBuilder
         string time,
         int    interchangeControlNumber = 1,
         string senderQualifier         = "ZZ",
-        string receiverQualifier       = "ZZ")
+        string receiverQualifier       = "ZZ",
+        char   elementSeparator        = '*',
+        char   componentSeparator      = ':',
+        char   segmentTerminator       = '~')
     {
-        _senderId   = senderId;
-        _receiverId = receiverId;
-        _date       = date;
-        _time       = time;
-        _icn        = interchangeControlNumber;
+        _senderId    = senderId;
+        _receiverId  = receiverId;
+        _date        = date;
+        _time        = time;
+        _icn         = interchangeControlNumber;
         SenderQualifier   = senderQualifier;
         ReceiverQualifier = receiverQualifier;
+        _elementSep  = elementSeparator;
+        _componentSep = componentSeparator;
+        _segmentTerm = segmentTerminator;
     }
 
     /// <summary>ISA05 sender qualifier.</summary>

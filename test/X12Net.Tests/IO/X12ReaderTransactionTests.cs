@@ -20,15 +20,31 @@ public class X12ReaderTransactionTests
         "GE*1*2~" +
         "IEA*2*000000001~";
 
+    private static List<X12Transaction> ReadAll(string input)
+    {
+        var delimiters = X12Delimiters.FromIsa(input);
+        using var reader = new X12Reader(input, delimiters);
+        return reader.ReadTransactions().ToList();
+    }
+
+    // ── Cycle 1 ───────────────────────────────────────────────────────────
+
+    [Fact]
+    public void Reader_ReadTransactions_yields_transactions_in_document_order()
+    {
+        var txns = ReadAll(TwoGroupInterchange);
+
+        Assert.Equal(2, txns.Count);
+        Assert.Equal("999", txns[0].ST[1]);
+        Assert.Equal("271", txns[1].ST[1]);
+    }
+
     // ── Cycle 2 ───────────────────────────────────────────────────────────
 
     [Fact]
     public void Reader_ReadTransactions_spans_multiple_functional_groups()
     {
-        var delimiters = X12Delimiters.FromIsa(TwoGroupInterchange);
-        using var reader = new X12Reader(TwoGroupInterchange, delimiters);
-
-        var txns = reader.ReadTransactions().ToList();
+        var txns = ReadAll(TwoGroupInterchange);
 
         // Body of tx[0]: AK1 only (GS/GE are envelope, not body)
         Assert.Single(txns[0].Segments);
@@ -39,18 +55,54 @@ public class X12ReaderTransactionTests
         Assert.Equal("BHT", txns[1].Segments[0].SegmentId);
     }
 
-    // ── Cycle 1 ───────────────────────────────────────────────────────────
+    // ── Cycle 1 (Phase 4) ─────────────────────────────────────────────────
 
     [Fact]
-    public void Reader_ReadTransactions_yields_transactions_in_document_order()
+    public async Task ReadTransactionsAsync_yields_transactions_in_document_order()
     {
         var delimiters = X12Delimiters.FromIsa(TwoGroupInterchange);
         using var reader = new X12Reader(TwoGroupInterchange, delimiters);
 
-        var txns = reader.ReadTransactions().ToList();
+        var txns = new List<X12Transaction>();
+        await foreach (var tx in reader.ReadTransactionsAsync())
+            txns.Add(tx);
 
         Assert.Equal(2, txns.Count);
         Assert.Equal("999", txns[0].ST[1]);
         Assert.Equal("271", txns[1].ST[1]);
+    }
+
+    // ── Cycle 1 (Phase 5) ─────────────────────────────────────────────────
+
+    [Fact]
+    public async Task CancellationToken_cancels_ReadTransactionsAsync_mid_stream()
+    {
+        var cts = new CancellationTokenSource();
+        var delimiters = X12Delimiters.FromIsa(TwoGroupInterchange);
+        using var reader = new X12Reader(TwoGroupInterchange, delimiters);
+
+        var txns = new List<X12Transaction>();
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+        {
+            await foreach (var tx in reader.ReadTransactionsAsync(cts.Token))
+            {
+                txns.Add(tx);
+                cts.Cancel();   // cancel after first transaction
+            }
+        });
+
+        Assert.Single(txns);    // only the first transaction was yielded
+    }
+
+    // ── Cycle 5 (Phase 4) ─────────────────────────────────────────────────
+
+    [Fact]
+    public void MemoryCap_is_enforced_on_ReadTransactions()
+    {
+        // TwoGroupInterchange has 12 segments total; cap at 5 should throw before any SE
+        var delimiters = X12Delimiters.FromIsa(TwoGroupInterchange);
+        using var reader = new X12Reader(TwoGroupInterchange, delimiters, maxSegments: 5);
+
+        Assert.Throws<X12MemoryCapException>(() => reader.ReadTransactions().ToList());
     }
 }

@@ -1,9 +1,14 @@
 using X12Net.Schema;
+using X12Net.Validation;
 
 namespace X12Net.Tests.Schema;
 
 public class X12SchemaTests
 {
+    private static readonly X12TransactionSchema Ts271Schema = new("271", "Eligibility Response",
+        new X12SegmentSchema("BHT", new[] { "HierarchicalStructureCode" }, isRequired: true),
+        new X12SegmentSchema("EB",  new[] { "EligibilityCode" },           isRequired: false));
+
     // ── Cycle 9 ───────────────────────────────────────────────────────────
 
     [Fact]
@@ -52,6 +57,79 @@ public class X12SchemaTests
         // Extended segment is also present
         Assert.NotNull(dentalSchema.GetSegment("DN1"));
         Assert.Equal("837D", dentalSchema.TransactionSetId);
+    }
+
+    // ── Cycle 3 (Phase 4) ─────────────────────────────────────────────────
+
+    [Fact]
+    public void SchemaValidator_fails_when_required_segment_is_missing()
+    {
+        const string input = "ST*271*0001~EB*1~SE*2*0001~";  // BHT missing
+
+        var result = X12SchemaValidator.Validate(input, Ts271Schema);
+
+        Assert.False(result.IsValid);
+        Assert.Contains(result.Errors, e => e.Message.Contains("BHT"));
+    }
+
+    // ── Cycle 4 (Phase 4) ─────────────────────────────────────────────────
+
+    [Fact]
+    public void SchemaValidator_passes_when_all_required_segments_present()
+    {
+        const string input = "ST*271*0001~BHT*0022~SE*2*0001~";  // BHT present, EB optional and absent
+
+        var result = X12SchemaValidator.Validate(input, Ts271Schema);
+
+        Assert.True(result.IsValid);
+        Assert.Empty(result.Errors);
+    }
+
+    // ── Cycle 2 (Phase 5) ─────────────────────────────────────────────────
+
+    private const string TwoTxInterchange =
+        "ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *201909*1200*^*00501*000000001*0*P*:~" +
+        "GS*HB*SENDER*RECEIVER*20190901*1200*1*X*005010X279A1~" +
+        "ST*271*0001~" +
+        "BHT*0022*11*10001234*20190901*1200~" +
+        "SE*2*0001~" +
+        "ST*271*0002~" +
+        "SE*1*0002~" +                          // BHT missing in second transaction
+        "GE*2*1~" +
+        "IEA*1*000000001~";
+
+    [Fact]
+    public void SchemaRegistry_validates_all_transactions_in_interchange()
+    {
+        var registry = new X12SchemaRegistry();
+        registry.Register(new X12TransactionSchema("271", "Eligibility Response",
+            new X12SegmentSchema("BHT", new[] { "HierarchicalStructureCode" }, isRequired: true)));
+
+        var interchange = X12Net.DOM.X12Interchange.Parse(TwoTxInterchange);
+        var errors = X12SchemaValidator.ValidateInterchange(interchange, registry);
+
+        // First transaction has BHT → valid; second is missing BHT → one error
+        Assert.Single(errors);
+        Assert.Contains("BHT", errors[0].Message);
+    }
+
+    // ── Cycle 4 (Phase 5) ─────────────────────────────────────────────────
+
+    [Fact]
+    public void DynamicTransaction_AllSegments_returns_every_occurrence()
+    {
+        var schema = new X12TransactionSchema("271", "Eligibility Response",
+            new X12SegmentSchema("EB", new[] { "EligibilityCode" }));
+
+        const string input = "ST*271*0001~EB*1~EB*C~EB*W~SE*4*0001~";
+        var tx = X12DynamicTransaction.Parse(input, schema);
+
+        var allEb = tx.AllSegments("EB").ToList();
+
+        Assert.Equal(3, allEb.Count);
+        Assert.Equal("1", allEb[0][1]);  // EB01
+        Assert.Equal("C", allEb[1][1]);
+        Assert.Equal("W", allEb[2][1]);
     }
 
     // ── Cycle 5 (Phase 4) ─────────────────────────────────────────────────

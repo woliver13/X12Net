@@ -89,6 +89,21 @@ public sealed class X12Reader : IDisposable
             yield return segment;
     }
 
+    /// <summary>
+    /// Asynchronously streams all ST/SE transaction sets from the interchange.
+    /// </summary>
+    public async IAsyncEnumerable<X12Transaction> ReadTransactionsAsync(
+        [System.Runtime.CompilerServices.EnumeratorCancellation] CancellationToken cancellationToken = default)
+    {
+        ThrowIfDisposed();
+        await Task.Yield();
+        foreach (var tx in ReadTransactions())
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            yield return tx;
+        }
+    }
+
     // ── Cap enforcement ───────────────────────────────────────────────────
 
     private IEnumerable<X12Segment> EnumerateWithCap(IEnumerable<X12Segment> source)
