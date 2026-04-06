@@ -1,3 +1,4 @@
+using X12Net.Core;
 using X12Net.IO;
 
 namespace X12Net.DOM;
@@ -12,11 +13,28 @@ public sealed class X12Interchange
     private X12Interchange(
         X12Segment isa,
         IReadOnlyList<X12FunctionalGroup> groups,
-        X12Segment iea)
+        X12Segment iea,
+        X12Delimiters delimiters)
     {
         ISA              = isa;
         FunctionalGroups = groups;
         IEA              = iea;
+        Delimiters       = delimiters;
+    }
+
+    /// <summary>The delimiters detected from the ISA header.</summary>
+    public X12Delimiters Delimiters { get; }
+
+    /// <summary>
+    /// Projects every transaction in this interchange through <paramref name="factory"/>,
+    /// returning a typed sequence. Use a generated <c>Parse</c> method as the factory,
+    /// for example: <c>interchange.GetTransactions(Ts271.Parse)</c>.
+    /// </summary>
+    public IEnumerable<T> GetTransactions<T>(Func<string, T> factory)
+    {
+        foreach (var group in FunctionalGroups)
+            foreach (var tx in group.Transactions)
+                yield return factory(tx.ToEdi(Delimiters));
     }
 
     /// <summary>The ISA (Interchange Control Header) segment.</summary>
@@ -33,14 +51,39 @@ public sealed class X12Interchange
     /// <summary>Parses a raw EDI X12 interchange into a hierarchical <see cref="X12Interchange"/>.</summary>
     public static X12Interchange Parse(string input)
     {
-        using var reader = new X12Reader(input);
+        var delimiters = X12Delimiters.FromIsa(input);
+        using var reader = new X12Reader(input, delimiters);
         var all = reader.ReadAllSegments().ToList();
-        return Build(all);
+        return Build(all, delimiters);
     }
+
+    /// <summary>Serializes the interchange back to EDI X12 text.</summary>
+    public override string ToString()
+    {
+        var sb = new System.Text.StringBuilder();
+
+        sb.Append(ISA.ToEdi(Delimiters));
+        foreach (var group in FunctionalGroups)
+        {
+            sb.Append(group.GS.ToEdi(Delimiters));
+            foreach (var tx in group.Transactions)
+            {
+                sb.Append(tx.ST.ToEdi(Delimiters));
+                foreach (var seg in tx.Segments)
+                    sb.Append(seg.ToEdi(Delimiters));
+                sb.Append(tx.SE.ToEdi(Delimiters));
+            }
+            sb.Append(group.GE.ToEdi(Delimiters));
+        }
+        sb.Append(IEA.ToEdi(Delimiters));
+
+        return sb.ToString();
+    }
+
 
     // ── Builder ───────────────────────────────────────────────────────────
 
-    private static X12Interchange Build(List<X12Segment> segments)
+    private static X12Interchange Build(List<X12Segment> segments, X12Delimiters delimiters)
     {
         X12Segment? isa = null;
         X12Segment? iea = null;
@@ -77,7 +120,7 @@ public sealed class X12Interchange
         if (isa is null) throw new InvalidOperationException("No ISA segment found.");
         if (iea is null) throw new InvalidOperationException("No IEA segment found.");
 
-        return new X12Interchange(isa, groups, iea);
+        return new X12Interchange(isa, groups, iea, delimiters);
     }
 
     private static (X12FunctionalGroup group, int segmentsConsumed) ParseGroup(

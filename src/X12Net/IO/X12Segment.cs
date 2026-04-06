@@ -23,4 +23,18 @@ public sealed class X12Segment
 
     /// <summary>Gets the element at <paramref name="index"/> (1-based, matching X12 field numbering).</summary>
     public string this[int index] => Elements[index - 1];
+
+    /// <summary>Serializes the segment back to EDI text.</summary>
+    internal string ToEdi(Core.X12Delimiters delimiters)
+    {
+        var sb = new System.Text.StringBuilder();
+        sb.Append(SegmentId);
+        foreach (var el in Elements)
+        {
+            sb.Append(delimiters.ElementSeparator);
+            sb.Append(el);
+        }
+        sb.Append(delimiters.SegmentTerminator);
+        return sb.ToString();
+    }
 }

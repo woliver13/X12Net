@@ -1,3 +1,4 @@
+using X12Net.Core;
 using X12Net.IO;
 
 namespace X12Net.DOM;
@@ -23,4 +24,15 @@ public sealed class X12Transaction
 
     /// <summary>Body segments between ST and SE (excluding ST and SE).</summary>
     public IReadOnlyList<X12Segment> Segments { get; }
+
+    /// <summary>Serializes the transaction (ST…body…SE) back to EDI X12 text.</summary>
+    public string ToEdi(X12Delimiters delimiters)
+    {
+        var sb = new System.Text.StringBuilder();
+        sb.Append(ST.ToEdi(delimiters));
+        foreach (var seg in Segments)
+            sb.Append(seg.ToEdi(delimiters));
+        sb.Append(SE.ToEdi(delimiters));
+        return sb.ToString();
+    }
 }

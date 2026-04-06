@@ -2,6 +2,8 @@ using X12Net.Transactions;
 
 namespace X12Net.Tests.Transactions;
 
+// Phase 2 — typed segment collections
+
 /// <summary>
 /// Verifies that the source generator emits a typed class for each built-in
 /// transaction set with the correct key-segment property.
@@ -94,6 +96,32 @@ public class GeneratedTransactionTests
 
         Assert.NotNull(ts.EQ);
         Assert.Equal("30", ts.EQ!.ServiceTypeCode);  // EQ01
+    }
+
+    // ── Phase 2, Cycle 5 — typed segment collections ──────────────────────
+
+    [Fact]
+    public void Ts271_AllEB_returns_all_EB_segments_in_order()
+    {
+        const string multi271 =
+            "ISA*00*          *00*          *ZZ*RECEIVER       *ZZ*SUBMITTER      *201909*1200*^*00501*000000001*0*P*:~" +
+            "GS*HB*RECEIVER*SUBMITTER*20190901*1200*1*X*005010X279A1~" +
+            "ST*271*0001~" +
+            "BHT*0022*11*10001234*20190901*1200~" +
+            "EB*1*FAM*30*MC~" +
+            "EB*C*IND*30*MC~" +
+            "EB*W*FAM*30*MC~" +
+            "SE*6*0001~" +
+            "GE*1*1~" +
+            "IEA*1*000000001~";
+
+        var ts = Ts271.Parse(multi271);
+        var all = ts.AllEB().ToList();
+
+        Assert.Equal(3, all.Count);
+        Assert.Equal("1", all[0].EligibilityOrBenefitInformation);
+        Assert.Equal("C", all[1].EligibilityOrBenefitInformation);
+        Assert.Equal("W", all[2].EligibilityOrBenefitInformation);
     }
 
     // ── 271 Eligibility Response ──────────────────────────────────────────

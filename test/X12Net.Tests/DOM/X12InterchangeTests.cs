@@ -127,6 +127,66 @@ public class X12InterchangeTests
         Assert.Equal("0002", group.Transactions[1].ST[2]);
     }
 
+    // ── Phase 2, Cycle 1 ─────────────────────────────────────────────────
+
+    [Fact]
+    public void Interchange_ToString_round_trips_a_simple_interchange()
+    {
+        var interchange = X12Interchange.Parse(FullInterchange);
+
+        var edI = interchange.ToString();
+        var reparsed = X12Interchange.Parse(edI);
+
+        Assert.Equal("ISA", reparsed.ISA.SegmentId);
+        Assert.Single(reparsed.FunctionalGroups);
+        Assert.Single(reparsed.FunctionalGroups[0].Transactions);
+        Assert.Equal("IEA", reparsed.IEA.SegmentId);
+    }
+
+    // ── Phase 2, Cycle 2 ─────────────────────────────────────────────────
+
+    [Fact]
+    public void Interchange_ToString_preserves_body_segments()
+    {
+        var interchange = X12Interchange.Parse(FullInterchange);
+
+        var reparsed = X12Interchange.Parse(interchange.ToString());
+        var tx = reparsed.FunctionalGroups[0].Transactions[0];
+
+        Assert.Equal("AK1", tx.Segments[0].SegmentId);
+        Assert.Equal("FA",  tx.Segments[0][1]);   // AK101
+        Assert.Equal("AK9", tx.Segments[1].SegmentId);
+        Assert.Equal("A",   tx.Segments[1][1]);   // AK901
+    }
+
+    // ── Phase 2, Cycle 6 ─────────────────────────────────────────────────
+
+    private const string Multi271Interchange =
+        "ISA*00*          *00*          *ZZ*RECEIVER       *ZZ*SUBMITTER      *201909*1200*^*00501*000000001*0*P*:~" +
+        "GS*HB*RECEIVER*SUBMITTER*20190901*1200*1*X*005010X279A1~" +
+        "ST*271*0001~" +
+        "BHT*0022*11*10001234*20190901*1200~" +
+        "EB*1*FAM*30*MC~" +
+        "SE*4*0001~" +
+        "ST*271*0002~" +
+        "BHT*0022*11*10001235*20190901*1200~" +
+        "EB*C*IND*30*MC~" +
+        "SE*4*0002~" +
+        "GE*2*1~" +
+        "IEA*1*000000001~";
+
+    [Fact]
+    public void Interchange_GetTransactions_returns_typed_wrappers()
+    {
+        var interchange = X12Interchange.Parse(Multi271Interchange);
+
+        var txns = interchange.GetTransactions(X12Net.Transactions.Ts271.Parse).ToList();
+
+        Assert.Equal(2, txns.Count);
+        Assert.Equal("1", txns[0].EB!.EligibilityOrBenefitInformation);
+        Assert.Equal("C", txns[1].EB!.EligibilityOrBenefitInformation);
+    }
+
     // ── Cycle 5 ───────────────────────────────────────────────────────────
 
     [Fact]

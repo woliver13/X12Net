@@ -1,3 +1,4 @@
+using X12Net.Core;
 using X12Net.IO;
 
 namespace X12Net.DOM;
@@ -24,33 +25,26 @@ public sealed class X12Document
         _elementSeparator   = elementSeparator;
         _componentSeparator = componentSeparator;
         _segmentTerminator  = segmentTerminator;
+        Delimiters          = new X12Delimiters(elementSeparator, componentSeparator, segmentTerminator);
     }
+
+    /// <summary>The delimiters used when this document was parsed.</summary>
+    public X12Delimiters Delimiters { get; }
 
     // ── Factory ───────────────────────────────────────────────────────────
 
     /// <summary>Parses raw EDI X12 text into an <see cref="X12Document"/>.</summary>
     public static X12Document Parse(string input)
     {
-        using var reader = new X12Reader(input);
-
-        // Detect delimiters from the ISA header if present
-        char elementSep   = '*';
-        char componentSep = ':';
-        char segmentTerm  = '~';
-
-        if (input.Length >= 106 && input.StartsWith("ISA", StringComparison.Ordinal))
-        {
-            elementSep   = input[3];
-            componentSep = input[104];
-            segmentTerm  = input[105];
-        }
+        var d = X12Delimiters.FromIsa(input);
+        using var reader = new X12Reader(input, d);
 
         var segments = reader
             .ReadAllSegments()
             .Select(s => new X12MutableSegment(s.SegmentId, s.Elements))
             .ToList();
 
-        return new X12Document(segments, elementSep, componentSep, segmentTerm);
+        return new X12Document(segments, d.ElementSeparator, d.ComponentSeparator, d.SegmentTerminator);
     }
 
     // ── Segment access ────────────────────────────────────────────────────
