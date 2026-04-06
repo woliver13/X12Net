@@ -1,9 +1,3 @@
-Here’s a clean, professional `README.md` tailored for your repo based on what’s publicly available about the project and similar X12 parser libraries. ([GitHub][1])
-
-You can drop this directly into your repo and tweak branding/details as needed.
-
----
-
 # X12Net
 
 A lightweight, object-oriented **ANSI ASC X12 EDI parser for .NET**.
@@ -20,19 +14,8 @@ X12Net provides a flexible way to parse, transform, and work with X12 transactio
 * 🧱 **Object-Oriented Design**
   Work with strongly structured hierarchical data (Interchange → Groups → Transactions → Segments).
 
-* 🔄 **Format Transformations**
-  Convert X12 documents into:
-
-  * XML
-  * HTML
-  * PDF (via integrations)
-
 * 🧩 **Extensible Architecture**
   Define custom transaction sets and extend parsing behavior.
-
-* 🗄️ **Optional Database Integration**
-  Interfaces available for persisting parsed data (e.g., SQL Server), but not required.
-
 ---
 
 ## 📚 What is X12?
@@ -54,7 +37,7 @@ git clone https://github.com/woliver13/X12Net.git
 Open the solution in Visual Studio:
 
 ```
-X12.sln
+X12Net.sln
 ```
 
 Build the project:
@@ -70,7 +53,7 @@ dotnet build
 ### Parse an X12 File
 
 ```csharp
-using X12;
+using X12Net;
 
 var parser = new X12Parser();
 var document = parser.Parse("sample.edi");
@@ -92,7 +75,7 @@ foreach (var group in document.FunctionGroups)
 ```
 /src        → Core parsing logic
 /tests      → Unit tests
-X12.sln     → Solution file
+X12Net.sln     → Solution file
 ```
 
 ---
@@ -164,9 +147,3 @@ If you encounter issues or have questions:
 
 * Open an issue on GitHub
 * Provide sample X12 files where possible
-
----
-
-If you want, I can tailor this further (e.g., add NuGet packaging, API docs, or align it with your internal engineering standards/spec style).
-
-[1]: https://github.com/bvanfleet/X12.NET?utm_source=chatgpt.com "GitHub - bvanfleet/X12.NET: An open source C# .NET implementation X12 Parser with object orientation."
