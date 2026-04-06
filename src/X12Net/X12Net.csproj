@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;netstandard2.0</TargetFrameworks>
+    <RootNamespace>X12Net</RootNamespace>
+    <AssemblyName>X12Net</AssemblyName>
+    <PackageId>X12Net</PackageId>
+    <Description>A modern, high-performance C# library for parsing, generating, and editing EDI X12 documents.</Description>
+    <Version>0.1.0</Version>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <ProjectReference
+      Include="..\X12Net.SourceGenerator\X12Net.SourceGenerator.csproj"
+      OutputItemType="Analyzer"
+      ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+</Project>
