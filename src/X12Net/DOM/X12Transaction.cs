@@ -1,3 +1,4 @@
+using System.Text;
 using X12Net.Core;
 using X12Net.IO;
 
@@ -28,7 +29,7 @@ public sealed class X12Transaction
     /// <summary>Serializes the transaction (ST…body…SE) back to EDI X12 text.</summary>
     public string ToEdi(X12Delimiters delimiters)
     {
-        var sb = new System.Text.StringBuilder();
+        var sb = new StringBuilder();
         sb.Append(ST.ToEdi(delimiters));
         foreach (var seg in Segments)
             sb.Append(seg.ToEdi(delimiters));

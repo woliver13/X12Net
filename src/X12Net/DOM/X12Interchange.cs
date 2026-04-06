@@ -1,3 +1,4 @@
+using System.Text;
 using X12Net.Core;
 using X12Net.IO;
 
@@ -60,26 +61,20 @@ public sealed class X12Interchange
     /// <summary>Serializes the interchange back to EDI X12 text.</summary>
     public override string ToString()
     {
-        var sb = new System.Text.StringBuilder();
+        var sb = new StringBuilder();
 
         sb.Append(ISA.ToEdi(Delimiters));
         foreach (var group in FunctionalGroups)
         {
             sb.Append(group.GS.ToEdi(Delimiters));
             foreach (var tx in group.Transactions)
-            {
-                sb.Append(tx.ST.ToEdi(Delimiters));
-                foreach (var seg in tx.Segments)
-                    sb.Append(seg.ToEdi(Delimiters));
-                sb.Append(tx.SE.ToEdi(Delimiters));
-            }
+                sb.Append(tx.ToEdi(Delimiters));
             sb.Append(group.GE.ToEdi(Delimiters));
         }
         sb.Append(IEA.ToEdi(Delimiters));
 
         return sb.ToString();
     }
-
 
     // ── Builder ───────────────────────────────────────────────────────────
 

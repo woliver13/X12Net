@@ -1,4 +1,5 @@
 using X12Net.Core;
+using X12Net.DOM;
 
 namespace X12Net.IO;
 
@@ -45,6 +46,36 @@ public sealed class X12Reader : IDisposable
     {
         ThrowIfDisposed();
         return EnumerateWithCap(ParseSegments(_input, _delimiters));
+    }
+
+    /// <summary>
+    /// Streams all ST/SE transaction sets from the interchange without building
+    /// a full <see cref="X12Net.DOM.X12Interchange"/> in memory.
+    /// </summary>
+    public IEnumerable<X12Transaction> ReadTransactions()
+    {
+        ThrowIfDisposed();
+        X12Segment? st = null;
+        var body = new List<X12Segment>();
+
+        foreach (var seg in EnumerateWithCap(ParseSegments(_input, _delimiters)))
+        {
+            if (seg.SegmentId == "ST")
+            {
+                st = seg;
+                body = new List<X12Segment>();
+            }
+            else if (seg.SegmentId == "SE" && st is not null)
+            {
+                yield return new X12Transaction(st, body.AsReadOnly(), seg);
+                st = null;
+                body = new List<X12Segment>();
+            }
+            else if (st is not null)
+            {
+                body.Add(seg);
+            }
+        }
     }
 
     // ── Asynchronous API ──────────────────────────────────────────────────
