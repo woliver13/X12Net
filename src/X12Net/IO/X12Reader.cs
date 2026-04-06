@@ -8,8 +8,9 @@ namespace X12Net.IO;
 /// </summary>
 public sealed class X12Reader : IDisposable
 {
-    private readonly string _input;
-    private readonly int    _maxSegments;
+    private readonly string          _input;
+    private readonly int             _maxSegments;
+    private readonly X12Delimiters?  _delimiters;
     private bool _disposed;
 
     /// <summary>
@@ -27,13 +28,23 @@ public sealed class X12Reader : IDisposable
         _maxSegments = maxSegments;
     }
 
+    /// <summary>
+    /// Initializes an <see cref="X12Reader"/> with explicit delimiters (no auto-detection).
+    /// </summary>
+    public X12Reader(string input, X12Delimiters delimiters, int maxSegments = 0)
+    {
+        _input       = input ?? throw new ArgumentNullException(nameof(input));
+        _delimiters  = delimiters;
+        _maxSegments = maxSegments;
+    }
+
     // ── Synchronous API ───────────────────────────────────────────────────
 
     /// <summary>Returns all segments in the interchange, respecting the configured segment cap.</summary>
     public IEnumerable<X12Segment> ReadAllSegments()
     {
         ThrowIfDisposed();
-        return EnumerateWithCap(ParseSegments(_input));
+        return EnumerateWithCap(ParseSegments(_input, _delimiters));
     }
 
     // ── Asynchronous API ──────────────────────────────────────────────────
@@ -43,7 +54,7 @@ public sealed class X12Reader : IDisposable
     {
         ThrowIfDisposed();
         await Task.Yield();
-        foreach (var segment in EnumerateWithCap(ParseSegments(_input)))
+        foreach (var segment in EnumerateWithCap(ParseSegments(_input, _delimiters)))
             yield return segment;
     }
 
@@ -63,7 +74,7 @@ public sealed class X12Reader : IDisposable
 
     // ── Core parsing ──────────────────────────────────────────────────────
 
-    private static IEnumerable<X12Segment> ParseSegments(string input)
+    private static IEnumerable<X12Segment> ParseSegments(string input, X12Delimiters? delimiters)
     {
         var segmentId    = string.Empty;
         var elements     = new List<string>();
@@ -72,7 +83,10 @@ public sealed class X12Reader : IDisposable
         // Used to know whether to flush composite before starting the next element.
         bool pendingFlush = false;
 
-        foreach (var token in X12Tokenizer.Tokenize(input))
+        var tokens = delimiters.HasValue
+            ? X12Tokenizer.Tokenize(input, delimiters.Value)
+            : X12Tokenizer.Tokenize(input);
+        foreach (var token in tokens)
         {
             switch (token.Type)
             {

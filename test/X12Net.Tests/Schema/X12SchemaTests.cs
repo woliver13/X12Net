@@ -54,6 +54,21 @@ public class X12SchemaTests
         Assert.Equal("837D", dentalSchema.TransactionSetId);
     }
 
+    // ── Cycle 5 (Phase 4) ─────────────────────────────────────────────────
+
+    [Fact]
+    public void DynamicTransaction_throws_when_segment_not_found_in_schema()
+    {
+        var schema = new X12TransactionSchema("ZZZ", "Custom",
+            new X12SegmentSchema("ZZZ", new[] { "Field1" }));
+
+        const string input = "ZZZ*HELLO~";
+        var tx = X12DynamicTransaction.Parse(input, schema);
+
+        // "MISSING" segment was never in the input or schema
+        Assert.Throws<KeyNotFoundException>(() => _ = tx["MISSING", "Field1"]);
+    }
+
     // ── Cycle 12 ──────────────────────────────────────────────────────────
 
     [Fact]

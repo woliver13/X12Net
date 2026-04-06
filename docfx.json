@@ -1,0 +1,31 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "files": [ "src/X12Net/**/*.csproj" ],
+          "exclude": [ "**/obj/**" ]
+        }
+      ],
+      "dest": "docs/api",
+      "disableGitFeatures": false
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "files": [ "docs/**/*.md", "docs/**/toc.yml" ]
+      },
+      {
+        "files": [ "docs/api/**.yml", "docs/api/index.md" ]
+      }
+    ],
+    "globalMetadata": {
+      "_appName": "X12Net",
+      "_appTitle": "X12Net Documentation",
+      "_enableSearch": true
+    },
+    "dest": "_site",
+    "template": [ "default", "modern" ]
+  }
+}

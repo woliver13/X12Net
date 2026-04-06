@@ -81,6 +81,52 @@ public class X12InterchangeTests
         Assert.Contains("AK9", ids);
     }
 
+    // Two transactions inside a single functional group
+    private const string TwoTxOneGroupInterchange =
+        "ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *201909*1200*^*00501*000000001*0*P*:~" +
+        "GS*FA*SENDER*RECEIVER*20190901*1200*1*X*005010X231A1~" +
+        "ST*999*0001~" +
+        "AK1*FA*1*005010X231A1~" +
+        "AK9*A*1*1*1~" +
+        "SE*4*0001~" +
+        "ST*999*0002~" +
+        "AK1*FA*2*005010X231A1~" +
+        "AK9*A*1*1*1~" +
+        "SE*4*0002~" +
+        "GE*2*1~" +
+        "IEA*1*000000001~";
+
+    // ISA/IEA with zero functional groups
+    private const string EmptyInterchange =
+        "ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *201909*1200*^*00501*000000001*0*P*:~" +
+        "IEA*0*000000001~";
+
+    // ── Cycle 6 (Phase 4) ─────────────────────────────────────────────────
+
+    [Fact]
+    public void Interchange_parses_when_no_functional_groups_present()
+    {
+        var interchange = X12Interchange.Parse(EmptyInterchange);
+
+        Assert.Empty(interchange.FunctionalGroups);
+        Assert.Equal("ISA", interchange.ISA.SegmentId);
+        Assert.Equal("IEA", interchange.IEA.SegmentId);
+    }
+
+    // ── Cycle 3 (Phase 4) ─────────────────────────────────────────────────
+
+    [Fact]
+    public void Interchange_handles_multiple_transactions_in_one_functional_group()
+    {
+        var interchange = X12Interchange.Parse(TwoTxOneGroupInterchange);
+
+        Assert.Single(interchange.FunctionalGroups);
+        var group = interchange.FunctionalGroups[0];
+        Assert.Equal(2, group.Transactions.Count);
+        Assert.Equal("0001", group.Transactions[0].ST[2]); // ST02 control number
+        Assert.Equal("0002", group.Transactions[1].ST[2]);
+    }
+
     // ── Cycle 5 ───────────────────────────────────────────────────────────
 
     [Fact]

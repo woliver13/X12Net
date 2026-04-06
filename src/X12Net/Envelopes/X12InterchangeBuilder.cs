@@ -158,8 +158,8 @@ public sealed class X12InterchangeBuilder
         // ISA is fixed-width: 106 characters total.
         // Fields: ISA01-ISA16, delimited by element separator, closed by segment terminator at [105].
         string icnPadded      = _icn.ToString().PadLeft(9, '0');
-        string senderPadded   = _senderId.PadRight(15)[..15];
-        string receiverPadded = _receiverId.PadRight(15)[..15];
+        string senderPadded   = _senderId.PadRight(15).Substring(0, 15);
+        string receiverPadded = _receiverId.PadRight(15).Substring(0, 15);
 
         // The ISA segment, without terminator:
         // ISA*00*          *00*          *ZZ*<sender15>*ZZ*<receiver15>*<date>*<time>*^*00501*<icn9>*0*P*:

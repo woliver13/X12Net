@@ -6,16 +6,20 @@
     <AssemblyName>X12Net</AssemblyName>
     <PackageId>X12Net</PackageId>
     <Description>A modern, high-performance C# library for parsing, generating, and editing EDI X12 documents.</Description>
+    <PackageTags>edi;x12;ansi-x12;edi-parsing;healthcare</PackageTags>
     <Version>0.1.0</Version>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageProjectUrl>https://github.com/woliver13/X12Net</PackageProjectUrl>
   </PropertyGroup>
 
 
   <ItemGroup>
-    <ProjectReference
-      Include="..\X12Net.SourceGenerator\X12Net.SourceGenerator.csproj"
-      OutputItemType="Analyzer"
-      ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\X12Net.SourceGenerator\X12Net.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0" />
   </ItemGroup>
 
 </Project>

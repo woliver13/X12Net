@@ -103,7 +103,7 @@ public static class X12Tokenizer
         {
             int next = IndexOfAny(input, pos, elementSep, componentSep, segmentTerm);
 
-            string value = next < 0 ? input[pos..] : input[pos..next];
+            string value = next < 0 ? input.Substring(pos) : input.Substring(pos, next - pos);
 
             if (firstInSeg)
             {

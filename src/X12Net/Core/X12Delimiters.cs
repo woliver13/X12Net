@@ -36,8 +36,17 @@ public readonly struct X12Delimiters : IEquatable<X12Delimiters>
     public override bool Equals(object? obj) => obj is X12Delimiters d && Equals(d);
 
     /// <inheritdoc/>
-    public override int GetHashCode() =>
-        HashCode.Combine(ElementSeparator, ComponentSeparator, SegmentTerminator);
+    public override int GetHashCode()
+    {
+        unchecked
+        {
+            int hash = 17;
+            hash = hash * 31 + ElementSeparator.GetHashCode();
+            hash = hash * 31 + ComponentSeparator.GetHashCode();
+            hash = hash * 31 + SegmentTerminator.GetHashCode();
+            return hash;
+        }
+    }
 
     /// <inheritdoc/>
     public override string ToString() =>

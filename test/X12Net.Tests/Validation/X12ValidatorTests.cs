@@ -79,6 +79,20 @@ public class X12ValidatorTests
         Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.SeSegmentCountMismatch);
     }
 
+    // ── Cycle 4 (Phase 4) ─────────────────────────────────────────────────
+
+    [Fact]
+    public void Validator_reports_error_for_GS_GE_control_number_mismatch()
+    {
+        // GS06 = "1", GE02 should also be "1"; corrupt GE02 to "99"
+        string bad = ValidInterchange.Replace("GE*1*1~", "GE*1*99~");
+
+        var result = X12Validator.Validate(bad);
+
+        Assert.False(result.IsValid);
+        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.GroupControlNumberMismatch);
+    }
+
     // ── Cycle 5 ───────────────────────────────────────────────────────────
 
     [Fact]
