@@ -17,9 +17,9 @@ public class X12ToolCommandTests
     // ── Cycle 13 ──────────────────────────────────────────────────────────
 
     [Fact]
-    public void ParseCommand_returns_ordered_segment_id_list()
+    public void Parse_returns_ordered_segment_id_list()
     {
-        var result = ParseCommand.Execute(ValidInterchange);
+        var result = X12Tool.Parse(ValidInterchange);
 
         Assert.Equal(
             new[] { "ISA", "GS", "ST", "AK1", "AK9", "SE", "GE", "IEA" },
@@ -30,9 +30,9 @@ public class X12ToolCommandTests
     // ── Cycle 14 ──────────────────────────────────────────────────────────
 
     [Fact]
-    public void ValidateCommand_returns_empty_errors_for_valid_interchange()
+    public void Validate_returns_empty_errors_for_valid_interchange()
     {
-        var result = ValidateCommand.Execute(ValidInterchange);
+        var result = X12Tool.Validate(ValidInterchange);
 
         Assert.True(result.IsValid);
         Assert.Empty(result.Errors);
@@ -41,11 +41,11 @@ public class X12ToolCommandTests
     // ── Cycle 15 ──────────────────────────────────────────────────────────
 
     [Fact]
-    public void ValidateCommand_returns_errors_for_mismatched_control_numbers()
+    public void Validate_returns_errors_for_mismatched_control_numbers()
     {
         string bad = ValidInterchange.Replace("IEA*1*000000001~", "IEA*1*000000099~");
 
-        var result = ValidateCommand.Execute(bad);
+        var result = X12Tool.Validate(bad);
 
         Assert.False(result.IsValid);
         Assert.NotEmpty(result.Errors);
@@ -55,17 +55,45 @@ public class X12ToolCommandTests
     // ── Cycle 16 ──────────────────────────────────────────────────────────
 
     [Fact]
-    public void EditCommand_modifies_element_and_returns_updated_edi_text()
+    public void Edit_modifies_element_and_returns_updated_edi_text()
     {
-        var result = EditCommand.Execute(
-            input:       ValidInterchange,
-            segmentId:   "GS",
+        var result = X12Tool.Edit(
+            input:        ValidInterchange,
+            segmentId:    "GS",
             elementIndex: 2,           // GS02 = application sender code
-            newValue:    "NEWSENDER");
+            newValue:     "NEWSENDER");
 
         Assert.True(result.Success);
         Assert.Contains("GS*FA*NEWSENDER*", result.Output);
-        // Original content unchanged in result.Output ISA line
         Assert.Contains("ISA*00*", result.Output);
+    }
+
+    // ── Cycle 1 (Issue 4) ─────────────────────────────────────────────────
+
+    [Fact]
+    public void X12Tool_Parse_returns_ordered_segment_ids()
+    {
+        var result = X12Tool.Parse(ValidInterchange);
+
+        Assert.True(result.Success);
+        Assert.Equal(new[] { "ISA", "GS", "ST", "AK1", "AK9", "SE", "GE", "IEA" }, result.SegmentIds);
+    }
+
+    [Fact]
+    public void X12Tool_Validate_returns_no_errors_for_valid_interchange()
+    {
+        var result = X12Tool.Validate(ValidInterchange);
+
+        Assert.True(result.IsValid);
+        Assert.Empty(result.Errors);
+    }
+
+    [Fact]
+    public void X12Tool_Edit_modifies_element_and_returns_updated_edi()
+    {
+        var result = X12Tool.Edit(ValidInterchange, "GS", 2, "NEWSENDER");
+
+        Assert.True(result.Success);
+        Assert.Contains("GS*FA*NEWSENDER*", result.Output);
     }
 }
