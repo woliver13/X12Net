@@ -2,18 +2,12 @@ namespace X12Net.Core;
 
 /// <summary>
 /// Converts raw EDI X12 text into a flat stream of <see cref="X12Token"/> values.
-/// Delimiter auto-detection fires when the input begins with an ISA segment;
-/// detection works by counting element separators (correct for both standard
-/// 106-char and any non-standard-width ISA).
+/// When the input begins with an ISA segment, delimiters are auto-detected via
+/// <see cref="DetectDelimiters"/>.
 /// </summary>
 public static class X12Tokenizer
 {
-    // ── ISA geometry ─────────────────────────────────────────────────────
-    // ISA has 16 elements. The element separator appears 16 times within the
-    // segment (once before each element). ISA16 (the component separator) is
-    // always a single character; the segment terminator immediately follows it.
-    private const int IsaElementCount = 16;
-    private const int MinIsaLength    = 106;  // still useful as a quick pre-check
+    private const int MinIsaLength = 106;  // quick pre-check before delegating to X12IsaParser
 
     // ── Public API ────────────────────────────────────────────────────────
 
@@ -23,38 +17,8 @@ public static class X12Tokenizer
     /// any non-standard-width ISA.
     /// </summary>
     /// <exception cref="ArgumentException">Input is null, too short, or does not start with "ISA".</exception>
-    public static X12Delimiters DetectDelimiters(string isaInput)
-    {
-        if (string.IsNullOrEmpty(isaInput) || isaInput.Length < MinIsaLength)
-            throw new ArgumentException(
-                $"ISA segment must be at least {MinIsaLength} characters.", nameof(isaInput));
-
-        if (!isaInput.StartsWith("ISA", StringComparison.Ordinal))
-            throw new ArgumentException("Input does not start with 'ISA'.", nameof(isaInput));
-
-        char elementSep = isaInput[3];
-
-        // Walk the string counting element separators until we reach the 15th one
-        // (which separates ISA15 from ISA16). ISA16 is 1 char; the segment
-        // terminator is the character immediately after ISA16.
-        int sepCount = 0;
-        for (int i = 4; i < isaInput.Length; i++)
-        {
-            if (isaInput[i] == elementSep)
-            {
-                sepCount++;
-                if (sepCount == IsaElementCount - 1)  // 15th separator: between ISA15 and ISA16
-                {
-                    char componentSep   = i + 1 < isaInput.Length ? isaInput[i + 1] : ':';
-                    char segmentTerm    = i + 2 < isaInput.Length ? isaInput[i + 2] : '~';
-                    return new X12Delimiters(elementSep, componentSep, segmentTerm);
-                }
-            }
-        }
-
-        // Fallback — should only be reached for malformed ISA
-        return new X12Delimiters(elementSep, ':', '~');
-    }
+    public static X12Delimiters DetectDelimiters(string isaInput) =>
+        X12IsaParser.Parse(isaInput);
 
     /// <summary>
     /// Tokenizes a single segment (or a full interchange) using the supplied

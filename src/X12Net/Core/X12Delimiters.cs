@@ -27,13 +27,14 @@ public readonly struct X12Delimiters : IEquatable<X12Delimiters>
     public static readonly X12Delimiters Default = new('*', ':', '~');
 
     /// <summary>
-    /// Detects delimiters from an ISA header (positions 3, 104, 105).
+    /// Detects delimiters from an ISA header.
     /// Falls back to <see cref="Default"/> when the input is not a full ISA.
     /// </summary>
-    public static X12Delimiters FromIsa(string input) =>
-        input.Length >= 106 && input.StartsWith("ISA", StringComparison.Ordinal)
-            ? new X12Delimiters(input[3], input[104], input[105])
-            : Default;
+    public static X12Delimiters FromIsa(string input)
+    {
+        try   { return X12IsaParser.Parse(input); }
+        catch (ArgumentException) { return Default; }
+    }
 
     /// <inheritdoc/>
     public bool Equals(X12Delimiters other) =>
