@@ -207,6 +207,7 @@ public class GeneratedTransactionTests
 
         Assert.NotNull(ts.STC);
         Assert.Equal("20190901", ts.STC!.StatusEffectiveDate);  // STC02
+        Assert.Equal("WQ",       ts.STC.ActionCode);            // STC03
         Assert.Equal("500",      ts.STC.MonetaryAmount);        // STC04
     }
 }
