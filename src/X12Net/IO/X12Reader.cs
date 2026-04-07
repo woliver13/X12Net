@@ -1,5 +1,4 @@
 using X12Net.Core;
-using X12Net.DOM;
 
 namespace X12Net.IO;
 
@@ -48,36 +47,6 @@ public sealed class X12Reader : IDisposable
         return EnumerateWithCap(ParseSegments(_input, _delimiters));
     }
 
-    /// <summary>
-    /// Streams all ST/SE transaction sets from the interchange without building
-    /// a full <see cref="X12Net.DOM.X12Interchange"/> in memory.
-    /// </summary>
-    public IEnumerable<X12Transaction> ReadTransactions()
-    {
-        ThrowIfDisposed();
-        X12Segment? st = null;
-        var body = new List<X12Segment>();
-
-        foreach (var seg in EnumerateWithCap(ParseSegments(_input, _delimiters)))
-        {
-            if (seg.SegmentId == "ST")
-            {
-                st = seg;
-                body = new List<X12Segment>();
-            }
-            else if (seg.SegmentId == "SE" && st is not null)
-            {
-                yield return new X12Transaction(st, body.AsReadOnly(), seg);
-                st = null;
-                body = new List<X12Segment>();
-            }
-            else if (st is not null)
-            {
-                body.Add(seg);
-            }
-        }
-    }
-
     // ── Asynchronous API ──────────────────────────────────────────────────
 
     /// <summary>Asynchronously enumerates all segments in the interchange.</summary>
@@ -94,17 +63,49 @@ public sealed class X12Reader : IDisposable
     }
 
     /// <summary>
-    /// Asynchronously streams all ST/SE transaction sets from the interchange.
+    /// Streams all ST/SE transaction sets through a caller-provided factory,
+    /// yielding the mapped result. X12Reader never knows the result type.
     /// </summary>
-    public async IAsyncEnumerable<X12Transaction> ReadTransactionsAsync(
+    public IEnumerable<T> ReadTransactions<T>(
+        Func<X12Segment, IReadOnlyList<X12Segment>, X12Segment, T> factory)
+    {
+        ThrowIfDisposed();
+        X12Segment? st = null;
+        var body = new List<X12Segment>();
+
+        foreach (var seg in EnumerateWithCap(ParseSegments(_input, _delimiters)))
+        {
+            if (seg.SegmentId == "ST")
+            {
+                st = seg;
+                body = new List<X12Segment>();
+            }
+            else if (seg.SegmentId == "SE" && st is not null)
+            {
+                yield return factory(st, body.AsReadOnly(), seg);
+                st = null;
+                body = new List<X12Segment>();
+            }
+            else if (st is not null)
+            {
+                body.Add(seg);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Asynchronously streams all ST/SE transaction sets through a caller-provided factory.
+    /// </summary>
+    public async IAsyncEnumerable<T> ReadTransactionsAsync<T>(
+        Func<X12Segment, IReadOnlyList<X12Segment>, X12Segment, T> factory,
         [System.Runtime.CompilerServices.EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
         await Task.Yield();
-        foreach (var tx in ReadTransactions())
+        foreach (var result in ReadTransactions(factory))
         {
             cancellationToken.ThrowIfCancellationRequested();
-            yield return tx;
+            yield return result;
         }
     }
 

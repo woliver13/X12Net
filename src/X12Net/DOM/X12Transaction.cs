@@ -1,6 +1,5 @@
 using System.Text;
 using X12Net.Core;
-using X12Net.IO;
 
 namespace X12Net.DOM;
 

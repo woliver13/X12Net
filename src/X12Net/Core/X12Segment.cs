@@ -1,4 +1,4 @@
-namespace X12Net.IO;
+namespace X12Net.Core;
 
 /// <summary>
 /// A parsed EDI X12 segment: its identifier and all element values in order.
@@ -25,7 +25,7 @@ public sealed class X12Segment
     public string this[int index] => Elements[index - 1];
 
     /// <summary>Serializes the segment back to EDI text.</summary>
-    internal string ToEdi(Core.X12Delimiters delimiters)
+    internal string ToEdi(X12Delimiters delimiters)
     {
         var sb = new System.Text.StringBuilder();
         sb.Append(SegmentId);

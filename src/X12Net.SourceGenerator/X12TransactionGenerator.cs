@@ -108,10 +108,10 @@ public sealed class X12TransactionGenerator : IIncrementalGenerator
                 /// <summary>Typed wrapper for the {{seg.SegmentId}} segment.</summary>
                 public sealed class {{seg.ClassName}}
                 {
-                    internal {{seg.ClassName}}(global::X12Net.IO.X12Segment raw) => Raw = raw;
+                    internal {{seg.ClassName}}(global::X12Net.Core.X12Segment raw) => Raw = raw;
 
                     /// <summary>The underlying raw segment.</summary>
-                    public global::X12Net.IO.X12Segment Raw { get; }
+                    public global::X12Net.Core.X12Segment Raw { get; }
 
             {{props}}    }
             }

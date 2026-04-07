@@ -1,3 +1,4 @@
+using X12Net.Core;
 using X12Net.DOM;
 using X12Net.IO;
 using X12Net.Validation;

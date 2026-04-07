@@ -20,12 +20,8 @@ public class X12ReaderTransactionTests
         "GE*1*2~" +
         "IEA*2*000000001~";
 
-    private static List<X12Transaction> ReadAll(string input)
-    {
-        var delimiters = X12Delimiters.FromIsa(input);
-        using var reader = new X12Reader(input, delimiters);
-        return reader.ReadTransactions().ToList();
-    }
+    private static List<X12Transaction> ReadAll(string input) =>
+        X12Interchange.Parse(input).FunctionalGroups.SelectMany(g => g.Transactions).ToList();
 
     // ── Cycle 1 ───────────────────────────────────────────────────────────
 
@@ -63,13 +59,13 @@ public class X12ReaderTransactionTests
         var delimiters = X12Delimiters.FromIsa(TwoGroupInterchange);
         using var reader = new X12Reader(TwoGroupInterchange, delimiters);
 
-        var txns = new List<X12Transaction>();
-        await foreach (var tx in reader.ReadTransactionsAsync())
-            txns.Add(tx);
+        var stSegs = new List<X12Segment>();
+        await foreach (var st in reader.ReadTransactionsAsync((st, body, se) => st))
+            stSegs.Add(st);
 
-        Assert.Equal(2, txns.Count);
-        Assert.Equal("999", txns[0].ST[1]);
-        Assert.Equal("271", txns[1].ST[1]);
+        Assert.Equal(2, stSegs.Count);
+        Assert.Equal("999", stSegs[0][1]);
+        Assert.Equal("271", stSegs[1][1]);
     }
 
     // ── Cycle 1 (Phase 6) ─────────────────────────────────────────────────
@@ -103,17 +99,54 @@ public class X12ReaderTransactionTests
         var delimiters = X12Delimiters.FromIsa(TwoGroupInterchange);
         using var reader = new X12Reader(TwoGroupInterchange, delimiters);
 
-        var txns = new List<X12Transaction>();
+        var stSegs = new List<X12Segment>();
         await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
         {
-            await foreach (var tx in reader.ReadTransactionsAsync(cts.Token))
+            await foreach (var st in reader.ReadTransactionsAsync((st, body, se) => st, cts.Token))
             {
-                txns.Add(tx);
+                stSegs.Add(st);
                 cts.Cancel();   // cancel after first transaction
             }
         });
 
-        Assert.Single(txns);    // only the first transaction was yielded
+        Assert.Single(stSegs);    // only the first transaction was yielded
+    }
+
+    // ── Cycle 1 (Issue 1) ─────────────────────────────────────────────────
+
+    [Fact]
+    public void ReadTransactions_with_factory_maps_transaction_set_ids()
+    {
+        var delimiters = X12Delimiters.FromIsa(TwoGroupInterchange);
+        using var reader = new X12Reader(TwoGroupInterchange, delimiters);
+
+        var ids = reader.ReadTransactions((st, body, se) => st[1]).ToList();
+
+        Assert.Equal(new[] { "999", "271" }, ids);
+    }
+
+    // ── Cycle 2 (Issue 1) ─────────────────────────────────────────────────
+
+    [Fact]
+    public async Task ReadTransactionsAsync_with_factory_respects_cancellation()
+    {
+        var cts = new CancellationTokenSource();
+        var delimiters = X12Delimiters.FromIsa(TwoGroupInterchange);
+        using var reader = new X12Reader(TwoGroupInterchange, delimiters);
+
+        var ids = new List<string>();
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+        {
+            await foreach (var id in reader.ReadTransactionsAsync(
+                (st, body, se) => st[1], cts.Token))
+            {
+                ids.Add(id);
+                cts.Cancel();
+            }
+        });
+
+        Assert.Single(ids);
+        Assert.Equal("999", ids[0]);
     }
 
     // ── Cycle 5 (Phase 4) ─────────────────────────────────────────────────
@@ -125,6 +158,6 @@ public class X12ReaderTransactionTests
         var delimiters = X12Delimiters.FromIsa(TwoGroupInterchange);
         using var reader = new X12Reader(TwoGroupInterchange, delimiters, maxSegments: 5);
 
-        Assert.Throws<X12MemoryCapException>(() => reader.ReadTransactions().ToList());
+        Assert.Throws<X12MemoryCapException>(() => reader.ReadTransactions((st, body, se) => st).ToList());
     }
 }

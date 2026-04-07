@@ -1,5 +1,5 @@
 using System.Text;
-using X12Net.IO;
+using X12Net.Core;
 
 namespace X12Net.Envelopes;
 
