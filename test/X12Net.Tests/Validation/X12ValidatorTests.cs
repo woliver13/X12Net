@@ -128,4 +128,41 @@ public class X12ValidatorTests
         Assert.False(result.IsValid);
         Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.MissingRequiredSegment);
     }
+
+    // ── Cycle 1 (Issue 3) ─────────────────────────────────────────────────
+
+    [Fact]
+    public void Validate_with_extra_rules_runs_custom_rule_alongside_defaults()
+    {
+        X12ValidationRule noAk1 = (segs, errs) =>
+        {
+            if (segs.Any(s => s.SegmentId == "AK1"))
+                errs.Add(new X12ValidationError(X12ErrorCode.MissingRequiredSegment, "AK1 is forbidden"));
+        };
+
+        var result = X12Validator.Validate(ValidInterchange, new[] { noAk1 });
+
+        Assert.False(result.IsValid);
+        Assert.Contains(result.Errors, e => e.Message.Contains("AK1 is forbidden"));
+    }
+
+    // ── Cycle 2 (Issue 3) ─────────────────────────────────────────────────
+
+    [Fact]
+    public void DefaultRules_contains_all_built_in_rules()
+    {
+        Assert.Equal(7, X12Validator.DefaultRules.Count);
+    }
+
+    [Fact]
+    public void Validate_with_only_custom_rules_skips_built_in_checks()
+    {
+        // An interchange missing IEA — normally fails built-in check
+        string noIea = ValidInterchange.Replace("IEA*1*000000001~", "");
+
+        // Running with no rules at all should return valid (nothing checked)
+        var result = X12Validator.Validate(noIea, builtInRules: false);
+
+        Assert.True(result.IsValid);
+    }
 }

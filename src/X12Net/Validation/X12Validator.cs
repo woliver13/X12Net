@@ -10,23 +10,43 @@ namespace X12Net.Validation;
 /// </summary>
 public static class X12Validator
 {
+    /// <summary>The seven built-in structural rules, in execution order.</summary>
+    public static IReadOnlyList<X12ValidationRule> DefaultRules { get; } = new X12ValidationRule[]
+    {
+        CheckRequiredEnvelopeSegments,
+        CheckIsaFieldLengths,
+        CheckInterchangeControlNumber,
+        CheckGroupControlNumbers,
+        CheckIeaGroupCount,
+        CheckGeTransactionCounts,
+        CheckSeSegmentCounts,
+    };
+
     /// <summary>Validates the raw EDI X12 text and returns a result containing any errors.</summary>
-    public static X12ValidationResult Validate(string input)
+    /// <param name="input">Raw EDI X12 text.</param>
+    /// <param name="extraRules">Additional rules appended after the built-in rules.</param>
+    /// <param name="builtInRules">When <c>false</c>, built-in rules are skipped.</param>
+    public static X12ValidationResult Validate(string input,
+        IEnumerable<X12ValidationRule>? extraRules = null,
+        bool builtInRules = true)
     {
         var errors = new List<X12ValidationError>();
         using var reader = new X12Reader(input);
         var segments = reader.ReadAllSegments().ToList();
 
-        CheckRequiredEnvelopeSegments(segments, errors);
-        if (errors.Any(e => e.Code == X12ErrorCode.MissingRequiredSegment))
-            return new X12ValidationResult(errors);  // structural check failed — stop early
+        if (builtInRules)
+        {
+            CheckRequiredEnvelopeSegments(segments, errors);
+            if (errors.Any(e => e.Code == X12ErrorCode.MissingRequiredSegment))
+                return new X12ValidationResult(errors);  // structural check failed — stop early
 
-        CheckIsaFieldLengths(segments, errors);
-        CheckInterchangeControlNumber(segments, errors);
-        CheckGroupControlNumbers(segments, errors);
-        CheckIeaGroupCount(segments, errors);
-        CheckGeTransactionCounts(segments, errors);
-        CheckSeSegmentCounts(segments, errors);
+            foreach (var rule in DefaultRules.Skip(1))
+                rule(segments, errors);
+        }
+
+        if (extraRules is not null)
+            foreach (var rule in extraRules)
+                rule(segments, errors);
 
         return new X12ValidationResult(errors);
     }
@@ -34,7 +54,7 @@ public static class X12Validator
     // ── Rules ─────────────────────────────────────────────────────────────
 
     private static void CheckRequiredEnvelopeSegments(
-        List<X12Segment> segments, List<X12ValidationError> errors)
+        IReadOnlyList<X12Segment> segments, List<X12ValidationError> errors)
     {
         foreach (var required in new[] { "ISA", "IEA" })
         {
@@ -46,7 +66,7 @@ public static class X12Validator
     }
 
     private static void CheckIsaFieldLengths(
-        List<X12Segment> segments, List<X12ValidationError> errors)
+        IReadOnlyList<X12Segment> segments, List<X12ValidationError> errors)
     {
         var isa = segments.First(s => s.SegmentId == "ISA");
 
@@ -60,7 +80,7 @@ public static class X12Validator
     }
 
     private static void CheckInterchangeControlNumber(
-        List<X12Segment> segments, List<X12ValidationError> errors)
+        IReadOnlyList<X12Segment> segments, List<X12ValidationError> errors)
     {
         var isa = segments.First(s => s.SegmentId == "ISA");
         var iea = segments.First(s => s.SegmentId == "IEA");
@@ -73,7 +93,7 @@ public static class X12Validator
     }
 
     private static void CheckGroupControlNumbers(
-        List<X12Segment> segments, List<X12ValidationError> errors)
+        IReadOnlyList<X12Segment> segments, List<X12ValidationError> errors)
     {
         // Pair each GS with its matching GE by stack depth
         var stack = new Stack<X12Segment>();
@@ -92,7 +112,7 @@ public static class X12Validator
     }
 
     private static void CheckIeaGroupCount(
-        List<X12Segment> segments, List<X12ValidationError> errors)
+        IReadOnlyList<X12Segment> segments, List<X12ValidationError> errors)
     {
         var iea      = segments.First(s => s.SegmentId == "IEA");
         int declared = int.Parse(iea[1]);
@@ -105,12 +125,11 @@ public static class X12Validator
     }
 
     private static void CheckGeTransactionCounts(
-        List<X12Segment> segments, List<X12ValidationError> errors)
+        IReadOnlyList<X12Segment> segments, List<X12ValidationError> errors)
     {
         // For each GS/GE pair, GE01 must equal the number of ST segments inside the group.
         int stCount = 0;
         bool inGroup = false;
-        X12Segment? currentGe = null;
 
         foreach (var seg in segments)
         {
@@ -118,7 +137,6 @@ public static class X12Validator
             if (seg.SegmentId == "ST" && inGroup) { stCount++; continue; }
             if (seg.SegmentId == "GE" && inGroup)
             {
-                currentGe = seg;
                 int declared = int.Parse(seg[1]);
                 if (declared != stCount)
                     errors.Add(new X12ValidationError(
@@ -130,7 +148,7 @@ public static class X12Validator
     }
 
     private static void CheckSeSegmentCounts(
-        List<X12Segment> segments, List<X12ValidationError> errors)
+        IReadOnlyList<X12Segment> segments, List<X12ValidationError> errors)
     {
         // For each ST/SE pair, SE01 must equal the count of segments
         // from ST through SE inclusive.
