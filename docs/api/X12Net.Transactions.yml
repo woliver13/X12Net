@@ -31,27 +31,13 @@ items:
   assemblies:
   - X12Net
 references:
-- uid: X12Net.Transactions.CLPSegment
-  commentId: T:X12Net.Transactions.CLPSegment
+- uid: X12Net.Transactions.EQSegment
+  commentId: T:X12Net.Transactions.EQSegment
   parent: X12Net.Transactions
-  href: X12Net.Transactions.CLPSegment.html
-  name: CLPSegment
-  nameWithType: CLPSegment
-  fullName: X12Net.Transactions.CLPSegment
-- uid: X12Net.Transactions.Ts834
-  commentId: T:X12Net.Transactions.Ts834
-  parent: X12Net.Transactions
-  href: X12Net.Transactions.Ts834.html
-  name: Ts834
-  nameWithType: Ts834
-  fullName: X12Net.Transactions.Ts834
-- uid: X12Net.Transactions.Ts277
-  commentId: T:X12Net.Transactions.Ts277
-  parent: X12Net.Transactions
-  href: X12Net.Transactions.Ts277.html
-  name: Ts277
-  nameWithType: Ts277
-  fullName: X12Net.Transactions.Ts277
+  href: X12Net.Transactions.EQSegment.html
+  name: EQSegment
+  nameWithType: EQSegment
+  fullName: X12Net.Transactions.EQSegment
 - uid: X12Net.Transactions.INSSegment
   commentId: T:X12Net.Transactions.INSSegment
   parent: X12Net.Transactions
@@ -59,6 +45,41 @@ references:
   name: INSSegment
   nameWithType: INSSegment
   fullName: X12Net.Transactions.INSSegment
+- uid: X12Net.Transactions.STCSegment
+  commentId: T:X12Net.Transactions.STCSegment
+  parent: X12Net.Transactions
+  href: X12Net.Transactions.STCSegment.html
+  name: STCSegment
+  nameWithType: STCSegment
+  fullName: X12Net.Transactions.STCSegment
+- uid: X12Net.Transactions.Ts271
+  commentId: T:X12Net.Transactions.Ts271
+  parent: X12Net.Transactions
+  href: X12Net.Transactions.Ts271.html
+  name: Ts271
+  nameWithType: Ts271
+  fullName: X12Net.Transactions.Ts271
+- uid: X12Net.Transactions.Ts999
+  commentId: T:X12Net.Transactions.Ts999
+  parent: X12Net.Transactions
+  href: X12Net.Transactions.Ts999.html
+  name: Ts999
+  nameWithType: Ts999
+  fullName: X12Net.Transactions.Ts999
+- uid: X12Net.Transactions.Ts837I
+  commentId: T:X12Net.Transactions.Ts837I
+  parent: X12Net.Transactions
+  href: X12Net.Transactions.Ts837I.html
+  name: Ts837I
+  nameWithType: Ts837I
+  fullName: X12Net.Transactions.Ts837I
+- uid: X12Net.Transactions.Ts837D
+  commentId: T:X12Net.Transactions.Ts837D
+  parent: X12Net.Transactions
+  href: X12Net.Transactions.Ts837D.html
+  name: Ts837D
+  nameWithType: Ts837D
+  fullName: X12Net.Transactions.Ts837D
 - uid: X12Net.Transactions.AK1Segment
   commentId: T:X12Net.Transactions.AK1Segment
   parent: X12Net.Transactions
@@ -73,20 +94,6 @@ references:
   name: Ts835
   nameWithType: Ts835
   fullName: X12Net.Transactions.Ts835
-- uid: X12Net.Transactions.STCSegment
-  commentId: T:X12Net.Transactions.STCSegment
-  parent: X12Net.Transactions
-  href: X12Net.Transactions.STCSegment.html
-  name: STCSegment
-  nameWithType: STCSegment
-  fullName: X12Net.Transactions.STCSegment
-- uid: X12Net.Transactions.Ts270
-  commentId: T:X12Net.Transactions.Ts270
-  parent: X12Net.Transactions
-  href: X12Net.Transactions.Ts270.html
-  name: Ts270
-  nameWithType: Ts270
-  fullName: X12Net.Transactions.Ts270
 - uid: X12Net.Transactions.Ts276
   commentId: T:X12Net.Transactions.Ts276
   parent: X12Net.Transactions
@@ -94,27 +101,27 @@ references:
   name: Ts276
   nameWithType: Ts276
   fullName: X12Net.Transactions.Ts276
-- uid: X12Net.Transactions.Ts837D
-  commentId: T:X12Net.Transactions.Ts837D
+- uid: X12Net.Transactions.Ts270
+  commentId: T:X12Net.Transactions.Ts270
   parent: X12Net.Transactions
-  href: X12Net.Transactions.Ts837D.html
-  name: Ts837D
-  nameWithType: Ts837D
-  fullName: X12Net.Transactions.Ts837D
-- uid: X12Net.Transactions.EQSegment
-  commentId: T:X12Net.Transactions.EQSegment
+  href: X12Net.Transactions.Ts270.html
+  name: Ts270
+  nameWithType: Ts270
+  fullName: X12Net.Transactions.Ts270
+- uid: X12Net.Transactions.Ts277
+  commentId: T:X12Net.Transactions.Ts277
   parent: X12Net.Transactions
-  href: X12Net.Transactions.EQSegment.html
-  name: EQSegment
-  nameWithType: EQSegment
-  fullName: X12Net.Transactions.EQSegment
-- uid: X12Net.Transactions.Ts837I
-  commentId: T:X12Net.Transactions.Ts837I
+  href: X12Net.Transactions.Ts277.html
+  name: Ts277
+  nameWithType: Ts277
+  fullName: X12Net.Transactions.Ts277
+- uid: X12Net.Transactions.CLPSegment
+  commentId: T:X12Net.Transactions.CLPSegment
   parent: X12Net.Transactions
-  href: X12Net.Transactions.Ts837I.html
-  name: Ts837I
-  nameWithType: Ts837I
-  fullName: X12Net.Transactions.Ts837I
+  href: X12Net.Transactions.CLPSegment.html
+  name: CLPSegment
+  nameWithType: CLPSegment
+  fullName: X12Net.Transactions.CLPSegment
 - uid: X12Net.Transactions.EBSegment
   commentId: T:X12Net.Transactions.EBSegment
   parent: X12Net.Transactions
@@ -122,27 +129,13 @@ references:
   name: EBSegment
   nameWithType: EBSegment
   fullName: X12Net.Transactions.EBSegment
-- uid: X12Net.Transactions.Ts999
-  commentId: T:X12Net.Transactions.Ts999
+- uid: X12Net.Transactions.Ts834
+  commentId: T:X12Net.Transactions.Ts834
   parent: X12Net.Transactions
-  href: X12Net.Transactions.Ts999.html
-  name: Ts999
-  nameWithType: Ts999
-  fullName: X12Net.Transactions.Ts999
-- uid: X12Net.Transactions.Ts837P
-  commentId: T:X12Net.Transactions.Ts837P
-  parent: X12Net.Transactions
-  href: X12Net.Transactions.Ts837P.html
-  name: Ts837P
-  nameWithType: Ts837P
-  fullName: X12Net.Transactions.Ts837P
-- uid: X12Net.Transactions.Ts271
-  commentId: T:X12Net.Transactions.Ts271
-  parent: X12Net.Transactions
-  href: X12Net.Transactions.Ts271.html
-  name: Ts271
-  nameWithType: Ts271
-  fullName: X12Net.Transactions.Ts271
+  href: X12Net.Transactions.Ts834.html
+  name: Ts834
+  nameWithType: Ts834
+  fullName: X12Net.Transactions.Ts834
 - uid: X12Net.Transactions.ClmSegment
   commentId: T:X12Net.Transactions.ClmSegment
   parent: X12Net.Transactions
@@ -150,6 +143,13 @@ references:
   name: ClmSegment
   nameWithType: ClmSegment
   fullName: X12Net.Transactions.ClmSegment
+- uid: X12Net.Transactions.Ts837P
+  commentId: T:X12Net.Transactions.Ts837P
+  parent: X12Net.Transactions
+  href: X12Net.Transactions.Ts837P.html
+  name: Ts837P
+  nameWithType: Ts837P
+  fullName: X12Net.Transactions.Ts837P
 - uid: X12Net.Transactions
   commentId: N:X12Net.Transactions
   href: X12Net.html

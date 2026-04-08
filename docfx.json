@@ -14,7 +14,8 @@
   "build": {
     "content": [
       {
-        "files": [ "docs/**/*.md", "docs/**/toc.yml" ]
+        "files":   [ "docs/**/*.md", "docs/**/toc.yml" ],
+        "exclude": [ "docs/api/**" ]
       },
       {
         "files": [ "docs/api/**.yml", "docs/api/index.md" ]
