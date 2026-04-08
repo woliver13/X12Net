@@ -1,0 +1,220 @@
+### YamlMime:ManagedReference
+items:
+- uid: X12Net.Validation.X12ValidationRule
+  commentId: T:X12Net.Validation.X12ValidationRule
+  id: X12ValidationRule
+  parent: X12Net.Validation
+  children: []
+  langs:
+  - csharp
+  - vb
+  name: X12ValidationRule
+  nameWithType: X12ValidationRule
+  fullName: X12Net.Validation.X12ValidationRule
+  type: Delegate
+  source:
+    remote:
+      path: src/X12Net/Validation/X12ValidationRule.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: X12ValidationRule
+    path: src/X12Net/Validation/X12ValidationRule.cs
+    startLine: 8
+  assemblies:
+  - X12Net
+  namespace: X12Net.Validation
+  summary: >-
+    A single validation rule: inspects a flat list of segments and appends any
+
+    errors it finds to <code class="paramref">errors</code>.
+  example: []
+  syntax:
+    content: public delegate void X12ValidationRule(IReadOnlyList<X12Segment> segments, List<X12ValidationError> errors)
+    parameters:
+    - id: segments
+      type: System.Collections.Generic.IReadOnlyList{X12Net.Core.X12Segment}
+    - id: errors
+      type: System.Collections.Generic.List{X12Net.Validation.X12ValidationError}
+    content.vb: Public Delegate Sub X12ValidationRule(segments As IReadOnlyList(Of X12Segment), errors As List(Of X12ValidationError))
+references:
+- uid: X12Net.Validation
+  commentId: N:X12Net.Validation
+  href: X12Net.html
+  name: X12Net.Validation
+  nameWithType: X12Net.Validation
+  fullName: X12Net.Validation
+  spec.csharp:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.Validation
+    name: Validation
+    href: X12Net.Validation.html
+  spec.vb:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.Validation
+    name: Validation
+    href: X12Net.Validation.html
+- uid: System.Collections.Generic.IReadOnlyList{X12Net.Core.X12Segment}
+  commentId: T:System.Collections.Generic.IReadOnlyList{X12Net.Core.X12Segment}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IReadOnlyList`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  name: IReadOnlyList<X12Segment>
+  nameWithType: IReadOnlyList<X12Segment>
+  fullName: System.Collections.Generic.IReadOnlyList<X12Net.Core.X12Segment>
+  nameWithType.vb: IReadOnlyList(Of X12Segment)
+  fullName.vb: System.Collections.Generic.IReadOnlyList(Of X12Net.Core.X12Segment)
+  name.vb: IReadOnlyList(Of X12Segment)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: <
+  - uid: X12Net.Core.X12Segment
+    name: X12Segment
+    href: X12Net.Core.X12Segment.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: X12Net.Core.X12Segment
+    name: X12Segment
+    href: X12Net.Core.X12Segment.html
+  - name: )
+- uid: System.Collections.Generic.List{X12Net.Validation.X12ValidationError}
+  commentId: T:System.Collections.Generic.List{X12Net.Validation.X12ValidationError}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.List`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<X12ValidationError>
+  nameWithType: List<X12ValidationError>
+  fullName: System.Collections.Generic.List<X12Net.Validation.X12ValidationError>
+  nameWithType.vb: List(Of X12ValidationError)
+  fullName.vb: System.Collections.Generic.List(Of X12Net.Validation.X12ValidationError)
+  name.vb: List(Of X12ValidationError)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: X12Net.Validation.X12ValidationError
+    name: X12ValidationError
+    href: X12Net.Validation.X12ValidationError.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: X12Net.Validation.X12ValidationError
+    name: X12ValidationError
+    href: X12Net.Validation.X12ValidationError.html
+  - name: )
+- uid: System.Collections.Generic.IReadOnlyList`1
+  commentId: T:System.Collections.Generic.IReadOnlyList`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  name: IReadOnlyList<T>
+  nameWithType: IReadOnlyList<T>
+  fullName: System.Collections.Generic.IReadOnlyList<T>
+  nameWithType.vb: IReadOnlyList(Of T)
+  fullName.vb: System.Collections.Generic.IReadOnlyList(Of T)
+  name.vb: IReadOnlyList(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: System.Collections.Generic.List`1
+  commentId: T:System.Collections.Generic.List`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  name: List<T>
+  nameWithType: List<T>
+  fullName: System.Collections.Generic.List<T>
+  nameWithType.vb: List(Of T)
+  fullName.vb: System.Collections.Generic.List(Of T)
+  name.vb: List(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )

@@ -1,0 +1,858 @@
+### YamlMime:ManagedReference
+items:
+- uid: X12Net.DOM.X12Interchange
+  commentId: T:X12Net.DOM.X12Interchange
+  id: X12Interchange
+  parent: X12Net.DOM
+  children:
+  - X12Net.DOM.X12Interchange.Delimiters
+  - X12Net.DOM.X12Interchange.FunctionalGroups
+  - X12Net.DOM.X12Interchange.GetTransactions``1(System.Func{System.String,``0})
+  - X12Net.DOM.X12Interchange.IEA
+  - X12Net.DOM.X12Interchange.ISA
+  - X12Net.DOM.X12Interchange.Parse(System.String)
+  - X12Net.DOM.X12Interchange.ToString
+  langs:
+  - csharp
+  - vb
+  name: X12Interchange
+  nameWithType: X12Interchange
+  fullName: X12Net.DOM.X12Interchange
+  type: Class
+  source:
+    remote:
+      path: src/X12Net/DOM/X12Interchange.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: X12Interchange
+    path: src/X12Net/DOM/X12Interchange.cs
+    startLine: 11
+  assemblies:
+  - X12Net
+  namespace: X12Net.DOM
+  summary: >-
+    The top-level hierarchical model of an EDI X12 interchange.
+
+    Parses an ISA/IEA envelope into <xref href="X12Net.DOM.X12Interchange.FunctionalGroups" data-throw-if-not-resolved="false"></xref>,
+
+    each of which contains <xref href="X12Net.DOM.X12Transaction" data-throw-if-not-resolved="false"></xref> objects.
+  example: []
+  syntax:
+    content: public sealed class X12Interchange
+    content.vb: Public NotInheritable Class X12Interchange
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+- uid: X12Net.DOM.X12Interchange.Delimiters
+  commentId: P:X12Net.DOM.X12Interchange.Delimiters
+  id: Delimiters
+  parent: X12Net.DOM.X12Interchange
+  langs:
+  - csharp
+  - vb
+  name: Delimiters
+  nameWithType: X12Interchange.Delimiters
+  fullName: X12Net.DOM.X12Interchange.Delimiters
+  type: Property
+  source:
+    remote:
+      path: src/X12Net/DOM/X12Interchange.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: Delimiters
+    path: src/X12Net/DOM/X12Interchange.cs
+    startLine: 26
+  assemblies:
+  - X12Net
+  namespace: X12Net.DOM
+  summary: The delimiters detected from the ISA header.
+  example: []
+  syntax:
+    content: public X12Delimiters Delimiters { get; }
+    parameters: []
+    return:
+      type: X12Net.Core.X12Delimiters
+    content.vb: Public ReadOnly Property Delimiters As X12Delimiters
+  overload: X12Net.DOM.X12Interchange.Delimiters*
+- uid: X12Net.DOM.X12Interchange.GetTransactions``1(System.Func{System.String,``0})
+  commentId: M:X12Net.DOM.X12Interchange.GetTransactions``1(System.Func{System.String,``0})
+  id: GetTransactions``1(System.Func{System.String,``0})
+  parent: X12Net.DOM.X12Interchange
+  langs:
+  - csharp
+  - vb
+  name: GetTransactions<T>(Func<string, T>)
+  nameWithType: X12Interchange.GetTransactions<T>(Func<string, T>)
+  fullName: X12Net.DOM.X12Interchange.GetTransactions<T>(System.Func<string, T>)
+  type: Method
+  source:
+    remote:
+      path: src/X12Net/DOM/X12Interchange.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: GetTransactions
+    path: src/X12Net/DOM/X12Interchange.cs
+    startLine: 33
+  assemblies:
+  - X12Net
+  namespace: X12Net.DOM
+  summary: >-
+    Projects every transaction in this interchange through <code class="paramref">factory</code>,
+
+    returning a typed sequence. Use a generated <code>Parse</code> method as the factory,
+
+    for example: <code>interchange.GetTransactions(Ts271.Parse)</code>.
+  example: []
+  syntax:
+    content: public IEnumerable<T> GetTransactions<T>(Func<string, T> factory)
+    parameters:
+    - id: factory
+      type: System.Func{System.String,{T}}
+    typeParameters:
+    - id: T
+    return:
+      type: System.Collections.Generic.IEnumerable{{T}}
+    content.vb: Public Function GetTransactions(Of T)(factory As Func(Of String, T)) As IEnumerable(Of T)
+  overload: X12Net.DOM.X12Interchange.GetTransactions*
+  nameWithType.vb: X12Interchange.GetTransactions(Of T)(Func(Of String, T))
+  fullName.vb: X12Net.DOM.X12Interchange.GetTransactions(Of T)(System.Func(Of String, T))
+  name.vb: GetTransactions(Of T)(Func(Of String, T))
+- uid: X12Net.DOM.X12Interchange.ISA
+  commentId: P:X12Net.DOM.X12Interchange.ISA
+  id: ISA
+  parent: X12Net.DOM.X12Interchange
+  langs:
+  - csharp
+  - vb
+  name: ISA
+  nameWithType: X12Interchange.ISA
+  fullName: X12Net.DOM.X12Interchange.ISA
+  type: Property
+  source:
+    remote:
+      path: src/X12Net/DOM/X12Interchange.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: ISA
+    path: src/X12Net/DOM/X12Interchange.cs
+    startLine: 41
+  assemblies:
+  - X12Net
+  namespace: X12Net.DOM
+  summary: The ISA (Interchange Control Header) segment.
+  example: []
+  syntax:
+    content: public X12Segment ISA { get; }
+    parameters: []
+    return:
+      type: X12Net.Core.X12Segment
+    content.vb: Public ReadOnly Property ISA As X12Segment
+  overload: X12Net.DOM.X12Interchange.ISA*
+- uid: X12Net.DOM.X12Interchange.IEA
+  commentId: P:X12Net.DOM.X12Interchange.IEA
+  id: IEA
+  parent: X12Net.DOM.X12Interchange
+  langs:
+  - csharp
+  - vb
+  name: IEA
+  nameWithType: X12Interchange.IEA
+  fullName: X12Net.DOM.X12Interchange.IEA
+  type: Property
+  source:
+    remote:
+      path: src/X12Net/DOM/X12Interchange.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: IEA
+    path: src/X12Net/DOM/X12Interchange.cs
+    startLine: 44
+  assemblies:
+  - X12Net
+  namespace: X12Net.DOM
+  summary: The IEA (Interchange Control Trailer) segment.
+  example: []
+  syntax:
+    content: public X12Segment IEA { get; }
+    parameters: []
+    return:
+      type: X12Net.Core.X12Segment
+    content.vb: Public ReadOnly Property IEA As X12Segment
+  overload: X12Net.DOM.X12Interchange.IEA*
+- uid: X12Net.DOM.X12Interchange.FunctionalGroups
+  commentId: P:X12Net.DOM.X12Interchange.FunctionalGroups
+  id: FunctionalGroups
+  parent: X12Net.DOM.X12Interchange
+  langs:
+  - csharp
+  - vb
+  name: FunctionalGroups
+  nameWithType: X12Interchange.FunctionalGroups
+  fullName: X12Net.DOM.X12Interchange.FunctionalGroups
+  type: Property
+  source:
+    remote:
+      path: src/X12Net/DOM/X12Interchange.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: FunctionalGroups
+    path: src/X12Net/DOM/X12Interchange.cs
+    startLine: 47
+  assemblies:
+  - X12Net
+  namespace: X12Net.DOM
+  summary: All functional groups within this interchange.
+  example: []
+  syntax:
+    content: public IReadOnlyList<X12FunctionalGroup> FunctionalGroups { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IReadOnlyList{X12Net.DOM.X12FunctionalGroup}
+    content.vb: Public ReadOnly Property FunctionalGroups As IReadOnlyList(Of X12FunctionalGroup)
+  overload: X12Net.DOM.X12Interchange.FunctionalGroups*
+- uid: X12Net.DOM.X12Interchange.Parse(System.String)
+  commentId: M:X12Net.DOM.X12Interchange.Parse(System.String)
+  id: Parse(System.String)
+  parent: X12Net.DOM.X12Interchange
+  langs:
+  - csharp
+  - vb
+  name: Parse(string)
+  nameWithType: X12Interchange.Parse(string)
+  fullName: X12Net.DOM.X12Interchange.Parse(string)
+  type: Method
+  source:
+    remote:
+      path: src/X12Net/DOM/X12Interchange.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: Parse
+    path: src/X12Net/DOM/X12Interchange.cs
+    startLine: 52
+  assemblies:
+  - X12Net
+  namespace: X12Net.DOM
+  summary: Parses a raw EDI X12 interchange into a hierarchical <xref href="X12Net.DOM.X12Interchange" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public static X12Interchange Parse(string input)
+    parameters:
+    - id: input
+      type: System.String
+    return:
+      type: X12Net.DOM.X12Interchange
+    content.vb: Public Shared Function Parse(input As String) As X12Interchange
+  overload: X12Net.DOM.X12Interchange.Parse*
+  nameWithType.vb: X12Interchange.Parse(String)
+  fullName.vb: X12Net.DOM.X12Interchange.Parse(String)
+  name.vb: Parse(String)
+- uid: X12Net.DOM.X12Interchange.ToString
+  commentId: M:X12Net.DOM.X12Interchange.ToString
+  id: ToString
+  parent: X12Net.DOM.X12Interchange
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: X12Interchange.ToString()
+  fullName: X12Net.DOM.X12Interchange.ToString()
+  type: Method
+  source:
+    remote:
+      path: src/X12Net/DOM/X12Interchange.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: ToString
+    path: src/X12Net/DOM/X12Interchange.cs
+    startLine: 61
+  assemblies:
+  - X12Net
+  namespace: X12Net.DOM
+  summary: Serializes the interchange back to EDI X12 text.
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+    content.vb: Public Overrides Function ToString() As String
+  overridden: System.Object.ToString
+  overload: X12Net.DOM.X12Interchange.ToString*
+references:
+- uid: X12Net.DOM.X12Interchange.FunctionalGroups
+  commentId: P:X12Net.DOM.X12Interchange.FunctionalGroups
+  href: X12Net.DOM.X12Interchange.html#X12Net_DOM_X12Interchange_FunctionalGroups
+  name: FunctionalGroups
+  nameWithType: X12Interchange.FunctionalGroups
+  fullName: X12Net.DOM.X12Interchange.FunctionalGroups
+- uid: X12Net.DOM.X12Transaction
+  commentId: T:X12Net.DOM.X12Transaction
+  href: X12Net.DOM.X12Transaction.html
+  name: X12Transaction
+  nameWithType: X12Transaction
+  fullName: X12Net.DOM.X12Transaction
+- uid: X12Net.DOM
+  commentId: N:X12Net.DOM
+  href: X12Net.html
+  name: X12Net.DOM
+  nameWithType: X12Net.DOM
+  fullName: X12Net.DOM
+  spec.csharp:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.DOM
+    name: DOM
+    href: X12Net.DOM.html
+  spec.vb:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.DOM
+    name: DOM
+    href: X12Net.DOM.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: X12Net.DOM.X12Interchange.Delimiters*
+  commentId: Overload:X12Net.DOM.X12Interchange.Delimiters
+  href: X12Net.DOM.X12Interchange.html#X12Net_DOM_X12Interchange_Delimiters
+  name: Delimiters
+  nameWithType: X12Interchange.Delimiters
+  fullName: X12Net.DOM.X12Interchange.Delimiters
+- uid: X12Net.Core.X12Delimiters
+  commentId: T:X12Net.Core.X12Delimiters
+  parent: X12Net.Core
+  href: X12Net.Core.X12Delimiters.html
+  name: X12Delimiters
+  nameWithType: X12Delimiters
+  fullName: X12Net.Core.X12Delimiters
+- uid: X12Net.Core
+  commentId: N:X12Net.Core
+  href: X12Net.html
+  name: X12Net.Core
+  nameWithType: X12Net.Core
+  fullName: X12Net.Core
+  spec.csharp:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.Core
+    name: Core
+    href: X12Net.Core.html
+  spec.vb:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.Core
+    name: Core
+    href: X12Net.Core.html
+- uid: X12Net.DOM.X12Interchange.GetTransactions*
+  commentId: Overload:X12Net.DOM.X12Interchange.GetTransactions
+  href: X12Net.DOM.X12Interchange.html#X12Net_DOM_X12Interchange_GetTransactions__1_System_Func_System_String___0__
+  name: GetTransactions
+  nameWithType: X12Interchange.GetTransactions
+  fullName: X12Net.DOM.X12Interchange.GetTransactions
+- uid: System.Func{System.String,{T}}
+  commentId: T:System.Func{System.String,``0}
+  parent: System
+  definition: System.Func`2
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
+  name: Func<string, T>
+  nameWithType: Func<string, T>
+  fullName: System.Func<string, T>
+  nameWithType.vb: Func(Of String, T)
+  fullName.vb: System.Func(Of String, T)
+  name.vb: Func(Of String, T)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic.IEnumerable{{T}}
+  commentId: T:System.Collections.Generic.IEnumerable{``0}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Func`2
+  commentId: T:System.Func`2
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.func-2
+  name: Func<T, TResult>
+  nameWithType: Func<T, TResult>
+  fullName: System.Func<T, TResult>
+  nameWithType.vb: Func(Of T, TResult)
+  fullName.vb: System.Func(Of T, TResult)
+  name.vb: Func(Of T, TResult)
+  spec.csharp:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: <
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`2
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-2
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: X12Net.DOM.X12Interchange.ISA*
+  commentId: Overload:X12Net.DOM.X12Interchange.ISA
+  href: X12Net.DOM.X12Interchange.html#X12Net_DOM_X12Interchange_ISA
+  name: ISA
+  nameWithType: X12Interchange.ISA
+  fullName: X12Net.DOM.X12Interchange.ISA
+- uid: X12Net.Core.X12Segment
+  commentId: T:X12Net.Core.X12Segment
+  parent: X12Net.Core
+  href: X12Net.Core.X12Segment.html
+  name: X12Segment
+  nameWithType: X12Segment
+  fullName: X12Net.Core.X12Segment
+- uid: X12Net.DOM.X12Interchange.IEA*
+  commentId: Overload:X12Net.DOM.X12Interchange.IEA
+  href: X12Net.DOM.X12Interchange.html#X12Net_DOM_X12Interchange_IEA
+  name: IEA
+  nameWithType: X12Interchange.IEA
+  fullName: X12Net.DOM.X12Interchange.IEA
+- uid: X12Net.DOM.X12Interchange.FunctionalGroups*
+  commentId: Overload:X12Net.DOM.X12Interchange.FunctionalGroups
+  href: X12Net.DOM.X12Interchange.html#X12Net_DOM_X12Interchange_FunctionalGroups
+  name: FunctionalGroups
+  nameWithType: X12Interchange.FunctionalGroups
+  fullName: X12Net.DOM.X12Interchange.FunctionalGroups
+- uid: System.Collections.Generic.IReadOnlyList{X12Net.DOM.X12FunctionalGroup}
+  commentId: T:System.Collections.Generic.IReadOnlyList{X12Net.DOM.X12FunctionalGroup}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IReadOnlyList`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  name: IReadOnlyList<X12FunctionalGroup>
+  nameWithType: IReadOnlyList<X12FunctionalGroup>
+  fullName: System.Collections.Generic.IReadOnlyList<X12Net.DOM.X12FunctionalGroup>
+  nameWithType.vb: IReadOnlyList(Of X12FunctionalGroup)
+  fullName.vb: System.Collections.Generic.IReadOnlyList(Of X12Net.DOM.X12FunctionalGroup)
+  name.vb: IReadOnlyList(Of X12FunctionalGroup)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: <
+  - uid: X12Net.DOM.X12FunctionalGroup
+    name: X12FunctionalGroup
+    href: X12Net.DOM.X12FunctionalGroup.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: X12Net.DOM.X12FunctionalGroup
+    name: X12FunctionalGroup
+    href: X12Net.DOM.X12FunctionalGroup.html
+  - name: )
+- uid: System.Collections.Generic.IReadOnlyList`1
+  commentId: T:System.Collections.Generic.IReadOnlyList`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  name: IReadOnlyList<T>
+  nameWithType: IReadOnlyList<T>
+  fullName: System.Collections.Generic.IReadOnlyList<T>
+  nameWithType.vb: IReadOnlyList(Of T)
+  fullName.vb: System.Collections.Generic.IReadOnlyList(Of T)
+  name.vb: IReadOnlyList(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: X12Net.DOM.X12Interchange
+  commentId: T:X12Net.DOM.X12Interchange
+  parent: X12Net.DOM
+  href: X12Net.DOM.X12Interchange.html
+  name: X12Interchange
+  nameWithType: X12Interchange
+  fullName: X12Net.DOM.X12Interchange
+- uid: X12Net.DOM.X12Interchange.Parse*
+  commentId: Overload:X12Net.DOM.X12Interchange.Parse
+  href: X12Net.DOM.X12Interchange.html#X12Net_DOM_X12Interchange_Parse_System_String_
+  name: Parse
+  nameWithType: X12Interchange.Parse
+  fullName: X12Net.DOM.X12Interchange.Parse
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: X12Net.DOM.X12Interchange.ToString*
+  commentId: Overload:X12Net.DOM.X12Interchange.ToString
+  href: X12Net.DOM.X12Interchange.html#X12Net_DOM_X12Interchange_ToString
+  name: ToString
+  nameWithType: X12Interchange.ToString
+  fullName: X12Net.DOM.X12Interchange.ToString

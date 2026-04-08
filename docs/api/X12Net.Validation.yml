@@ -1,0 +1,96 @@
+### YamlMime:ManagedReference
+items:
+- uid: X12Net.Validation
+  commentId: N:X12Net.Validation
+  id: X12Net.Validation
+  children:
+  - X12Net.Validation.EbSegmentValidator
+  - X12Net.Validation.Ts271Validator
+  - X12Net.Validation.X12ErrorCode
+  - X12Net.Validation.X12InterchangeValidator
+  - X12Net.Validation.X12ValidationError
+  - X12Net.Validation.X12ValidationResult
+  - X12Net.Validation.X12ValidationRule
+  - X12Net.Validation.X12Validator
+  langs:
+  - csharp
+  - vb
+  name: X12Net.Validation
+  nameWithType: X12Net.Validation
+  fullName: X12Net.Validation
+  type: Namespace
+  assemblies:
+  - X12Net
+references:
+- uid: X12Net.Validation.EbSegmentValidator
+  commentId: T:X12Net.Validation.EbSegmentValidator
+  href: X12Net.Validation.EbSegmentValidator.html
+  name: EbSegmentValidator
+  nameWithType: EbSegmentValidator
+  fullName: X12Net.Validation.EbSegmentValidator
+- uid: X12Net.Validation.Ts271Validator
+  commentId: T:X12Net.Validation.Ts271Validator
+  href: X12Net.Validation.Ts271Validator.html
+  name: Ts271Validator
+  nameWithType: Ts271Validator
+  fullName: X12Net.Validation.Ts271Validator
+- uid: X12Net.Validation.X12ErrorCode
+  commentId: T:X12Net.Validation.X12ErrorCode
+  parent: X12Net.Validation
+  href: X12Net.Validation.X12ErrorCode.html
+  name: X12ErrorCode
+  nameWithType: X12ErrorCode
+  fullName: X12Net.Validation.X12ErrorCode
+- uid: X12Net.Validation.X12InterchangeValidator
+  commentId: T:X12Net.Validation.X12InterchangeValidator
+  href: X12Net.Validation.X12InterchangeValidator.html
+  name: X12InterchangeValidator
+  nameWithType: X12InterchangeValidator
+  fullName: X12Net.Validation.X12InterchangeValidator
+- uid: X12Net.Validation.X12ValidationError
+  commentId: T:X12Net.Validation.X12ValidationError
+  href: X12Net.Validation.X12ValidationError.html
+  name: X12ValidationError
+  nameWithType: X12ValidationError
+  fullName: X12Net.Validation.X12ValidationError
+- uid: X12Net.Validation.X12ValidationResult
+  commentId: T:X12Net.Validation.X12ValidationResult
+  parent: X12Net.Validation
+  href: X12Net.Validation.X12ValidationResult.html
+  name: X12ValidationResult
+  nameWithType: X12ValidationResult
+  fullName: X12Net.Validation.X12ValidationResult
+- uid: X12Net.Validation.X12ValidationRule
+  commentId: T:X12Net.Validation.X12ValidationRule
+  href: X12Net.Validation.X12ValidationRule.html
+  name: X12ValidationRule
+  nameWithType: X12ValidationRule
+  fullName: X12Net.Validation.X12ValidationRule
+- uid: X12Net.Validation.X12Validator
+  commentId: T:X12Net.Validation.X12Validator
+  href: X12Net.Validation.X12Validator.html
+  name: X12Validator
+  nameWithType: X12Validator
+  fullName: X12Net.Validation.X12Validator
+- uid: X12Net.Validation
+  commentId: N:X12Net.Validation
+  href: X12Net.html
+  name: X12Net.Validation
+  nameWithType: X12Net.Validation
+  fullName: X12Net.Validation
+  spec.csharp:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.Validation
+    name: Validation
+    href: X12Net.Validation.html
+  spec.vb:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.Validation
+    name: Validation
+    href: X12Net.Validation.html

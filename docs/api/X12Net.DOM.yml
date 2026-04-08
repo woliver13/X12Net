@@ -1,0 +1,75 @@
+### YamlMime:ManagedReference
+items:
+- uid: X12Net.DOM
+  commentId: N:X12Net.DOM
+  id: X12Net.DOM
+  children:
+  - X12Net.DOM.X12Document
+  - X12Net.DOM.X12FunctionalGroup
+  - X12Net.DOM.X12Interchange
+  - X12Net.DOM.X12MutableSegment
+  - X12Net.DOM.X12Transaction
+  langs:
+  - csharp
+  - vb
+  name: X12Net.DOM
+  nameWithType: X12Net.DOM
+  fullName: X12Net.DOM
+  type: Namespace
+  assemblies:
+  - X12Net
+references:
+- uid: X12Net.DOM.X12Document
+  commentId: T:X12Net.DOM.X12Document
+  parent: X12Net.DOM
+  href: X12Net.DOM.X12Document.html
+  name: X12Document
+  nameWithType: X12Document
+  fullName: X12Net.DOM.X12Document
+- uid: X12Net.DOM.X12FunctionalGroup
+  commentId: T:X12Net.DOM.X12FunctionalGroup
+  href: X12Net.DOM.X12FunctionalGroup.html
+  name: X12FunctionalGroup
+  nameWithType: X12FunctionalGroup
+  fullName: X12Net.DOM.X12FunctionalGroup
+- uid: X12Net.DOM.X12Interchange
+  commentId: T:X12Net.DOM.X12Interchange
+  parent: X12Net.DOM
+  href: X12Net.DOM.X12Interchange.html
+  name: X12Interchange
+  nameWithType: X12Interchange
+  fullName: X12Net.DOM.X12Interchange
+- uid: X12Net.DOM.X12MutableSegment
+  commentId: T:X12Net.DOM.X12MutableSegment
+  href: X12Net.DOM.X12MutableSegment.html
+  name: X12MutableSegment
+  nameWithType: X12MutableSegment
+  fullName: X12Net.DOM.X12MutableSegment
+- uid: X12Net.DOM.X12Transaction
+  commentId: T:X12Net.DOM.X12Transaction
+  href: X12Net.DOM.X12Transaction.html
+  name: X12Transaction
+  nameWithType: X12Transaction
+  fullName: X12Net.DOM.X12Transaction
+- uid: X12Net.DOM
+  commentId: N:X12Net.DOM
+  href: X12Net.html
+  name: X12Net.DOM
+  nameWithType: X12Net.DOM
+  fullName: X12Net.DOM
+  spec.csharp:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.DOM
+    name: DOM
+    href: X12Net.DOM.html
+  spec.vb:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.DOM
+    name: DOM
+    href: X12Net.DOM.html

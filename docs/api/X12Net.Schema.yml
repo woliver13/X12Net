@@ -1,0 +1,77 @@
+### YamlMime:ManagedReference
+items:
+- uid: X12Net.Schema
+  commentId: N:X12Net.Schema
+  id: X12Net.Schema
+  children:
+  - X12Net.Schema.X12DynamicTransaction
+  - X12Net.Schema.X12SchemaRegistry
+  - X12Net.Schema.X12SchemaValidator
+  - X12Net.Schema.X12SegmentSchema
+  - X12Net.Schema.X12TransactionSchema
+  langs:
+  - csharp
+  - vb
+  name: X12Net.Schema
+  nameWithType: X12Net.Schema
+  fullName: X12Net.Schema
+  type: Namespace
+  assemblies:
+  - X12Net
+references:
+- uid: X12Net.Schema.X12DynamicTransaction
+  commentId: T:X12Net.Schema.X12DynamicTransaction
+  parent: X12Net.Schema
+  href: X12Net.Schema.X12DynamicTransaction.html
+  name: X12DynamicTransaction
+  nameWithType: X12DynamicTransaction
+  fullName: X12Net.Schema.X12DynamicTransaction
+- uid: X12Net.Schema.X12SchemaRegistry
+  commentId: T:X12Net.Schema.X12SchemaRegistry
+  parent: X12Net.Schema
+  href: X12Net.Schema.X12SchemaRegistry.html
+  name: X12SchemaRegistry
+  nameWithType: X12SchemaRegistry
+  fullName: X12Net.Schema.X12SchemaRegistry
+- uid: X12Net.Schema.X12SchemaValidator
+  commentId: T:X12Net.Schema.X12SchemaValidator
+  href: X12Net.Schema.X12SchemaValidator.html
+  name: X12SchemaValidator
+  nameWithType: X12SchemaValidator
+  fullName: X12Net.Schema.X12SchemaValidator
+- uid: X12Net.Schema.X12SegmentSchema
+  commentId: T:X12Net.Schema.X12SegmentSchema
+  parent: X12Net.Schema
+  href: X12Net.Schema.X12SegmentSchema.html
+  name: X12SegmentSchema
+  nameWithType: X12SegmentSchema
+  fullName: X12Net.Schema.X12SegmentSchema
+- uid: X12Net.Schema.X12TransactionSchema
+  commentId: T:X12Net.Schema.X12TransactionSchema
+  parent: X12Net.Schema
+  href: X12Net.Schema.X12TransactionSchema.html
+  name: X12TransactionSchema
+  nameWithType: X12TransactionSchema
+  fullName: X12Net.Schema.X12TransactionSchema
+- uid: X12Net.Schema
+  commentId: N:X12Net.Schema
+  href: X12Net.html
+  name: X12Net.Schema
+  nameWithType: X12Net.Schema
+  fullName: X12Net.Schema
+  spec.csharp:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.Schema
+    name: Schema
+    href: X12Net.Schema.html
+  spec.vb:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.Schema
+    name: Schema
+    href: X12Net.Schema.html

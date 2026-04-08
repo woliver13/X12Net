@@ -1,0 +1,37 @@
+### YamlMime:ManagedReference
+items:
+- uid: X12Net.IO
+  commentId: N:X12Net.IO
+  id: X12Net.IO
+  children:
+  - X12Net.IO.X12MemoryCapException
+  - X12Net.IO.X12Reader
+  - X12Net.IO.X12Writer
+  langs:
+  - csharp
+  - vb
+  name: X12Net.IO
+  nameWithType: X12Net.IO
+  fullName: X12Net.IO
+  type: Namespace
+  assemblies:
+  - X12Net
+references:
+- uid: X12Net.IO.X12MemoryCapException
+  commentId: T:X12Net.IO.X12MemoryCapException
+  href: X12Net.IO.X12MemoryCapException.html
+  name: X12MemoryCapException
+  nameWithType: X12MemoryCapException
+  fullName: X12Net.IO.X12MemoryCapException
+- uid: X12Net.IO.X12Reader
+  commentId: T:X12Net.IO.X12Reader
+  href: X12Net.IO.X12Reader.html
+  name: X12Reader
+  nameWithType: X12Reader
+  fullName: X12Net.IO.X12Reader
+- uid: X12Net.IO.X12Writer
+  commentId: T:X12Net.IO.X12Writer
+  href: X12Net.IO.X12Writer.html
+  name: X12Writer
+  nameWithType: X12Writer
+  fullName: X12Net.IO.X12Writer

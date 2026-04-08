@@ -1,0 +1,583 @@
+### YamlMime:ManagedReference
+items:
+- uid: X12Net.DOM.X12Transaction
+  commentId: T:X12Net.DOM.X12Transaction
+  id: X12Transaction
+  parent: X12Net.DOM
+  children:
+  - X12Net.DOM.X12Transaction.SE
+  - X12Net.DOM.X12Transaction.ST
+  - X12Net.DOM.X12Transaction.Segments
+  - X12Net.DOM.X12Transaction.ToEdi(X12Net.Core.X12Delimiters)
+  langs:
+  - csharp
+  - vb
+  name: X12Transaction
+  nameWithType: X12Transaction
+  fullName: X12Net.DOM.X12Transaction
+  type: Class
+  source:
+    remote:
+      path: src/X12Net/DOM/X12Transaction.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: X12Transaction
+    path: src/X12Net/DOM/X12Transaction.cs
+    startLine: 9
+  assemblies:
+  - X12Net
+  namespace: X12Net.DOM
+  summary: >-
+    An ST/SE transaction set within a functional group.
+
+    <xref href="X12Net.DOM.X12Transaction.Segments" data-throw-if-not-resolved="false"></xref> contains the body segments (excluding ST and SE themselves).
+  example: []
+  syntax:
+    content: public sealed class X12Transaction
+    content.vb: Public NotInheritable Class X12Transaction
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: X12Net.DOM.X12Transaction.ST
+  commentId: P:X12Net.DOM.X12Transaction.ST
+  id: ST
+  parent: X12Net.DOM.X12Transaction
+  langs:
+  - csharp
+  - vb
+  name: ST
+  nameWithType: X12Transaction.ST
+  fullName: X12Net.DOM.X12Transaction.ST
+  type: Property
+  source:
+    remote:
+      path: src/X12Net/DOM/X12Transaction.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: ST
+    path: src/X12Net/DOM/X12Transaction.cs
+    startLine: 19
+  assemblies:
+  - X12Net
+  namespace: X12Net.DOM
+  summary: The ST (Transaction Set Header) segment.
+  example: []
+  syntax:
+    content: public X12Segment ST { get; }
+    parameters: []
+    return:
+      type: X12Net.Core.X12Segment
+    content.vb: Public ReadOnly Property ST As X12Segment
+  overload: X12Net.DOM.X12Transaction.ST*
+- uid: X12Net.DOM.X12Transaction.SE
+  commentId: P:X12Net.DOM.X12Transaction.SE
+  id: SE
+  parent: X12Net.DOM.X12Transaction
+  langs:
+  - csharp
+  - vb
+  name: SE
+  nameWithType: X12Transaction.SE
+  fullName: X12Net.DOM.X12Transaction.SE
+  type: Property
+  source:
+    remote:
+      path: src/X12Net/DOM/X12Transaction.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: SE
+    path: src/X12Net/DOM/X12Transaction.cs
+    startLine: 22
+  assemblies:
+  - X12Net
+  namespace: X12Net.DOM
+  summary: The SE (Transaction Set Trailer) segment.
+  example: []
+  syntax:
+    content: public X12Segment SE { get; }
+    parameters: []
+    return:
+      type: X12Net.Core.X12Segment
+    content.vb: Public ReadOnly Property SE As X12Segment
+  overload: X12Net.DOM.X12Transaction.SE*
+- uid: X12Net.DOM.X12Transaction.Segments
+  commentId: P:X12Net.DOM.X12Transaction.Segments
+  id: Segments
+  parent: X12Net.DOM.X12Transaction
+  langs:
+  - csharp
+  - vb
+  name: Segments
+  nameWithType: X12Transaction.Segments
+  fullName: X12Net.DOM.X12Transaction.Segments
+  type: Property
+  source:
+    remote:
+      path: src/X12Net/DOM/X12Transaction.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: Segments
+    path: src/X12Net/DOM/X12Transaction.cs
+    startLine: 25
+  assemblies:
+  - X12Net
+  namespace: X12Net.DOM
+  summary: Body segments between ST and SE (excluding ST and SE).
+  example: []
+  syntax:
+    content: public IReadOnlyList<X12Segment> Segments { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IReadOnlyList{X12Net.Core.X12Segment}
+    content.vb: Public ReadOnly Property Segments As IReadOnlyList(Of X12Segment)
+  overload: X12Net.DOM.X12Transaction.Segments*
+- uid: X12Net.DOM.X12Transaction.ToEdi(X12Net.Core.X12Delimiters)
+  commentId: M:X12Net.DOM.X12Transaction.ToEdi(X12Net.Core.X12Delimiters)
+  id: ToEdi(X12Net.Core.X12Delimiters)
+  parent: X12Net.DOM.X12Transaction
+  langs:
+  - csharp
+  - vb
+  name: ToEdi(X12Delimiters)
+  nameWithType: X12Transaction.ToEdi(X12Delimiters)
+  fullName: X12Net.DOM.X12Transaction.ToEdi(X12Net.Core.X12Delimiters)
+  type: Method
+  source:
+    remote:
+      path: src/X12Net/DOM/X12Transaction.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: ToEdi
+    path: src/X12Net/DOM/X12Transaction.cs
+    startLine: 28
+  assemblies:
+  - X12Net
+  namespace: X12Net.DOM
+  summary: Serializes the transaction (ST…body…SE) back to EDI X12 text.
+  example: []
+  syntax:
+    content: public string ToEdi(X12Delimiters delimiters)
+    parameters:
+    - id: delimiters
+      type: X12Net.Core.X12Delimiters
+    return:
+      type: System.String
+    content.vb: Public Function ToEdi(delimiters As X12Delimiters) As String
+  overload: X12Net.DOM.X12Transaction.ToEdi*
+references:
+- uid: X12Net.DOM.X12Transaction.Segments
+  commentId: P:X12Net.DOM.X12Transaction.Segments
+  href: X12Net.DOM.X12Transaction.html#X12Net_DOM_X12Transaction_Segments
+  name: Segments
+  nameWithType: X12Transaction.Segments
+  fullName: X12Net.DOM.X12Transaction.Segments
+- uid: X12Net.DOM
+  commentId: N:X12Net.DOM
+  href: X12Net.html
+  name: X12Net.DOM
+  nameWithType: X12Net.DOM
+  fullName: X12Net.DOM
+  spec.csharp:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.DOM
+    name: DOM
+    href: X12Net.DOM.html
+  spec.vb:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.DOM
+    name: DOM
+    href: X12Net.DOM.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: X12Net.DOM.X12Transaction.ST*
+  commentId: Overload:X12Net.DOM.X12Transaction.ST
+  href: X12Net.DOM.X12Transaction.html#X12Net_DOM_X12Transaction_ST
+  name: ST
+  nameWithType: X12Transaction.ST
+  fullName: X12Net.DOM.X12Transaction.ST
+- uid: X12Net.Core.X12Segment
+  commentId: T:X12Net.Core.X12Segment
+  parent: X12Net.Core
+  href: X12Net.Core.X12Segment.html
+  name: X12Segment
+  nameWithType: X12Segment
+  fullName: X12Net.Core.X12Segment
+- uid: X12Net.Core
+  commentId: N:X12Net.Core
+  href: X12Net.html
+  name: X12Net.Core
+  nameWithType: X12Net.Core
+  fullName: X12Net.Core
+  spec.csharp:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.Core
+    name: Core
+    href: X12Net.Core.html
+  spec.vb:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.Core
+    name: Core
+    href: X12Net.Core.html
+- uid: X12Net.DOM.X12Transaction.SE*
+  commentId: Overload:X12Net.DOM.X12Transaction.SE
+  href: X12Net.DOM.X12Transaction.html#X12Net_DOM_X12Transaction_SE
+  name: SE
+  nameWithType: X12Transaction.SE
+  fullName: X12Net.DOM.X12Transaction.SE
+- uid: X12Net.DOM.X12Transaction.Segments*
+  commentId: Overload:X12Net.DOM.X12Transaction.Segments
+  href: X12Net.DOM.X12Transaction.html#X12Net_DOM_X12Transaction_Segments
+  name: Segments
+  nameWithType: X12Transaction.Segments
+  fullName: X12Net.DOM.X12Transaction.Segments
+- uid: System.Collections.Generic.IReadOnlyList{X12Net.Core.X12Segment}
+  commentId: T:System.Collections.Generic.IReadOnlyList{X12Net.Core.X12Segment}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IReadOnlyList`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  name: IReadOnlyList<X12Segment>
+  nameWithType: IReadOnlyList<X12Segment>
+  fullName: System.Collections.Generic.IReadOnlyList<X12Net.Core.X12Segment>
+  nameWithType.vb: IReadOnlyList(Of X12Segment)
+  fullName.vb: System.Collections.Generic.IReadOnlyList(Of X12Net.Core.X12Segment)
+  name.vb: IReadOnlyList(Of X12Segment)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: <
+  - uid: X12Net.Core.X12Segment
+    name: X12Segment
+    href: X12Net.Core.X12Segment.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: X12Net.Core.X12Segment
+    name: X12Segment
+    href: X12Net.Core.X12Segment.html
+  - name: )
+- uid: System.Collections.Generic.IReadOnlyList`1
+  commentId: T:System.Collections.Generic.IReadOnlyList`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  name: IReadOnlyList<T>
+  nameWithType: IReadOnlyList<T>
+  fullName: System.Collections.Generic.IReadOnlyList<T>
+  nameWithType.vb: IReadOnlyList(Of T)
+  fullName.vb: System.Collections.Generic.IReadOnlyList(Of T)
+  name.vb: IReadOnlyList(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: X12Net.DOM.X12Transaction.ToEdi*
+  commentId: Overload:X12Net.DOM.X12Transaction.ToEdi
+  href: X12Net.DOM.X12Transaction.html#X12Net_DOM_X12Transaction_ToEdi_X12Net_Core_X12Delimiters_
+  name: ToEdi
+  nameWithType: X12Transaction.ToEdi
+  fullName: X12Net.DOM.X12Transaction.ToEdi
+- uid: X12Net.Core.X12Delimiters
+  commentId: T:X12Net.Core.X12Delimiters
+  parent: X12Net.Core
+  href: X12Net.Core.X12Delimiters.html
+  name: X12Delimiters
+  nameWithType: X12Delimiters
+  fullName: X12Net.Core.X12Delimiters
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String

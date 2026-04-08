@@ -1,0 +1,852 @@
+### YamlMime:ManagedReference
+items:
+- uid: X12Net.Core.X12Delimiters
+  commentId: T:X12Net.Core.X12Delimiters
+  id: X12Delimiters
+  parent: X12Net.Core
+  children:
+  - X12Net.Core.X12Delimiters.#ctor(System.Char,System.Char,System.Char)
+  - X12Net.Core.X12Delimiters.ComponentSeparator
+  - X12Net.Core.X12Delimiters.Default
+  - X12Net.Core.X12Delimiters.ElementSeparator
+  - X12Net.Core.X12Delimiters.Equals(System.Object)
+  - X12Net.Core.X12Delimiters.Equals(X12Net.Core.X12Delimiters)
+  - X12Net.Core.X12Delimiters.FromIsa(System.String)
+  - X12Net.Core.X12Delimiters.GetHashCode
+  - X12Net.Core.X12Delimiters.SegmentTerminator
+  - X12Net.Core.X12Delimiters.ToString
+  langs:
+  - csharp
+  - vb
+  name: X12Delimiters
+  nameWithType: X12Delimiters
+  fullName: X12Net.Core.X12Delimiters
+  type: Struct
+  source:
+    remote:
+      path: src/X12Net/Core/X12Delimiters.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: X12Delimiters
+    path: src/X12Net/Core/X12Delimiters.cs
+    startLine: 6
+  assemblies:
+  - X12Net
+  namespace: X12Net.Core
+  summary: >-
+    The three delimiter characters used in an EDI X12 interchange.
+
+    Detected from the ISA header or supplied explicitly.
+  example: []
+  syntax:
+    content: 'public readonly struct X12Delimiters : IEquatable<X12Delimiters>'
+    content.vb: Public Structure X12Delimiters Implements IEquatable(Of X12Delimiters)
+  implements:
+  - System.IEquatable{X12Net.Core.X12Delimiters}
+  inheritedMembers:
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+- uid: X12Net.Core.X12Delimiters.#ctor(System.Char,System.Char,System.Char)
+  commentId: M:X12Net.Core.X12Delimiters.#ctor(System.Char,System.Char,System.Char)
+  id: '#ctor(System.Char,System.Char,System.Char)'
+  parent: X12Net.Core.X12Delimiters
+  langs:
+  - csharp
+  - vb
+  name: X12Delimiters(char, char, char)
+  nameWithType: X12Delimiters.X12Delimiters(char, char, char)
+  fullName: X12Net.Core.X12Delimiters.X12Delimiters(char, char, char)
+  type: Constructor
+  source:
+    remote:
+      path: src/X12Net/Core/X12Delimiters.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: .ctor
+    path: src/X12Net/Core/X12Delimiters.cs
+    startLine: 9
+  assemblies:
+  - X12Net
+  namespace: X12Net.Core
+  summary: Initializes delimiter values.
+  example: []
+  syntax:
+    content: public X12Delimiters(char elementSeparator, char componentSeparator, char segmentTerminator)
+    parameters:
+    - id: elementSeparator
+      type: System.Char
+    - id: componentSeparator
+      type: System.Char
+    - id: segmentTerminator
+      type: System.Char
+    content.vb: Public Sub New(elementSeparator As Char, componentSeparator As Char, segmentTerminator As Char)
+  overload: X12Net.Core.X12Delimiters.#ctor*
+  nameWithType.vb: X12Delimiters.New(Char, Char, Char)
+  fullName.vb: X12Net.Core.X12Delimiters.New(Char, Char, Char)
+  name.vb: New(Char, Char, Char)
+- uid: X12Net.Core.X12Delimiters.ElementSeparator
+  commentId: P:X12Net.Core.X12Delimiters.ElementSeparator
+  id: ElementSeparator
+  parent: X12Net.Core.X12Delimiters
+  langs:
+  - csharp
+  - vb
+  name: ElementSeparator
+  nameWithType: X12Delimiters.ElementSeparator
+  fullName: X12Net.Core.X12Delimiters.ElementSeparator
+  type: Property
+  source:
+    remote:
+      path: src/X12Net/Core/X12Delimiters.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: ElementSeparator
+    path: src/X12Net/Core/X12Delimiters.cs
+    startLine: 17
+  assemblies:
+  - X12Net
+  namespace: X12Net.Core
+  summary: Separates elements within a segment (ISA position 3; typically <code>*</code>).
+  example: []
+  syntax:
+    content: public char ElementSeparator { get; }
+    parameters: []
+    return:
+      type: System.Char
+    content.vb: Public ReadOnly Property ElementSeparator As Char
+  overload: X12Net.Core.X12Delimiters.ElementSeparator*
+- uid: X12Net.Core.X12Delimiters.ComponentSeparator
+  commentId: P:X12Net.Core.X12Delimiters.ComponentSeparator
+  id: ComponentSeparator
+  parent: X12Net.Core.X12Delimiters
+  langs:
+  - csharp
+  - vb
+  name: ComponentSeparator
+  nameWithType: X12Delimiters.ComponentSeparator
+  fullName: X12Net.Core.X12Delimiters.ComponentSeparator
+  type: Property
+  source:
+    remote:
+      path: src/X12Net/Core/X12Delimiters.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: ComponentSeparator
+    path: src/X12Net/Core/X12Delimiters.cs
+    startLine: 20
+  assemblies:
+  - X12Net
+  namespace: X12Net.Core
+  summary: Separates components within a composite element (ISA16; typically <code>:</code>).
+  example: []
+  syntax:
+    content: public char ComponentSeparator { get; }
+    parameters: []
+    return:
+      type: System.Char
+    content.vb: Public ReadOnly Property ComponentSeparator As Char
+  overload: X12Net.Core.X12Delimiters.ComponentSeparator*
+- uid: X12Net.Core.X12Delimiters.SegmentTerminator
+  commentId: P:X12Net.Core.X12Delimiters.SegmentTerminator
+  id: SegmentTerminator
+  parent: X12Net.Core.X12Delimiters
+  langs:
+  - csharp
+  - vb
+  name: SegmentTerminator
+  nameWithType: X12Delimiters.SegmentTerminator
+  fullName: X12Net.Core.X12Delimiters.SegmentTerminator
+  type: Property
+  source:
+    remote:
+      path: src/X12Net/Core/X12Delimiters.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: SegmentTerminator
+    path: src/X12Net/Core/X12Delimiters.cs
+    startLine: 23
+  assemblies:
+  - X12Net
+  namespace: X12Net.Core
+  summary: Terminates each segment (character after ISA16; typically <code>~</code>).
+  example: []
+  syntax:
+    content: public char SegmentTerminator { get; }
+    parameters: []
+    return:
+      type: System.Char
+    content.vb: Public ReadOnly Property SegmentTerminator As Char
+  overload: X12Net.Core.X12Delimiters.SegmentTerminator*
+- uid: X12Net.Core.X12Delimiters.Default
+  commentId: F:X12Net.Core.X12Delimiters.Default
+  id: Default
+  parent: X12Net.Core.X12Delimiters
+  langs:
+  - csharp
+  - vb
+  name: Default
+  nameWithType: X12Delimiters.Default
+  fullName: X12Net.Core.X12Delimiters.Default
+  type: Field
+  source:
+    remote:
+      path: src/X12Net/Core/X12Delimiters.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: Default
+    path: src/X12Net/Core/X12Delimiters.cs
+    startLine: 26
+  assemblies:
+  - X12Net
+  namespace: X12Net.Core
+  summary: Default delimiters used when no ISA header is present.
+  example: []
+  syntax:
+    content: public static readonly X12Delimiters Default
+    return:
+      type: X12Net.Core.X12Delimiters
+    content.vb: Public Shared ReadOnly [Default] As X12Delimiters
+- uid: X12Net.Core.X12Delimiters.FromIsa(System.String)
+  commentId: M:X12Net.Core.X12Delimiters.FromIsa(System.String)
+  id: FromIsa(System.String)
+  parent: X12Net.Core.X12Delimiters
+  langs:
+  - csharp
+  - vb
+  name: FromIsa(string)
+  nameWithType: X12Delimiters.FromIsa(string)
+  fullName: X12Net.Core.X12Delimiters.FromIsa(string)
+  type: Method
+  source:
+    remote:
+      path: src/X12Net/Core/X12Delimiters.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: FromIsa
+    path: src/X12Net/Core/X12Delimiters.cs
+    startLine: 32
+  assemblies:
+  - X12Net
+  namespace: X12Net.Core
+  summary: >-
+    Detects delimiters from an ISA header.
+
+    Falls back to <xref href="X12Net.Core.X12Delimiters.Default" data-throw-if-not-resolved="false"></xref> when the input is not a full ISA.
+  example: []
+  syntax:
+    content: public static X12Delimiters FromIsa(string input)
+    parameters:
+    - id: input
+      type: System.String
+    return:
+      type: X12Net.Core.X12Delimiters
+    content.vb: Public Shared Function FromIsa(input As String) As X12Delimiters
+  overload: X12Net.Core.X12Delimiters.FromIsa*
+  nameWithType.vb: X12Delimiters.FromIsa(String)
+  fullName.vb: X12Net.Core.X12Delimiters.FromIsa(String)
+  name.vb: FromIsa(String)
+- uid: X12Net.Core.X12Delimiters.Equals(X12Net.Core.X12Delimiters)
+  commentId: M:X12Net.Core.X12Delimiters.Equals(X12Net.Core.X12Delimiters)
+  id: Equals(X12Net.Core.X12Delimiters)
+  parent: X12Net.Core.X12Delimiters
+  langs:
+  - csharp
+  - vb
+  name: Equals(X12Delimiters)
+  nameWithType: X12Delimiters.Equals(X12Delimiters)
+  fullName: X12Net.Core.X12Delimiters.Equals(X12Net.Core.X12Delimiters)
+  type: Method
+  source:
+    remote:
+      path: src/X12Net/Core/X12Delimiters.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: Equals
+    path: src/X12Net/Core/X12Delimiters.cs
+    startLine: 39
+  assemblies:
+  - X12Net
+  namespace: X12Net.Core
+  summary: Indicates whether the current object is equal to another object of the same type.
+  example: []
+  syntax:
+    content: public bool Equals(X12Delimiters other)
+    parameters:
+    - id: other
+      type: X12Net.Core.X12Delimiters
+      description: An object to compare with this object.
+    return:
+      type: System.Boolean
+      description: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if the current object is equal to the <code class="paramref">other</code> parameter; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+    content.vb: Public Function Equals(other As X12Delimiters) As Boolean
+  overload: X12Net.Core.X12Delimiters.Equals*
+  implements:
+  - System.IEquatable{X12Net.Core.X12Delimiters}.Equals(X12Net.Core.X12Delimiters)
+- uid: X12Net.Core.X12Delimiters.Equals(System.Object)
+  commentId: M:X12Net.Core.X12Delimiters.Equals(System.Object)
+  id: Equals(System.Object)
+  parent: X12Net.Core.X12Delimiters
+  langs:
+  - csharp
+  - vb
+  name: Equals(object?)
+  nameWithType: X12Delimiters.Equals(object?)
+  fullName: X12Net.Core.X12Delimiters.Equals(object?)
+  type: Method
+  source:
+    remote:
+      path: src/X12Net/Core/X12Delimiters.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: Equals
+    path: src/X12Net/Core/X12Delimiters.cs
+    startLine: 45
+  assemblies:
+  - X12Net
+  namespace: X12Net.Core
+  summary: Indicates whether this instance and a specified object are equal.
+  example: []
+  syntax:
+    content: public override bool Equals(object? obj)
+    parameters:
+    - id: obj
+      type: System.Object
+      description: The object to compare with the current instance.
+    return:
+      type: System.Boolean
+      description: <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">true</a> if <code class="paramref">obj</code> and this instance are the same type and represent the same value; otherwise, <a href="https://learn.microsoft.com/dotnet/csharp/language-reference/builtin-types/bool">false</a>.
+    content.vb: Public Overrides Function Equals(obj As Object) As Boolean
+  overridden: System.ValueType.Equals(System.Object)
+  overload: X12Net.Core.X12Delimiters.Equals*
+  nameWithType.vb: X12Delimiters.Equals(Object)
+  fullName.vb: X12Net.Core.X12Delimiters.Equals(Object)
+  name.vb: Equals(Object)
+- uid: X12Net.Core.X12Delimiters.GetHashCode
+  commentId: M:X12Net.Core.X12Delimiters.GetHashCode
+  id: GetHashCode
+  parent: X12Net.Core.X12Delimiters
+  langs:
+  - csharp
+  - vb
+  name: GetHashCode()
+  nameWithType: X12Delimiters.GetHashCode()
+  fullName: X12Net.Core.X12Delimiters.GetHashCode()
+  type: Method
+  source:
+    remote:
+      path: src/X12Net/Core/X12Delimiters.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: GetHashCode
+    path: src/X12Net/Core/X12Delimiters.cs
+    startLine: 48
+  assemblies:
+  - X12Net
+  namespace: X12Net.Core
+  summary: Returns the hash code for this instance.
+  example: []
+  syntax:
+    content: public override int GetHashCode()
+    return:
+      type: System.Int32
+      description: A 32-bit signed integer that is the hash code for this instance.
+    content.vb: Public Overrides Function GetHashCode() As Integer
+  overridden: System.ValueType.GetHashCode
+  overload: X12Net.Core.X12Delimiters.GetHashCode*
+- uid: X12Net.Core.X12Delimiters.ToString
+  commentId: M:X12Net.Core.X12Delimiters.ToString
+  id: ToString
+  parent: X12Net.Core.X12Delimiters
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: X12Delimiters.ToString()
+  fullName: X12Net.Core.X12Delimiters.ToString()
+  type: Method
+  source:
+    remote:
+      path: src/X12Net/Core/X12Delimiters.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: ToString
+    path: src/X12Net/Core/X12Delimiters.cs
+    startLine: 61
+  assemblies:
+  - X12Net
+  namespace: X12Net.Core
+  summary: Returns the fully qualified type name of this instance.
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+      description: The fully qualified type name.
+    content.vb: Public Overrides Function ToString() As String
+  overridden: System.ValueType.ToString
+  overload: X12Net.Core.X12Delimiters.ToString*
+references:
+- uid: X12Net.Core
+  commentId: N:X12Net.Core
+  href: X12Net.html
+  name: X12Net.Core
+  nameWithType: X12Net.Core
+  fullName: X12Net.Core
+  spec.csharp:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.Core
+    name: Core
+    href: X12Net.Core.html
+  spec.vb:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.Core
+    name: Core
+    href: X12Net.Core.html
+- uid: System.IEquatable{X12Net.Core.X12Delimiters}
+  commentId: T:System.IEquatable{X12Net.Core.X12Delimiters}
+  parent: System
+  definition: System.IEquatable`1
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<X12Delimiters>
+  nameWithType: IEquatable<X12Delimiters>
+  fullName: System.IEquatable<X12Net.Core.X12Delimiters>
+  nameWithType.vb: IEquatable(Of X12Delimiters)
+  fullName.vb: System.IEquatable(Of X12Net.Core.X12Delimiters)
+  name.vb: IEquatable(Of X12Delimiters)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - uid: X12Net.Core.X12Delimiters
+    name: X12Delimiters
+    href: X12Net.Core.X12Delimiters.html
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: X12Net.Core.X12Delimiters
+    name: X12Delimiters
+    href: X12Net.Core.X12Delimiters.html
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.IEquatable`1
+  commentId: T:System.IEquatable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  name: IEquatable<T>
+  nameWithType: IEquatable<T>
+  fullName: System.IEquatable<T>
+  nameWithType.vb: IEquatable(Of T)
+  fullName.vb: System.IEquatable(Of T)
+  name.vb: IEquatable(Of T)
+  spec.csharp:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.IEquatable`1
+    name: IEquatable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: X12Net.Core.X12Delimiters.#ctor*
+  commentId: Overload:X12Net.Core.X12Delimiters.#ctor
+  href: X12Net.Core.X12Delimiters.html#X12Net_Core_X12Delimiters__ctor_System_Char_System_Char_System_Char_
+  name: X12Delimiters
+  nameWithType: X12Delimiters.X12Delimiters
+  fullName: X12Net.Core.X12Delimiters.X12Delimiters
+  nameWithType.vb: X12Delimiters.New
+  fullName.vb: X12Net.Core.X12Delimiters.New
+  name.vb: New
+- uid: System.Char
+  commentId: T:System.Char
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.char
+  name: char
+  nameWithType: char
+  fullName: char
+  nameWithType.vb: Char
+  fullName.vb: Char
+  name.vb: Char
+- uid: X12Net.Core.X12Delimiters.ElementSeparator*
+  commentId: Overload:X12Net.Core.X12Delimiters.ElementSeparator
+  href: X12Net.Core.X12Delimiters.html#X12Net_Core_X12Delimiters_ElementSeparator
+  name: ElementSeparator
+  nameWithType: X12Delimiters.ElementSeparator
+  fullName: X12Net.Core.X12Delimiters.ElementSeparator
+- uid: X12Net.Core.X12Delimiters.ComponentSeparator*
+  commentId: Overload:X12Net.Core.X12Delimiters.ComponentSeparator
+  href: X12Net.Core.X12Delimiters.html#X12Net_Core_X12Delimiters_ComponentSeparator
+  name: ComponentSeparator
+  nameWithType: X12Delimiters.ComponentSeparator
+  fullName: X12Net.Core.X12Delimiters.ComponentSeparator
+- uid: X12Net.Core.X12Delimiters.SegmentTerminator*
+  commentId: Overload:X12Net.Core.X12Delimiters.SegmentTerminator
+  href: X12Net.Core.X12Delimiters.html#X12Net_Core_X12Delimiters_SegmentTerminator
+  name: SegmentTerminator
+  nameWithType: X12Delimiters.SegmentTerminator
+  fullName: X12Net.Core.X12Delimiters.SegmentTerminator
+- uid: X12Net.Core.X12Delimiters
+  commentId: T:X12Net.Core.X12Delimiters
+  parent: X12Net.Core
+  href: X12Net.Core.X12Delimiters.html
+  name: X12Delimiters
+  nameWithType: X12Delimiters
+  fullName: X12Net.Core.X12Delimiters
+- uid: X12Net.Core.X12Delimiters.Default
+  commentId: F:X12Net.Core.X12Delimiters.Default
+  href: X12Net.Core.X12Delimiters.html#X12Net_Core_X12Delimiters_Default
+  name: Default
+  nameWithType: X12Delimiters.Default
+  fullName: X12Net.Core.X12Delimiters.Default
+- uid: X12Net.Core.X12Delimiters.FromIsa*
+  commentId: Overload:X12Net.Core.X12Delimiters.FromIsa
+  href: X12Net.Core.X12Delimiters.html#X12Net_Core_X12Delimiters_FromIsa_System_String_
+  name: FromIsa
+  nameWithType: X12Delimiters.FromIsa
+  fullName: X12Net.Core.X12Delimiters.FromIsa
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: X12Net.Core.X12Delimiters.Equals*
+  commentId: Overload:X12Net.Core.X12Delimiters.Equals
+  href: X12Net.Core.X12Delimiters.html#X12Net_Core_X12Delimiters_Equals_X12Net_Core_X12Delimiters_
+  name: Equals
+  nameWithType: X12Delimiters.Equals
+  fullName: X12Net.Core.X12Delimiters.Equals
+- uid: System.IEquatable{X12Net.Core.X12Delimiters}.Equals(X12Net.Core.X12Delimiters)
+  commentId: M:System.IEquatable{X12Net.Core.X12Delimiters}.Equals(X12Net.Core.X12Delimiters)
+  parent: System.IEquatable{X12Net.Core.X12Delimiters}
+  definition: System.IEquatable`1.Equals(`0)
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(X12Delimiters)
+  nameWithType: IEquatable<X12Delimiters>.Equals(X12Delimiters)
+  fullName: System.IEquatable<X12Net.Core.X12Delimiters>.Equals(X12Net.Core.X12Delimiters)
+  nameWithType.vb: IEquatable(Of X12Delimiters).Equals(X12Delimiters)
+  fullName.vb: System.IEquatable(Of X12Net.Core.X12Delimiters).Equals(X12Net.Core.X12Delimiters)
+  spec.csharp:
+  - uid: System.IEquatable{X12Net.Core.X12Delimiters}.Equals(X12Net.Core.X12Delimiters)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: X12Net.Core.X12Delimiters
+    name: X12Delimiters
+    href: X12Net.Core.X12Delimiters.html
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable{X12Net.Core.X12Delimiters}.Equals(X12Net.Core.X12Delimiters)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - uid: X12Net.Core.X12Delimiters
+    name: X12Delimiters
+    href: X12Net.Core.X12Delimiters.html
+  - name: )
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: System.IEquatable`1.Equals(`0)
+  commentId: M:System.IEquatable`1.Equals(`0)
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  name: Equals(T)
+  nameWithType: IEquatable<T>.Equals(T)
+  fullName: System.IEquatable<T>.Equals(T)
+  nameWithType.vb: IEquatable(Of T).Equals(T)
+  fullName.vb: System.IEquatable(Of T).Equals(T)
+  spec.csharp:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+  spec.vb:
+  - uid: System.IEquatable`1.Equals(`0)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.iequatable-1.equals
+  - name: (
+  - name: T
+  - name: )
+- uid: System.ValueType.Equals(System.Object)
+  commentId: M:System.ValueType.Equals(System.Object)
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  name: Equals(object)
+  nameWithType: ValueType.Equals(object)
+  fullName: System.ValueType.Equals(object)
+  nameWithType.vb: ValueType.Equals(Object)
+  fullName.vb: System.ValueType.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.equals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.ValueType
+  commentId: T:System.ValueType
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype
+  name: ValueType
+  nameWithType: ValueType
+  fullName: System.ValueType
+- uid: System.ValueType.GetHashCode
+  commentId: M:System.ValueType.GetHashCode
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  name: GetHashCode()
+  nameWithType: ValueType.GetHashCode()
+  fullName: System.ValueType.GetHashCode()
+  spec.csharp:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.gethashcode
+  - name: (
+  - name: )
+- uid: X12Net.Core.X12Delimiters.GetHashCode*
+  commentId: Overload:X12Net.Core.X12Delimiters.GetHashCode
+  href: X12Net.Core.X12Delimiters.html#X12Net_Core_X12Delimiters_GetHashCode
+  name: GetHashCode
+  nameWithType: X12Delimiters.GetHashCode
+  fullName: X12Net.Core.X12Delimiters.GetHashCode
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: System.ValueType.ToString
+  commentId: M:System.ValueType.ToString
+  parent: System.ValueType
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  name: ToString()
+  nameWithType: ValueType.ToString()
+  fullName: System.ValueType.ToString()
+  spec.csharp:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.ValueType.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.valuetype.tostring
+  - name: (
+  - name: )
+- uid: X12Net.Core.X12Delimiters.ToString*
+  commentId: Overload:X12Net.Core.X12Delimiters.ToString
+  href: X12Net.Core.X12Delimiters.html#X12Net_Core_X12Delimiters_ToString
+  name: ToString
+  nameWithType: X12Delimiters.ToString
+  fullName: X12Net.Core.X12Delimiters.ToString

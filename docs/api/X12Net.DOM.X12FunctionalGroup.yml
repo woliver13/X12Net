@@ -1,0 +1,525 @@
+### YamlMime:ManagedReference
+items:
+- uid: X12Net.DOM.X12FunctionalGroup
+  commentId: T:X12Net.DOM.X12FunctionalGroup
+  id: X12FunctionalGroup
+  parent: X12Net.DOM
+  children:
+  - X12Net.DOM.X12FunctionalGroup.GE
+  - X12Net.DOM.X12FunctionalGroup.GS
+  - X12Net.DOM.X12FunctionalGroup.Transactions
+  langs:
+  - csharp
+  - vb
+  name: X12FunctionalGroup
+  nameWithType: X12FunctionalGroup
+  fullName: X12Net.DOM.X12FunctionalGroup
+  type: Class
+  source:
+    remote:
+      path: src/X12Net/DOM/X12FunctionalGroup.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: X12FunctionalGroup
+    path: src/X12Net/DOM/X12FunctionalGroup.cs
+    startLine: 8
+  assemblies:
+  - X12Net
+  namespace: X12Net.DOM
+  summary: >-
+    A GS/GE functional group within an interchange.
+
+    Contains one or more <xref href="X12Net.DOM.X12Transaction" data-throw-if-not-resolved="false"></xref> objects.
+  example: []
+  syntax:
+    content: public sealed class X12FunctionalGroup
+    content.vb: Public NotInheritable Class X12FunctionalGroup
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: X12Net.DOM.X12FunctionalGroup.GS
+  commentId: P:X12Net.DOM.X12FunctionalGroup.GS
+  id: GS
+  parent: X12Net.DOM.X12FunctionalGroup
+  langs:
+  - csharp
+  - vb
+  name: GS
+  nameWithType: X12FunctionalGroup.GS
+  fullName: X12Net.DOM.X12FunctionalGroup.GS
+  type: Property
+  source:
+    remote:
+      path: src/X12Net/DOM/X12FunctionalGroup.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: GS
+    path: src/X12Net/DOM/X12FunctionalGroup.cs
+    startLine: 18
+  assemblies:
+  - X12Net
+  namespace: X12Net.DOM
+  summary: The GS (Functional Group Header) segment.
+  example: []
+  syntax:
+    content: public X12Segment GS { get; }
+    parameters: []
+    return:
+      type: X12Net.Core.X12Segment
+    content.vb: Public ReadOnly Property GS As X12Segment
+  overload: X12Net.DOM.X12FunctionalGroup.GS*
+- uid: X12Net.DOM.X12FunctionalGroup.GE
+  commentId: P:X12Net.DOM.X12FunctionalGroup.GE
+  id: GE
+  parent: X12Net.DOM.X12FunctionalGroup
+  langs:
+  - csharp
+  - vb
+  name: GE
+  nameWithType: X12FunctionalGroup.GE
+  fullName: X12Net.DOM.X12FunctionalGroup.GE
+  type: Property
+  source:
+    remote:
+      path: src/X12Net/DOM/X12FunctionalGroup.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: GE
+    path: src/X12Net/DOM/X12FunctionalGroup.cs
+    startLine: 21
+  assemblies:
+  - X12Net
+  namespace: X12Net.DOM
+  summary: The GE (Functional Group Trailer) segment.
+  example: []
+  syntax:
+    content: public X12Segment GE { get; }
+    parameters: []
+    return:
+      type: X12Net.Core.X12Segment
+    content.vb: Public ReadOnly Property GE As X12Segment
+  overload: X12Net.DOM.X12FunctionalGroup.GE*
+- uid: X12Net.DOM.X12FunctionalGroup.Transactions
+  commentId: P:X12Net.DOM.X12FunctionalGroup.Transactions
+  id: Transactions
+  parent: X12Net.DOM.X12FunctionalGroup
+  langs:
+  - csharp
+  - vb
+  name: Transactions
+  nameWithType: X12FunctionalGroup.Transactions
+  fullName: X12Net.DOM.X12FunctionalGroup.Transactions
+  type: Property
+  source:
+    remote:
+      path: src/X12Net/DOM/X12FunctionalGroup.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: Transactions
+    path: src/X12Net/DOM/X12FunctionalGroup.cs
+    startLine: 24
+  assemblies:
+  - X12Net
+  namespace: X12Net.DOM
+  summary: All transactions within this functional group.
+  example: []
+  syntax:
+    content: public IReadOnlyList<X12Transaction> Transactions { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IReadOnlyList{X12Net.DOM.X12Transaction}
+    content.vb: Public ReadOnly Property Transactions As IReadOnlyList(Of X12Transaction)
+  overload: X12Net.DOM.X12FunctionalGroup.Transactions*
+references:
+- uid: X12Net.DOM.X12Transaction
+  commentId: T:X12Net.DOM.X12Transaction
+  href: X12Net.DOM.X12Transaction.html
+  name: X12Transaction
+  nameWithType: X12Transaction
+  fullName: X12Net.DOM.X12Transaction
+- uid: X12Net.DOM
+  commentId: N:X12Net.DOM
+  href: X12Net.html
+  name: X12Net.DOM
+  nameWithType: X12Net.DOM
+  fullName: X12Net.DOM
+  spec.csharp:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.DOM
+    name: DOM
+    href: X12Net.DOM.html
+  spec.vb:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.DOM
+    name: DOM
+    href: X12Net.DOM.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: X12Net.DOM.X12FunctionalGroup.GS*
+  commentId: Overload:X12Net.DOM.X12FunctionalGroup.GS
+  href: X12Net.DOM.X12FunctionalGroup.html#X12Net_DOM_X12FunctionalGroup_GS
+  name: GS
+  nameWithType: X12FunctionalGroup.GS
+  fullName: X12Net.DOM.X12FunctionalGroup.GS
+- uid: X12Net.Core.X12Segment
+  commentId: T:X12Net.Core.X12Segment
+  parent: X12Net.Core
+  href: X12Net.Core.X12Segment.html
+  name: X12Segment
+  nameWithType: X12Segment
+  fullName: X12Net.Core.X12Segment
+- uid: X12Net.Core
+  commentId: N:X12Net.Core
+  href: X12Net.html
+  name: X12Net.Core
+  nameWithType: X12Net.Core
+  fullName: X12Net.Core
+  spec.csharp:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.Core
+    name: Core
+    href: X12Net.Core.html
+  spec.vb:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.Core
+    name: Core
+    href: X12Net.Core.html
+- uid: X12Net.DOM.X12FunctionalGroup.GE*
+  commentId: Overload:X12Net.DOM.X12FunctionalGroup.GE
+  href: X12Net.DOM.X12FunctionalGroup.html#X12Net_DOM_X12FunctionalGroup_GE
+  name: GE
+  nameWithType: X12FunctionalGroup.GE
+  fullName: X12Net.DOM.X12FunctionalGroup.GE
+- uid: X12Net.DOM.X12FunctionalGroup.Transactions*
+  commentId: Overload:X12Net.DOM.X12FunctionalGroup.Transactions
+  href: X12Net.DOM.X12FunctionalGroup.html#X12Net_DOM_X12FunctionalGroup_Transactions
+  name: Transactions
+  nameWithType: X12FunctionalGroup.Transactions
+  fullName: X12Net.DOM.X12FunctionalGroup.Transactions
+- uid: System.Collections.Generic.IReadOnlyList{X12Net.DOM.X12Transaction}
+  commentId: T:System.Collections.Generic.IReadOnlyList{X12Net.DOM.X12Transaction}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IReadOnlyList`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  name: IReadOnlyList<X12Transaction>
+  nameWithType: IReadOnlyList<X12Transaction>
+  fullName: System.Collections.Generic.IReadOnlyList<X12Net.DOM.X12Transaction>
+  nameWithType.vb: IReadOnlyList(Of X12Transaction)
+  fullName.vb: System.Collections.Generic.IReadOnlyList(Of X12Net.DOM.X12Transaction)
+  name.vb: IReadOnlyList(Of X12Transaction)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: <
+  - uid: X12Net.DOM.X12Transaction
+    name: X12Transaction
+    href: X12Net.DOM.X12Transaction.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: X12Net.DOM.X12Transaction
+    name: X12Transaction
+    href: X12Net.DOM.X12Transaction.html
+  - name: )
+- uid: System.Collections.Generic.IReadOnlyList`1
+  commentId: T:System.Collections.Generic.IReadOnlyList`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  name: IReadOnlyList<T>
+  nameWithType: IReadOnlyList<T>
+  fullName: System.Collections.Generic.IReadOnlyList<T>
+  nameWithType.vb: IReadOnlyList(Of T)
+  fullName.vb: System.Collections.Generic.IReadOnlyList(Of T)
+  name.vb: IReadOnlyList(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic

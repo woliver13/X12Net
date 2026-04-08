@@ -1,0 +1,556 @@
+### YamlMime:ManagedReference
+items:
+- uid: X12Net.Schema.X12DynamicTransaction
+  commentId: T:X12Net.Schema.X12DynamicTransaction
+  id: X12DynamicTransaction
+  parent: X12Net.Schema
+  children:
+  - X12Net.Schema.X12DynamicTransaction.AllSegments(System.String)
+  - X12Net.Schema.X12DynamicTransaction.Item(System.String,System.String)
+  - X12Net.Schema.X12DynamicTransaction.Parse(System.String,X12Net.Schema.X12TransactionSchema)
+  langs:
+  - csharp
+  - vb
+  name: X12DynamicTransaction
+  nameWithType: X12DynamicTransaction
+  fullName: X12Net.Schema.X12DynamicTransaction
+  type: Class
+  source:
+    remote:
+      path: src/X12Net/Schema/X12DynamicTransaction.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: X12DynamicTransaction
+    path: src/X12Net/Schema/X12DynamicTransaction.cs
+    startLine: 10
+  assemblies:
+  - X12Net
+  namespace: X12Net.Schema
+  summary: >-
+    A schema-driven view of a parsed EDI X12 interchange.
+
+    Elements can be accessed by segment ID and element name as defined in the
+
+    <xref href="X12Net.Schema.X12TransactionSchema" data-throw-if-not-resolved="false"></xref> supplied at parse time.
+  example: []
+  syntax:
+    content: public sealed class X12DynamicTransaction
+    content.vb: Public NotInheritable Class X12DynamicTransaction
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: X12Net.Schema.X12DynamicTransaction.Parse(System.String,X12Net.Schema.X12TransactionSchema)
+  commentId: M:X12Net.Schema.X12DynamicTransaction.Parse(System.String,X12Net.Schema.X12TransactionSchema)
+  id: Parse(System.String,X12Net.Schema.X12TransactionSchema)
+  parent: X12Net.Schema.X12DynamicTransaction
+  langs:
+  - csharp
+  - vb
+  name: Parse(string, X12TransactionSchema)
+  nameWithType: X12DynamicTransaction.Parse(string, X12TransactionSchema)
+  fullName: X12Net.Schema.X12DynamicTransaction.Parse(string, X12Net.Schema.X12TransactionSchema)
+  type: Method
+  source:
+    remote:
+      path: src/X12Net/Schema/X12DynamicTransaction.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: Parse
+    path: src/X12Net/Schema/X12DynamicTransaction.cs
+    startLine: 30
+  assemblies:
+  - X12Net
+  namespace: X12Net.Schema
+  summary: Parses raw EDI X12 text and builds an indexed view using the supplied schema.
+  example: []
+  syntax:
+    content: public static X12DynamicTransaction Parse(string input, X12TransactionSchema schema)
+    parameters:
+    - id: input
+      type: System.String
+    - id: schema
+      type: X12Net.Schema.X12TransactionSchema
+    return:
+      type: X12Net.Schema.X12DynamicTransaction
+    content.vb: Public Shared Function Parse(input As String, schema As X12TransactionSchema) As X12DynamicTransaction
+  overload: X12Net.Schema.X12DynamicTransaction.Parse*
+  nameWithType.vb: X12DynamicTransaction.Parse(String, X12TransactionSchema)
+  fullName.vb: X12Net.Schema.X12DynamicTransaction.Parse(String, X12Net.Schema.X12TransactionSchema)
+  name.vb: Parse(String, X12TransactionSchema)
+- uid: X12Net.Schema.X12DynamicTransaction.AllSegments(System.String)
+  commentId: M:X12Net.Schema.X12DynamicTransaction.AllSegments(System.String)
+  id: AllSegments(System.String)
+  parent: X12Net.Schema.X12DynamicTransaction
+  langs:
+  - csharp
+  - vb
+  name: AllSegments(string)
+  nameWithType: X12DynamicTransaction.AllSegments(string)
+  fullName: X12Net.Schema.X12DynamicTransaction.AllSegments(string)
+  type: Method
+  source:
+    remote:
+      path: src/X12Net/Schema/X12DynamicTransaction.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: AllSegments
+    path: src/X12Net/Schema/X12DynamicTransaction.cs
+    startLine: 60
+  assemblies:
+  - X12Net
+  namespace: X12Net.Schema
+  summary: >-
+    Returns all occurrences of <code class="paramref">segmentId</code> in document order,
+
+    or an empty list if none were found.
+  example: []
+  syntax:
+    content: public IReadOnlyList<X12Segment> AllSegments(string segmentId)
+    parameters:
+    - id: segmentId
+      type: System.String
+    return:
+      type: System.Collections.Generic.IReadOnlyList{X12Net.Core.X12Segment}
+    content.vb: Public Function AllSegments(segmentId As String) As IReadOnlyList(Of X12Segment)
+  overload: X12Net.Schema.X12DynamicTransaction.AllSegments*
+  nameWithType.vb: X12DynamicTransaction.AllSegments(String)
+  fullName.vb: X12Net.Schema.X12DynamicTransaction.AllSegments(String)
+  name.vb: AllSegments(String)
+- uid: X12Net.Schema.X12DynamicTransaction.Item(System.String,System.String)
+  commentId: P:X12Net.Schema.X12DynamicTransaction.Item(System.String,System.String)
+  id: Item(System.String,System.String)
+  parent: X12Net.Schema.X12DynamicTransaction
+  langs:
+  - csharp
+  - vb
+  name: this[string, string]
+  nameWithType: X12DynamicTransaction.this[string, string]
+  fullName: X12Net.Schema.X12DynamicTransaction.this[string, string]
+  type: Property
+  source:
+    remote:
+      path: src/X12Net/Schema/X12DynamicTransaction.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: this[]
+    path: src/X12Net/Schema/X12DynamicTransaction.cs
+    startLine: 72
+  assemblies:
+  - X12Net
+  namespace: X12Net.Schema
+  summary: >-
+    Gets the element value identified by <code class="paramref">segmentId</code> and
+
+    <code class="paramref">elementName</code> as defined in the schema.
+  example: []
+  syntax:
+    content: public string this[string segmentId, string elementName] { get; }
+    parameters:
+    - id: segmentId
+      type: System.String
+    - id: elementName
+      type: System.String
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Default Property this[](segmentId As String, elementName As String) As String
+  overload: X12Net.Schema.X12DynamicTransaction.Item*
+  exceptions:
+  - type: System.Collections.Generic.KeyNotFoundException
+    commentId: T:System.Collections.Generic.KeyNotFoundException
+    description: Thrown if the segment or element name is not found.
+  nameWithType.vb: X12DynamicTransaction.this[](String, String)
+  fullName.vb: X12Net.Schema.X12DynamicTransaction.this[](String, String)
+  name.vb: this[](String, String)
+references:
+- uid: X12Net.Schema.X12TransactionSchema
+  commentId: T:X12Net.Schema.X12TransactionSchema
+  parent: X12Net.Schema
+  href: X12Net.Schema.X12TransactionSchema.html
+  name: X12TransactionSchema
+  nameWithType: X12TransactionSchema
+  fullName: X12Net.Schema.X12TransactionSchema
+- uid: X12Net.Schema
+  commentId: N:X12Net.Schema
+  href: X12Net.html
+  name: X12Net.Schema
+  nameWithType: X12Net.Schema
+  fullName: X12Net.Schema
+  spec.csharp:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.Schema
+    name: Schema
+    href: X12Net.Schema.html
+  spec.vb:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.Schema
+    name: Schema
+    href: X12Net.Schema.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: X12Net.Schema.X12DynamicTransaction.Parse*
+  commentId: Overload:X12Net.Schema.X12DynamicTransaction.Parse
+  href: X12Net.Schema.X12DynamicTransaction.html#X12Net_Schema_X12DynamicTransaction_Parse_System_String_X12Net_Schema_X12TransactionSchema_
+  name: Parse
+  nameWithType: X12DynamicTransaction.Parse
+  fullName: X12Net.Schema.X12DynamicTransaction.Parse
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: X12Net.Schema.X12DynamicTransaction
+  commentId: T:X12Net.Schema.X12DynamicTransaction
+  parent: X12Net.Schema
+  href: X12Net.Schema.X12DynamicTransaction.html
+  name: X12DynamicTransaction
+  nameWithType: X12DynamicTransaction
+  fullName: X12Net.Schema.X12DynamicTransaction
+- uid: X12Net.Schema.X12DynamicTransaction.AllSegments*
+  commentId: Overload:X12Net.Schema.X12DynamicTransaction.AllSegments
+  href: X12Net.Schema.X12DynamicTransaction.html#X12Net_Schema_X12DynamicTransaction_AllSegments_System_String_
+  name: AllSegments
+  nameWithType: X12DynamicTransaction.AllSegments
+  fullName: X12Net.Schema.X12DynamicTransaction.AllSegments
+- uid: System.Collections.Generic.IReadOnlyList{X12Net.Core.X12Segment}
+  commentId: T:System.Collections.Generic.IReadOnlyList{X12Net.Core.X12Segment}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IReadOnlyList`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  name: IReadOnlyList<X12Segment>
+  nameWithType: IReadOnlyList<X12Segment>
+  fullName: System.Collections.Generic.IReadOnlyList<X12Net.Core.X12Segment>
+  nameWithType.vb: IReadOnlyList(Of X12Segment)
+  fullName.vb: System.Collections.Generic.IReadOnlyList(Of X12Net.Core.X12Segment)
+  name.vb: IReadOnlyList(Of X12Segment)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: <
+  - uid: X12Net.Core.X12Segment
+    name: X12Segment
+    href: X12Net.Core.X12Segment.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: X12Net.Core.X12Segment
+    name: X12Segment
+    href: X12Net.Core.X12Segment.html
+  - name: )
+- uid: System.Collections.Generic.IReadOnlyList`1
+  commentId: T:System.Collections.Generic.IReadOnlyList`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  name: IReadOnlyList<T>
+  nameWithType: IReadOnlyList<T>
+  fullName: System.Collections.Generic.IReadOnlyList<T>
+  nameWithType.vb: IReadOnlyList(Of T)
+  fullName.vb: System.Collections.Generic.IReadOnlyList(Of T)
+  name.vb: IReadOnlyList(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: System.Collections.Generic.KeyNotFoundException
+  commentId: T:System.Collections.Generic.KeyNotFoundException
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.keynotfoundexception
+  name: KeyNotFoundException
+  nameWithType: KeyNotFoundException
+  fullName: System.Collections.Generic.KeyNotFoundException
+- uid: X12Net.Schema.X12DynamicTransaction.Item*
+  commentId: Overload:X12Net.Schema.X12DynamicTransaction.Item
+  href: X12Net.Schema.X12DynamicTransaction.html#X12Net_Schema_X12DynamicTransaction_Item_System_String_System_String_
+  name: this
+  nameWithType: X12DynamicTransaction.this
+  fullName: X12Net.Schema.X12DynamicTransaction.this
+  nameWithType.vb: X12DynamicTransaction.this[]
+  fullName.vb: X12Net.Schema.X12DynamicTransaction.this[]
+  name.vb: this[]

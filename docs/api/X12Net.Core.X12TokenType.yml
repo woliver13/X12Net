@@ -1,0 +1,182 @@
+### YamlMime:ManagedReference
+items:
+- uid: X12Net.Core.X12TokenType
+  commentId: T:X12Net.Core.X12TokenType
+  id: X12TokenType
+  parent: X12Net.Core
+  children:
+  - X12Net.Core.X12TokenType.ComponentData
+  - X12Net.Core.X12TokenType.ElementData
+  - X12Net.Core.X12TokenType.SegmentId
+  - X12Net.Core.X12TokenType.SegmentTerminator
+  langs:
+  - csharp
+  - vb
+  name: X12TokenType
+  nameWithType: X12TokenType
+  fullName: X12Net.Core.X12TokenType
+  type: Enum
+  source:
+    remote:
+      path: src/X12Net/Core/X12TokenType.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: X12TokenType
+    path: src/X12Net/Core/X12TokenType.cs
+    startLine: 3
+  assemblies:
+  - X12Net
+  namespace: X12Net.Core
+  summary: Classifies a token emitted by <xref href="X12Net.Core.X12Tokenizer" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public enum X12TokenType
+    content.vb: Public Enum X12TokenType
+- uid: X12Net.Core.X12TokenType.SegmentId
+  commentId: F:X12Net.Core.X12TokenType.SegmentId
+  id: SegmentId
+  parent: X12Net.Core.X12TokenType
+  langs:
+  - csharp
+  - vb
+  name: SegmentId
+  nameWithType: X12TokenType.SegmentId
+  fullName: X12Net.Core.X12TokenType.SegmentId
+  type: Field
+  source:
+    remote:
+      path: src/X12Net/Core/X12TokenType.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: SegmentId
+    path: src/X12Net/Core/X12TokenType.cs
+    startLine: 6
+  assemblies:
+  - X12Net
+  namespace: X12Net.Core
+  summary: The segment identifier (first element, e.g. "ISA", "GS", "ST").
+  example: []
+  syntax:
+    content: SegmentId = 0
+    return:
+      type: X12Net.Core.X12TokenType
+- uid: X12Net.Core.X12TokenType.ElementData
+  commentId: F:X12Net.Core.X12TokenType.ElementData
+  id: ElementData
+  parent: X12Net.Core.X12TokenType
+  langs:
+  - csharp
+  - vb
+  name: ElementData
+  nameWithType: X12TokenType.ElementData
+  fullName: X12Net.Core.X12TokenType.ElementData
+  type: Field
+  source:
+    remote:
+      path: src/X12Net/Core/X12TokenType.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: ElementData
+    path: src/X12Net/Core/X12TokenType.cs
+    startLine: 9
+  assemblies:
+  - X12Net
+  namespace: X12Net.Core
+  summary: A data element value within a segment.
+  example: []
+  syntax:
+    content: ElementData = 1
+    return:
+      type: X12Net.Core.X12TokenType
+- uid: X12Net.Core.X12TokenType.ComponentData
+  commentId: F:X12Net.Core.X12TokenType.ComponentData
+  id: ComponentData
+  parent: X12Net.Core.X12TokenType
+  langs:
+  - csharp
+  - vb
+  name: ComponentData
+  nameWithType: X12TokenType.ComponentData
+  fullName: X12Net.Core.X12TokenType.ComponentData
+  type: Field
+  source:
+    remote:
+      path: src/X12Net/Core/X12TokenType.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: ComponentData
+    path: src/X12Net/Core/X12TokenType.cs
+    startLine: 12
+  assemblies:
+  - X12Net
+  namespace: X12Net.Core
+  summary: A component (sub-element) value within a composite element.
+  example: []
+  syntax:
+    content: ComponentData = 2
+    return:
+      type: X12Net.Core.X12TokenType
+- uid: X12Net.Core.X12TokenType.SegmentTerminator
+  commentId: F:X12Net.Core.X12TokenType.SegmentTerminator
+  id: SegmentTerminator
+  parent: X12Net.Core.X12TokenType
+  langs:
+  - csharp
+  - vb
+  name: SegmentTerminator
+  nameWithType: X12TokenType.SegmentTerminator
+  fullName: X12Net.Core.X12TokenType.SegmentTerminator
+  type: Field
+  source:
+    remote:
+      path: src/X12Net/Core/X12TokenType.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: SegmentTerminator
+    path: src/X12Net/Core/X12TokenType.cs
+    startLine: 15
+  assemblies:
+  - X12Net
+  namespace: X12Net.Core
+  summary: Marks the end of a segment.
+  example: []
+  syntax:
+    content: SegmentTerminator = 3
+    return:
+      type: X12Net.Core.X12TokenType
+references:
+- uid: X12Net.Core.X12Tokenizer
+  commentId: T:X12Net.Core.X12Tokenizer
+  href: X12Net.Core.X12Tokenizer.html
+  name: X12Tokenizer
+  nameWithType: X12Tokenizer
+  fullName: X12Net.Core.X12Tokenizer
+- uid: X12Net.Core
+  commentId: N:X12Net.Core
+  href: X12Net.html
+  name: X12Net.Core
+  nameWithType: X12Net.Core
+  fullName: X12Net.Core
+  spec.csharp:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.Core
+    name: Core
+    href: X12Net.Core.html
+  spec.vb:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.Core
+    name: Core
+    href: X12Net.Core.html
+- uid: X12Net.Core.X12TokenType
+  commentId: T:X12Net.Core.X12TokenType
+  parent: X12Net.Core
+  href: X12Net.Core.X12TokenType.html
+  name: X12TokenType
+  nameWithType: X12TokenType
+  fullName: X12Net.Core.X12TokenType

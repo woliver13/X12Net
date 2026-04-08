@@ -1,0 +1,698 @@
+### YamlMime:ManagedReference
+items:
+- uid: X12Net.Validation.X12ErrorCode
+  commentId: T:X12Net.Validation.X12ErrorCode
+  id: X12ErrorCode
+  parent: X12Net.Validation
+  children:
+  - X12Net.Validation.X12ErrorCode.ControlNumberMismatch
+  - X12Net.Validation.X12ErrorCode.EbInvalidAuthorizationIndicator
+  - X12Net.Validation.X12ErrorCode.EbInvalidCoverageLevelCode
+  - X12Net.Validation.X12ErrorCode.EbInvalidEligibilityCode
+  - X12Net.Validation.X12ErrorCode.EbInvalidInPlanNetworkIndicator
+  - X12Net.Validation.X12ErrorCode.EbInvalidInsuranceTypeCode
+  - X12Net.Validation.X12ErrorCode.EbInvalidQuantityQualifier
+  - X12Net.Validation.X12ErrorCode.EbInvalidServiceTypeCode
+  - X12Net.Validation.X12ErrorCode.EbInvalidTimePeriodQualifier
+  - X12Net.Validation.X12ErrorCode.EbMissingEligibilityCode
+  - X12Net.Validation.X12ErrorCode.EbNegativeMonetaryAmount
+  - X12Net.Validation.X12ErrorCode.EbNegativeQuantity
+  - X12Net.Validation.X12ErrorCode.EbPercentOutOfRange
+  - X12Net.Validation.X12ErrorCode.EbPlanDescriptionTooLong
+  - X12Net.Validation.X12ErrorCode.EbQuantityQualifierWithoutQuantity
+  - X12Net.Validation.X12ErrorCode.EbTimePeriodRequiresAmount
+  - X12Net.Validation.X12ErrorCode.GeTransactionCountMismatch
+  - X12Net.Validation.X12ErrorCode.GroupControlNumberMismatch
+  - X12Net.Validation.X12ErrorCode.IeaGroupCountMismatch
+  - X12Net.Validation.X12ErrorCode.IsaSenderIdTooLong
+  - X12Net.Validation.X12ErrorCode.MissingRequiredSegment
+  - X12Net.Validation.X12ErrorCode.SeSegmentCountMismatch
+  langs:
+  - csharp
+  - vb
+  name: X12ErrorCode
+  nameWithType: X12ErrorCode
+  fullName: X12Net.Validation.X12ErrorCode
+  type: Enum
+  source:
+    remote:
+      path: src/X12Net/Validation/X12ErrorCode.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: X12ErrorCode
+    path: src/X12Net/Validation/X12ErrorCode.cs
+    startLine: 3
+  assemblies:
+  - X12Net
+  namespace: X12Net.Validation
+  summary: Identifies the category of a validation failure.
+  example: []
+  syntax:
+    content: public enum X12ErrorCode
+    content.vb: Public Enum X12ErrorCode
+- uid: X12Net.Validation.X12ErrorCode.IsaSenderIdTooLong
+  commentId: F:X12Net.Validation.X12ErrorCode.IsaSenderIdTooLong
+  id: IsaSenderIdTooLong
+  parent: X12Net.Validation.X12ErrorCode
+  langs:
+  - csharp
+  - vb
+  name: IsaSenderIdTooLong
+  nameWithType: X12ErrorCode.IsaSenderIdTooLong
+  fullName: X12Net.Validation.X12ErrorCode.IsaSenderIdTooLong
+  type: Field
+  source:
+    remote:
+      path: src/X12Net/Validation/X12ErrorCode.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: IsaSenderIdTooLong
+    path: src/X12Net/Validation/X12ErrorCode.cs
+    startLine: 6
+  assemblies:
+  - X12Net
+  namespace: X12Net.Validation
+  summary: ISA06 or ISA08 sender/receiver ID exceeds 15 characters.
+  example: []
+  syntax:
+    content: IsaSenderIdTooLong = 0
+    return:
+      type: X12Net.Validation.X12ErrorCode
+- uid: X12Net.Validation.X12ErrorCode.ControlNumberMismatch
+  commentId: F:X12Net.Validation.X12ErrorCode.ControlNumberMismatch
+  id: ControlNumberMismatch
+  parent: X12Net.Validation.X12ErrorCode
+  langs:
+  - csharp
+  - vb
+  name: ControlNumberMismatch
+  nameWithType: X12ErrorCode.ControlNumberMismatch
+  fullName: X12Net.Validation.X12ErrorCode.ControlNumberMismatch
+  type: Field
+  source:
+    remote:
+      path: src/X12Net/Validation/X12ErrorCode.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: ControlNumberMismatch
+    path: src/X12Net/Validation/X12ErrorCode.cs
+    startLine: 9
+  assemblies:
+  - X12Net
+  namespace: X12Net.Validation
+  summary: ISA13 interchange control number does not match IEA02.
+  example: []
+  syntax:
+    content: ControlNumberMismatch = 1
+    return:
+      type: X12Net.Validation.X12ErrorCode
+- uid: X12Net.Validation.X12ErrorCode.GroupControlNumberMismatch
+  commentId: F:X12Net.Validation.X12ErrorCode.GroupControlNumberMismatch
+  id: GroupControlNumberMismatch
+  parent: X12Net.Validation.X12ErrorCode
+  langs:
+  - csharp
+  - vb
+  name: GroupControlNumberMismatch
+  nameWithType: X12ErrorCode.GroupControlNumberMismatch
+  fullName: X12Net.Validation.X12ErrorCode.GroupControlNumberMismatch
+  type: Field
+  source:
+    remote:
+      path: src/X12Net/Validation/X12ErrorCode.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: GroupControlNumberMismatch
+    path: src/X12Net/Validation/X12ErrorCode.cs
+    startLine: 12
+  assemblies:
+  - X12Net
+  namespace: X12Net.Validation
+  summary: GS06 group control number does not match GE02.
+  example: []
+  syntax:
+    content: GroupControlNumberMismatch = 2
+    return:
+      type: X12Net.Validation.X12ErrorCode
+- uid: X12Net.Validation.X12ErrorCode.SeSegmentCountMismatch
+  commentId: F:X12Net.Validation.X12ErrorCode.SeSegmentCountMismatch
+  id: SeSegmentCountMismatch
+  parent: X12Net.Validation.X12ErrorCode
+  langs:
+  - csharp
+  - vb
+  name: SeSegmentCountMismatch
+  nameWithType: X12ErrorCode.SeSegmentCountMismatch
+  fullName: X12Net.Validation.X12ErrorCode.SeSegmentCountMismatch
+  type: Field
+  source:
+    remote:
+      path: src/X12Net/Validation/X12ErrorCode.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: SeSegmentCountMismatch
+    path: src/X12Net/Validation/X12ErrorCode.cs
+    startLine: 15
+  assemblies:
+  - X12Net
+  namespace: X12Net.Validation
+  summary: SE01 transaction segment count does not match actual body segment count.
+  example: []
+  syntax:
+    content: SeSegmentCountMismatch = 3
+    return:
+      type: X12Net.Validation.X12ErrorCode
+- uid: X12Net.Validation.X12ErrorCode.IeaGroupCountMismatch
+  commentId: F:X12Net.Validation.X12ErrorCode.IeaGroupCountMismatch
+  id: IeaGroupCountMismatch
+  parent: X12Net.Validation.X12ErrorCode
+  langs:
+  - csharp
+  - vb
+  name: IeaGroupCountMismatch
+  nameWithType: X12ErrorCode.IeaGroupCountMismatch
+  fullName: X12Net.Validation.X12ErrorCode.IeaGroupCountMismatch
+  type: Field
+  source:
+    remote:
+      path: src/X12Net/Validation/X12ErrorCode.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: IeaGroupCountMismatch
+    path: src/X12Net/Validation/X12ErrorCode.cs
+    startLine: 18
+  assemblies:
+  - X12Net
+  namespace: X12Net.Validation
+  summary: IEA01 functional group count does not match the number of GS segments.
+  example: []
+  syntax:
+    content: IeaGroupCountMismatch = 4
+    return:
+      type: X12Net.Validation.X12ErrorCode
+- uid: X12Net.Validation.X12ErrorCode.GeTransactionCountMismatch
+  commentId: F:X12Net.Validation.X12ErrorCode.GeTransactionCountMismatch
+  id: GeTransactionCountMismatch
+  parent: X12Net.Validation.X12ErrorCode
+  langs:
+  - csharp
+  - vb
+  name: GeTransactionCountMismatch
+  nameWithType: X12ErrorCode.GeTransactionCountMismatch
+  fullName: X12Net.Validation.X12ErrorCode.GeTransactionCountMismatch
+  type: Field
+  source:
+    remote:
+      path: src/X12Net/Validation/X12ErrorCode.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: GeTransactionCountMismatch
+    path: src/X12Net/Validation/X12ErrorCode.cs
+    startLine: 21
+  assemblies:
+  - X12Net
+  namespace: X12Net.Validation
+  summary: GE01 transaction set count does not match the number of ST segments in the group.
+  example: []
+  syntax:
+    content: GeTransactionCountMismatch = 5
+    return:
+      type: X12Net.Validation.X12ErrorCode
+- uid: X12Net.Validation.X12ErrorCode.MissingRequiredSegment
+  commentId: F:X12Net.Validation.X12ErrorCode.MissingRequiredSegment
+  id: MissingRequiredSegment
+  parent: X12Net.Validation.X12ErrorCode
+  langs:
+  - csharp
+  - vb
+  name: MissingRequiredSegment
+  nameWithType: X12ErrorCode.MissingRequiredSegment
+  fullName: X12Net.Validation.X12ErrorCode.MissingRequiredSegment
+  type: Field
+  source:
+    remote:
+      path: src/X12Net/Validation/X12ErrorCode.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: MissingRequiredSegment
+    path: src/X12Net/Validation/X12ErrorCode.cs
+    startLine: 24
+  assemblies:
+  - X12Net
+  namespace: X12Net.Validation
+  summary: A structurally required segment (ISA, IEA, GS, GE, ST, SE) is absent.
+  example: []
+  syntax:
+    content: MissingRequiredSegment = 6
+    return:
+      type: X12Net.Validation.X12ErrorCode
+- uid: X12Net.Validation.X12ErrorCode.EbMissingEligibilityCode
+  commentId: F:X12Net.Validation.X12ErrorCode.EbMissingEligibilityCode
+  id: EbMissingEligibilityCode
+  parent: X12Net.Validation.X12ErrorCode
+  langs:
+  - csharp
+  - vb
+  name: EbMissingEligibilityCode
+  nameWithType: X12ErrorCode.EbMissingEligibilityCode
+  fullName: X12Net.Validation.X12ErrorCode.EbMissingEligibilityCode
+  type: Field
+  source:
+    remote:
+      path: src/X12Net/Validation/X12ErrorCode.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: EbMissingEligibilityCode
+    path: src/X12Net/Validation/X12ErrorCode.cs
+    startLine: 29
+  assemblies:
+  - X12Net
+  namespace: X12Net.Validation
+  summary: EB01 Eligibility or Benefit Information Code is absent or blank.
+  example: []
+  syntax:
+    content: EbMissingEligibilityCode = 7
+    return:
+      type: X12Net.Validation.X12ErrorCode
+- uid: X12Net.Validation.X12ErrorCode.EbInvalidEligibilityCode
+  commentId: F:X12Net.Validation.X12ErrorCode.EbInvalidEligibilityCode
+  id: EbInvalidEligibilityCode
+  parent: X12Net.Validation.X12ErrorCode
+  langs:
+  - csharp
+  - vb
+  name: EbInvalidEligibilityCode
+  nameWithType: X12ErrorCode.EbInvalidEligibilityCode
+  fullName: X12Net.Validation.X12ErrorCode.EbInvalidEligibilityCode
+  type: Field
+  source:
+    remote:
+      path: src/X12Net/Validation/X12ErrorCode.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: EbInvalidEligibilityCode
+    path: src/X12Net/Validation/X12ErrorCode.cs
+    startLine: 32
+  assemblies:
+  - X12Net
+  namespace: X12Net.Validation
+  summary: EB01 value is not in code set 235.
+  example: []
+  syntax:
+    content: EbInvalidEligibilityCode = 8
+    return:
+      type: X12Net.Validation.X12ErrorCode
+- uid: X12Net.Validation.X12ErrorCode.EbInvalidCoverageLevelCode
+  commentId: F:X12Net.Validation.X12ErrorCode.EbInvalidCoverageLevelCode
+  id: EbInvalidCoverageLevelCode
+  parent: X12Net.Validation.X12ErrorCode
+  langs:
+  - csharp
+  - vb
+  name: EbInvalidCoverageLevelCode
+  nameWithType: X12ErrorCode.EbInvalidCoverageLevelCode
+  fullName: X12Net.Validation.X12ErrorCode.EbInvalidCoverageLevelCode
+  type: Field
+  source:
+    remote:
+      path: src/X12Net/Validation/X12ErrorCode.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: EbInvalidCoverageLevelCode
+    path: src/X12Net/Validation/X12ErrorCode.cs
+    startLine: 35
+  assemblies:
+  - X12Net
+  namespace: X12Net.Validation
+  summary: EB02 Coverage Level Code is not in code set 1205.
+  example: []
+  syntax:
+    content: EbInvalidCoverageLevelCode = 9
+    return:
+      type: X12Net.Validation.X12ErrorCode
+- uid: X12Net.Validation.X12ErrorCode.EbInvalidServiceTypeCode
+  commentId: F:X12Net.Validation.X12ErrorCode.EbInvalidServiceTypeCode
+  id: EbInvalidServiceTypeCode
+  parent: X12Net.Validation.X12ErrorCode
+  langs:
+  - csharp
+  - vb
+  name: EbInvalidServiceTypeCode
+  nameWithType: X12ErrorCode.EbInvalidServiceTypeCode
+  fullName: X12Net.Validation.X12ErrorCode.EbInvalidServiceTypeCode
+  type: Field
+  source:
+    remote:
+      path: src/X12Net/Validation/X12ErrorCode.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: EbInvalidServiceTypeCode
+    path: src/X12Net/Validation/X12ErrorCode.cs
+    startLine: 38
+  assemblies:
+  - X12Net
+  namespace: X12Net.Validation
+  summary: EB03 Service Type Code component is not in code set 1365.
+  example: []
+  syntax:
+    content: EbInvalidServiceTypeCode = 10
+    return:
+      type: X12Net.Validation.X12ErrorCode
+- uid: X12Net.Validation.X12ErrorCode.EbInvalidInsuranceTypeCode
+  commentId: F:X12Net.Validation.X12ErrorCode.EbInvalidInsuranceTypeCode
+  id: EbInvalidInsuranceTypeCode
+  parent: X12Net.Validation.X12ErrorCode
+  langs:
+  - csharp
+  - vb
+  name: EbInvalidInsuranceTypeCode
+  nameWithType: X12ErrorCode.EbInvalidInsuranceTypeCode
+  fullName: X12Net.Validation.X12ErrorCode.EbInvalidInsuranceTypeCode
+  type: Field
+  source:
+    remote:
+      path: src/X12Net/Validation/X12ErrorCode.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: EbInvalidInsuranceTypeCode
+    path: src/X12Net/Validation/X12ErrorCode.cs
+    startLine: 41
+  assemblies:
+  - X12Net
+  namespace: X12Net.Validation
+  summary: EB04 Insurance Type Code is not in the allowed subset.
+  example: []
+  syntax:
+    content: EbInvalidInsuranceTypeCode = 11
+    return:
+      type: X12Net.Validation.X12ErrorCode
+- uid: X12Net.Validation.X12ErrorCode.EbPlanDescriptionTooLong
+  commentId: F:X12Net.Validation.X12ErrorCode.EbPlanDescriptionTooLong
+  id: EbPlanDescriptionTooLong
+  parent: X12Net.Validation.X12ErrorCode
+  langs:
+  - csharp
+  - vb
+  name: EbPlanDescriptionTooLong
+  nameWithType: X12ErrorCode.EbPlanDescriptionTooLong
+  fullName: X12Net.Validation.X12ErrorCode.EbPlanDescriptionTooLong
+  type: Field
+  source:
+    remote:
+      path: src/X12Net/Validation/X12ErrorCode.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: EbPlanDescriptionTooLong
+    path: src/X12Net/Validation/X12ErrorCode.cs
+    startLine: 44
+  assemblies:
+  - X12Net
+  namespace: X12Net.Validation
+  summary: EB05 Plan Coverage Description exceeds 50 characters.
+  example: []
+  syntax:
+    content: EbPlanDescriptionTooLong = 12
+    return:
+      type: X12Net.Validation.X12ErrorCode
+- uid: X12Net.Validation.X12ErrorCode.EbInvalidTimePeriodQualifier
+  commentId: F:X12Net.Validation.X12ErrorCode.EbInvalidTimePeriodQualifier
+  id: EbInvalidTimePeriodQualifier
+  parent: X12Net.Validation.X12ErrorCode
+  langs:
+  - csharp
+  - vb
+  name: EbInvalidTimePeriodQualifier
+  nameWithType: X12ErrorCode.EbInvalidTimePeriodQualifier
+  fullName: X12Net.Validation.X12ErrorCode.EbInvalidTimePeriodQualifier
+  type: Field
+  source:
+    remote:
+      path: src/X12Net/Validation/X12ErrorCode.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: EbInvalidTimePeriodQualifier
+    path: src/X12Net/Validation/X12ErrorCode.cs
+    startLine: 47
+  assemblies:
+  - X12Net
+  namespace: X12Net.Validation
+  summary: EB06 Time Period Qualifier is not in code set 615.
+  example: []
+  syntax:
+    content: EbInvalidTimePeriodQualifier = 13
+    return:
+      type: X12Net.Validation.X12ErrorCode
+- uid: X12Net.Validation.X12ErrorCode.EbNegativeMonetaryAmount
+  commentId: F:X12Net.Validation.X12ErrorCode.EbNegativeMonetaryAmount
+  id: EbNegativeMonetaryAmount
+  parent: X12Net.Validation.X12ErrorCode
+  langs:
+  - csharp
+  - vb
+  name: EbNegativeMonetaryAmount
+  nameWithType: X12ErrorCode.EbNegativeMonetaryAmount
+  fullName: X12Net.Validation.X12ErrorCode.EbNegativeMonetaryAmount
+  type: Field
+  source:
+    remote:
+      path: src/X12Net/Validation/X12ErrorCode.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: EbNegativeMonetaryAmount
+    path: src/X12Net/Validation/X12ErrorCode.cs
+    startLine: 50
+  assemblies:
+  - X12Net
+  namespace: X12Net.Validation
+  summary: EB07 Monetary Amount is negative.
+  example: []
+  syntax:
+    content: EbNegativeMonetaryAmount = 14
+    return:
+      type: X12Net.Validation.X12ErrorCode
+- uid: X12Net.Validation.X12ErrorCode.EbPercentOutOfRange
+  commentId: F:X12Net.Validation.X12ErrorCode.EbPercentOutOfRange
+  id: EbPercentOutOfRange
+  parent: X12Net.Validation.X12ErrorCode
+  langs:
+  - csharp
+  - vb
+  name: EbPercentOutOfRange
+  nameWithType: X12ErrorCode.EbPercentOutOfRange
+  fullName: X12Net.Validation.X12ErrorCode.EbPercentOutOfRange
+  type: Field
+  source:
+    remote:
+      path: src/X12Net/Validation/X12ErrorCode.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: EbPercentOutOfRange
+    path: src/X12Net/Validation/X12ErrorCode.cs
+    startLine: 53
+  assemblies:
+  - X12Net
+  namespace: X12Net.Validation
+  summary: EB08 Percent is less than 0 or greater than 100.00.
+  example: []
+  syntax:
+    content: EbPercentOutOfRange = 15
+    return:
+      type: X12Net.Validation.X12ErrorCode
+- uid: X12Net.Validation.X12ErrorCode.EbInvalidQuantityQualifier
+  commentId: F:X12Net.Validation.X12ErrorCode.EbInvalidQuantityQualifier
+  id: EbInvalidQuantityQualifier
+  parent: X12Net.Validation.X12ErrorCode
+  langs:
+  - csharp
+  - vb
+  name: EbInvalidQuantityQualifier
+  nameWithType: X12ErrorCode.EbInvalidQuantityQualifier
+  fullName: X12Net.Validation.X12ErrorCode.EbInvalidQuantityQualifier
+  type: Field
+  source:
+    remote:
+      path: src/X12Net/Validation/X12ErrorCode.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: EbInvalidQuantityQualifier
+    path: src/X12Net/Validation/X12ErrorCode.cs
+    startLine: 56
+  assemblies:
+  - X12Net
+  namespace: X12Net.Validation
+  summary: EB09 Quantity Qualifier is not in code set 673.
+  example: []
+  syntax:
+    content: EbInvalidQuantityQualifier = 16
+    return:
+      type: X12Net.Validation.X12ErrorCode
+- uid: X12Net.Validation.X12ErrorCode.EbNegativeQuantity
+  commentId: F:X12Net.Validation.X12ErrorCode.EbNegativeQuantity
+  id: EbNegativeQuantity
+  parent: X12Net.Validation.X12ErrorCode
+  langs:
+  - csharp
+  - vb
+  name: EbNegativeQuantity
+  nameWithType: X12ErrorCode.EbNegativeQuantity
+  fullName: X12Net.Validation.X12ErrorCode.EbNegativeQuantity
+  type: Field
+  source:
+    remote:
+      path: src/X12Net/Validation/X12ErrorCode.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: EbNegativeQuantity
+    path: src/X12Net/Validation/X12ErrorCode.cs
+    startLine: 59
+  assemblies:
+  - X12Net
+  namespace: X12Net.Validation
+  summary: EB10 Quantity is negative.
+  example: []
+  syntax:
+    content: EbNegativeQuantity = 17
+    return:
+      type: X12Net.Validation.X12ErrorCode
+- uid: X12Net.Validation.X12ErrorCode.EbInvalidAuthorizationIndicator
+  commentId: F:X12Net.Validation.X12ErrorCode.EbInvalidAuthorizationIndicator
+  id: EbInvalidAuthorizationIndicator
+  parent: X12Net.Validation.X12ErrorCode
+  langs:
+  - csharp
+  - vb
+  name: EbInvalidAuthorizationIndicator
+  nameWithType: X12ErrorCode.EbInvalidAuthorizationIndicator
+  fullName: X12Net.Validation.X12ErrorCode.EbInvalidAuthorizationIndicator
+  type: Field
+  source:
+    remote:
+      path: src/X12Net/Validation/X12ErrorCode.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: EbInvalidAuthorizationIndicator
+    path: src/X12Net/Validation/X12ErrorCode.cs
+    startLine: 62
+  assemblies:
+  - X12Net
+  namespace: X12Net.Validation
+  summary: EB11 Authorization/Certification Required is not N, Y, or U.
+  example: []
+  syntax:
+    content: EbInvalidAuthorizationIndicator = 18
+    return:
+      type: X12Net.Validation.X12ErrorCode
+- uid: X12Net.Validation.X12ErrorCode.EbInvalidInPlanNetworkIndicator
+  commentId: F:X12Net.Validation.X12ErrorCode.EbInvalidInPlanNetworkIndicator
+  id: EbInvalidInPlanNetworkIndicator
+  parent: X12Net.Validation.X12ErrorCode
+  langs:
+  - csharp
+  - vb
+  name: EbInvalidInPlanNetworkIndicator
+  nameWithType: X12ErrorCode.EbInvalidInPlanNetworkIndicator
+  fullName: X12Net.Validation.X12ErrorCode.EbInvalidInPlanNetworkIndicator
+  type: Field
+  source:
+    remote:
+      path: src/X12Net/Validation/X12ErrorCode.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: EbInvalidInPlanNetworkIndicator
+    path: src/X12Net/Validation/X12ErrorCode.cs
+    startLine: 65
+  assemblies:
+  - X12Net
+  namespace: X12Net.Validation
+  summary: EB12 In-Plan Network Indicator is not N, U, W, or Y.
+  example: []
+  syntax:
+    content: EbInvalidInPlanNetworkIndicator = 19
+    return:
+      type: X12Net.Validation.X12ErrorCode
+- uid: X12Net.Validation.X12ErrorCode.EbQuantityQualifierWithoutQuantity
+  commentId: F:X12Net.Validation.X12ErrorCode.EbQuantityQualifierWithoutQuantity
+  id: EbQuantityQualifierWithoutQuantity
+  parent: X12Net.Validation.X12ErrorCode
+  langs:
+  - csharp
+  - vb
+  name: EbQuantityQualifierWithoutQuantity
+  nameWithType: X12ErrorCode.EbQuantityQualifierWithoutQuantity
+  fullName: X12Net.Validation.X12ErrorCode.EbQuantityQualifierWithoutQuantity
+  type: Field
+  source:
+    remote:
+      path: src/X12Net/Validation/X12ErrorCode.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: EbQuantityQualifierWithoutQuantity
+    path: src/X12Net/Validation/X12ErrorCode.cs
+    startLine: 68
+  assemblies:
+  - X12Net
+  namespace: X12Net.Validation
+  summary: EB09 and EB10 must both be present or both absent.
+  example: []
+  syntax:
+    content: EbQuantityQualifierWithoutQuantity = 20
+    return:
+      type: X12Net.Validation.X12ErrorCode
+- uid: X12Net.Validation.X12ErrorCode.EbTimePeriodRequiresAmount
+  commentId: F:X12Net.Validation.X12ErrorCode.EbTimePeriodRequiresAmount
+  id: EbTimePeriodRequiresAmount
+  parent: X12Net.Validation.X12ErrorCode
+  langs:
+  - csharp
+  - vb
+  name: EbTimePeriodRequiresAmount
+  nameWithType: X12ErrorCode.EbTimePeriodRequiresAmount
+  fullName: X12Net.Validation.X12ErrorCode.EbTimePeriodRequiresAmount
+  type: Field
+  source:
+    remote:
+      path: src/X12Net/Validation/X12ErrorCode.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: EbTimePeriodRequiresAmount
+    path: src/X12Net/Validation/X12ErrorCode.cs
+    startLine: 71
+  assemblies:
+  - X12Net
+  namespace: X12Net.Validation
+  summary: EB06 is present but none of EB07, EB08, or EB10 contain a value.
+  example: []
+  syntax:
+    content: EbTimePeriodRequiresAmount = 21
+    return:
+      type: X12Net.Validation.X12ErrorCode
+references:
+- uid: X12Net.Validation
+  commentId: N:X12Net.Validation
+  href: X12Net.html
+  name: X12Net.Validation
+  nameWithType: X12Net.Validation
+  fullName: X12Net.Validation
+  spec.csharp:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.Validation
+    name: Validation
+    href: X12Net.Validation.html
+  spec.vb:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.Validation
+    name: Validation
+    href: X12Net.Validation.html
+- uid: X12Net.Validation.X12ErrorCode
+  commentId: T:X12Net.Validation.X12ErrorCode
+  parent: X12Net.Validation
+  href: X12Net.Validation.X12ErrorCode.html
+  name: X12ErrorCode
+  nameWithType: X12ErrorCode
+  fullName: X12Net.Validation.X12ErrorCode

@@ -1,0 +1,182 @@
+### YamlMime:TableOfContent
+items:
+- uid: X12Net.CLI
+  name: X12Net.CLI
+  type: Namespace
+  items:
+  - uid: X12Net.CLI.EditResult
+    name: EditResult
+    type: Class
+  - uid: X12Net.CLI.ParseResult
+    name: ParseResult
+    type: Class
+  - uid: X12Net.CLI.ValidateResult
+    name: ValidateResult
+    type: Class
+  - uid: X12Net.CLI.X12Tool
+    name: X12Tool
+    type: Class
+- uid: X12Net.Core
+  name: X12Net.Core
+  type: Namespace
+  items:
+  - uid: X12Net.Core.X12Delimiters
+    name: X12Delimiters
+    type: Struct
+  - uid: X12Net.Core.X12Segment
+    name: X12Segment
+    type: Class
+  - uid: X12Net.Core.X12Token
+    name: X12Token
+    type: Class
+  - uid: X12Net.Core.X12TokenType
+    name: X12TokenType
+    type: Enum
+  - uid: X12Net.Core.X12Tokenizer
+    name: X12Tokenizer
+    type: Class
+- uid: X12Net.DOM
+  name: X12Net.DOM
+  type: Namespace
+  items:
+  - uid: X12Net.DOM.X12Document
+    name: X12Document
+    type: Class
+  - uid: X12Net.DOM.X12FunctionalGroup
+    name: X12FunctionalGroup
+    type: Class
+  - uid: X12Net.DOM.X12Interchange
+    name: X12Interchange
+    type: Class
+  - uid: X12Net.DOM.X12MutableSegment
+    name: X12MutableSegment
+    type: Class
+  - uid: X12Net.DOM.X12Transaction
+    name: X12Transaction
+    type: Class
+- uid: X12Net.Envelopes
+  name: X12Net.Envelopes
+  type: Namespace
+  items:
+  - uid: X12Net.Envelopes.X12Envelope
+    name: X12Envelope
+    type: Class
+  - uid: X12Net.Envelopes.X12InterchangeBuilder
+    name: X12InterchangeBuilder
+    type: Class
+- uid: X12Net.IO
+  name: X12Net.IO
+  type: Namespace
+  items:
+  - uid: X12Net.IO.X12MemoryCapException
+    name: X12MemoryCapException
+    type: Class
+  - uid: X12Net.IO.X12Reader
+    name: X12Reader
+    type: Class
+  - uid: X12Net.IO.X12Writer
+    name: X12Writer
+    type: Class
+- uid: X12Net.Schema
+  name: X12Net.Schema
+  type: Namespace
+  items:
+  - uid: X12Net.Schema.X12DynamicTransaction
+    name: X12DynamicTransaction
+    type: Class
+  - uid: X12Net.Schema.X12SchemaRegistry
+    name: X12SchemaRegistry
+    type: Class
+  - uid: X12Net.Schema.X12SchemaValidator
+    name: X12SchemaValidator
+    type: Class
+  - uid: X12Net.Schema.X12SegmentSchema
+    name: X12SegmentSchema
+    type: Class
+  - uid: X12Net.Schema.X12TransactionSchema
+    name: X12TransactionSchema
+    type: Class
+- uid: X12Net.Transactions
+  name: X12Net.Transactions
+  type: Namespace
+  items:
+  - uid: X12Net.Transactions.AK1Segment
+    name: AK1Segment
+    type: Class
+  - uid: X12Net.Transactions.CLPSegment
+    name: CLPSegment
+    type: Class
+  - uid: X12Net.Transactions.ClmSegment
+    name: ClmSegment
+    type: Class
+  - uid: X12Net.Transactions.EBSegment
+    name: EBSegment
+    type: Class
+  - uid: X12Net.Transactions.EQSegment
+    name: EQSegment
+    type: Class
+  - uid: X12Net.Transactions.INSSegment
+    name: INSSegment
+    type: Class
+  - uid: X12Net.Transactions.STCSegment
+    name: STCSegment
+    type: Class
+  - uid: X12Net.Transactions.Ts270
+    name: Ts270
+    type: Class
+  - uid: X12Net.Transactions.Ts271
+    name: Ts271
+    type: Class
+  - uid: X12Net.Transactions.Ts276
+    name: Ts276
+    type: Class
+  - uid: X12Net.Transactions.Ts277
+    name: Ts277
+    type: Class
+  - uid: X12Net.Transactions.Ts834
+    name: Ts834
+    type: Class
+  - uid: X12Net.Transactions.Ts835
+    name: Ts835
+    type: Class
+  - uid: X12Net.Transactions.Ts837D
+    name: Ts837D
+    type: Class
+  - uid: X12Net.Transactions.Ts837I
+    name: Ts837I
+    type: Class
+  - uid: X12Net.Transactions.Ts837P
+    name: Ts837P
+    type: Class
+  - uid: X12Net.Transactions.Ts999
+    name: Ts999
+    type: Class
+- uid: X12Net.Validation
+  name: X12Net.Validation
+  type: Namespace
+  items:
+  - uid: X12Net.Validation.EbSegmentValidator
+    name: EbSegmentValidator
+    type: Class
+  - uid: X12Net.Validation.Ts271Validator
+    name: Ts271Validator
+    type: Class
+  - uid: X12Net.Validation.X12ErrorCode
+    name: X12ErrorCode
+    type: Enum
+  - uid: X12Net.Validation.X12InterchangeValidator
+    name: X12InterchangeValidator
+    type: Class
+  - uid: X12Net.Validation.X12ValidationError
+    name: X12ValidationError
+    type: Class
+  - uid: X12Net.Validation.X12ValidationResult
+    name: X12ValidationResult
+    type: Class
+  - uid: X12Net.Validation.X12ValidationRule
+    name: X12ValidationRule
+    type: Delegate
+  - uid: X12Net.Validation.X12Validator
+    name: X12Validator
+    type: Class
+memberLayout: SamePage

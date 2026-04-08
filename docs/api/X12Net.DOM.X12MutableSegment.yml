@@ -1,0 +1,429 @@
+### YamlMime:ManagedReference
+items:
+- uid: X12Net.DOM.X12MutableSegment
+  commentId: T:X12Net.DOM.X12MutableSegment
+  id: X12MutableSegment
+  parent: X12Net.DOM
+  children:
+  - X12Net.DOM.X12MutableSegment.ElementCount
+  - X12Net.DOM.X12MutableSegment.Item(System.Int32)
+  - X12Net.DOM.X12MutableSegment.SegmentId
+  langs:
+  - csharp
+  - vb
+  name: X12MutableSegment
+  nameWithType: X12MutableSegment
+  fullName: X12Net.DOM.X12MutableSegment
+  type: Class
+  source:
+    remote:
+      path: src/X12Net/DOM/X12MutableSegment.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: X12MutableSegment
+    path: src/X12Net/DOM/X12MutableSegment.cs
+    startLine: 6
+  assemblies:
+  - X12Net
+  namespace: X12Net.DOM
+  summary: >-
+    A mutable view of an EDI X12 segment held inside an <xref href="X12Net.DOM.X12Document" data-throw-if-not-resolved="false"></xref>.
+
+    Element values may be read and written by 1-based index.
+  example: []
+  syntax:
+    content: public sealed class X12MutableSegment
+    content.vb: Public NotInheritable Class X12MutableSegment
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: X12Net.DOM.X12MutableSegment.SegmentId
+  commentId: P:X12Net.DOM.X12MutableSegment.SegmentId
+  id: SegmentId
+  parent: X12Net.DOM.X12MutableSegment
+  langs:
+  - csharp
+  - vb
+  name: SegmentId
+  nameWithType: X12MutableSegment.SegmentId
+  fullName: X12Net.DOM.X12MutableSegment.SegmentId
+  type: Property
+  source:
+    remote:
+      path: src/X12Net/DOM/X12MutableSegment.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: SegmentId
+    path: src/X12Net/DOM/X12MutableSegment.cs
+    startLine: 17
+  assemblies:
+  - X12Net
+  namespace: X12Net.DOM
+  summary: The segment identifier, e.g. "ISA", "GS", "ST".
+  example: []
+  syntax:
+    content: public string SegmentId { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property SegmentId As String
+  overload: X12Net.DOM.X12MutableSegment.SegmentId*
+- uid: X12Net.DOM.X12MutableSegment.Item(System.Int32)
+  commentId: P:X12Net.DOM.X12MutableSegment.Item(System.Int32)
+  id: Item(System.Int32)
+  parent: X12Net.DOM.X12MutableSegment
+  langs:
+  - csharp
+  - vb
+  name: this[int]
+  nameWithType: X12MutableSegment.this[int]
+  fullName: X12Net.DOM.X12MutableSegment.this[int]
+  type: Property
+  source:
+    remote:
+      path: src/X12Net/DOM/X12MutableSegment.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: this[]
+    path: src/X12Net/DOM/X12MutableSegment.cs
+    startLine: 20
+  assemblies:
+  - X12Net
+  namespace: X12Net.DOM
+  summary: Gets or sets the element at the given 1-based <code class="paramref">index</code>.
+  example: []
+  syntax:
+    content: public string this[int index] { get; set; }
+    parameters:
+    - id: index
+      type: System.Int32
+    return:
+      type: System.String
+    content.vb: Public Default Property this[](index As Integer) As String
+  overload: X12Net.DOM.X12MutableSegment.Item*
+  nameWithType.vb: X12MutableSegment.this[](Integer)
+  fullName.vb: X12Net.DOM.X12MutableSegment.this[](Integer)
+  name.vb: this[](Integer)
+- uid: X12Net.DOM.X12MutableSegment.ElementCount
+  commentId: P:X12Net.DOM.X12MutableSegment.ElementCount
+  id: ElementCount
+  parent: X12Net.DOM.X12MutableSegment
+  langs:
+  - csharp
+  - vb
+  name: ElementCount
+  nameWithType: X12MutableSegment.ElementCount
+  fullName: X12Net.DOM.X12MutableSegment.ElementCount
+  type: Property
+  source:
+    remote:
+      path: src/X12Net/DOM/X12MutableSegment.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: ElementCount
+    path: src/X12Net/DOM/X12MutableSegment.cs
+    startLine: 32
+  assemblies:
+  - X12Net
+  namespace: X12Net.DOM
+  summary: The number of elements in this segment.
+  example: []
+  syntax:
+    content: public int ElementCount { get; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public ReadOnly Property ElementCount As Integer
+  overload: X12Net.DOM.X12MutableSegment.ElementCount*
+references:
+- uid: X12Net.DOM.X12Document
+  commentId: T:X12Net.DOM.X12Document
+  parent: X12Net.DOM
+  href: X12Net.DOM.X12Document.html
+  name: X12Document
+  nameWithType: X12Document
+  fullName: X12Net.DOM.X12Document
+- uid: X12Net.DOM
+  commentId: N:X12Net.DOM
+  href: X12Net.html
+  name: X12Net.DOM
+  nameWithType: X12Net.DOM
+  fullName: X12Net.DOM
+  spec.csharp:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.DOM
+    name: DOM
+    href: X12Net.DOM.html
+  spec.vb:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.DOM
+    name: DOM
+    href: X12Net.DOM.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: X12Net.DOM.X12MutableSegment.SegmentId*
+  commentId: Overload:X12Net.DOM.X12MutableSegment.SegmentId
+  href: X12Net.DOM.X12MutableSegment.html#X12Net_DOM_X12MutableSegment_SegmentId
+  name: SegmentId
+  nameWithType: X12MutableSegment.SegmentId
+  fullName: X12Net.DOM.X12MutableSegment.SegmentId
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: X12Net.DOM.X12MutableSegment.Item*
+  commentId: Overload:X12Net.DOM.X12MutableSegment.Item
+  href: X12Net.DOM.X12MutableSegment.html#X12Net_DOM_X12MutableSegment_Item_System_Int32_
+  name: this
+  nameWithType: X12MutableSegment.this
+  fullName: X12Net.DOM.X12MutableSegment.this
+  nameWithType.vb: X12MutableSegment.this[]
+  fullName.vb: X12Net.DOM.X12MutableSegment.this[]
+  name.vb: this[]
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: X12Net.DOM.X12MutableSegment.ElementCount*
+  commentId: Overload:X12Net.DOM.X12MutableSegment.ElementCount
+  href: X12Net.DOM.X12MutableSegment.html#X12Net_DOM_X12MutableSegment_ElementCount
+  name: ElementCount
+  nameWithType: X12MutableSegment.ElementCount
+  fullName: X12Net.DOM.X12MutableSegment.ElementCount

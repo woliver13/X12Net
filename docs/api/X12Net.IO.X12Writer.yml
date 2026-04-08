@@ -1,0 +1,454 @@
+### YamlMime:ManagedReference
+items:
+- uid: X12Net.IO.X12Writer
+  commentId: T:X12Net.IO.X12Writer
+  id: X12Writer
+  parent: X12Net.IO
+  children:
+  - X12Net.IO.X12Writer.#ctor(System.Char,System.Char,System.Char)
+  - X12Net.IO.X12Writer.ToString
+  - X12Net.IO.X12Writer.WriteSegment(System.String,System.String[])
+  langs:
+  - csharp
+  - vb
+  name: X12Writer
+  nameWithType: X12Writer
+  fullName: X12Net.IO.X12Writer
+  type: Class
+  source:
+    remote:
+      path: src/X12Net/IO/X12Writer.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: X12Writer
+    path: src/X12Net/IO/X12Writer.cs
+    startLine: 7
+  assemblies:
+  - X12Net
+  namespace: X12Net.IO
+  summary: Builds EDI X12 interchange text segment by segment.
+  example: []
+  syntax:
+    content: public sealed class X12Writer
+    content.vb: Public NotInheritable Class X12Writer
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+- uid: X12Net.IO.X12Writer.#ctor(System.Char,System.Char,System.Char)
+  commentId: M:X12Net.IO.X12Writer.#ctor(System.Char,System.Char,System.Char)
+  id: '#ctor(System.Char,System.Char,System.Char)'
+  parent: X12Net.IO.X12Writer
+  langs:
+  - csharp
+  - vb
+  name: X12Writer(char, char, char)
+  nameWithType: X12Writer.X12Writer(char, char, char)
+  fullName: X12Net.IO.X12Writer.X12Writer(char, char, char)
+  type: Constructor
+  source:
+    remote:
+      path: src/X12Net/IO/X12Writer.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: .ctor
+    path: src/X12Net/IO/X12Writer.cs
+    startLine: 17
+  assemblies:
+  - X12Net
+  namespace: X12Net.IO
+  summary: Initializes an <xref href="X12Net.IO.X12Writer" data-throw-if-not-resolved="false"></xref> with the standard delimiters.
+  example: []
+  syntax:
+    content: public X12Writer(char elementSeparator = '*', char componentSeparator = ':', char segmentTerminator = '~')
+    parameters:
+    - id: elementSeparator
+      type: System.Char
+    - id: componentSeparator
+      type: System.Char
+    - id: segmentTerminator
+      type: System.Char
+    content.vb: Public Sub New(elementSeparator As Char = "*"c, componentSeparator As Char = ":"c, segmentTerminator As Char = "~"c)
+  overload: X12Net.IO.X12Writer.#ctor*
+  nameWithType.vb: X12Writer.New(Char, Char, Char)
+  fullName.vb: X12Net.IO.X12Writer.New(Char, Char, Char)
+  name.vb: New(Char, Char, Char)
+- uid: X12Net.IO.X12Writer.WriteSegment(System.String,System.String[])
+  commentId: M:X12Net.IO.X12Writer.WriteSegment(System.String,System.String[])
+  id: WriteSegment(System.String,System.String[])
+  parent: X12Net.IO.X12Writer
+  langs:
+  - csharp
+  - vb
+  name: WriteSegment(string, params string[])
+  nameWithType: X12Writer.WriteSegment(string, params string[])
+  fullName: X12Net.IO.X12Writer.WriteSegment(string, params string[])
+  type: Method
+  source:
+    remote:
+      path: src/X12Net/IO/X12Writer.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: WriteSegment
+    path: src/X12Net/IO/X12Writer.cs
+    startLine: 31
+  assemblies:
+  - X12Net
+  namespace: X12Net.IO
+  summary: Writes a segment with the given <code class="paramref">segmentId</code> and <code class="paramref">elements</code>.
+  example: []
+  syntax:
+    content: public void WriteSegment(string segmentId, params string[] elements)
+    parameters:
+    - id: segmentId
+      type: System.String
+    - id: elements
+      type: System.String[]
+    content.vb: Public Sub WriteSegment(segmentId As String, ParamArray elements As String())
+  overload: X12Net.IO.X12Writer.WriteSegment*
+  nameWithType.vb: X12Writer.WriteSegment(String, ParamArray String())
+  fullName.vb: X12Net.IO.X12Writer.WriteSegment(String, ParamArray String())
+  name.vb: WriteSegment(String, ParamArray String())
+- uid: X12Net.IO.X12Writer.ToString
+  commentId: M:X12Net.IO.X12Writer.ToString
+  id: ToString
+  parent: X12Net.IO.X12Writer
+  langs:
+  - csharp
+  - vb
+  name: ToString()
+  nameWithType: X12Writer.ToString()
+  fullName: X12Net.IO.X12Writer.ToString()
+  type: Method
+  source:
+    remote:
+      path: src/X12Net/IO/X12Writer.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: ToString
+    path: src/X12Net/IO/X12Writer.cs
+    startLine: 43
+  assemblies:
+  - X12Net
+  namespace: X12Net.IO
+  summary: Returns the accumulated EDI text.
+  example: []
+  syntax:
+    content: public override string ToString()
+    return:
+      type: System.String
+    content.vb: Public Overrides Function ToString() As String
+  overridden: System.Object.ToString
+  overload: X12Net.IO.X12Writer.ToString*
+references:
+- uid: X12Net.IO
+  commentId: N:X12Net.IO
+  href: X12Net.html
+  name: X12Net.IO
+  nameWithType: X12Net.IO
+  fullName: X12Net.IO
+  spec.csharp:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.IO
+    name: IO
+    href: X12Net.IO.html
+  spec.vb:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.IO
+    name: IO
+    href: X12Net.IO.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: X12Net.IO.X12Writer
+  commentId: T:X12Net.IO.X12Writer
+  href: X12Net.IO.X12Writer.html
+  name: X12Writer
+  nameWithType: X12Writer
+  fullName: X12Net.IO.X12Writer
+- uid: X12Net.IO.X12Writer.#ctor*
+  commentId: Overload:X12Net.IO.X12Writer.#ctor
+  href: X12Net.IO.X12Writer.html#X12Net_IO_X12Writer__ctor_System_Char_System_Char_System_Char_
+  name: X12Writer
+  nameWithType: X12Writer.X12Writer
+  fullName: X12Net.IO.X12Writer.X12Writer
+  nameWithType.vb: X12Writer.New
+  fullName.vb: X12Net.IO.X12Writer.New
+  name.vb: New
+- uid: System.Char
+  commentId: T:System.Char
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.char
+  name: char
+  nameWithType: char
+  fullName: char
+  nameWithType.vb: Char
+  fullName.vb: Char
+  name.vb: Char
+- uid: X12Net.IO.X12Writer.WriteSegment*
+  commentId: Overload:X12Net.IO.X12Writer.WriteSegment
+  href: X12Net.IO.X12Writer.html#X12Net_IO_X12Writer_WriteSegment_System_String_System_String___
+  name: WriteSegment
+  nameWithType: X12Writer.WriteSegment
+  fullName: X12Net.IO.X12Writer.WriteSegment
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.String[]
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string[]
+  nameWithType: string[]
+  fullName: string[]
+  nameWithType.vb: String()
+  fullName.vb: String()
+  name.vb: String()
+  spec.csharp:
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: (
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: X12Net.IO.X12Writer.ToString*
+  commentId: Overload:X12Net.IO.X12Writer.ToString
+  href: X12Net.IO.X12Writer.html#X12Net_IO_X12Writer_ToString
+  name: ToString
+  nameWithType: X12Writer.ToString
+  fullName: X12Net.IO.X12Writer.ToString

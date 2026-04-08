@@ -1,0 +1,76 @@
+### YamlMime:ManagedReference
+items:
+- uid: X12Net.Core
+  commentId: N:X12Net.Core
+  id: X12Net.Core
+  children:
+  - X12Net.Core.X12Delimiters
+  - X12Net.Core.X12Segment
+  - X12Net.Core.X12Token
+  - X12Net.Core.X12TokenType
+  - X12Net.Core.X12Tokenizer
+  langs:
+  - csharp
+  - vb
+  name: X12Net.Core
+  nameWithType: X12Net.Core
+  fullName: X12Net.Core
+  type: Namespace
+  assemblies:
+  - X12Net
+references:
+- uid: X12Net.Core.X12Delimiters
+  commentId: T:X12Net.Core.X12Delimiters
+  parent: X12Net.Core
+  href: X12Net.Core.X12Delimiters.html
+  name: X12Delimiters
+  nameWithType: X12Delimiters
+  fullName: X12Net.Core.X12Delimiters
+- uid: X12Net.Core.X12Segment
+  commentId: T:X12Net.Core.X12Segment
+  parent: X12Net.Core
+  href: X12Net.Core.X12Segment.html
+  name: X12Segment
+  nameWithType: X12Segment
+  fullName: X12Net.Core.X12Segment
+- uid: X12Net.Core.X12Token
+  commentId: T:X12Net.Core.X12Token
+  href: X12Net.Core.X12Token.html
+  name: X12Token
+  nameWithType: X12Token
+  fullName: X12Net.Core.X12Token
+- uid: X12Net.Core.X12Tokenizer
+  commentId: T:X12Net.Core.X12Tokenizer
+  href: X12Net.Core.X12Tokenizer.html
+  name: X12Tokenizer
+  nameWithType: X12Tokenizer
+  fullName: X12Net.Core.X12Tokenizer
+- uid: X12Net.Core.X12TokenType
+  commentId: T:X12Net.Core.X12TokenType
+  parent: X12Net.Core
+  href: X12Net.Core.X12TokenType.html
+  name: X12TokenType
+  nameWithType: X12TokenType
+  fullName: X12Net.Core.X12TokenType
+- uid: X12Net.Core
+  commentId: N:X12Net.Core
+  href: X12Net.html
+  name: X12Net.Core
+  nameWithType: X12Net.Core
+  fullName: X12Net.Core
+  spec.csharp:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.Core
+    name: Core
+    href: X12Net.Core.html
+  spec.vb:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.Core
+    name: Core
+    href: X12Net.Core.html

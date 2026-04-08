@@ -1,0 +1,54 @@
+### YamlMime:ManagedReference
+items:
+- uid: X12Net.Envelopes
+  commentId: N:X12Net.Envelopes
+  id: X12Net.Envelopes
+  children:
+  - X12Net.Envelopes.X12Envelope
+  - X12Net.Envelopes.X12InterchangeBuilder
+  langs:
+  - csharp
+  - vb
+  name: X12Net.Envelopes
+  nameWithType: X12Net.Envelopes
+  fullName: X12Net.Envelopes
+  type: Namespace
+  assemblies:
+  - X12Net
+references:
+- uid: X12Net.Envelopes.X12Envelope
+  commentId: T:X12Net.Envelopes.X12Envelope
+  parent: X12Net.Envelopes
+  href: X12Net.Envelopes.X12Envelope.html
+  name: X12Envelope
+  nameWithType: X12Envelope
+  fullName: X12Net.Envelopes.X12Envelope
+- uid: X12Net.Envelopes.X12InterchangeBuilder
+  commentId: T:X12Net.Envelopes.X12InterchangeBuilder
+  parent: X12Net.Envelopes
+  href: X12Net.Envelopes.X12InterchangeBuilder.html
+  name: X12InterchangeBuilder
+  nameWithType: X12InterchangeBuilder
+  fullName: X12Net.Envelopes.X12InterchangeBuilder
+- uid: X12Net.Envelopes
+  commentId: N:X12Net.Envelopes
+  href: X12Net.html
+  name: X12Net.Envelopes
+  nameWithType: X12Net.Envelopes
+  fullName: X12Net.Envelopes
+  spec.csharp:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.Envelopes
+    name: Envelopes
+    href: X12Net.Envelopes.html
+  spec.vb:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.Envelopes
+    name: Envelopes
+    href: X12Net.Envelopes.html

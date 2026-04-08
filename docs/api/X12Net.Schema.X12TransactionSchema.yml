@@ -1,0 +1,737 @@
+### YamlMime:ManagedReference
+items:
+- uid: X12Net.Schema.X12TransactionSchema
+  commentId: T:X12Net.Schema.X12TransactionSchema
+  id: X12TransactionSchema
+  parent: X12Net.Schema
+  children:
+  - X12Net.Schema.X12TransactionSchema.#ctor(System.String,System.String,X12Net.Schema.X12SegmentSchema[])
+  - X12Net.Schema.X12TransactionSchema.Description
+  - X12Net.Schema.X12TransactionSchema.Extend(System.String,System.String,X12Net.Schema.X12SegmentSchema[])
+  - X12Net.Schema.X12TransactionSchema.GetSegment(System.String)
+  - X12Net.Schema.X12TransactionSchema.Segments
+  - X12Net.Schema.X12TransactionSchema.TransactionSetId
+  langs:
+  - csharp
+  - vb
+  name: X12TransactionSchema
+  nameWithType: X12TransactionSchema
+  fullName: X12Net.Schema.X12TransactionSchema
+  type: Class
+  source:
+    remote:
+      path: src/X12Net/Schema/X12TransactionSchema.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: X12TransactionSchema
+    path: src/X12Net/Schema/X12TransactionSchema.cs
+    startLine: 6
+  assemblies:
+  - X12Net
+  namespace: X12Net.Schema
+  summary: >-
+    Describes the segment structure of a transaction set.
+
+    Supports single-level inheritance via <xref href="X12Net.Schema.X12TransactionSchema.Extend(System.String%2cSystem.String%2cX12Net.Schema.X12SegmentSchema%5b%5d)" data-throw-if-not-resolved="false"></xref>.
+  example: []
+  syntax:
+    content: public sealed class X12TransactionSchema
+    content.vb: Public NotInheritable Class X12TransactionSchema
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: X12Net.Schema.X12TransactionSchema.#ctor(System.String,System.String,X12Net.Schema.X12SegmentSchema[])
+  commentId: M:X12Net.Schema.X12TransactionSchema.#ctor(System.String,System.String,X12Net.Schema.X12SegmentSchema[])
+  id: '#ctor(System.String,System.String,X12Net.Schema.X12SegmentSchema[])'
+  parent: X12Net.Schema.X12TransactionSchema
+  langs:
+  - csharp
+  - vb
+  name: X12TransactionSchema(string, string, params X12SegmentSchema[])
+  nameWithType: X12TransactionSchema.X12TransactionSchema(string, string, params X12SegmentSchema[])
+  fullName: X12Net.Schema.X12TransactionSchema.X12TransactionSchema(string, string, params X12Net.Schema.X12SegmentSchema[])
+  type: Constructor
+  source:
+    remote:
+      path: src/X12Net/Schema/X12TransactionSchema.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: .ctor
+    path: src/X12Net/Schema/X12TransactionSchema.cs
+    startLine: 11
+  assemblies:
+  - X12Net
+  namespace: X12Net.Schema
+  summary: Initializes a schema for the given transaction set.
+  example: []
+  syntax:
+    content: public X12TransactionSchema(string transactionSetId, string description, params X12SegmentSchema[] segments)
+    parameters:
+    - id: transactionSetId
+      type: System.String
+    - id: description
+      type: System.String
+    - id: segments
+      type: X12Net.Schema.X12SegmentSchema[]
+    content.vb: Public Sub New(transactionSetId As String, description As String, ParamArray segments As X12SegmentSchema())
+  overload: X12Net.Schema.X12TransactionSchema.#ctor*
+  nameWithType.vb: X12TransactionSchema.New(String, String, ParamArray X12SegmentSchema())
+  fullName.vb: X12Net.Schema.X12TransactionSchema.New(String, String, ParamArray X12Net.Schema.X12SegmentSchema())
+  name.vb: New(String, String, ParamArray X12SegmentSchema())
+- uid: X12Net.Schema.X12TransactionSchema.TransactionSetId
+  commentId: P:X12Net.Schema.X12TransactionSchema.TransactionSetId
+  id: TransactionSetId
+  parent: X12Net.Schema.X12TransactionSchema
+  langs:
+  - csharp
+  - vb
+  name: TransactionSetId
+  nameWithType: X12TransactionSchema.TransactionSetId
+  fullName: X12Net.Schema.X12TransactionSchema.TransactionSetId
+  type: Property
+  source:
+    remote:
+      path: src/X12Net/Schema/X12TransactionSchema.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: TransactionSetId
+    path: src/X12Net/Schema/X12TransactionSchema.cs
+    startLine: 33
+  assemblies:
+  - X12Net
+  namespace: X12Net.Schema
+  summary: The transaction set identifier (e.g. "837", "999").
+  example: []
+  syntax:
+    content: public string TransactionSetId { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property TransactionSetId As String
+  overload: X12Net.Schema.X12TransactionSchema.TransactionSetId*
+- uid: X12Net.Schema.X12TransactionSchema.Description
+  commentId: P:X12Net.Schema.X12TransactionSchema.Description
+  id: Description
+  parent: X12Net.Schema.X12TransactionSchema
+  langs:
+  - csharp
+  - vb
+  name: Description
+  nameWithType: X12TransactionSchema.Description
+  fullName: X12Net.Schema.X12TransactionSchema.Description
+  type: Property
+  source:
+    remote:
+      path: src/X12Net/Schema/X12TransactionSchema.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: Description
+    path: src/X12Net/Schema/X12TransactionSchema.cs
+    startLine: 36
+  assemblies:
+  - X12Net
+  namespace: X12Net.Schema
+  summary: Human-readable description.
+  example: []
+  syntax:
+    content: public string Description { get; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public ReadOnly Property Description As String
+  overload: X12Net.Schema.X12TransactionSchema.Description*
+- uid: X12Net.Schema.X12TransactionSchema.GetSegment(System.String)
+  commentId: M:X12Net.Schema.X12TransactionSchema.GetSegment(System.String)
+  id: GetSegment(System.String)
+  parent: X12Net.Schema.X12TransactionSchema
+  langs:
+  - csharp
+  - vb
+  name: GetSegment(string)
+  nameWithType: X12TransactionSchema.GetSegment(string)
+  fullName: X12Net.Schema.X12TransactionSchema.GetSegment(string)
+  type: Method
+  source:
+    remote:
+      path: src/X12Net/Schema/X12TransactionSchema.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: GetSegment
+    path: src/X12Net/Schema/X12TransactionSchema.cs
+    startLine: 39
+  assemblies:
+  - X12Net
+  namespace: X12Net.Schema
+  summary: Returns the segment schema for <code class="paramref">segmentId</code>, or <code>null</code> if not registered.
+  example: []
+  syntax:
+    content: public X12SegmentSchema? GetSegment(string segmentId)
+    parameters:
+    - id: segmentId
+      type: System.String
+    return:
+      type: X12Net.Schema.X12SegmentSchema
+    content.vb: Public Function GetSegment(segmentId As String) As X12SegmentSchema
+  overload: X12Net.Schema.X12TransactionSchema.GetSegment*
+  nameWithType.vb: X12TransactionSchema.GetSegment(String)
+  fullName.vb: X12Net.Schema.X12TransactionSchema.GetSegment(String)
+  name.vb: GetSegment(String)
+- uid: X12Net.Schema.X12TransactionSchema.Segments
+  commentId: P:X12Net.Schema.X12TransactionSchema.Segments
+  id: Segments
+  parent: X12Net.Schema.X12TransactionSchema
+  langs:
+  - csharp
+  - vb
+  name: Segments
+  nameWithType: X12TransactionSchema.Segments
+  fullName: X12Net.Schema.X12TransactionSchema.Segments
+  type: Property
+  source:
+    remote:
+      path: src/X12Net/Schema/X12TransactionSchema.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: Segments
+    path: src/X12Net/Schema/X12TransactionSchema.cs
+    startLine: 43
+  assemblies:
+  - X12Net
+  namespace: X12Net.Schema
+  summary: All segment schemas in this transaction schema.
+  example: []
+  syntax:
+    content: public IReadOnlyCollection<X12SegmentSchema> Segments { get; }
+    parameters: []
+    return:
+      type: System.Collections.Generic.IReadOnlyCollection{X12Net.Schema.X12SegmentSchema}
+    content.vb: Public ReadOnly Property Segments As IReadOnlyCollection(Of X12SegmentSchema)
+  overload: X12Net.Schema.X12TransactionSchema.Segments*
+- uid: X12Net.Schema.X12TransactionSchema.Extend(System.String,System.String,X12Net.Schema.X12SegmentSchema[])
+  commentId: M:X12Net.Schema.X12TransactionSchema.Extend(System.String,System.String,X12Net.Schema.X12SegmentSchema[])
+  id: Extend(System.String,System.String,X12Net.Schema.X12SegmentSchema[])
+  parent: X12Net.Schema.X12TransactionSchema
+  langs:
+  - csharp
+  - vb
+  name: Extend(string, string, params X12SegmentSchema[])
+  nameWithType: X12TransactionSchema.Extend(string, string, params X12SegmentSchema[])
+  fullName: X12Net.Schema.X12TransactionSchema.Extend(string, string, params X12Net.Schema.X12SegmentSchema[])
+  type: Method
+  source:
+    remote:
+      path: src/X12Net/Schema/X12TransactionSchema.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: Extend
+    path: src/X12Net/Schema/X12TransactionSchema.cs
+    startLine: 49
+  assemblies:
+  - X12Net
+  namespace: X12Net.Schema
+  summary: >-
+    Creates a derived schema that inherits all segments from this instance and
+
+    adds (or overrides) the supplied <code class="paramref">additionalSegments</code>.
+  example: []
+  syntax:
+    content: public X12TransactionSchema Extend(string transactionSetId, string description, params X12SegmentSchema[] additionalSegments)
+    parameters:
+    - id: transactionSetId
+      type: System.String
+    - id: description
+      type: System.String
+    - id: additionalSegments
+      type: X12Net.Schema.X12SegmentSchema[]
+    return:
+      type: X12Net.Schema.X12TransactionSchema
+    content.vb: Public Function Extend(transactionSetId As String, description As String, ParamArray additionalSegments As X12SegmentSchema()) As X12TransactionSchema
+  overload: X12Net.Schema.X12TransactionSchema.Extend*
+  nameWithType.vb: X12TransactionSchema.Extend(String, String, ParamArray X12SegmentSchema())
+  fullName.vb: X12Net.Schema.X12TransactionSchema.Extend(String, String, ParamArray X12Net.Schema.X12SegmentSchema())
+  name.vb: Extend(String, String, ParamArray X12SegmentSchema())
+references:
+- uid: X12Net.Schema.X12TransactionSchema.Extend(System.String,System.String,X12Net.Schema.X12SegmentSchema[])
+  commentId: M:X12Net.Schema.X12TransactionSchema.Extend(System.String,System.String,X12Net.Schema.X12SegmentSchema[])
+  isExternal: true
+  href: X12Net.Schema.X12TransactionSchema.html#X12Net_Schema_X12TransactionSchema_Extend_System_String_System_String_X12Net_Schema_X12SegmentSchema___
+  name: Extend(string, string, params X12SegmentSchema[])
+  nameWithType: X12TransactionSchema.Extend(string, string, params X12SegmentSchema[])
+  fullName: X12Net.Schema.X12TransactionSchema.Extend(string, string, params X12Net.Schema.X12SegmentSchema[])
+  nameWithType.vb: X12TransactionSchema.Extend(String, String, ParamArray X12SegmentSchema())
+  fullName.vb: X12Net.Schema.X12TransactionSchema.Extend(String, String, ParamArray X12Net.Schema.X12SegmentSchema())
+  name.vb: Extend(String, String, ParamArray X12SegmentSchema())
+  spec.csharp:
+  - uid: X12Net.Schema.X12TransactionSchema.Extend(System.String,System.String,X12Net.Schema.X12SegmentSchema[])
+    name: Extend
+    href: X12Net.Schema.X12TransactionSchema.html#X12Net_Schema_X12TransactionSchema_Extend_System_String_System_String_X12Net_Schema_X12SegmentSchema___
+  - name: (
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: string
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - name: params
+  - name: " "
+  - uid: X12Net.Schema.X12SegmentSchema
+    name: X12SegmentSchema
+    href: X12Net.Schema.X12SegmentSchema.html
+  - name: '['
+  - name: ']'
+  - name: )
+  spec.vb:
+  - uid: X12Net.Schema.X12TransactionSchema.Extend(System.String,System.String,X12Net.Schema.X12SegmentSchema[])
+    name: Extend
+    href: X12Net.Schema.X12TransactionSchema.html#X12Net_Schema_X12TransactionSchema_Extend_System_String_System_String_X12Net_Schema_X12SegmentSchema___
+  - name: (
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - uid: System.String
+    name: String
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.string
+  - name: ','
+  - name: " "
+  - name: ParamArray
+  - name: " "
+  - uid: X12Net.Schema.X12SegmentSchema
+    name: X12SegmentSchema
+    href: X12Net.Schema.X12SegmentSchema.html
+  - name: (
+  - name: )
+  - name: )
+- uid: X12Net.Schema
+  commentId: N:X12Net.Schema
+  href: X12Net.html
+  name: X12Net.Schema
+  nameWithType: X12Net.Schema
+  fullName: X12Net.Schema
+  spec.csharp:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.Schema
+    name: Schema
+    href: X12Net.Schema.html
+  spec.vb:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.Schema
+    name: Schema
+    href: X12Net.Schema.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: X12Net.Schema.X12TransactionSchema.#ctor*
+  commentId: Overload:X12Net.Schema.X12TransactionSchema.#ctor
+  href: X12Net.Schema.X12TransactionSchema.html#X12Net_Schema_X12TransactionSchema__ctor_System_String_System_String_X12Net_Schema_X12SegmentSchema___
+  name: X12TransactionSchema
+  nameWithType: X12TransactionSchema.X12TransactionSchema
+  fullName: X12Net.Schema.X12TransactionSchema.X12TransactionSchema
+  nameWithType.vb: X12TransactionSchema.New
+  fullName.vb: X12Net.Schema.X12TransactionSchema.New
+  name.vb: New
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: X12Net.Schema.X12SegmentSchema[]
+  isExternal: true
+  href: X12Net.Schema.X12SegmentSchema.html
+  name: X12SegmentSchema[]
+  nameWithType: X12SegmentSchema[]
+  fullName: X12Net.Schema.X12SegmentSchema[]
+  nameWithType.vb: X12SegmentSchema()
+  fullName.vb: X12Net.Schema.X12SegmentSchema()
+  name.vb: X12SegmentSchema()
+  spec.csharp:
+  - uid: X12Net.Schema.X12SegmentSchema
+    name: X12SegmentSchema
+    href: X12Net.Schema.X12SegmentSchema.html
+  - name: '['
+  - name: ']'
+  spec.vb:
+  - uid: X12Net.Schema.X12SegmentSchema
+    name: X12SegmentSchema
+    href: X12Net.Schema.X12SegmentSchema.html
+  - name: (
+  - name: )
+- uid: X12Net.Schema.X12TransactionSchema.TransactionSetId*
+  commentId: Overload:X12Net.Schema.X12TransactionSchema.TransactionSetId
+  href: X12Net.Schema.X12TransactionSchema.html#X12Net_Schema_X12TransactionSchema_TransactionSetId
+  name: TransactionSetId
+  nameWithType: X12TransactionSchema.TransactionSetId
+  fullName: X12Net.Schema.X12TransactionSchema.TransactionSetId
+- uid: X12Net.Schema.X12TransactionSchema.Description*
+  commentId: Overload:X12Net.Schema.X12TransactionSchema.Description
+  href: X12Net.Schema.X12TransactionSchema.html#X12Net_Schema_X12TransactionSchema_Description
+  name: Description
+  nameWithType: X12TransactionSchema.Description
+  fullName: X12Net.Schema.X12TransactionSchema.Description
+- uid: X12Net.Schema.X12TransactionSchema.GetSegment*
+  commentId: Overload:X12Net.Schema.X12TransactionSchema.GetSegment
+  href: X12Net.Schema.X12TransactionSchema.html#X12Net_Schema_X12TransactionSchema_GetSegment_System_String_
+  name: GetSegment
+  nameWithType: X12TransactionSchema.GetSegment
+  fullName: X12Net.Schema.X12TransactionSchema.GetSegment
+- uid: X12Net.Schema.X12SegmentSchema
+  commentId: T:X12Net.Schema.X12SegmentSchema
+  parent: X12Net.Schema
+  href: X12Net.Schema.X12SegmentSchema.html
+  name: X12SegmentSchema
+  nameWithType: X12SegmentSchema
+  fullName: X12Net.Schema.X12SegmentSchema
+- uid: X12Net.Schema.X12TransactionSchema.Segments*
+  commentId: Overload:X12Net.Schema.X12TransactionSchema.Segments
+  href: X12Net.Schema.X12TransactionSchema.html#X12Net_Schema_X12TransactionSchema_Segments
+  name: Segments
+  nameWithType: X12TransactionSchema.Segments
+  fullName: X12Net.Schema.X12TransactionSchema.Segments
+- uid: System.Collections.Generic.IReadOnlyCollection{X12Net.Schema.X12SegmentSchema}
+  commentId: T:System.Collections.Generic.IReadOnlyCollection{X12Net.Schema.X12SegmentSchema}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IReadOnlyCollection`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+  name: IReadOnlyCollection<X12SegmentSchema>
+  nameWithType: IReadOnlyCollection<X12SegmentSchema>
+  fullName: System.Collections.Generic.IReadOnlyCollection<X12Net.Schema.X12SegmentSchema>
+  nameWithType.vb: IReadOnlyCollection(Of X12SegmentSchema)
+  fullName.vb: System.Collections.Generic.IReadOnlyCollection(Of X12Net.Schema.X12SegmentSchema)
+  name.vb: IReadOnlyCollection(Of X12SegmentSchema)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyCollection`1
+    name: IReadOnlyCollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+  - name: <
+  - uid: X12Net.Schema.X12SegmentSchema
+    name: X12SegmentSchema
+    href: X12Net.Schema.X12SegmentSchema.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyCollection`1
+    name: IReadOnlyCollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: X12Net.Schema.X12SegmentSchema
+    name: X12SegmentSchema
+    href: X12Net.Schema.X12SegmentSchema.html
+  - name: )
+- uid: System.Collections.Generic.IReadOnlyCollection`1
+  commentId: T:System.Collections.Generic.IReadOnlyCollection`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+  name: IReadOnlyCollection<T>
+  nameWithType: IReadOnlyCollection<T>
+  fullName: System.Collections.Generic.IReadOnlyCollection<T>
+  nameWithType.vb: IReadOnlyCollection(Of T)
+  fullName.vb: System.Collections.Generic.IReadOnlyCollection(Of T)
+  name.vb: IReadOnlyCollection(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IReadOnlyCollection`1
+    name: IReadOnlyCollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IReadOnlyCollection`1
+    name: IReadOnlyCollection
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlycollection-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: X12Net.Schema.X12TransactionSchema.Extend*
+  commentId: Overload:X12Net.Schema.X12TransactionSchema.Extend
+  href: X12Net.Schema.X12TransactionSchema.html#X12Net_Schema_X12TransactionSchema_Extend_System_String_System_String_X12Net_Schema_X12SegmentSchema___
+  name: Extend
+  nameWithType: X12TransactionSchema.Extend
+  fullName: X12Net.Schema.X12TransactionSchema.Extend
+- uid: X12Net.Schema.X12TransactionSchema
+  commentId: T:X12Net.Schema.X12TransactionSchema
+  parent: X12Net.Schema
+  href: X12Net.Schema.X12TransactionSchema.html
+  name: X12TransactionSchema
+  nameWithType: X12TransactionSchema
+  fullName: X12Net.Schema.X12TransactionSchema

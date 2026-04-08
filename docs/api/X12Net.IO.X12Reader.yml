@@ -1,0 +1,1052 @@
+### YamlMime:ManagedReference
+items:
+- uid: X12Net.IO.X12Reader
+  commentId: T:X12Net.IO.X12Reader
+  id: X12Reader
+  parent: X12Net.IO
+  children:
+  - X12Net.IO.X12Reader.#ctor(System.String,System.Int32)
+  - X12Net.IO.X12Reader.#ctor(System.String,X12Net.Core.X12Delimiters,System.Int32)
+  - X12Net.IO.X12Reader.Dispose
+  - X12Net.IO.X12Reader.ReadAllSegments
+  - X12Net.IO.X12Reader.ReadAllSegmentsAsync(System.Threading.CancellationToken)
+  - X12Net.IO.X12Reader.ReadTransactionsAsync``1(System.Func{X12Net.Core.X12Segment,System.Collections.Generic.IReadOnlyList{X12Net.Core.X12Segment},X12Net.Core.X12Segment,``0},System.Threading.CancellationToken)
+  - X12Net.IO.X12Reader.ReadTransactions``1(System.Func{X12Net.Core.X12Segment,System.Collections.Generic.IReadOnlyList{X12Net.Core.X12Segment},X12Net.Core.X12Segment,``0})
+  langs:
+  - csharp
+  - vb
+  name: X12Reader
+  nameWithType: X12Reader
+  fullName: X12Net.IO.X12Reader
+  type: Class
+  source:
+    remote:
+      path: src/X12Net/IO/X12Reader.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: X12Reader
+    path: src/X12Net/IO/X12Reader.cs
+    startLine: 8
+  assemblies:
+  - X12Net
+  namespace: X12Net.IO
+  summary: >-
+    Reads EDI X12 text and surfaces it as a sequence of <xref href="X12Net.Core.X12Segment" data-throw-if-not-resolved="false"></xref> objects.
+
+    Supports both synchronous and asynchronous enumeration.
+  example: []
+  syntax:
+    content: 'public sealed class X12Reader : IDisposable'
+    content.vb: Public NotInheritable Class X12Reader Implements IDisposable
+  inheritance:
+  - System.Object
+  implements:
+  - System.IDisposable
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: X12Net.IO.X12Reader.#ctor(System.String,System.Int32)
+  commentId: M:X12Net.IO.X12Reader.#ctor(System.String,System.Int32)
+  id: '#ctor(System.String,System.Int32)'
+  parent: X12Net.IO.X12Reader
+  langs:
+  - csharp
+  - vb
+  name: X12Reader(string, int)
+  nameWithType: X12Reader.X12Reader(string, int)
+  fullName: X12Net.IO.X12Reader.X12Reader(string, int)
+  type: Constructor
+  source:
+    remote:
+      path: src/X12Net/IO/X12Reader.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: .ctor
+    path: src/X12Net/IO/X12Reader.cs
+    startLine: 24
+  assemblies:
+  - X12Net
+  namespace: X12Net.IO
+  summary: Initializes an <xref href="X12Net.IO.X12Reader" data-throw-if-not-resolved="false"></xref> over raw EDI text.
+  example: []
+  syntax:
+    content: public X12Reader(string input, int maxSegments = 0)
+    parameters:
+    - id: input
+      type: System.String
+      description: The raw EDI X12 text to read.
+    - id: maxSegments
+      type: System.Int32
+      description: >-
+        Optional segment cap. When positive, <xref href="X12Net.IO.X12MemoryCapException" data-throw-if-not-resolved="false"></xref> is thrown
+
+        if the interchange contains more segments than this limit.
+
+        Use 0 (default) for no limit.
+    content.vb: Public Sub New(input As String, maxSegments As Integer = 0)
+  overload: X12Net.IO.X12Reader.#ctor*
+  nameWithType.vb: X12Reader.New(String, Integer)
+  fullName.vb: X12Net.IO.X12Reader.New(String, Integer)
+  name.vb: New(String, Integer)
+- uid: X12Net.IO.X12Reader.#ctor(System.String,X12Net.Core.X12Delimiters,System.Int32)
+  commentId: M:X12Net.IO.X12Reader.#ctor(System.String,X12Net.Core.X12Delimiters,System.Int32)
+  id: '#ctor(System.String,X12Net.Core.X12Delimiters,System.Int32)'
+  parent: X12Net.IO.X12Reader
+  langs:
+  - csharp
+  - vb
+  name: X12Reader(string, X12Delimiters, int)
+  nameWithType: X12Reader.X12Reader(string, X12Delimiters, int)
+  fullName: X12Net.IO.X12Reader.X12Reader(string, X12Net.Core.X12Delimiters, int)
+  type: Constructor
+  source:
+    remote:
+      path: src/X12Net/IO/X12Reader.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: .ctor
+    path: src/X12Net/IO/X12Reader.cs
+    startLine: 33
+  assemblies:
+  - X12Net
+  namespace: X12Net.IO
+  summary: Initializes an <xref href="X12Net.IO.X12Reader" data-throw-if-not-resolved="false"></xref> with explicit delimiters (no auto-detection).
+  example: []
+  syntax:
+    content: public X12Reader(string input, X12Delimiters delimiters, int maxSegments = 0)
+    parameters:
+    - id: input
+      type: System.String
+    - id: delimiters
+      type: X12Net.Core.X12Delimiters
+    - id: maxSegments
+      type: System.Int32
+    content.vb: Public Sub New(input As String, delimiters As X12Delimiters, maxSegments As Integer = 0)
+  overload: X12Net.IO.X12Reader.#ctor*
+  nameWithType.vb: X12Reader.New(String, X12Delimiters, Integer)
+  fullName.vb: X12Net.IO.X12Reader.New(String, X12Net.Core.X12Delimiters, Integer)
+  name.vb: New(String, X12Delimiters, Integer)
+- uid: X12Net.IO.X12Reader.ReadAllSegments
+  commentId: M:X12Net.IO.X12Reader.ReadAllSegments
+  id: ReadAllSegments
+  parent: X12Net.IO.X12Reader
+  langs:
+  - csharp
+  - vb
+  name: ReadAllSegments()
+  nameWithType: X12Reader.ReadAllSegments()
+  fullName: X12Net.IO.X12Reader.ReadAllSegments()
+  type: Method
+  source:
+    remote:
+      path: src/X12Net/IO/X12Reader.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: ReadAllSegments
+    path: src/X12Net/IO/X12Reader.cs
+    startLine: 43
+  assemblies:
+  - X12Net
+  namespace: X12Net.IO
+  summary: Returns all segments in the interchange, respecting the configured segment cap.
+  example: []
+  syntax:
+    content: public IEnumerable<X12Segment> ReadAllSegments()
+    return:
+      type: System.Collections.Generic.IEnumerable{X12Net.Core.X12Segment}
+    content.vb: Public Function ReadAllSegments() As IEnumerable(Of X12Segment)
+  overload: X12Net.IO.X12Reader.ReadAllSegments*
+- uid: X12Net.IO.X12Reader.ReadAllSegmentsAsync(System.Threading.CancellationToken)
+  commentId: M:X12Net.IO.X12Reader.ReadAllSegmentsAsync(System.Threading.CancellationToken)
+  id: ReadAllSegmentsAsync(System.Threading.CancellationToken)
+  parent: X12Net.IO.X12Reader
+  langs:
+  - csharp
+  - vb
+  name: ReadAllSegmentsAsync(CancellationToken)
+  nameWithType: X12Reader.ReadAllSegmentsAsync(CancellationToken)
+  fullName: X12Net.IO.X12Reader.ReadAllSegmentsAsync(System.Threading.CancellationToken)
+  type: Method
+  source:
+    remote:
+      path: src/X12Net/IO/X12Reader.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: ReadAllSegmentsAsync
+    path: src/X12Net/IO/X12Reader.cs
+    startLine: 52
+  assemblies:
+  - X12Net
+  namespace: X12Net.IO
+  summary: Asynchronously enumerates all segments in the interchange.
+  example: []
+  syntax:
+    content: public IAsyncEnumerable<X12Segment> ReadAllSegmentsAsync(CancellationToken cancellationToken = default)
+    parameters:
+    - id: cancellationToken
+      type: System.Threading.CancellationToken
+    return:
+      type: System.Collections.Generic.IAsyncEnumerable{X12Net.Core.X12Segment}
+    content.vb: Public Function ReadAllSegmentsAsync(cancellationToken As CancellationToken = Nothing) As IAsyncEnumerable(Of X12Segment)
+  overload: X12Net.IO.X12Reader.ReadAllSegmentsAsync*
+- uid: X12Net.IO.X12Reader.ReadTransactions``1(System.Func{X12Net.Core.X12Segment,System.Collections.Generic.IReadOnlyList{X12Net.Core.X12Segment},X12Net.Core.X12Segment,``0})
+  commentId: M:X12Net.IO.X12Reader.ReadTransactions``1(System.Func{X12Net.Core.X12Segment,System.Collections.Generic.IReadOnlyList{X12Net.Core.X12Segment},X12Net.Core.X12Segment,``0})
+  id: ReadTransactions``1(System.Func{X12Net.Core.X12Segment,System.Collections.Generic.IReadOnlyList{X12Net.Core.X12Segment},X12Net.Core.X12Segment,``0})
+  parent: X12Net.IO.X12Reader
+  langs:
+  - csharp
+  - vb
+  name: ReadTransactions<T>(Func<X12Segment, IReadOnlyList<X12Segment>, X12Segment, T>)
+  nameWithType: X12Reader.ReadTransactions<T>(Func<X12Segment, IReadOnlyList<X12Segment>, X12Segment, T>)
+  fullName: X12Net.IO.X12Reader.ReadTransactions<T>(System.Func<X12Net.Core.X12Segment, System.Collections.Generic.IReadOnlyList<X12Net.Core.X12Segment>, X12Net.Core.X12Segment, T>)
+  type: Method
+  source:
+    remote:
+      path: src/X12Net/IO/X12Reader.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: ReadTransactions
+    path: src/X12Net/IO/X12Reader.cs
+    startLine: 68
+  assemblies:
+  - X12Net
+  namespace: X12Net.IO
+  summary: >-
+    Streams all ST/SE transaction sets through a caller-provided factory,
+
+    yielding the mapped result. X12Reader never knows the result type.
+  example: []
+  syntax:
+    content: public IEnumerable<T> ReadTransactions<T>(Func<X12Segment, IReadOnlyList<X12Segment>, X12Segment, T> factory)
+    parameters:
+    - id: factory
+      type: System.Func{X12Net.Core.X12Segment,System.Collections.Generic.IReadOnlyList{X12Net.Core.X12Segment},X12Net.Core.X12Segment,{T}}
+    typeParameters:
+    - id: T
+    return:
+      type: System.Collections.Generic.IEnumerable{{T}}
+    content.vb: Public Function ReadTransactions(Of T)(factory As Func(Of X12Segment, IReadOnlyList(Of X12Segment), X12Segment, T)) As IEnumerable(Of T)
+  overload: X12Net.IO.X12Reader.ReadTransactions*
+  nameWithType.vb: X12Reader.ReadTransactions(Of T)(Func(Of X12Segment, IReadOnlyList(Of X12Segment), X12Segment, T))
+  fullName.vb: X12Net.IO.X12Reader.ReadTransactions(Of T)(System.Func(Of X12Net.Core.X12Segment, System.Collections.Generic.IReadOnlyList(Of X12Net.Core.X12Segment), X12Net.Core.X12Segment, T))
+  name.vb: ReadTransactions(Of T)(Func(Of X12Segment, IReadOnlyList(Of X12Segment), X12Segment, T))
+- uid: X12Net.IO.X12Reader.ReadTransactionsAsync``1(System.Func{X12Net.Core.X12Segment,System.Collections.Generic.IReadOnlyList{X12Net.Core.X12Segment},X12Net.Core.X12Segment,``0},System.Threading.CancellationToken)
+  commentId: M:X12Net.IO.X12Reader.ReadTransactionsAsync``1(System.Func{X12Net.Core.X12Segment,System.Collections.Generic.IReadOnlyList{X12Net.Core.X12Segment},X12Net.Core.X12Segment,``0},System.Threading.CancellationToken)
+  id: ReadTransactionsAsync``1(System.Func{X12Net.Core.X12Segment,System.Collections.Generic.IReadOnlyList{X12Net.Core.X12Segment},X12Net.Core.X12Segment,``0},System.Threading.CancellationToken)
+  parent: X12Net.IO.X12Reader
+  langs:
+  - csharp
+  - vb
+  name: ReadTransactionsAsync<T>(Func<X12Segment, IReadOnlyList<X12Segment>, X12Segment, T>, CancellationToken)
+  nameWithType: X12Reader.ReadTransactionsAsync<T>(Func<X12Segment, IReadOnlyList<X12Segment>, X12Segment, T>, CancellationToken)
+  fullName: X12Net.IO.X12Reader.ReadTransactionsAsync<T>(System.Func<X12Net.Core.X12Segment, System.Collections.Generic.IReadOnlyList<X12Net.Core.X12Segment>, X12Net.Core.X12Segment, T>, System.Threading.CancellationToken)
+  type: Method
+  source:
+    remote:
+      path: src/X12Net/IO/X12Reader.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: ReadTransactionsAsync
+    path: src/X12Net/IO/X12Reader.cs
+    startLine: 98
+  assemblies:
+  - X12Net
+  namespace: X12Net.IO
+  summary: Asynchronously streams all ST/SE transaction sets through a caller-provided factory.
+  example: []
+  syntax:
+    content: public IAsyncEnumerable<T> ReadTransactionsAsync<T>(Func<X12Segment, IReadOnlyList<X12Segment>, X12Segment, T> factory, CancellationToken cancellationToken = default)
+    parameters:
+    - id: factory
+      type: System.Func{X12Net.Core.X12Segment,System.Collections.Generic.IReadOnlyList{X12Net.Core.X12Segment},X12Net.Core.X12Segment,{T}}
+    - id: cancellationToken
+      type: System.Threading.CancellationToken
+    typeParameters:
+    - id: T
+    return:
+      type: System.Collections.Generic.IAsyncEnumerable{{T}}
+    content.vb: Public Function ReadTransactionsAsync(Of T)(factory As Func(Of X12Segment, IReadOnlyList(Of X12Segment), X12Segment, T), cancellationToken As CancellationToken = Nothing) As IAsyncEnumerable(Of T)
+  overload: X12Net.IO.X12Reader.ReadTransactionsAsync*
+  nameWithType.vb: X12Reader.ReadTransactionsAsync(Of T)(Func(Of X12Segment, IReadOnlyList(Of X12Segment), X12Segment, T), CancellationToken)
+  fullName.vb: X12Net.IO.X12Reader.ReadTransactionsAsync(Of T)(System.Func(Of X12Net.Core.X12Segment, System.Collections.Generic.IReadOnlyList(Of X12Net.Core.X12Segment), X12Net.Core.X12Segment, T), System.Threading.CancellationToken)
+  name.vb: ReadTransactionsAsync(Of T)(Func(Of X12Segment, IReadOnlyList(Of X12Segment), X12Segment, T), CancellationToken)
+- uid: X12Net.IO.X12Reader.Dispose
+  commentId: M:X12Net.IO.X12Reader.Dispose
+  id: Dispose
+  parent: X12Net.IO.X12Reader
+  langs:
+  - csharp
+  - vb
+  name: Dispose()
+  nameWithType: X12Reader.Dispose()
+  fullName: X12Net.IO.X12Reader.Dispose()
+  type: Method
+  source:
+    remote:
+      path: src/X12Net/IO/X12Reader.cs
+      branch: main
+      repo: https://github.com/woliver13/X12Net.git
+    id: Dispose
+    path: src/X12Net/IO/X12Reader.cs
+    startLine: 191
+  assemblies:
+  - X12Net
+  namespace: X12Net.IO
+  summary: Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+  example: []
+  syntax:
+    content: public void Dispose()
+    content.vb: Public Sub Dispose()
+  overload: X12Net.IO.X12Reader.Dispose*
+  implements:
+  - System.IDisposable.Dispose
+references:
+- uid: X12Net.Core.X12Segment
+  commentId: T:X12Net.Core.X12Segment
+  parent: X12Net.Core
+  href: X12Net.Core.X12Segment.html
+  name: X12Segment
+  nameWithType: X12Segment
+  fullName: X12Net.Core.X12Segment
+- uid: X12Net.IO
+  commentId: N:X12Net.IO
+  href: X12Net.html
+  name: X12Net.IO
+  nameWithType: X12Net.IO
+  fullName: X12Net.IO
+  spec.csharp:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.IO
+    name: IO
+    href: X12Net.IO.html
+  spec.vb:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.IO
+    name: IO
+    href: X12Net.IO.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.IDisposable
+  commentId: T:System.IDisposable
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable
+  name: IDisposable
+  nameWithType: IDisposable
+  fullName: System.IDisposable
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: X12Net.Core
+  commentId: N:X12Net.Core
+  href: X12Net.html
+  name: X12Net.Core
+  nameWithType: X12Net.Core
+  fullName: X12Net.Core
+  spec.csharp:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.Core
+    name: Core
+    href: X12Net.Core.html
+  spec.vb:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.Core
+    name: Core
+    href: X12Net.Core.html
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: X12Net.IO.X12Reader
+  commentId: T:X12Net.IO.X12Reader
+  href: X12Net.IO.X12Reader.html
+  name: X12Reader
+  nameWithType: X12Reader
+  fullName: X12Net.IO.X12Reader
+- uid: X12Net.IO.X12MemoryCapException
+  commentId: T:X12Net.IO.X12MemoryCapException
+  href: X12Net.IO.X12MemoryCapException.html
+  name: X12MemoryCapException
+  nameWithType: X12MemoryCapException
+  fullName: X12Net.IO.X12MemoryCapException
+- uid: X12Net.IO.X12Reader.#ctor*
+  commentId: Overload:X12Net.IO.X12Reader.#ctor
+  href: X12Net.IO.X12Reader.html#X12Net_IO_X12Reader__ctor_System_String_System_Int32_
+  name: X12Reader
+  nameWithType: X12Reader.X12Reader
+  fullName: X12Net.IO.X12Reader.X12Reader
+  nameWithType.vb: X12Reader.New
+  fullName.vb: X12Net.IO.X12Reader.New
+  name.vb: New
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: X12Net.Core.X12Delimiters
+  commentId: T:X12Net.Core.X12Delimiters
+  parent: X12Net.Core
+  href: X12Net.Core.X12Delimiters.html
+  name: X12Delimiters
+  nameWithType: X12Delimiters
+  fullName: X12Net.Core.X12Delimiters
+- uid: X12Net.IO.X12Reader.ReadAllSegments*
+  commentId: Overload:X12Net.IO.X12Reader.ReadAllSegments
+  href: X12Net.IO.X12Reader.html#X12Net_IO_X12Reader_ReadAllSegments
+  name: ReadAllSegments
+  nameWithType: X12Reader.ReadAllSegments
+  fullName: X12Net.IO.X12Reader.ReadAllSegments
+- uid: System.Collections.Generic.IEnumerable{X12Net.Core.X12Segment}
+  commentId: T:System.Collections.Generic.IEnumerable{X12Net.Core.X12Segment}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<X12Segment>
+  nameWithType: IEnumerable<X12Segment>
+  fullName: System.Collections.Generic.IEnumerable<X12Net.Core.X12Segment>
+  nameWithType.vb: IEnumerable(Of X12Segment)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of X12Net.Core.X12Segment)
+  name.vb: IEnumerable(Of X12Segment)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - uid: X12Net.Core.X12Segment
+    name: X12Segment
+    href: X12Net.Core.X12Segment.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: X12Net.Core.X12Segment
+    name: X12Segment
+    href: X12Net.Core.X12Segment.html
+  - name: )
+- uid: System.Collections.Generic.IEnumerable`1
+  commentId: T:System.Collections.Generic.IEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic
+  commentId: N:System.Collections.Generic
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Collections.Generic
+  nameWithType: System.Collections.Generic
+  fullName: System.Collections.Generic
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Collections
+    name: Collections
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections
+  - name: .
+  - uid: System.Collections.Generic
+    name: Generic
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic
+- uid: X12Net.IO.X12Reader.ReadAllSegmentsAsync*
+  commentId: Overload:X12Net.IO.X12Reader.ReadAllSegmentsAsync
+  href: X12Net.IO.X12Reader.html#X12Net_IO_X12Reader_ReadAllSegmentsAsync_System_Threading_CancellationToken_
+  name: ReadAllSegmentsAsync
+  nameWithType: X12Reader.ReadAllSegmentsAsync
+  fullName: X12Net.IO.X12Reader.ReadAllSegmentsAsync
+- uid: System.Threading.CancellationToken
+  commentId: T:System.Threading.CancellationToken
+  parent: System.Threading
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.cancellationtoken
+  name: CancellationToken
+  nameWithType: CancellationToken
+  fullName: System.Threading.CancellationToken
+- uid: System.Collections.Generic.IAsyncEnumerable{X12Net.Core.X12Segment}
+  commentId: T:System.Collections.Generic.IAsyncEnumerable{X12Net.Core.X12Segment}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IAsyncEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iasyncenumerable-1
+  name: IAsyncEnumerable<X12Segment>
+  nameWithType: IAsyncEnumerable<X12Segment>
+  fullName: System.Collections.Generic.IAsyncEnumerable<X12Net.Core.X12Segment>
+  nameWithType.vb: IAsyncEnumerable(Of X12Segment)
+  fullName.vb: System.Collections.Generic.IAsyncEnumerable(Of X12Net.Core.X12Segment)
+  name.vb: IAsyncEnumerable(Of X12Segment)
+  spec.csharp:
+  - uid: System.Collections.Generic.IAsyncEnumerable`1
+    name: IAsyncEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iasyncenumerable-1
+  - name: <
+  - uid: X12Net.Core.X12Segment
+    name: X12Segment
+    href: X12Net.Core.X12Segment.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IAsyncEnumerable`1
+    name: IAsyncEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iasyncenumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: X12Net.Core.X12Segment
+    name: X12Segment
+    href: X12Net.Core.X12Segment.html
+  - name: )
+- uid: System.Threading
+  commentId: N:System.Threading
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading
+  nameWithType: System.Threading
+  fullName: System.Threading
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+- uid: System.Collections.Generic.IAsyncEnumerable`1
+  commentId: T:System.Collections.Generic.IAsyncEnumerable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iasyncenumerable-1
+  name: IAsyncEnumerable<T>
+  nameWithType: IAsyncEnumerable<T>
+  fullName: System.Collections.Generic.IAsyncEnumerable<T>
+  nameWithType.vb: IAsyncEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IAsyncEnumerable(Of T)
+  name.vb: IAsyncEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IAsyncEnumerable`1
+    name: IAsyncEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iasyncenumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IAsyncEnumerable`1
+    name: IAsyncEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iasyncenumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: X12Net.IO.X12Reader.ReadTransactions*
+  commentId: Overload:X12Net.IO.X12Reader.ReadTransactions
+  href: X12Net.IO.X12Reader.html#X12Net_IO_X12Reader_ReadTransactions__1_System_Func_X12Net_Core_X12Segment_System_Collections_Generic_IReadOnlyList_X12Net_Core_X12Segment__X12Net_Core_X12Segment___0__
+  name: ReadTransactions
+  nameWithType: X12Reader.ReadTransactions
+  fullName: X12Net.IO.X12Reader.ReadTransactions
+- uid: System.Func{X12Net.Core.X12Segment,System.Collections.Generic.IReadOnlyList{X12Net.Core.X12Segment},X12Net.Core.X12Segment,{T}}
+  commentId: T:System.Func{X12Net.Core.X12Segment,System.Collections.Generic.IReadOnlyList{X12Net.Core.X12Segment},X12Net.Core.X12Segment,``0}
+  parent: System
+  definition: System.Func`4
+  href: https://learn.microsoft.com/dotnet/api/system.func-4
+  name: Func<X12Segment, IReadOnlyList<X12Segment>, X12Segment, T>
+  nameWithType: Func<X12Segment, IReadOnlyList<X12Segment>, X12Segment, T>
+  fullName: System.Func<X12Net.Core.X12Segment, System.Collections.Generic.IReadOnlyList<X12Net.Core.X12Segment>, X12Net.Core.X12Segment, T>
+  nameWithType.vb: Func(Of X12Segment, IReadOnlyList(Of X12Segment), X12Segment, T)
+  fullName.vb: System.Func(Of X12Net.Core.X12Segment, System.Collections.Generic.IReadOnlyList(Of X12Net.Core.X12Segment), X12Net.Core.X12Segment, T)
+  name.vb: Func(Of X12Segment, IReadOnlyList(Of X12Segment), X12Segment, T)
+  spec.csharp:
+  - uid: System.Func`4
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-4
+  - name: <
+  - uid: X12Net.Core.X12Segment
+    name: X12Segment
+    href: X12Net.Core.X12Segment.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: <
+  - uid: X12Net.Core.X12Segment
+    name: X12Segment
+    href: X12Net.Core.X12Segment.html
+  - name: '>'
+  - name: ','
+  - name: " "
+  - uid: X12Net.Core.X12Segment
+    name: X12Segment
+    href: X12Net.Core.X12Segment.html
+  - name: ','
+  - name: " "
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`4
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-4
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: X12Net.Core.X12Segment
+    name: X12Segment
+    href: X12Net.Core.X12Segment.html
+  - name: ','
+  - name: " "
+  - uid: System.Collections.Generic.IReadOnlyList`1
+    name: IReadOnlyList
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: X12Net.Core.X12Segment
+    name: X12Segment
+    href: X12Net.Core.X12Segment.html
+  - name: )
+  - name: ','
+  - name: " "
+  - uid: X12Net.Core.X12Segment
+    name: X12Segment
+    href: X12Net.Core.X12Segment.html
+  - name: ','
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Collections.Generic.IEnumerable{{T}}
+  commentId: T:System.Collections.Generic.IEnumerable{``0}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  name: IEnumerable<T>
+  nameWithType: IEnumerable<T>
+  fullName: System.Collections.Generic.IEnumerable<T>
+  nameWithType.vb: IEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IEnumerable(Of T)
+  name.vb: IEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IEnumerable`1
+    name: IEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.ienumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Func`4
+  commentId: T:System.Func`4
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.func-4
+  name: Func<T1, T2, T3, TResult>
+  nameWithType: Func<T1, T2, T3, TResult>
+  fullName: System.Func<T1, T2, T3, TResult>
+  nameWithType.vb: Func(Of T1, T2, T3, TResult)
+  fullName.vb: System.Func(Of T1, T2, T3, TResult)
+  name.vb: Func(Of T1, T2, T3, TResult)
+  spec.csharp:
+  - uid: System.Func`4
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-4
+  - name: <
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
+  - name: T3
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Func`4
+    name: Func
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.func-4
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T1
+  - name: ','
+  - name: " "
+  - name: T2
+  - name: ','
+  - name: " "
+  - name: T3
+  - name: ','
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: X12Net.IO.X12Reader.ReadTransactionsAsync*
+  commentId: Overload:X12Net.IO.X12Reader.ReadTransactionsAsync
+  href: X12Net.IO.X12Reader.html#X12Net_IO_X12Reader_ReadTransactionsAsync__1_System_Func_X12Net_Core_X12Segment_System_Collections_Generic_IReadOnlyList_X12Net_Core_X12Segment__X12Net_Core_X12Segment___0__System_Threading_CancellationToken_
+  name: ReadTransactionsAsync
+  nameWithType: X12Reader.ReadTransactionsAsync
+  fullName: X12Net.IO.X12Reader.ReadTransactionsAsync
+- uid: System.Collections.Generic.IAsyncEnumerable{{T}}
+  commentId: T:System.Collections.Generic.IAsyncEnumerable{``0}
+  parent: System.Collections.Generic
+  definition: System.Collections.Generic.IAsyncEnumerable`1
+  href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iasyncenumerable-1
+  name: IAsyncEnumerable<T>
+  nameWithType: IAsyncEnumerable<T>
+  fullName: System.Collections.Generic.IAsyncEnumerable<T>
+  nameWithType.vb: IAsyncEnumerable(Of T)
+  fullName.vb: System.Collections.Generic.IAsyncEnumerable(Of T)
+  name.vb: IAsyncEnumerable(Of T)
+  spec.csharp:
+  - uid: System.Collections.Generic.IAsyncEnumerable`1
+    name: IAsyncEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iasyncenumerable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Collections.Generic.IAsyncEnumerable`1
+    name: IAsyncEnumerable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.iasyncenumerable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: X12Net.IO.X12Reader.Dispose*
+  commentId: Overload:X12Net.IO.X12Reader.Dispose
+  href: X12Net.IO.X12Reader.html#X12Net_IO_X12Reader_Dispose
+  name: Dispose
+  nameWithType: X12Reader.Dispose
+  fullName: X12Net.IO.X12Reader.Dispose
+- uid: System.IDisposable.Dispose
+  commentId: M:System.IDisposable.Dispose
+  parent: System.IDisposable
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  name: Dispose()
+  nameWithType: IDisposable.Dispose()
+  fullName: System.IDisposable.Dispose()
+  spec.csharp:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.IDisposable.Dispose
+    name: Dispose
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.idisposable.dispose
+  - name: (
+  - name: )

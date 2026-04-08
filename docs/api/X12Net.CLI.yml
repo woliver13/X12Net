@@ -1,0 +1,69 @@
+### YamlMime:ManagedReference
+items:
+- uid: X12Net.CLI
+  commentId: N:X12Net.CLI
+  id: X12Net.CLI
+  children:
+  - X12Net.CLI.EditResult
+  - X12Net.CLI.ParseResult
+  - X12Net.CLI.ValidateResult
+  - X12Net.CLI.X12Tool
+  langs:
+  - csharp
+  - vb
+  name: X12Net.CLI
+  nameWithType: X12Net.CLI
+  fullName: X12Net.CLI
+  type: Namespace
+  assemblies:
+  - X12Net
+references:
+- uid: X12Net.CLI.ParseResult
+  commentId: T:X12Net.CLI.ParseResult
+  parent: X12Net.CLI
+  href: X12Net.CLI.ParseResult.html
+  name: ParseResult
+  nameWithType: ParseResult
+  fullName: X12Net.CLI.ParseResult
+- uid: X12Net.CLI.ValidateResult
+  commentId: T:X12Net.CLI.ValidateResult
+  parent: X12Net.CLI
+  href: X12Net.CLI.ValidateResult.html
+  name: ValidateResult
+  nameWithType: ValidateResult
+  fullName: X12Net.CLI.ValidateResult
+- uid: X12Net.CLI.EditResult
+  commentId: T:X12Net.CLI.EditResult
+  parent: X12Net.CLI
+  href: X12Net.CLI.EditResult.html
+  name: EditResult
+  nameWithType: EditResult
+  fullName: X12Net.CLI.EditResult
+- uid: X12Net.CLI.X12Tool
+  commentId: T:X12Net.CLI.X12Tool
+  href: X12Net.CLI.X12Tool.html
+  name: X12Tool
+  nameWithType: X12Tool
+  fullName: X12Net.CLI.X12Tool
+- uid: X12Net.CLI
+  commentId: N:X12Net.CLI
+  href: X12Net.html
+  name: X12Net.CLI
+  nameWithType: X12Net.CLI
+  fullName: X12Net.CLI
+  spec.csharp:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.CLI
+    name: CLI
+    href: X12Net.CLI.html
+  spec.vb:
+  - uid: X12Net
+    name: X12Net
+    href: X12Net.html
+  - name: .
+  - uid: X12Net.CLI
+    name: CLI
+    href: X12Net.CLI.html
