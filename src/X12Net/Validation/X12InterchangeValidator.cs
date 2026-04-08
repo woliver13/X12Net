@@ -9,6 +9,10 @@ namespace X12Net.Validation;
 /// </summary>
 public sealed class X12InterchangeValidator : AbstractValidator<string>
 {
+    /// <summary>
+    /// Initializes the validator and registers the single structural-validation rule
+    /// that delegates to <see cref="X12Validator.Validate"/>.
+    /// </summary>
     public X12InterchangeValidator()
     {
         RuleFor(input => input)

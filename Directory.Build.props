@@ -2,12 +2,16 @@
   <PropertyGroup>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <LangVersion>latest</LangVersion>
     <Authors>Bill Oliver</Authors>
     <Copyright>Copyright © 2026 Bill Oliver</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryUrl>https://github.com/woliver13/X12Net</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+
+    <!-- Reproducible builds -->
+    <Deterministic>true</Deterministic>
+    <!-- Set ContinuousIntegrationBuild automatically when running in GitHub Actions -->
+    <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
   </PropertyGroup>
 </Project>

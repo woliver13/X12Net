@@ -4,23 +4,44 @@
     <TargetFrameworks>net8.0;netstandard2.0</TargetFrameworks>
     <RootNamespace>X12Net</RootNamespace>
     <AssemblyName>X12Net</AssemblyName>
+
+    <!-- NuGet identity -->
     <PackageId>X12Net</PackageId>
+    <Title>X12Net</Title>
     <Description>A modern, high-performance C# library for parsing, generating, and editing EDI X12 documents.</Description>
     <PackageTags>edi;x12;ansi-x12;edi-parsing;healthcare</PackageTags>
     <Version>0.1.0</Version>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageProjectUrl>https://github.com/woliver13/X12Net</PackageProjectUrl>
+    <PackageReadme>README.md</PackageReadme>
+
+    <!-- Docs / symbols -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+
+    <!-- Quality gate: treat warnings as errors in Release so CI catches doc gaps -->
+    <TreatWarningsAsErrors Condition="'$(Configuration)' == 'Release'">true</TreatWarningsAsErrors>
   </PropertyGroup>
 
-
+  <!-- Bundle README.md into the NuGet package root -->
   <ItemGroup>
-    <ProjectReference Include="..\X12Net.SourceGenerator\X12Net.SourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\X12Net.SourceGenerator\X12Net.SourceGenerator.csproj"
+                      OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.11.0" />
-    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0" />
+    <!-- AsyncInterfaces is inbox on net8.0; only needed for netstandard2.0 -->
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0"
+                      Condition="'$(TargetFramework)' == 'netstandard2.0'" />
+    <!-- SourceLink embeds source URLs in PDB for debuggable symbols -->
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="all" />
   </ItemGroup>
 
 </Project>

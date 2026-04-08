@@ -58,10 +58,9 @@ public static class X12Tokenizer
     private static IEnumerable<X12Token> TokenizeWithDelimiters(
         string input, char elementSep, char componentSep, char segmentTerm)
     {
-        int   pos          = 0;
-        bool  firstInSeg   = true;
-        bool  pendingFlush = false;
-        char? lastDelim    = null;
+        int   pos        = 0;
+        bool  firstInSeg = true;
+        char? lastDelim  = null;
 
         while (pos < input.Length)
         {
@@ -73,8 +72,7 @@ public static class X12Tokenizer
             {
                 if (value.Length > 0)
                     yield return new X12Token(X12TokenType.SegmentId, value);
-                firstInSeg   = false;
-                pendingFlush = false;
+                firstInSeg = false;
             }
             else
             {
@@ -82,7 +80,6 @@ public static class X12Tokenizer
                     ? X12TokenType.ComponentData
                     : X12TokenType.ElementData;
                 yield return new X12Token(type, value);
-                pendingFlush = true;
             }
 
             if (next < 0)
@@ -94,9 +91,8 @@ public static class X12Tokenizer
             if (delim == segmentTerm)
             {
                 yield return new X12Token(X12TokenType.SegmentTerminator, segmentTerm.ToString());
-                firstInSeg   = true;
-                pendingFlush = false;
-                lastDelim    = null;
+                firstInSeg = true;
+                lastDelim  = null;
             }
 
             pos = next + 1;

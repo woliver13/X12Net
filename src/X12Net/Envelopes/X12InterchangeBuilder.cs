@@ -42,6 +42,9 @@ public sealed class X12InterchangeBuilder
 
     // ── Constructor ───────────────────────────────────────────────────────
 
+    /// <summary>
+    /// Initializes the builder with envelope identifiers and optional delimiter overrides.
+    /// </summary>
     /// <param name="senderId">ISA06 sender ID (padded to 15 chars).</param>
     /// <param name="receiverId">ISA08 receiver ID (padded to 15 chars).</param>
     /// <param name="date">ISA09 date (YYMMDD, 6 chars).</param>
@@ -49,6 +52,9 @@ public sealed class X12InterchangeBuilder
     /// <param name="interchangeControlNumber">ISA13 / IEA02 control number (default 1).</param>
     /// <param name="senderQualifier">ISA05 (default "ZZ").</param>
     /// <param name="receiverQualifier">ISA07 (default "ZZ").</param>
+    /// <param name="elementSeparator">ISA element delimiter (default <c>*</c>).</param>
+    /// <param name="componentSeparator">ISA16 component delimiter (default <c>:</c>).</param>
+    /// <param name="segmentTerminator">Segment terminator written after every segment (default <c>~</c>).</param>
     public X12InterchangeBuilder(
         string senderId,
         string receiverId,
