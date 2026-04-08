@@ -18,7 +18,7 @@ switch (command)
 {
     case "parse":
     {
-        var result = ParseCommand.Execute(input);
+        var result = X12Tool.Parse(input);
         if (!result.Success) { Console.Error.WriteLine(result.Error); return 1; }
         foreach (var id in result.SegmentIds)
             Console.WriteLine(id);
@@ -26,7 +26,7 @@ switch (command)
     }
     case "validate":
     {
-        var result = ValidateCommand.Execute(input);
+        var result = X12Tool.Validate(input);
         if (result.IsValid) { Console.WriteLine("OK"); return 0; }
         foreach (var err in result.Errors)
             Console.Error.WriteLine(err);
@@ -44,7 +44,7 @@ switch (command)
             Console.Error.WriteLine("element-index must be an integer.");
             return 1;
         }
-        var result = EditCommand.Execute(input, args[2], idx, args[4]);
+        var result = X12Tool.Edit(input, args[2], idx, args[4]);
         if (!result.Success) { Console.Error.WriteLine(result.Error); return 1; }
         Console.Write(result.Output);
         return 0;

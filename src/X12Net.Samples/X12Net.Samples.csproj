@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;netstandard2.0</TargetFrameworks>
+    <RootNamespace>X12Net.Samples</RootNamespace>
+    <AssemblyName>X12Net.Samples</AssemblyName>
+    <PackageId>X12Net.Samples</PackageId>
+    <Description>Anonymized sample EDI X12 files and ready-to-run snippets for the X12Net library.</Description>
+    <PackageTags>edi;x12;ansi-x12;samples;healthcare</PackageTags>
+    <Version>0.1.0</Version>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageProjectUrl>https://github.com/woliver13/X12Net</PackageProjectUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Data\*.edi" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\X12Net\X12Net.csproj" />
+  </ItemGroup>
+
+</Project>
