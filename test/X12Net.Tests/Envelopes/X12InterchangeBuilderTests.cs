@@ -178,6 +178,50 @@ public class X12InterchangeBuilderTests
         Assert.Contains("IEA*1*000000042~", output);
     }
 
+    // ── Issue #9 ─────────────────────────────────────────────────────────
+
+    [Theory]
+    [InlineData(1)]
+    [InlineData(2)]
+    [InlineData(3)]
+    public void GE01_reflects_ST_segment_count(int transactionCount)
+    {
+        var builder = new X12InterchangeBuilder("SENDER", "RECEIVER", "201909", "1200");
+        builder.BeginFunctionalGroup("FA", "SENDER", "RECEIVER", "20190901", "005010X231A1", groupControlNumber: 1);
+        for (int i = 1; i <= transactionCount; i++)
+        {
+            builder.AddRawSegment($"ST*999*{i:D4}");
+            builder.AddRawSegment($"SE*2*{i:D4}");
+        }
+        builder.EndFunctionalGroup();
+
+        string edi = builder.Build();
+
+        Assert.Contains($"GE*{transactionCount}*1~", edi);
+    }
+
+    [Fact]
+    public void Multi_transaction_group_passes_X12_validation()
+    {
+        var edi = new X12InterchangeBuilder("SENDER", "RECEIVER", "201909", "1200",
+                      interchangeControlNumber: 1)
+            .BeginFunctionalGroup("FA", "SENDER", "RECEIVER", "20190901", "005010X231A1", groupControlNumber: 1)
+            .AddRawSegment("ST*999*0001")
+            .AddRawSegment("AK1*FA*1*005010X231A1")
+            .AddRawSegment("AK9*A*1*1*1")
+            .AddRawSegment("SE*4*0001")
+            .AddRawSegment("ST*999*0002")
+            .AddRawSegment("AK1*FA*2*005010X231A1")
+            .AddRawSegment("AK9*A*1*1*1")
+            .AddRawSegment("SE*4*0002")
+            .EndFunctionalGroup()
+            .Build();
+
+        var result = X12Net.Validation.X12Validator.Validate(edi);
+
+        Assert.True(result.IsValid, string.Join("; ", result.Errors.Select(e => e.Message)));
+    }
+
     // ── Issue #7 ─────────────────────────────────────────────────────────
 
     [Fact]

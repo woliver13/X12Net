@@ -35,7 +35,17 @@ public sealed class X12InterchangeBuilder
         public string Time         { get; init; } = "";
         public string Version      { get; init; } = "";
         public int    GroupControlNumber { get; init; }
-        public List<string> Segments { get; } = new();
+        public int TransactionCount { get; private set; }
+
+        private readonly List<string> _segments = new();
+        public IReadOnlyList<string> Segments => _segments;
+
+        public void AddSegment(string segmentText, char elementSep)
+        {
+            _segments.Add(segmentText);
+            if (segmentText.StartsWith($"ST{elementSep}", StringComparison.Ordinal))
+                TransactionCount++;
+        }
     }
 
     private readonly List<GroupState> _groups = new();
@@ -128,7 +138,7 @@ public sealed class X12InterchangeBuilder
     {
         if (_currentGroup is null)
             throw new InvalidOperationException("Call BeginFunctionalGroup first.");
-        _currentGroup.Segments.Add(segmentText);
+        _currentGroup.AddSegment(segmentText, _elementSep);
         return this;
     }
 
@@ -230,7 +240,7 @@ public sealed class X12InterchangeBuilder
     }
 
     private string BuildGE(GroupState g) =>
-        $"GE{_elementSep}1{_elementSep}{g.GroupControlNumber}{_segmentTerm}";
+        $"GE{_elementSep}{g.TransactionCount}{_elementSep}{g.GroupControlNumber}{_segmentTerm}";
 
     private string BuildIEA() =>
         $"IEA{_elementSep}{_groups.Count}{_elementSep}{_icn.ToString().PadLeft(9, '0')}{_segmentTerm}";
