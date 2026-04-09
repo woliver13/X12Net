@@ -178,6 +178,41 @@ public class X12InterchangeBuilderTests
         Assert.Contains("IEA*1*000000042~", output);
     }
 
+    // ── Issue #7 ─────────────────────────────────────────────────────────
+
+    [Fact]
+    public void BuildGS_uses_supplied_time_in_GS05()
+    {
+        var edi = new X12InterchangeBuilder("SENDER", "RECEIVER", "201909", "1200")
+            .BeginFunctionalGroup("FA", "SENDER", "RECEIVER", "20190901", "005010X231A1",
+                groupControlNumber: 1, time: "0930")
+            .AddRawSegment("ST*999*0001")
+            .AddRawSegment("AK1*FA*1*005010X231A1")
+            .AddRawSegment("AK9*A*1*1*1")
+            .AddRawSegment("SE*4*0001")
+            .EndFunctionalGroup()
+            .Build();
+
+        Assert.Contains("GS*FA*SENDER*RECEIVER*20190901*0930*", edi);
+    }
+
+    [Fact]
+    public void BuildGS_defaults_GS05_to_interchange_time_when_time_omitted()
+    {
+        const string interchangeTime = "0845";
+
+        var edi = new X12InterchangeBuilder("SENDER", "RECEIVER", "201909", interchangeTime)
+            .BeginFunctionalGroup("FA", "SENDER", "RECEIVER", "20190901", "005010X231A1")
+            .AddRawSegment("ST*999*0001")
+            .AddRawSegment("AK1*FA*1*005010X231A1")
+            .AddRawSegment("AK9*A*1*1*1")
+            .AddRawSegment("SE*4*0001")
+            .EndFunctionalGroup()
+            .Build();
+
+        Assert.Contains($"GS*FA*SENDER*RECEIVER*20190901*{interchangeTime}*", edi);
+    }
+
     // ── Cycle 18 ──────────────────────────────────────────────────────────
 
     [Fact]

@@ -32,6 +32,7 @@ public sealed class X12InterchangeBuilder
         public string SenderId     { get; init; } = "";
         public string ReceiverId   { get; init; } = "";
         public string Date         { get; init; } = "";
+        public string Time         { get; init; } = "";
         public string Version      { get; init; } = "";
         public int    GroupControlNumber { get; init; }
         public List<string> Segments { get; } = new();
@@ -88,13 +89,21 @@ public sealed class X12InterchangeBuilder
     // ── Fluent API ────────────────────────────────────────────────────────
 
     /// <summary>Begins a GS/GE functional group.</summary>
+    /// <param name="functionCode">GS01 functional identifier code (e.g. "FA", "HB").</param>
+    /// <param name="senderId">GS02 application sender ID.</param>
+    /// <param name="receiverId">GS03 application receiver ID.</param>
+    /// <param name="date">GS04 date (YYYYMMDD, 8 chars).</param>
+    /// <param name="version">GS08 implementation convention reference.</param>
+    /// <param name="groupControlNumber">GS06 / GE02 group control number (default 1).</param>
+    /// <param name="time">GS05 time (HHMM, 4 chars). Defaults to the interchange-level time when omitted.</param>
     public X12InterchangeBuilder BeginFunctionalGroup(
-        string functionCode,
-        string senderId,
-        string receiverId,
-        string date,
-        string version,
-        int    groupControlNumber = 1)
+        string  functionCode,
+        string  senderId,
+        string  receiverId,
+        string  date,
+        string  version,
+        int     groupControlNumber = 1,
+        string? time               = null)
     {
         if (_currentGroup is not null)
             throw new InvalidOperationException("Call EndFunctionalGroup before beginning another.");
@@ -105,6 +114,7 @@ public sealed class X12InterchangeBuilder
             SenderId           = senderId,
             ReceiverId         = receiverId,
             Date               = date,
+            Time               = time ?? _time,
             Version            = version,
             GroupControlNumber = groupControlNumber,
         };
@@ -213,7 +223,7 @@ public sealed class X12InterchangeBuilder
             $"{g.SenderId}{_elementSep}" +
             $"{g.ReceiverId}{_elementSep}" +
             $"{g.Date}{_elementSep}" +
-            $"1200{_elementSep}" +
+            $"{g.Time}{_elementSep}" +
             $"{gcn}{_elementSep}" +
             $"X{_elementSep}" +
             $"{g.Version}{_segmentTerm}";
