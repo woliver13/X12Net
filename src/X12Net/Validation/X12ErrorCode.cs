@@ -21,6 +21,9 @@ public enum X12ErrorCode
     /// <summary>GE01 transaction set count does not match the number of ST segments in the group.</summary>
     GeTransactionCountMismatch,
 
+    /// <summary>IEA01, GE01, or SE01 contains a non-numeric value that cannot be parsed as an integer.</summary>
+    MalformedControlField,
+
     /// <summary>A structurally required segment (ISA, IEA, GS, GE, ST, SE) is absent.</summary>
     MissingRequiredSegment,
 

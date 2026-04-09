@@ -146,6 +146,41 @@ public class X12ValidatorTests
         Assert.Contains(result.Errors, e => e.Message.Contains("AK1 is forbidden"));
     }
 
+    // ── Issue 6 — non-numeric control fields ─────────────────────────────
+
+    [Fact]
+    public void Validate_returns_MalformedControlField_when_IEA01_is_non_numeric()
+    {
+        string bad = ValidInterchange.Replace("IEA*1*", "IEA*ABC*");
+
+        var result = X12Validator.Validate(bad);
+
+        Assert.False(result.IsValid);
+        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.MalformedControlField);
+    }
+
+    [Fact]
+    public void Validate_returns_MalformedControlField_when_GE01_is_non_numeric()
+    {
+        string bad = ValidInterchange.Replace("GE*1*1~", "GE*ABC*1~");
+
+        var result = X12Validator.Validate(bad);
+
+        Assert.False(result.IsValid);
+        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.MalformedControlField);
+    }
+
+    [Fact]
+    public void Validate_returns_MalformedControlField_when_SE01_is_non_numeric()
+    {
+        string bad = ValidInterchange.Replace("SE*4*0001~", "SE*ABC*0001~");
+
+        var result = X12Validator.Validate(bad);
+
+        Assert.False(result.IsValid);
+        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.MalformedControlField);
+    }
+
     // ── Cycle 2 (Issue 3) ─────────────────────────────────────────────────
 
     [Fact]

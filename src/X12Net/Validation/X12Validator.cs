@@ -114,9 +114,16 @@ public static class X12Validator
     private static void CheckIeaGroupCount(
         IReadOnlyList<X12Segment> segments, List<X12ValidationError> errors)
     {
-        var iea      = segments.First(s => s.SegmentId == "IEA");
-        int declared = int.Parse(iea[1]);
-        int actual   = segments.Count(s => s.SegmentId == "GS");
+        var iea    = segments.First(s => s.SegmentId == "IEA");
+        int actual = segments.Count(s => s.SegmentId == "GS");
+
+        if (!int.TryParse(iea[1], out int declared))
+        {
+            errors.Add(new X12ValidationError(
+                X12ErrorCode.MalformedControlField,
+                $"IEA01 '{iea[1]}' is not a valid integer."));
+            return;
+        }
 
         if (declared != actual)
             errors.Add(new X12ValidationError(
@@ -137,11 +144,18 @@ public static class X12Validator
             if (seg.SegmentId == "ST" && inGroup) { stCount++; continue; }
             if (seg.SegmentId == "GE" && inGroup)
             {
-                int declared = int.Parse(seg[1]);
-                if (declared != stCount)
+                if (!int.TryParse(seg[1], out int declared))
+                {
+                    errors.Add(new X12ValidationError(
+                        X12ErrorCode.MalformedControlField,
+                        $"GE01 '{seg[1]}' is not a valid integer."));
+                }
+                else if (declared != stCount)
+                {
                     errors.Add(new X12ValidationError(
                         X12ErrorCode.GeTransactionCountMismatch,
                         $"GE01 declares {declared} transaction(s) but group contains {stCount}."));
+                }
                 inGroup = false;
             }
         }
@@ -159,12 +173,19 @@ public static class X12Validator
             if (seg.SegmentId == "ST")  { stIndex = i; continue; }
             if (seg.SegmentId == "SE" && stIndex is not null)
             {
-                int declared = int.Parse(seg[1]);
-                int actual   = (i - stIndex.Value) + 1; // ST through SE inclusive
-                if (declared != actual)
+                int actual = (i - stIndex.Value) + 1; // ST through SE inclusive
+                if (!int.TryParse(seg[1], out int declared))
+                {
+                    errors.Add(new X12ValidationError(
+                        X12ErrorCode.MalformedControlField,
+                        $"SE01 '{seg[1]}' is not a valid integer."));
+                }
+                else if (declared != actual)
+                {
                     errors.Add(new X12ValidationError(
                         X12ErrorCode.SeSegmentCountMismatch,
                         $"SE01 declares {declared} segment(s) but transaction contains {actual}."));
+                }
                 stIndex = null;
             }
         }
