@@ -44,7 +44,8 @@ public sealed class X12Reader : IDisposable
     public IEnumerable<X12Segment> ReadAllSegments()
     {
         ThrowIfDisposed();
-        return EnumerateWithCap(ParseSegments(_input, _delimiters));
+        var resolved = _delimiters ?? X12Delimiters.FromIsa(_input);
+        return EnumerateWithCap(ParseSegments(_input, resolved));
     }
 
     // ── Asynchronous API ──────────────────────────────────────────────────
@@ -55,7 +56,8 @@ public sealed class X12Reader : IDisposable
     {
         ThrowIfDisposed();
         await Task.Yield();
-        foreach (var segment in EnumerateWithCap(ParseSegments(_input, _delimiters)))
+        var resolved = _delimiters ?? X12Delimiters.FromIsa(_input);
+        foreach (var segment in EnumerateWithCap(ParseSegments(_input, resolved)))
         {
             cancellationToken.ThrowIfCancellationRequested();
             yield return segment;
@@ -73,7 +75,8 @@ public sealed class X12Reader : IDisposable
         X12Segment? st = null;
         var body = new List<X12Segment>();
 
-        foreach (var seg in EnumerateWithCap(ParseSegments(_input, _delimiters)))
+        var resolved = _delimiters ?? X12Delimiters.FromIsa(_input);
+        foreach (var seg in EnumerateWithCap(ParseSegments(_input, resolved)))
         {
             if (seg.SegmentId == "ST")
             {
@@ -125,7 +128,7 @@ public sealed class X12Reader : IDisposable
 
     // ── Core parsing ──────────────────────────────────────────────────────
 
-    private static IEnumerable<X12Segment> ParseSegments(string input, X12Delimiters? delimiters)
+    private static IEnumerable<X12Segment> ParseSegments(string input, X12Delimiters delimiters)
     {
         var segmentId    = string.Empty;
         var elements     = new List<string>();
@@ -134,9 +137,7 @@ public sealed class X12Reader : IDisposable
         // Used to know whether to flush composite before starting the next element.
         bool pendingFlush = false;
 
-        var tokens = delimiters.HasValue
-            ? X12Tokenizer.Tokenize(input, delimiters.Value)
-            : X12Tokenizer.Tokenize(input);
+        var tokens = X12Tokenizer.Tokenize(input, delimiters);
         foreach (var token in tokens)
         {
             switch (token.Type)
@@ -160,7 +161,7 @@ public sealed class X12Reader : IDisposable
                     break;
 
                 case X12TokenType.ComponentData:
-                    composite.Append(':');
+                    composite.Append(delimiters.ComponentSeparator);
                     composite.Append(token.Value);
                     break;
 

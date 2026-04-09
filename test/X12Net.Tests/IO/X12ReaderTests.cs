@@ -50,4 +50,28 @@ public class X12ReaderTests
         Assert.Equal("ISA", segments[0].SegmentId);
         Assert.Equal("GS",  segments[1].SegmentId);
     }
+
+    // ── Issue #10 ─────────────────────────────────────────────────────────
+
+    [Fact]
+    public void Reader_uses_ISA16_component_separator_for_composite_elements()
+    {
+        // ISA16 is '^' instead of the default ':'
+        // CLM05 is a composite element: "11^B^1" (components separated by '^')
+        const string edi =
+            "ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *201909*1200*^*00501*000000001*0*P*^~" +
+            "GS*HC*SENDER*RECEIVER*20190901*1200*1*X*005010X222A1~" +
+            "ST*837*0001~" +
+            "CLM*PATIENT1*100***11^B^1~" +
+            "SE*3*0001~" +
+            "GE*1*1~" +
+            "IEA*1*000000001~";
+
+        using var reader = new X12Reader(edi);
+        var segments = reader.ReadAllSegments().ToList();
+        var clm = segments.First(s => s.SegmentId == "CLM");
+
+        // CLM05 should be assembled with '^' as the component separator
+        Assert.Equal("11^B^1", clm[5]);
+    }
 }
