@@ -280,4 +280,45 @@ public class X12InterchangeBuilderTests
 
         Assert.Equal(new[] { "ISA", "GS", "ST", "AK1", "AK9", "SE", "GE", "IEA" }, segments);
     }
+
+    // ── Issue #11 ─────────────────────────────────────────────────────────
+
+    [Fact]
+    public void ISA11_reflects_repetition_separator()
+    {
+        var edi = new X12InterchangeBuilder("SENDER", "RECEIVER", "201909", "1200",
+                      repetitionSeparator: '!')
+            .Build();
+
+        Assert.Contains("*!*", edi[..106]);
+    }
+
+    [Fact]
+    public void ISA12_reflects_isa_version()
+    {
+        var edi = new X12InterchangeBuilder("SENDER", "RECEIVER", "201909", "1200",
+                      isaVersion: "00401")
+            .Build();
+
+        Assert.Contains("*00401*", edi[..106]);
+    }
+
+    [Fact]
+    public void Build_004010_style_ISA_roundtrips_through_reader()
+    {
+        var edi = new X12InterchangeBuilder("SENDER", "RECEIVER", "201909", "1200",
+                      isaVersion: "00401", repetitionSeparator: ':')
+            .BeginFunctionalGroup("FA", "SENDER", "RECEIVER", "20190901", "004010X231A1", groupControlNumber: 1)
+            .AddRawSegment("ST*999*0001")
+            .AddRawSegment("SE*2*0001")
+            .EndFunctionalGroup()
+            .Build();
+
+        Assert.Contains("*00401*", edi[..106]);
+        Assert.Contains("*:*",     edi[..106]);
+
+        using var reader = new X12Reader(edi);
+        var segIds = reader.ReadAllSegments().Select(s => s.SegmentId).ToList();
+        Assert.Equal(new[] { "ISA", "GS", "ST", "SE", "GE", "IEA" }, segIds);
+    }
 }

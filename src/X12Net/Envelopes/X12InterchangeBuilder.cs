@@ -17,9 +17,11 @@ public sealed class X12InterchangeBuilder
     private readonly string _time;
     private readonly int    _icn;
 
-    private readonly char _elementSep;
-    private readonly char _componentSep;
-    private readonly char _segmentTerm;
+    private readonly char   _elementSep;
+    private readonly char   _componentSep;
+    private readonly char   _segmentTerm;
+    private readonly char   _repetitionSep;
+    private readonly string _isaVersion;
 
     // ── Build state ───────────────────────────────────────────────────────
 
@@ -66,6 +68,8 @@ public sealed class X12InterchangeBuilder
     /// <param name="elementSeparator">ISA element delimiter (default <c>*</c>).</param>
     /// <param name="componentSeparator">ISA16 component delimiter (default <c>:</c>).</param>
     /// <param name="segmentTerminator">Segment terminator written after every segment (default <c>~</c>).</param>
+    /// <param name="isaVersion">ISA12 version/release number (default <c>"00501"</c>).</param>
+    /// <param name="repetitionSeparator">ISA11 repetition separator (default <c>^</c>).</param>
     public X12InterchangeBuilder(
         string senderId,
         string receiverId,
@@ -76,7 +80,9 @@ public sealed class X12InterchangeBuilder
         string receiverQualifier       = "ZZ",
         char   elementSeparator        = '*',
         char   componentSeparator      = ':',
-        char   segmentTerminator       = '~')
+        char   segmentTerminator       = '~',
+        string isaVersion              = "00501",
+        char   repetitionSeparator     = '^')
     {
         _senderId    = senderId;
         _receiverId  = receiverId;
@@ -85,9 +91,11 @@ public sealed class X12InterchangeBuilder
         _icn         = interchangeControlNumber;
         SenderQualifier   = senderQualifier;
         ReceiverQualifier = receiverQualifier;
-        _elementSep  = elementSeparator;
-        _componentSep = componentSeparator;
-        _segmentTerm = segmentTerminator;
+        _elementSep    = elementSeparator;
+        _componentSep  = componentSeparator;
+        _segmentTerm   = segmentTerminator;
+        _isaVersion    = isaVersion;
+        _repetitionSep = repetitionSeparator;
     }
 
     /// <summary>ISA05 sender qualifier.</summary>
@@ -194,7 +202,7 @@ public sealed class X12InterchangeBuilder
         string receiverPadded = _receiverId.PadRight(15).Substring(0, 15);
 
         // The ISA segment, without terminator:
-        // ISA*00*          *00*          *ZZ*<sender15>*ZZ*<receiver15>*<date>*<time>*^*00501*<icn9>*0*P*:
+        // ISA*00*          *00*          *ZZ*<sender15>*ZZ*<receiver15>*<date>*<time>*<ISA11>*<ISA12>*<icn9>*0*P*<ISA16>
         string body =
             $"ISA{_elementSep}" +
             $"00{_elementSep}" +
@@ -207,8 +215,8 @@ public sealed class X12InterchangeBuilder
             $"{receiverPadded}{_elementSep}" +
             $"{_date}{_elementSep}" +
             $"{_time}{_elementSep}" +
-            $"^{_elementSep}" +
-            $"00501{_elementSep}" +
+            $"{_repetitionSep}{_elementSep}" +
+            $"{_isaVersion}{_elementSep}" +
             $"{icnPadded}{_elementSep}" +
             $"0{_elementSep}" +
             $"P{_elementSep}" +
