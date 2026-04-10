@@ -1,5 +1,4 @@
-using X12Net.Core;
-using X12Net.IO;
+using X12Net.DOM;
 
 namespace X12Net.Envelopes;
 
@@ -76,24 +75,14 @@ public sealed class X12Envelope
     /// <summary>Parses the ISA/IEA envelope from raw EDI X12 text.</summary>
     public static X12Envelope Parse(string input)
     {
-        using var reader = new X12Reader(input);
-        var segments = reader.ReadAllSegments().ToList();
-
-        var isa = segments.FirstOrDefault(s => s.SegmentId == "ISA")
-            ?? throw new InvalidOperationException("No ISA segment found.");
-
-        var iea = segments.FirstOrDefault(s => s.SegmentId == "IEA")
-            ?? throw new InvalidOperationException("No IEA segment found.");
-
-        int gsCount = segments.Count(s => s.SegmentId == "GS");
-
+        var interchange = X12Interchange.Parse(input);
         return new X12Envelope(
-            senderId:                 isa[6].Trim(),
-            receiverId:               isa[8].Trim(),
-            date:                     isa[9],
-            time:                     isa[10],
-            interchangeControlNumber: int.Parse(isa[13]),
-            declaredGroupCount:       int.Parse(iea[1]),
-            actualGroupCount:         gsCount);
+            senderId:                 interchange.ISA[6].Trim(),
+            receiverId:               interchange.ISA[8].Trim(),
+            date:                     interchange.ISA[9],
+            time:                     interchange.ISA[10],
+            interchangeControlNumber: int.Parse(interchange.ISA[13]),
+            declaredGroupCount:       int.Parse(interchange.IEA[1]),
+            actualGroupCount:         interchange.FunctionalGroups.Count);
     }
 }
