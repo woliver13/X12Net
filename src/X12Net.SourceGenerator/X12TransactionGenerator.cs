@@ -135,16 +135,9 @@ public sealed class X12TransactionGenerator : IIncrementalGenerator
                     public static {{tx.ClassName}} Parse(string input)
                     {
                         var doc = global::X12Net.DOM.X12Document.Parse(input);
-                        using var reader = new global::X12Net.IO.X12Reader(input, doc.Delimiters);
-                        {{tx.SegClassName}}? found = null;
-                        foreach (var seg in reader.ReadAllSegments())
-                        {
-                            if (seg.SegmentId == "{{segId}}")
-                            {
-                                found = new {{tx.SegClassName}}(seg);
-                                break;
-                            }
-                        }
+                        var raw = doc.Segments.FirstOrDefault(s => s.SegmentId == "{{segId}}");
+                        var found = raw is null ? null
+                            : new {{tx.SegClassName}}(new global::X12Net.Core.X12Segment(raw.SegmentId, raw.Elements));
                         return new {{tx.ClassName}}(found, doc);
                     }
                 }
