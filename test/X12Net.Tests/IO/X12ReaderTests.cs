@@ -74,4 +74,21 @@ public class X12ReaderTests
         // CLM05 should be assembled with '^' as the component separator
         Assert.Equal("11^B^1", clm[5]);
     }
+
+    [Fact]
+    public void Dispose_releases_stream()
+    {
+        var ms = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(SimpleInput));
+        var reader = new X12Reader(ms);
+        reader.Dispose();
+        Assert.Throws<ObjectDisposedException>(() => ms.ReadByte());
+    }
+
+    [Fact]
+    public void Dispose_string_constructed_prevents_further_use()
+    {
+        var reader = new X12Reader(SimpleInput);
+        reader.Dispose();
+        Assert.Throws<ObjectDisposedException>(() => reader.ReadAllSegments().ToList());
+    }
 }

@@ -44,8 +44,8 @@ public sealed class X12Reader : IDisposable
 
     /// <summary>
     /// Initializes an <see cref="X12Reader"/> over a stream of EDI X12 text.
-    /// The stream is read in full when enumeration begins; the caller retains ownership
-    /// and is responsible for disposing the stream.
+    /// The reader takes ownership of the stream and will dispose it when
+    /// <see cref="Dispose"/> is called.
     /// </summary>
     /// <param name="stream">A readable stream containing EDI X12 text.</param>
     /// <param name="encoding">
@@ -275,8 +275,20 @@ public sealed class X12Reader : IDisposable
 
     // ── IDisposable ───────────────────────────────────────────────────────
 
-    /// <inheritdoc/>
-    public void Dispose() => _disposed = true;
+    /// <summary>
+    /// Releases resources held by this reader.
+    /// </summary>
+    /// <remarks>
+    /// Dispose is a no-op when constructed from a string.
+    /// When constructed from a <see cref="Stream"/>, Dispose releases the stream.
+    /// Safe to call more than once.
+    /// </remarks>
+    public void Dispose()
+    {
+        if (_disposed) return;
+        _disposed = true;
+        _stream?.Dispose();
+    }
 
     private void ThrowIfDisposed()
     {
