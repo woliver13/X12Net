@@ -1,3 +1,4 @@
+using System.Text;
 using X12Net.IO;
 
 namespace X12Net.Tests.IO;
@@ -18,6 +19,79 @@ public class X12StreamingReaderTests
         w.WriteSegment("GE", "1", "1");
         w.WriteSegment("IEA", "1", "000000001");
         return w.ToString();
+    }
+
+    private static MemoryStream ToStream(string edi) =>
+        new(Encoding.UTF8.GetBytes(edi));
+
+    // ── Stream-based constructor (TD-14) ──────────────────────────────────
+
+    [Fact]
+    public void Stream_ReadAllSegments_returns_correct_segments()
+    {
+        string edi = MakeInterchange(bodySegmentCount: 2);
+        using var stream = ToStream(edi);
+        using var reader = new X12Reader(stream);
+
+        var segments = reader.ReadAllSegments().ToList();
+
+        Assert.True(segments.Count >= 3);
+        Assert.Equal("ISA", segments[0].SegmentId);
+        Assert.Equal("GS",  segments[1].SegmentId);
+        Assert.Equal("IEA", segments[^1].SegmentId);
+    }
+
+    [Fact]
+    public async Task Stream_ReadAllSegmentsAsync_yields_segments()
+    {
+        string edi = MakeInterchange(bodySegmentCount: 2);
+        using var stream = ToStream(edi);
+        using var reader = new X12Reader(stream);
+
+        var segments = new List<string>();
+        await foreach (var seg in reader.ReadAllSegmentsAsync())
+            segments.Add(seg.SegmentId);
+
+        Assert.Contains("ISA", segments);
+        Assert.Contains("IEA", segments);
+    }
+
+    [Fact]
+    public void Stream_ReadTransactions_returns_correct_transactions()
+    {
+        string edi = MakeInterchange(bodySegmentCount: 2);
+        using var stream = ToStream(edi);
+        using var reader = new X12Reader(stream);
+
+        var txns = reader.ReadTransactions((st, body, se) => st[1]).ToList();
+
+        Assert.Single(txns);
+        Assert.Equal("999", txns[0]);
+    }
+
+    [Fact]
+    public async Task Stream_ReadTransactionsAsync_returns_correct_transactions()
+    {
+        string edi = MakeInterchange(bodySegmentCount: 2);
+        using var stream = ToStream(edi);
+        using var reader = new X12Reader(stream);
+
+        var txns = new List<string>();
+        await foreach (var id in reader.ReadTransactionsAsync((st, body, se) => st[1]))
+            txns.Add(id);
+
+        Assert.Single(txns);
+        Assert.Equal("999", txns[0]);
+    }
+
+    [Fact]
+    public void Stream_MaxSegments_cap_enforced()
+    {
+        string edi = MakeInterchange(bodySegmentCount: 10); // 15 segments total
+        using var stream = ToStream(edi);
+        using var reader = new X12Reader(stream, maxSegments: 5);
+
+        Assert.Throws<X12MemoryCapException>(() => reader.ReadAllSegments().ToList());
     }
 
     // ── Cycle 6 ───────────────────────────────────────────────────────────

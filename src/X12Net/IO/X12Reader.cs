@@ -1,3 +1,5 @@
+using System.IO;
+using System.Text;
 using X12Net.Core;
 
 namespace X12Net.IO;
@@ -8,9 +10,11 @@ namespace X12Net.IO;
 /// </summary>
 public sealed class X12Reader : IDisposable
 {
-    private readonly string          _input;
-    private readonly int             _maxSegments;
-    private readonly X12Delimiters?  _delimiters;
+    private readonly string?          _input;
+    private readonly Stream?          _stream;
+    private readonly Encoding?        _encoding;
+    private readonly int              _maxSegments;
+    private readonly X12Delimiters?   _delimiters;
     private bool _disposed;
 
     /// <summary>
@@ -38,32 +42,60 @@ public sealed class X12Reader : IDisposable
         _maxSegments = maxSegments;
     }
 
+    /// <summary>
+    /// Initializes an <see cref="X12Reader"/> over a stream of EDI X12 text.
+    /// The stream is read in full when enumeration begins; the caller retains ownership
+    /// and is responsible for disposing the stream.
+    /// </summary>
+    /// <param name="stream">A readable stream containing EDI X12 text.</param>
+    /// <param name="encoding">
+    /// Character encoding to use when reading the stream.
+    /// Defaults to UTF-8 with BOM detection when <c>null</c>.
+    /// </param>
+    /// <param name="maxSegments">
+    /// Optional segment cap. When positive, <see cref="X12MemoryCapException"/> is thrown
+    /// if the interchange contains more segments than this limit.
+    /// Use 0 (default) for no limit.
+    /// </param>
+    /// <remarks>
+    /// When using the async API (<see cref="ReadAllSegmentsAsync"/> /
+    /// <see cref="ReadTransactionsAsync{T}"/>), the stream is read asynchronously before
+    /// parsing begins, providing genuine async I/O unlike the string-based overloads.
+    /// </remarks>
+    public X12Reader(Stream stream, Encoding? encoding = null, int maxSegments = 0)
+    {
+        _stream      = stream ?? throw new ArgumentNullException(nameof(stream));
+        _encoding    = encoding;
+        _maxSegments = maxSegments;
+    }
+
     // ── Synchronous API ───────────────────────────────────────────────────
 
     /// <summary>Returns all segments in the interchange, respecting the configured segment cap.</summary>
     public IEnumerable<X12Segment> ReadAllSegments()
     {
         ThrowIfDisposed();
-        var resolved = _delimiters ?? X12Delimiters.FromIsa(_input);
-        return EnumerateWithCap(ParseSegments(_input, resolved));
+        var content  = ReadContent();
+        var resolved = _delimiters ?? X12Delimiters.FromIsa(content);
+        return EnumerateWithCap(ParseSegments(content, resolved));
     }
 
     // ── Asynchronous API ──────────────────────────────────────────────────
 
     /// <summary>Asynchronously enumerates all segments in the interchange.</summary>
     /// <remarks>
-    /// This overload operates on an in-memory string and is CPU-bound.
-    /// It does not perform asynchronous I/O; the async enumeration yields
-    /// between segments but does not release the thread during parsing.
-    /// For true async I/O, use a <c>Stream</c>-based constructor (see TD-14).
+    /// When constructed from a <see cref="Stream"/>, the stream is read asynchronously
+    /// before parsing begins — this is genuine async I/O.
+    /// When constructed from a string, this overload is CPU-bound; the async enumeration
+    /// yields between segments but does not release the thread during parsing.
     /// </remarks>
     public async IAsyncEnumerable<X12Segment> ReadAllSegmentsAsync(
         [System.Runtime.CompilerServices.EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        await Task.Yield();
-        var resolved = _delimiters ?? X12Delimiters.FromIsa(_input);
-        foreach (var segment in EnumerateWithCap(ParseSegments(_input, resolved)))
+        var content  = await ReadContentAsync().ConfigureAwait(false);
+        var resolved = _delimiters ?? X12Delimiters.FromIsa(content);
+        foreach (var segment in EnumerateWithCap(ParseSegments(content, resolved)))
         {
             cancellationToken.ThrowIfCancellationRequested();
             yield return segment;
@@ -81,8 +113,9 @@ public sealed class X12Reader : IDisposable
         X12Segment? st = null;
         var body = new List<X12Segment>();
 
-        var resolved = _delimiters ?? X12Delimiters.FromIsa(_input);
-        foreach (var seg in EnumerateWithCap(ParseSegments(_input, resolved)))
+        var content  = ReadContent();
+        var resolved = _delimiters ?? X12Delimiters.FromIsa(content);
+        foreach (var seg in EnumerateWithCap(ParseSegments(content, resolved)))
         {
             if (seg.SegmentId == "ST")
             {
@@ -106,23 +139,63 @@ public sealed class X12Reader : IDisposable
     /// Asynchronously streams all ST/SE transaction sets through a caller-provided factory.
     /// </summary>
     /// <remarks>
-    /// This overload operates on an in-memory string and is CPU-bound.
-    /// It delegates to the synchronous <see cref="ReadTransactions{T}"/> and provides
-    /// no additional asynchronous I/O benefit. The <c>CancellationToken</c> is checked
-    /// between transactions but there is no I/O to cancel.
-    /// For true async I/O, use a <c>Stream</c>-based constructor (see TD-14).
+    /// When constructed from a <see cref="Stream"/>, the stream is read asynchronously
+    /// before processing begins — this is genuine async I/O.
+    /// When constructed from a string, this overload is CPU-bound.
     /// </remarks>
     public async IAsyncEnumerable<T> ReadTransactionsAsync<T>(
         Func<X12Segment, IReadOnlyList<X12Segment>, X12Segment, T> factory,
         [System.Runtime.CompilerServices.EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
-        await Task.Yield();
-        foreach (var result in ReadTransactions(factory))
+        var content  = await ReadContentAsync().ConfigureAwait(false);
+        var resolved = _delimiters ?? X12Delimiters.FromIsa(content);
+        X12Segment? st = null;
+        var body = new List<X12Segment>();
+        foreach (var seg in EnumerateWithCap(ParseSegments(content, resolved)))
         {
             cancellationToken.ThrowIfCancellationRequested();
-            yield return result;
+            if (seg.SegmentId == "ST")
+            {
+                st = seg;
+                body = new List<X12Segment>();
+            }
+            else if (seg.SegmentId == "SE" && st is not null)
+            {
+                yield return factory(st, body.AsReadOnly(), seg);
+                st = null;
+                body = new List<X12Segment>();
+            }
+            else if (st is not null)
+            {
+                body.Add(seg);
+            }
         }
+    }
+
+    // ── Content helpers ───────────────────────────────────────────────────
+
+    private string ReadContent()
+    {
+        if (_stream != null)
+        {
+            using var sr = new StreamReader(_stream, _encoding ?? Encoding.UTF8,
+                detectEncodingFromByteOrderMarks: true, bufferSize: 4096, leaveOpen: true);
+            return sr.ReadToEnd();
+        }
+        return _input!;
+    }
+
+    private async Task<string> ReadContentAsync()
+    {
+        if (_stream != null)
+        {
+            using var sr = new StreamReader(_stream, _encoding ?? Encoding.UTF8,
+                detectEncodingFromByteOrderMarks: true, bufferSize: 4096, leaveOpen: true);
+            return await sr.ReadToEndAsync().ConfigureAwait(false);
+        }
+        await Task.Yield();
+        return _input!;
     }
 
     // ── Cap enforcement ───────────────────────────────────────────────────
