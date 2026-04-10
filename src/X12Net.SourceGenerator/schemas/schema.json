@@ -1,0 +1,72 @@
+{
+  "segments": [
+    {
+      "segmentId": "AK1",
+      "className": "AK1Segment",
+      "properties": [
+        { "name": "FunctionalIdentifierCode", "index": 1, "doc": "Functional Identifier Code" },
+        { "name": "GroupControlNumber",        "index": 2, "doc": "Group Control Number" }
+      ]
+    },
+    {
+      "segmentId": "CLP",
+      "className": "CLPSegment",
+      "properties": [
+        { "name": "PatientControlNumber", "index": 1, "doc": "Patient Control Number" },
+        { "name": "ClaimStatusCode",      "index": 2, "doc": "Claim Status Code" }
+      ]
+    },
+    {
+      "segmentId": "CLM",
+      "className": "ClmSegment",
+      "properties": [
+        { "name": "PatientControlNumber",   "index": 1, "doc": "Patient Control Number (CLM01)" },
+        { "name": "TotalClaimChargeAmount", "index": 2, "doc": "Total Claim Charge Amount (CLM02)" }
+      ]
+    },
+    {
+      "segmentId": "EQ",
+      "className": "EQSegment",
+      "properties": [
+        { "name": "ServiceTypeCode", "index": 1, "doc": "Service Type Code (EQ01)" }
+      ]
+    },
+    {
+      "segmentId": "EB",
+      "className": "EBSegment",
+      "properties": [
+        { "name": "EligibilityOrBenefitInformation", "index": 1, "doc": "Eligibility or Benefit Information (EB01)" }
+      ]
+    },
+    {
+      "segmentId": "INS",
+      "className": "INSSegment",
+      "properties": [
+        { "name": "MemberIndicator",            "index": 1, "doc": "Member Indicator (INS01)" },
+        { "name": "IndividualRelationshipCode", "index": 2, "doc": "Individual Relationship Code (INS02)" }
+      ]
+    },
+    {
+      "segmentId": "STC",
+      "className": "STCSegment",
+      "properties": [
+        { "name": "HealthCareClaimStatus", "index": 1, "doc": "Health Care Claim Status composite (STC01)" },
+        { "name": "StatusEffectiveDate",   "index": 2, "doc": "Status Effective Date (STC02)" },
+        { "name": "ActionCode",            "index": 3, "doc": "Action Code (STC03)" },
+        { "name": "MonetaryAmount",        "index": 4, "doc": "Monetary Amount (STC04)" }
+      ]
+    }
+  ],
+  "transactions": [
+    { "className": "Ts999",  "txSetId": "999", "segmentClassName": "AK1Segment", "propertyName": "AK1" },
+    { "className": "Ts835",  "txSetId": "835", "segmentClassName": "CLPSegment", "propertyName": "CLP" },
+    { "className": "Ts837P", "txSetId": "837", "segmentClassName": "ClmSegment", "propertyName": "CLM" },
+    { "className": "Ts837I", "txSetId": "837", "segmentClassName": "ClmSegment", "propertyName": "CLM" },
+    { "className": "Ts837D", "txSetId": "837", "segmentClassName": "ClmSegment", "propertyName": "CLM" },
+    { "className": "Ts270",  "txSetId": "270", "segmentClassName": "EQSegment",  "propertyName": "EQ"  },
+    { "className": "Ts271",  "txSetId": "271", "segmentClassName": "EBSegment",  "propertyName": "EB"  },
+    { "className": "Ts834",  "txSetId": "834", "segmentClassName": "INSSegment", "propertyName": "INS" },
+    { "className": "Ts276",  "txSetId": "276", "segmentClassName": "STCSegment", "propertyName": "STC" },
+    { "className": "Ts277",  "txSetId": "277", "segmentClassName": "STCSegment", "propertyName": "STC" }
+  ]
+}
