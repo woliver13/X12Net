@@ -127,12 +127,8 @@ public sealed class X12TransactionGenerator : IIncrementalGenerator
                     /// <summary>Returns all {{segId}} segments in document order.</summary>
                     public global::System.Collections.Generic.IEnumerable<{{tx.SegClassName}}> All{{tx.PropertyName}}()
                     {
-                        using var reader = new global::X12Net.IO.X12Reader(Document.ToString(), Document.Delimiters);
-                        foreach (var seg in reader.ReadAllSegments())
-                        {
-                            if (seg.SegmentId == "{{segId}}")
-                                yield return new {{tx.SegClassName}}(seg);
-                        }
+                        foreach (var seg in Document.AllSegments("{{segId}}"))
+                            yield return new {{tx.SegClassName}}(new global::X12Net.Core.X12Segment(seg.SegmentId, seg.Elements));
                     }
 
                     /// <summary>Parses a {{tx.TxSetId}} transaction from raw EDI X12 text.</summary>
