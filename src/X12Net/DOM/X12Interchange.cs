@@ -31,11 +31,35 @@ public sealed class X12Interchange
     /// returning a typed sequence. Use a generated <c>Parse</c> method as the factory,
     /// for example: <c>interchange.GetTransactions(Ts271.Parse)</c>.
     /// </summary>
+    /// <remarks>
+    /// This overload serializes each <see cref="X12Transaction"/> back to an EDI string
+    /// before calling the factory. Use the
+    /// <see cref="GetTransactions{T}(Func{X12Transaction, X12Delimiters, T})"/> overload
+    /// to avoid that allocation when the factory can accept an <see cref="X12Transaction"/>
+    /// directly.
+    /// </remarks>
     public IEnumerable<T> GetTransactions<T>(Func<string, T> factory)
     {
         foreach (var group in FunctionalGroups)
             foreach (var tx in group.Transactions)
                 yield return factory(tx.ToEdi(Delimiters));
+    }
+
+    /// <summary>
+    /// Projects every transaction in this interchange through <paramref name="factory"/>,
+    /// passing the parsed <see cref="X12Transaction"/> and the interchange
+    /// <see cref="Delimiters"/> directly — without re-serializing to EDI text.
+    /// </summary>
+    /// <remarks>
+    /// Prefer this overload over <see cref="GetTransactions{T}(Func{string, T})"/> when
+    /// the factory can consume an <see cref="X12Transaction"/> directly, as it avoids
+    /// the per-transaction EDI serialization allocation.
+    /// </remarks>
+    public IEnumerable<T> GetTransactions<T>(Func<X12Transaction, X12Delimiters, T> factory)
+    {
+        foreach (var group in FunctionalGroups)
+            foreach (var tx in group.Transactions)
+                yield return factory(tx, Delimiters);
     }
 
     /// <summary>The ISA (Interchange Control Header) segment.</summary>

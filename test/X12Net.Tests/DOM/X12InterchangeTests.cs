@@ -187,6 +187,47 @@ public class X12InterchangeTests
         Assert.Equal("C", txns[1].EB!.EligibilityOrBenefitInformation);
     }
 
+    // ── GetTransactions direct-factory overload (TD-15) ──────────────────
+
+    [Fact]
+    public void GetTransactions_with_direct_factory_returns_correct_results()
+    {
+        var interchange = X12Interchange.Parse(Multi271Interchange);
+
+        // Factory receives X12Transaction directly — no ToEdi round-trip
+        var stIds = interchange.GetTransactions(
+            (tx, delimiters) => tx.ST[1]).ToList();
+
+        Assert.Equal(2, stIds.Count);
+        Assert.Equal("271", stIds[0]);
+        Assert.Equal("271", stIds[1]);
+    }
+
+    [Fact]
+    public void GetTransactions_direct_factory_receives_correct_delimiters()
+    {
+        var interchange = X12Interchange.Parse(Multi271Interchange);
+
+        var separators = interchange.GetTransactions(
+            (tx, d) => d.ElementSeparator).ToList();
+
+        Assert.Equal(2, separators.Count);
+        Assert.All(separators, sep => Assert.Equal('*', sep));
+    }
+
+    [Fact]
+    public void GetTransactions_direct_factory_exposes_body_segments()
+    {
+        var interchange = X12Interchange.Parse(Multi271Interchange);
+
+        var firstBodyIds = interchange.GetTransactions(
+            (tx, d) => tx.Segments.Select(s => s.SegmentId).ToList()).ToList();
+
+        Assert.Equal(2, firstBodyIds.Count);
+        Assert.Contains("BHT", firstBodyIds[0]);
+        Assert.Contains("EB",  firstBodyIds[0]);
+    }
+
     // ── Cycle 5 ───────────────────────────────────────────────────────────
 
     [Fact]
