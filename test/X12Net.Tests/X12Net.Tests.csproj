@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\X12Net\X12Net.csproj" />
+    <ProjectReference Include="..\..\src\X12Net.FluentValidation\X12Net.FluentValidation.csproj" />
   </ItemGroup>
 
 </Project>
