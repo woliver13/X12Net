@@ -51,6 +51,12 @@ public sealed class X12Reader : IDisposable
     // ── Asynchronous API ──────────────────────────────────────────────────
 
     /// <summary>Asynchronously enumerates all segments in the interchange.</summary>
+    /// <remarks>
+    /// This overload operates on an in-memory string and is CPU-bound.
+    /// It does not perform asynchronous I/O; the async enumeration yields
+    /// between segments but does not release the thread during parsing.
+    /// For true async I/O, use a <c>Stream</c>-based constructor (see TD-14).
+    /// </remarks>
     public async IAsyncEnumerable<X12Segment> ReadAllSegmentsAsync(
         [System.Runtime.CompilerServices.EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
@@ -99,6 +105,13 @@ public sealed class X12Reader : IDisposable
     /// <summary>
     /// Asynchronously streams all ST/SE transaction sets through a caller-provided factory.
     /// </summary>
+    /// <remarks>
+    /// This overload operates on an in-memory string and is CPU-bound.
+    /// It delegates to the synchronous <see cref="ReadTransactions{T}"/> and provides
+    /// no additional asynchronous I/O benefit. The <c>CancellationToken</c> is checked
+    /// between transactions but there is no I/O to cancel.
+    /// For true async I/O, use a <c>Stream</c>-based constructor (see TD-14).
+    /// </remarks>
     public async IAsyncEnumerable<T> ReadTransactionsAsync<T>(
         Func<X12Segment, IReadOnlyList<X12Segment>, X12Segment, T> factory,
         [System.Runtime.CompilerServices.EnumeratorCancellation] CancellationToken cancellationToken = default)
