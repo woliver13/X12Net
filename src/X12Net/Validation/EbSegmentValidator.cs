@@ -58,6 +58,12 @@ public static class EbSegmentValidator
         "CA","LA","LE","NE","VS",
     };
 
+    /// <summary>Authorization/Certification Required indicator (EB11).</summary>
+    private static readonly HashSet<string> Eb11Codes = new(StringComparer.Ordinal) { "N", "Y", "U" };
+
+    /// <summary>In-Plan Network Indicator (EB12).</summary>
+    private static readonly HashSet<string> Eb12Codes = new(StringComparer.Ordinal) { "N", "U", "W", "Y" };
+
     // ── Public API ────────────────────────────────────────────────────────
 
     /// <summary>
@@ -81,8 +87,10 @@ public static class EbSegmentValidator
         CheckCodeSet(ebSegment, 9,  Eb09Codes, X12ErrorCode.EbInvalidQuantityQualifier,
             "EB09 Quantity Qualifier", "code set 673", errors);
         CheckNonNegative(ebSegment, 10, X12ErrorCode.EbNegativeQuantity, "EB10 Quantity", errors);
-        CheckEb11AuthorizationRequired(ebSegment, errors);
-        CheckEb12InPlanNetwork(ebSegment, errors);
+        CheckCodeSet(ebSegment, 11, Eb11Codes, X12ErrorCode.EbInvalidAuthorizationIndicator,
+            "EB11 Authorization/Certification Required", "valid indicators (N, Y, U)", errors);
+        CheckCodeSet(ebSegment, 12, Eb12Codes, X12ErrorCode.EbInvalidInPlanNetworkIndicator,
+            "EB12 In-Plan Network Indicator", "valid indicators (N, U, W, Y)", errors);
         // EB13 Procedure Identifier: full code-set validation (ICD-10/CPT/HCPCS) is out of scope.
         CheckEb09Eb10Pairing(ebSegment, errors);
         CheckEb06RequiresNumericElement(ebSegment, errors);
@@ -152,22 +160,6 @@ public static class EbSegmentValidator
         if (TryParseDecimal(val, out decimal pct) && (pct < 0 || pct > 100))
             errors.Add(new(X12ErrorCode.EbPercentOutOfRange,
                 $"EB08 Percent '{val}' must be between 0.00 and 100.00."));
-    }
-
-    private static void CheckEb11AuthorizationRequired(X12Segment seg, List<X12ValidationError> errors)
-    {
-        string val = GetElement(seg, 11);
-        if (!string.IsNullOrEmpty(val) && val != "N" && val != "Y" && val != "U")
-            errors.Add(new(X12ErrorCode.EbInvalidAuthorizationIndicator,
-                $"EB11 Authorization/Certification Required '{val}' must be N, Y, or U."));
-    }
-
-    private static void CheckEb12InPlanNetwork(X12Segment seg, List<X12ValidationError> errors)
-    {
-        string val = GetElement(seg, 12);
-        if (!string.IsNullOrEmpty(val) && val != "N" && val != "U" && val != "W" && val != "Y")
-            errors.Add(new(X12ErrorCode.EbInvalidInPlanNetworkIndicator,
-                $"EB12 In-Plan Network Indicator '{val}' must be N, U, W, or Y."));
     }
 
     private static void CheckEb09Eb10Pairing(X12Segment seg, List<X12ValidationError> errors)
