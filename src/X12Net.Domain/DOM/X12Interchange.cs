@@ -1,6 +1,5 @@
 using System.Text;
 using woliver13.X12Net.Core;
-using woliver13.X12Net.IO;
 
 namespace woliver13.X12Net.DOM;
 
@@ -77,8 +76,7 @@ public sealed class X12Interchange
     public static X12Interchange Parse(string input)
     {
         var delimiters = X12Delimiters.FromIsa(input);
-        using var reader = new X12Reader(input, delimiters);
-        var all = reader.ReadAllSegments().ToList();
+        var all = X12SegmentParser.ParseAll(input, delimiters).ToList();
         return Build(all, delimiters);
     }
 

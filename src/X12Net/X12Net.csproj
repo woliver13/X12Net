@@ -25,28 +25,19 @@
     <TreatWarningsAsErrors Condition="'$(Configuration)' == 'Release'">true</TreatWarningsAsErrors>
   </PropertyGroup>
 
-  <ItemGroup>
-    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
-      <_Parameter1>X12Net.Tests</_Parameter1>
-    </AssemblyAttribute>
-  </ItemGroup>
-
   <!-- Bundle README.md into the NuGet package root -->
   <ItemGroup>
     <None Include="..\..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
+  <!-- Aggregate the three Clean Architecture layers -->
   <ItemGroup>
-    <ProjectReference Include="..\X12Net.SourceGenerator\X12Net.SourceGenerator.csproj"
-                      OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\X12Net.Domain\X12Net.Domain.csproj" />
+    <ProjectReference Include="..\X12Net.Infrastructure\X12Net.Infrastructure.csproj" />
+    <ProjectReference Include="..\X12Net.Application\X12Net.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <!-- AsyncInterfaces is inbox on net8.0; only needed for netstandard2.0 -->
-    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0"
-                      Condition="'$(TargetFramework)' == 'netstandard2.0'" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
     <!-- SourceLink embeds source URLs in PDB for debuggable symbols -->
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="all" />
   </ItemGroup>
