@@ -33,12 +33,12 @@ public class X12TransactionTests
         using var reader = new X12Reader(fragment, Delimiters);
         var segments = reader.ReadAllSegments().ToList();
 
-        Assert.Equal(4, segments.Count);
-        Assert.Equal("ST",  segments[0].SegmentId);
-        Assert.Equal("AK1", segments[1].SegmentId);
-        Assert.Equal("AK9", segments[2].SegmentId);
-        Assert.Equal("SE",  segments[3].SegmentId);
-        Assert.Equal("999", segments[0][1]);   // ST01 transaction set ID
+        segments.Count.ShouldBe(4);
+        segments[0].SegmentId.ShouldBe("ST");
+        segments[1].SegmentId.ShouldBe("AK1");
+        segments[2].SegmentId.ShouldBe("AK9");
+        segments[3].SegmentId.ShouldBe("SE");
+        segments[0][1].ShouldBe("999");   // ST01 transaction set ID
     }
 
     // ── Cycle 3 ───────────────────────────────────────────────────────────
@@ -52,15 +52,15 @@ public class X12TransactionTests
         var edi = tx.ToEdi(interchange.Delimiters);
 
         // Must start with ST and end with SE~
-        Assert.StartsWith("ST*", edi);
-        Assert.EndsWith("SE*4*0001~", edi);
+        edi.ShouldStartWith("ST*");
+        edi.ShouldEndWith("SE*4*0001~");
 
         // Re-parsing the text must yield ST, body segments, SE
         using var reader = new X12Reader(edi, interchange.Delimiters);
         var segments = reader.ReadAllSegments().ToList();
-        Assert.Equal("ST",  segments[0].SegmentId);
-        Assert.Equal("AK1", segments[1].SegmentId);
-        Assert.Equal("AK9", segments[2].SegmentId);
-        Assert.Equal("SE",  segments[3].SegmentId);
+        segments[0].SegmentId.ShouldBe("ST");
+        segments[1].SegmentId.ShouldBe("AK1");
+        segments[2].SegmentId.ShouldBe("AK9");
+        segments[3].SegmentId.ShouldBe("SE");
     }
 }

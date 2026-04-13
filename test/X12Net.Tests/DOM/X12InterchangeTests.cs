@@ -38,8 +38,8 @@ public class X12InterchangeTests
     {
         var interchange = X12Interchange.Parse(FullInterchange);
 
-        Assert.Equal("ISA", interchange.ISA.SegmentId);
-        Assert.Equal("IEA", interchange.IEA.SegmentId);
+        interchange.ISA.SegmentId.ShouldBe("ISA");
+        interchange.IEA.SegmentId.ShouldBe("IEA");
     }
 
     // ── Cycle 2 ───────────────────────────────────────────────────────────
@@ -49,9 +49,9 @@ public class X12InterchangeTests
     {
         var interchange = X12Interchange.Parse(FullInterchange);
 
-        Assert.Single(interchange.FunctionalGroups);
-        Assert.Equal("GS", interchange.FunctionalGroups[0].GS.SegmentId);
-        Assert.Equal("GE", interchange.FunctionalGroups[0].GE.SegmentId);
+        interchange.FunctionalGroups.ShouldHaveSingleItem();
+        interchange.FunctionalGroups[0].GS.SegmentId.ShouldBe("GS");
+        interchange.FunctionalGroups[0].GE.SegmentId.ShouldBe("GE");
     }
 
     // ── Cycle 3 ───────────────────────────────────────────────────────────
@@ -62,9 +62,9 @@ public class X12InterchangeTests
         var interchange = X12Interchange.Parse(FullInterchange);
         var group = interchange.FunctionalGroups[0];
 
-        Assert.Single(group.Transactions);
-        Assert.Equal("ST", group.Transactions[0].ST.SegmentId);
-        Assert.Equal("SE", group.Transactions[0].SE.SegmentId);
+        group.Transactions.ShouldHaveSingleItem();
+        group.Transactions[0].ST.SegmentId.ShouldBe("ST");
+        group.Transactions[0].SE.SegmentId.ShouldBe("SE");
     }
 
     // ── Cycle 4 ───────────────────────────────────────────────────────────
@@ -77,8 +77,8 @@ public class X12InterchangeTests
 
         // Inner segments: AK1 + AK9 (ST and SE are envelope, not counted as body)
         var ids = tx.Segments.Select(s => s.SegmentId).ToList();
-        Assert.Contains("AK1", ids);
-        Assert.Contains("AK9", ids);
+        ids.ShouldContain("AK1");
+        ids.ShouldContain("AK9");
     }
 
     // Two transactions inside a single functional group
@@ -108,9 +108,9 @@ public class X12InterchangeTests
     {
         var interchange = X12Interchange.Parse(EmptyInterchange);
 
-        Assert.Empty(interchange.FunctionalGroups);
-        Assert.Equal("ISA", interchange.ISA.SegmentId);
-        Assert.Equal("IEA", interchange.IEA.SegmentId);
+        interchange.FunctionalGroups.ShouldBeEmpty();
+        interchange.ISA.SegmentId.ShouldBe("ISA");
+        interchange.IEA.SegmentId.ShouldBe("IEA");
     }
 
     // ── Cycle 3 (Phase 4) ─────────────────────────────────────────────────
@@ -120,11 +120,11 @@ public class X12InterchangeTests
     {
         var interchange = X12Interchange.Parse(TwoTxOneGroupInterchange);
 
-        Assert.Single(interchange.FunctionalGroups);
+        interchange.FunctionalGroups.ShouldHaveSingleItem();
         var group = interchange.FunctionalGroups[0];
-        Assert.Equal(2, group.Transactions.Count);
-        Assert.Equal("0001", group.Transactions[0].ST[2]); // ST02 control number
-        Assert.Equal("0002", group.Transactions[1].ST[2]);
+        group.Transactions.Count.ShouldBe(2);
+        group.Transactions[0].ST[2].ShouldBe("0001"); // ST02 control number
+        group.Transactions[1].ST[2].ShouldBe("0002");
     }
 
     // ── Phase 2, Cycle 1 ─────────────────────────────────────────────────
@@ -137,10 +137,10 @@ public class X12InterchangeTests
         var edI = interchange.ToString();
         var reparsed = X12Interchange.Parse(edI);
 
-        Assert.Equal("ISA", reparsed.ISA.SegmentId);
-        Assert.Single(reparsed.FunctionalGroups);
-        Assert.Single(reparsed.FunctionalGroups[0].Transactions);
-        Assert.Equal("IEA", reparsed.IEA.SegmentId);
+        reparsed.ISA.SegmentId.ShouldBe("ISA");
+        reparsed.FunctionalGroups.ShouldHaveSingleItem();
+        reparsed.FunctionalGroups[0].Transactions.ShouldHaveSingleItem();
+        reparsed.IEA.SegmentId.ShouldBe("IEA");
     }
 
     // ── Phase 2, Cycle 2 ─────────────────────────────────────────────────
@@ -153,10 +153,10 @@ public class X12InterchangeTests
         var reparsed = X12Interchange.Parse(interchange.ToString());
         var tx = reparsed.FunctionalGroups[0].Transactions[0];
 
-        Assert.Equal("AK1", tx.Segments[0].SegmentId);
-        Assert.Equal("FA",  tx.Segments[0][1]);   // AK101
-        Assert.Equal("AK9", tx.Segments[1].SegmentId);
-        Assert.Equal("A",   tx.Segments[1][1]);   // AK901
+        tx.Segments[0].SegmentId.ShouldBe("AK1");
+        tx.Segments[0][1].ShouldBe("FA");   // AK101
+        tx.Segments[1].SegmentId.ShouldBe("AK9");
+        tx.Segments[1][1].ShouldBe("A");    // AK901
     }
 
     // ── Phase 2, Cycle 6 ─────────────────────────────────────────────────
@@ -182,9 +182,9 @@ public class X12InterchangeTests
 
         var txns = interchange.GetTransactions(X12Net.Transactions.Ts271.Parse).ToList();
 
-        Assert.Equal(2, txns.Count);
-        Assert.Equal("1", txns[0].EB!.EligibilityOrBenefitInformation);
-        Assert.Equal("C", txns[1].EB!.EligibilityOrBenefitInformation);
+        txns.Count.ShouldBe(2);
+        txns[0].EB!.EligibilityOrBenefitInformation.ShouldBe("1");
+        txns[1].EB!.EligibilityOrBenefitInformation.ShouldBe("C");
     }
 
     // ── GetTransactions direct-factory overload (TD-15) ──────────────────
@@ -198,9 +198,9 @@ public class X12InterchangeTests
         var stIds = interchange.GetTransactions(
             (tx, delimiters) => tx.ST[1]).ToList();
 
-        Assert.Equal(2, stIds.Count);
-        Assert.Equal("271", stIds[0]);
-        Assert.Equal("271", stIds[1]);
+        stIds.Count.ShouldBe(2);
+        stIds[0].ShouldBe("271");
+        stIds[1].ShouldBe("271");
     }
 
     [Fact]
@@ -211,8 +211,8 @@ public class X12InterchangeTests
         var separators = interchange.GetTransactions(
             (tx, d) => d.ElementSeparator).ToList();
 
-        Assert.Equal(2, separators.Count);
-        Assert.All(separators, sep => Assert.Equal('*', sep));
+        separators.Count.ShouldBe(2);
+        separators.ShouldAllBe(sep => sep == '*');
     }
 
     [Fact]
@@ -223,9 +223,9 @@ public class X12InterchangeTests
         var firstBodyIds = interchange.GetTransactions(
             (tx, d) => tx.Segments.Select(s => s.SegmentId).ToList()).ToList();
 
-        Assert.Equal(2, firstBodyIds.Count);
-        Assert.Contains("BHT", firstBodyIds[0]);
-        Assert.Contains("EB",  firstBodyIds[0]);
+        firstBodyIds.Count.ShouldBe(2);
+        firstBodyIds[0].ShouldContain("BHT");
+        firstBodyIds[0].ShouldContain("EB");
     }
 
     // ── Cycle 5 ───────────────────────────────────────────────────────────
@@ -235,10 +235,10 @@ public class X12InterchangeTests
     {
         var interchange = X12Interchange.Parse(TwoGroupInterchange);
 
-        Assert.Equal(2, interchange.FunctionalGroups.Count);
-        Assert.Equal("FA",  interchange.FunctionalGroups[0].GS[1]);  // GS01
-        Assert.Equal("HB",  interchange.FunctionalGroups[1].GS[1]);  // GS01
-        Assert.Equal("999", interchange.FunctionalGroups[0].Transactions[0].ST[1]); // ST01
-        Assert.Equal("271", interchange.FunctionalGroups[1].Transactions[0].ST[1]); // ST01
+        interchange.FunctionalGroups.Count.ShouldBe(2);
+        interchange.FunctionalGroups[0].GS[1].ShouldBe("FA");  // GS01
+        interchange.FunctionalGroups[1].GS[1].ShouldBe("HB");  // GS01
+        interchange.FunctionalGroups[0].Transactions[0].ST[1].ShouldBe("999"); // ST01
+        interchange.FunctionalGroups[1].Transactions[0].ST[1].ShouldBe("271"); // ST01
     }
 }

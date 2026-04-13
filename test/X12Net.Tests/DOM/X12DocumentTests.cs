@@ -13,8 +13,8 @@ public class X12DocumentTests
     {
         var doc = X12Document.Parse(TwoSegmentInput);
 
-        Assert.Equal("ISA", doc.Segments[0].SegmentId);
-        Assert.Equal("GS",  doc.Segments[1].SegmentId);
+        doc.Segments[0].SegmentId.ShouldBe("ISA");
+        doc.Segments[1].SegmentId.ShouldBe("GS");
     }
 
     [Fact]
@@ -23,7 +23,7 @@ public class X12DocumentTests
         var doc = X12Document.Parse(TwoSegmentInput);
 
         // doc["GS", 1] = first element of the first GS segment
-        Assert.Equal("FA", doc["GS", 1]);
+        doc["GS", 1].ShouldBe("FA");
     }
 
     [Fact]
@@ -33,7 +33,7 @@ public class X12DocumentTests
 
         doc["GS", 2] = "NEWSENDER";
 
-        Assert.Equal("NEWSENDER", doc["GS", 2]);
+        doc["GS", 2].ShouldBe("NEWSENDER");
     }
 
     [Fact]
@@ -57,9 +57,9 @@ public class X12DocumentTests
 
         // Generic indexer: returns ALL mutable segments with given segment ID
         var gsSegments = doc.AllSegments("GS");
-        Assert.Equal(2, gsSegments.Count);
-        Assert.Equal("FA", gsSegments[0][1]);
-        Assert.Equal("HB", gsSegments[1][1]);
+        gsSegments.Count.ShouldBe(2);
+        gsSegments[0][1].ShouldBe("FA");
+        gsSegments[1][1].ShouldBe("HB");
     }
 
     [Fact]
@@ -70,8 +70,8 @@ public class X12DocumentTests
         doc["GS", 2] = "NEWSENDER";
         string output = doc.ToString();
 
-        Assert.Contains("GS*FA*NEWSENDER*", output);
-        Assert.StartsWith("ISA*", output);
+        output.ShouldContain("GS*FA*NEWSENDER*");
+        output.ShouldStartWith("ISA*");
     }
 
     // ── Cycle 1 (Phase 8) ─────────────────────────────────────────────────
@@ -85,7 +85,7 @@ public class X12DocumentTests
         // GS has 8 elements; index 20 is beyond current length
         var value = gs[20];
 
-        Assert.Equal(string.Empty, value);
+        value.ShouldBe(string.Empty);
     }
 
     // ── Cycle 2 (Phase 7) ─────────────────────────────────────────────────
@@ -99,9 +99,9 @@ public class X12DocumentTests
         // GS has 8 elements; set element 10 (beyond current length)
         gs[10] = "EXTRA";
 
-        Assert.Equal("EXTRA", gs[10]);
+        gs[10].ShouldBe("EXTRA");
         // Elements 9 is auto-filled with empty string
-        Assert.Equal(string.Empty, gs[9]);
+        gs[9].ShouldBe(string.Empty);
     }
 
     // ── Cycle 4 (Phase 7) ─────────────────────────────────────────────────
@@ -128,8 +128,8 @@ public class X12DocumentTests
         var reparsed = X12Document.Parse(doc.ToString());
         var reparsedEbs = reparsed.AllSegments("EB");
 
-        Assert.Equal("W", reparsedEbs[0][1]);
-        Assert.Equal("X", reparsedEbs[1][1]);
+        reparsedEbs[0][1].ShouldBe("W");
+        reparsedEbs[1][1].ShouldBe("X");
     }
 
     // ── Cycle 3 (Phase 6) ─────────────────────────────────────────────────
@@ -152,9 +152,9 @@ public class X12DocumentTests
 
         var reparsed = X12Document.Parse(doc.ToString());
 
-        Assert.Equal("ACME", reparsed["GS", 2]);
+        reparsed["GS", 2].ShouldBe("ACME");
         // Other elements unaffected
-        Assert.Equal("FA", reparsed["GS", 1]);
-        Assert.Equal("RECEIVER", reparsed["GS", 3]);
+        reparsed["GS", 1].ShouldBe("FA");
+        reparsed["GS", 3].ShouldBe("RECEIVER");
     }
 }
