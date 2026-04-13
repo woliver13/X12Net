@@ -9,7 +9,7 @@ public class X12TokenTests
     {
         var token = new X12Token(X12TokenType.SegmentId, "ISA");
 
-        Assert.Equal(X12TokenType.SegmentId, token.Type);
-        Assert.Equal("ISA", token.Value);
+        token.Type.ShouldBe(X12TokenType.SegmentId);
+        token.Value.ShouldBe("ISA");
     }
 }
