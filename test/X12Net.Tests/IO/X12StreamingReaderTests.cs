@@ -35,10 +35,10 @@ public class X12StreamingReaderTests
 
         var segments = reader.ReadAllSegments().ToList();
 
-        Assert.True(segments.Count >= 3);
-        Assert.Equal("ISA", segments[0].SegmentId);
-        Assert.Equal("GS",  segments[1].SegmentId);
-        Assert.Equal("IEA", segments[^1].SegmentId);
+        (segments.Count >= 3).ShouldBeTrue();
+        segments[0].SegmentId.ShouldBe("ISA");
+        segments[1].SegmentId.ShouldBe("GS");
+        segments[^1].SegmentId.ShouldBe("IEA");
     }
 
     [Fact]
@@ -52,8 +52,8 @@ public class X12StreamingReaderTests
         await foreach (var seg in reader.ReadAllSegmentsAsync())
             segments.Add(seg.SegmentId);
 
-        Assert.Contains("ISA", segments);
-        Assert.Contains("IEA", segments);
+        segments.ShouldContain("ISA");
+        segments.ShouldContain("IEA");
     }
 
     [Fact]
@@ -65,8 +65,8 @@ public class X12StreamingReaderTests
 
         var txns = reader.ReadTransactions((st, body, se) => st[1]).ToList();
 
-        Assert.Single(txns);
-        Assert.Equal("999", txns[0]);
+        txns.ShouldHaveSingleItem();
+        txns[0].ShouldBe("999");
     }
 
     [Fact]
@@ -80,8 +80,8 @@ public class X12StreamingReaderTests
         await foreach (var id in reader.ReadTransactionsAsync((st, body, se) => st[1]))
             txns.Add(id);
 
-        Assert.Single(txns);
-        Assert.Equal("999", txns[0]);
+        txns.ShouldHaveSingleItem();
+        txns[0].ShouldBe("999");
     }
 
     [Fact]
@@ -91,7 +91,7 @@ public class X12StreamingReaderTests
         using var stream = ToStream(edi);
         using var reader = new X12Reader(stream, maxSegments: 5);
 
-        Assert.Throws<X12MemoryCapException>(() => reader.ReadAllSegments().ToList());
+        Should.Throw<X12MemoryCapException>(() => reader.ReadAllSegments().ToList());
     }
 
     // ── Cycle 6 ───────────────────────────────────────────────────────────
@@ -108,8 +108,8 @@ public class X12StreamingReaderTests
         {
             // Advance to first segment only
             var moved = enumerator.MoveNextAsync().AsTask().GetAwaiter().GetResult();
-            Assert.True(moved);
-            Assert.Equal("ISA", enumerator.Current.SegmentId);
+            moved.ShouldBeTrue();
+            enumerator.Current.SegmentId.ShouldBe("ISA");
         }
         finally
         {
@@ -125,10 +125,10 @@ public class X12StreamingReaderTests
         string input = MakeInterchange(bodySegmentCount: 10);  // ISA+GS+ST+10×AK1+SE+GE+IEA = 15 segs
         using var reader = new X12Reader(input, maxSegments: 5);
 
-        var ex = Assert.Throws<X12MemoryCapException>(() =>
+        var ex = Should.Throw<X12MemoryCapException>(() =>
             reader.ReadAllSegments().ToList());
 
-        Assert.Contains("5", ex.Message);
+        ex.Message.ShouldContain("5");
     }
 
     // ── Cycle 8 ───────────────────────────────────────────────────────────
@@ -139,7 +139,7 @@ public class X12StreamingReaderTests
         string input = MakeInterchange(bodySegmentCount: 10);
         using var reader = new X12Reader(input, maxSegments: 5);
 
-        await Assert.ThrowsAsync<X12MemoryCapException>(async () =>
+        await Should.ThrowAsync<X12MemoryCapException>(async () =>
         {
             await foreach (var _ in reader.ReadAllSegmentsAsync()) { }
         });

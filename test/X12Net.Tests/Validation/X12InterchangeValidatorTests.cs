@@ -33,8 +33,8 @@ public class X12InterchangeValidatorTests
 
         var result = validator.Validate(MismatchedControlNumber);
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.ErrorCode == "ControlNumberMismatch");
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.ErrorCode == "ControlNumberMismatch");
     }
 
     // ── Cycle 3 ───────────────────────────────────────────────────────────
@@ -46,6 +46,6 @@ public class X12InterchangeValidatorTests
 
         var result = validator.Validate(ValidInterchange);
 
-        Assert.True(result.IsValid);
+        result.IsValid.ShouldBeTrue();
     }
 }

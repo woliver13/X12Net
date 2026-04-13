@@ -82,8 +82,8 @@ public class Ts271ValidatorTests
     {
         var result = Ts271Validator.Validate(Valid271);
 
-        Assert.True(result.IsValid);
-        Assert.Empty(result.Errors);
+        result.IsValid.ShouldBeTrue();
+        result.Errors.ShouldBeEmpty();
     }
 
     // ── Cycle 2 — structural early-exit ───────────────────────────────────
@@ -96,10 +96,10 @@ public class Ts271ValidatorTests
 
         var result = Ts271Validator.Validate(noEnvelope);
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.MissingRequiredSegment);
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.Code == X12ErrorCode.MissingRequiredSegment);
         // EB-specific codes must NOT appear — phase 2 must not run.
-        Assert.DoesNotContain(result.Errors, e => e.Code == X12ErrorCode.EbInvalidEligibilityCode);
+        result.Errors.ShouldNotContain(e => e.Code == X12ErrorCode.EbInvalidEligibilityCode);
     }
 
     // ── Cycle 3 — EB semantic errors surface ─────────────────────────────
@@ -109,10 +109,10 @@ public class Ts271ValidatorTests
     {
         var result = Ts271Validator.Validate(Valid271WithBadEb01);
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.EbInvalidEligibilityCode);
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.Code == X12ErrorCode.EbInvalidEligibilityCode);
         // No structural errors — only the EB problem.
-        Assert.DoesNotContain(result.Errors, e => e.Code == X12ErrorCode.ControlNumberMismatch);
+        result.Errors.ShouldNotContain(e => e.Code == X12ErrorCode.ControlNumberMismatch);
     }
 
     // ── Cycle 4 — combined structural + EB errors ─────────────────────────
@@ -122,9 +122,9 @@ public class Ts271ValidatorTests
     {
         var result = Ts271Validator.Validate(Mismatched271WithBadEb);
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.ControlNumberMismatch);
-        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.EbInvalidEligibilityCode);
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.Code == X12ErrorCode.ControlNumberMismatch);
+        result.Errors.ShouldContain(e => e.Code == X12ErrorCode.EbInvalidEligibilityCode);
     }
 
     // ── Cycle 5 — multiple EB segments each validated independently ───────
@@ -134,9 +134,9 @@ public class Ts271ValidatorTests
     {
         var result = Ts271Validator.Validate(Valid271TwoEbsOneInvalid);
 
-        Assert.False(result.IsValid);
+        result.IsValid.ShouldBeFalse();
         // Exactly one EB error — from the second EB, not the first.
-        Assert.Single(result.Errors, e => e.Code == X12ErrorCode.EbInvalidEligibilityCode);
+        result.Errors.Where(e => e.Code == X12ErrorCode.EbInvalidEligibilityCode).ShouldHaveSingleItem();
     }
 
     // ── Cycle 6 — valid 271 with no EB segments ───────────────────────────
@@ -146,7 +146,7 @@ public class Ts271ValidatorTests
     {
         var result = Ts271Validator.Validate(Valid271NoEb);
 
-        Assert.True(result.IsValid);
-        Assert.Empty(result.Errors);
+        result.IsValid.ShouldBeTrue();
+        result.Errors.ShouldBeEmpty();
     }
 }

@@ -12,7 +12,7 @@ public class X12WriterTests
         writer.WriteSegment("NM1", "IL", "1", "DOE", "JOHN");
         string result = writer.ToString();
 
-        Assert.Equal("NM1*IL*1*DOE*JOHN~", result);
+        result.ShouldBe("NM1*IL*1*DOE*JOHN~");
     }
 
     [Fact]
@@ -28,6 +28,6 @@ public class X12WriterTests
         foreach (var seg in reader.ReadAllSegments())
             writer.WriteSegment(seg.SegmentId, seg.Elements.ToArray());
 
-        Assert.Equal(original, writer.ToString());
+        writer.ToString().ShouldBe(original);
     }
 }

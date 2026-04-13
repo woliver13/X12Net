@@ -21,8 +21,8 @@ public class X12SchemaTests
         registry.Register(schema);
 
         var retrieved = registry.Get("ZZZ");
-        Assert.NotNull(retrieved);
-        Assert.Equal("ZZZ", retrieved!.TransactionSetId);
+        retrieved.ShouldNotBeNull();
+        retrieved!.TransactionSetId.ShouldBe("ZZZ");
     }
 
     // ── Cycle 10 ──────────────────────────────────────────────────────────
@@ -36,8 +36,8 @@ public class X12SchemaTests
         const string input = "ZZZ*HELLO*WORLD~";
         var tx = X12DynamicTransaction.Parse(input, schema);
 
-        Assert.Equal("HELLO", tx["ZZZ", "Field1"]);
-        Assert.Equal("WORLD", tx["ZZZ", "Field2"]);
+        tx["ZZZ", "Field1"].ShouldBe("HELLO");
+        tx["ZZZ", "Field2"].ShouldBe("WORLD");
     }
 
     // ── Cycle 11 ──────────────────────────────────────────────────────────
@@ -53,10 +53,10 @@ public class X12SchemaTests
             new X12SegmentSchema("DN1", new[] { "ToothCode", "Surface" }));
 
         // Inherited segments are present
-        Assert.NotNull(dentalSchema.GetSegment("CLM"));
+        dentalSchema.GetSegment("CLM").ShouldNotBeNull();
         // Extended segment is also present
-        Assert.NotNull(dentalSchema.GetSegment("DN1"));
-        Assert.Equal("837D", dentalSchema.TransactionSetId);
+        dentalSchema.GetSegment("DN1").ShouldNotBeNull();
+        dentalSchema.TransactionSetId.ShouldBe("837D");
     }
 
     // ── Cycle 3 (Phase 4) ─────────────────────────────────────────────────
@@ -68,8 +68,8 @@ public class X12SchemaTests
 
         var result = X12SchemaValidator.Validate(input, Ts271Schema);
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.Message.Contains("BHT"));
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.Message.Contains("BHT"));
     }
 
     // ── Cycle 4 (Phase 4) ─────────────────────────────────────────────────
@@ -81,8 +81,8 @@ public class X12SchemaTests
 
         var result = X12SchemaValidator.Validate(input, Ts271Schema);
 
-        Assert.True(result.IsValid);
-        Assert.Empty(result.Errors);
+        result.IsValid.ShouldBeTrue();
+        result.Errors.ShouldBeEmpty();
     }
 
     // ── Cycle 2 (Phase 5) ─────────────────────────────────────────────────
@@ -109,8 +109,8 @@ public class X12SchemaTests
         var errors = X12SchemaValidator.ValidateInterchange(interchange, registry);
 
         // First transaction has BHT → valid; second is missing BHT → one error
-        Assert.Single(errors);
-        Assert.Contains("BHT", errors[0].Message);
+        errors.ShouldHaveSingleItem();
+        errors[0].Message.ShouldContain("BHT");
     }
 
     // ── Cycle 3 (Phase 7) ─────────────────────────────────────────────────
@@ -135,7 +135,7 @@ public class X12SchemaTests
         var interchange = X12Net.DOM.X12Interchange.Parse(input);
         var errors = X12SchemaValidator.ValidateInterchange(interchange, registry);
 
-        Assert.Empty(errors);
+        errors.ShouldBeEmpty();
     }
 
     // ── Cycle 4 (Phase 5) ─────────────────────────────────────────────────
@@ -151,10 +151,10 @@ public class X12SchemaTests
 
         var allEb = tx.AllSegments("EB").ToList();
 
-        Assert.Equal(3, allEb.Count);
-        Assert.Equal("1", allEb[0][1]);  // EB01
-        Assert.Equal("C", allEb[1][1]);
-        Assert.Equal("W", allEb[2][1]);
+        allEb.Count.ShouldBe(3);
+        allEb[0][1].ShouldBe("1");  // EB01
+        allEb[1][1].ShouldBe("C");
+        allEb[2][1].ShouldBe("W");
     }
 
     // ── Cycle 4 (Phase 8) ─────────────────────────────────────────────────
@@ -170,7 +170,7 @@ public class X12SchemaTests
 
         var result = tx.AllSegments("NM1");  // NM1 not in schema or input
 
-        Assert.Empty(result);
+        result.ShouldBeEmpty();
     }
 
     // ── Cycle 5 (Phase 4) ─────────────────────────────────────────────────
@@ -185,7 +185,7 @@ public class X12SchemaTests
         var tx = X12DynamicTransaction.Parse(input, schema);
 
         // "MISSING" segment was never in the input or schema
-        Assert.Throws<KeyNotFoundException>(() => _ = tx["MISSING", "Field1"]);
+        Should.Throw<KeyNotFoundException>(() => _ = tx["MISSING", "Field1"]);
     }
 
     // ── Cycle 12 ──────────────────────────────────────────────────────────
@@ -209,9 +209,9 @@ public class X12SchemaTests
 
         var tx = X12DynamicTransaction.Parse(input, schema);
 
-        Assert.Equal("FA",           tx["AK1", "FunctionalIdentifierCode"]);
-        Assert.Equal("1",            tx["AK1", "GroupControlNumber"]);
-        Assert.Equal("005010X231A1", tx["AK1", "Version"]);
-        Assert.Equal("A",            tx["AK9", "AckCode"]);
+        tx["AK1", "FunctionalIdentifierCode"].ShouldBe("FA");
+        tx["AK1", "GroupControlNumber"].ShouldBe("1");
+        tx["AK1", "Version"].ShouldBe("005010X231A1");
+        tx["AK9", "AckCode"].ShouldBe("A");
     }
 }

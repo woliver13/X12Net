@@ -17,9 +17,9 @@ public class X12ReaderTests
 
         var segments = reader.ReadAllSegments().ToList();
 
-        Assert.Equal(2, segments.Count);
-        Assert.Equal("ISA", segments[0].SegmentId);
-        Assert.Equal("GS",  segments[1].SegmentId);
+        segments.Count.ShouldBe(2);
+        segments[0].SegmentId.ShouldBe("ISA");
+        segments[1].SegmentId.ShouldBe("GS");
     }
 
     [Fact]
@@ -30,11 +30,11 @@ public class X12ReaderTests
         var gs = reader.ReadAllSegments().First(s => s.SegmentId == "GS");
 
         // GS*FA*SENDER*RECEIVER*20190901*1200*1*X*005010X231A1
-        Assert.Equal("FA",              gs[1]);  // GS01 — functional identifier code
-        Assert.Equal("SENDER",          gs[2]);  // GS02
-        Assert.Equal("RECEIVER",        gs[3]);  // GS03
-        Assert.Equal("20190901",        gs[4]);  // GS04 — date
-        Assert.Equal("005010X231A1",    gs[8]);  // GS08 — version
+        gs[1].ShouldBe("FA");              // GS01 — functional identifier code
+        gs[2].ShouldBe("SENDER");          // GS02
+        gs[3].ShouldBe("RECEIVER");        // GS03
+        gs[4].ShouldBe("20190901");        // GS04 — date
+        gs[8].ShouldBe("005010X231A1");    // GS08 — version
     }
 
     [Fact]
@@ -46,9 +46,9 @@ public class X12ReaderTests
         await foreach (var seg in reader.ReadAllSegmentsAsync())
             segments.Add(seg);
 
-        Assert.Equal(2, segments.Count);
-        Assert.Equal("ISA", segments[0].SegmentId);
-        Assert.Equal("GS",  segments[1].SegmentId);
+        segments.Count.ShouldBe(2);
+        segments[0].SegmentId.ShouldBe("ISA");
+        segments[1].SegmentId.ShouldBe("GS");
     }
 
     // ── Issue #10 ─────────────────────────────────────────────────────────
@@ -72,7 +72,7 @@ public class X12ReaderTests
         var clm = segments.First(s => s.SegmentId == "CLM");
 
         // CLM05 should be assembled with '^' as the component separator
-        Assert.Equal("11^B^1", clm[5]);
+        clm[5].ShouldBe("11^B^1");
     }
 
     [Fact]
@@ -81,7 +81,7 @@ public class X12ReaderTests
         var ms = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(SimpleInput));
         var reader = new X12Reader(ms);
         reader.Dispose();
-        Assert.Throws<ObjectDisposedException>(() => ms.ReadByte());
+        Should.Throw<ObjectDisposedException>(() => ms.ReadByte());
     }
 
     [Fact]
@@ -89,6 +89,6 @@ public class X12ReaderTests
     {
         var reader = new X12Reader(SimpleInput);
         reader.Dispose();
-        Assert.Throws<ObjectDisposedException>(() => reader.ReadAllSegments().ToList());
+        Should.Throw<ObjectDisposedException>(() => reader.ReadAllSegments().ToList());
     }
 }

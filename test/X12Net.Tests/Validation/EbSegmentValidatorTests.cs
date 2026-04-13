@@ -22,8 +22,8 @@ public class EbSegmentValidatorTests
     {
         var result = EbSegmentValidator.ValidateRaw("EB*1~");
 
-        Assert.True(result.IsValid);
-        Assert.Empty(result.Errors);
+        result.IsValid.ShouldBeTrue();
+        result.Errors.ShouldBeEmpty();
     }
 
     // ── Cycle 2 — EB01 required ───────────────────────────────────────────
@@ -33,8 +33,8 @@ public class EbSegmentValidatorTests
     {
         var result = EbSegmentValidator.ValidateRaw("EB*~");
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.EbMissingEligibilityCode);
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.Code == X12ErrorCode.EbMissingEligibilityCode);
     }
 
     [Fact]
@@ -42,8 +42,8 @@ public class EbSegmentValidatorTests
     {
         var result = EbSegmentValidator.ValidateRaw("EB~");
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.EbMissingEligibilityCode);
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.Code == X12ErrorCode.EbMissingEligibilityCode);
     }
 
     // ── Cycle 3 — EB01 code set ───────────────────────────────────────────
@@ -53,8 +53,8 @@ public class EbSegmentValidatorTests
     {
         var result = EbSegmentValidator.ValidateRaw("EB*ZZ~");
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.EbInvalidEligibilityCode);
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.Code == X12ErrorCode.EbInvalidEligibilityCode);
     }
 
     [Theory]
@@ -70,7 +70,7 @@ public class EbSegmentValidatorTests
     {
         var result = EbSegmentValidator.ValidateRaw($"EB*{code}~");
 
-        Assert.True(result.IsValid);
+        result.IsValid.ShouldBeTrue();
     }
 
     // ── Cycle 4 — EB02 coverage level code ───────────────────────────────
@@ -80,8 +80,8 @@ public class EbSegmentValidatorTests
     {
         var result = EbSegmentValidator.ValidateRaw("EB*1*ZZZ~");
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.EbInvalidCoverageLevelCode);
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.Code == X12ErrorCode.EbInvalidCoverageLevelCode);
     }
 
     [Theory]
@@ -92,7 +92,7 @@ public class EbSegmentValidatorTests
     {
         var result = EbSegmentValidator.ValidateRaw($"EB*1*{code}~");
 
-        Assert.True(result.IsValid);
+        result.IsValid.ShouldBeTrue();
     }
 
     [Fact]
@@ -100,7 +100,7 @@ public class EbSegmentValidatorTests
     {
         var result = EbSegmentValidator.ValidateRaw("EB*1~");
 
-        Assert.True(result.IsValid);
+        result.IsValid.ShouldBeTrue();
     }
 
     // ── Cycle 5 — EB03 composite service type code ────────────────────────
@@ -110,7 +110,7 @@ public class EbSegmentValidatorTests
     {
         var result = EbSegmentValidator.ValidateRaw("EB*1**30~");
 
-        Assert.True(result.IsValid);
+        result.IsValid.ShouldBeTrue();
     }
 
     [Fact]
@@ -119,7 +119,7 @@ public class EbSegmentValidatorTests
         // X12Reader stores composite "30:35:48" as a single element string joined by ':'
         var result = ValidateEb("1", "", "30:35:48");
 
-        Assert.True(result.IsValid);
+        result.IsValid.ShouldBeTrue();
     }
 
     [Fact]
@@ -127,8 +127,8 @@ public class EbSegmentValidatorTests
     {
         var result = EbSegmentValidator.ValidateRaw("EB*1**ZZ~");
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.EbInvalidServiceTypeCode);
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.Code == X12ErrorCode.EbInvalidServiceTypeCode);
     }
 
     [Fact]
@@ -136,8 +136,8 @@ public class EbSegmentValidatorTests
     {
         var result = ValidateEb("1", "", "30:ZZ:48");
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.EbInvalidServiceTypeCode);
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.Code == X12ErrorCode.EbInvalidServiceTypeCode);
     }
 
     // ── Cycle 6 — EB04 insurance type code ───────────────────────────────
@@ -147,8 +147,8 @@ public class EbSegmentValidatorTests
     {
         var result = EbSegmentValidator.ValidateRaw("EB*1***ZZ~");
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.EbInvalidInsuranceTypeCode);
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.Code == X12ErrorCode.EbInvalidInsuranceTypeCode);
     }
 
     [Theory]
@@ -158,7 +158,7 @@ public class EbSegmentValidatorTests
     {
         var result = EbSegmentValidator.ValidateRaw($"EB*1***{code}~");
 
-        Assert.True(result.IsValid);
+        result.IsValid.ShouldBeTrue();
     }
 
     // ── Cycle 7 — EB05 plan description length ────────────────────────────
@@ -168,8 +168,8 @@ public class EbSegmentValidatorTests
     {
         var result = ValidateEb("1", "", "", "", new string('A', 51));
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.EbPlanDescriptionTooLong);
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.Code == X12ErrorCode.EbPlanDescriptionTooLong);
     }
 
     [Fact]
@@ -177,7 +177,7 @@ public class EbSegmentValidatorTests
     {
         var result = ValidateEb("1", "", "", "", new string('A', 50));
 
-        Assert.True(result.IsValid);
+        result.IsValid.ShouldBeTrue();
     }
 
     // ── Cycle 8 — EB06 time period qualifier ─────────────────────────────
@@ -188,8 +188,8 @@ public class EbSegmentValidatorTests
         // EB07 supplied so the EB06 relational rule is satisfied
         var result = ValidateEb("1", "", "", "", "", "ZZ", "100");
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.EbInvalidTimePeriodQualifier);
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.Code == X12ErrorCode.EbInvalidTimePeriodQualifier);
     }
 
     [Theory]
@@ -201,7 +201,7 @@ public class EbSegmentValidatorTests
         // EB07 = "100" so the relational rule is satisfied
         var result = ValidateEb("1", "", "", "", "", code, "100");
 
-        Assert.True(result.IsValid);
+        result.IsValid.ShouldBeTrue();
     }
 
     // ── Cycle 9 — EB07 monetary amount ───────────────────────────────────
@@ -211,8 +211,8 @@ public class EbSegmentValidatorTests
     {
         var result = ValidateEb("1", "", "", "", "", "", "-100");
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.EbNegativeMonetaryAmount);
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.Code == X12ErrorCode.EbNegativeMonetaryAmount);
     }
 
     [Theory]
@@ -221,7 +221,7 @@ public class EbSegmentValidatorTests
     {
         var result = ValidateEb("1", "", "", "", "", "", amount);
 
-        Assert.True(result.IsValid);
+        result.IsValid.ShouldBeTrue();
     }
 
     // ── Cycle 10 — EB08 percent ───────────────────────────────────────────
@@ -232,8 +232,8 @@ public class EbSegmentValidatorTests
     {
         var result = ValidateEb("1", "", "", "", "", "", "", pct);
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.EbPercentOutOfRange);
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.Code == X12ErrorCode.EbPercentOutOfRange);
     }
 
     [Theory]
@@ -242,7 +242,7 @@ public class EbSegmentValidatorTests
     {
         var result = ValidateEb("1", "", "", "", "", "", "", pct);
 
-        Assert.True(result.IsValid);
+        result.IsValid.ShouldBeTrue();
     }
 
     // ── Cycle 11 — EB09 quantity qualifier ───────────────────────────────
@@ -253,8 +253,8 @@ public class EbSegmentValidatorTests
         // EB09 + EB10 both present so the pairing rule is satisfied
         var result = ValidateEb("1", "", "", "", "", "", "", "", "ZZ", "5");
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.EbInvalidQuantityQualifier);
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.Code == X12ErrorCode.EbInvalidQuantityQualifier);
     }
 
     [Theory]
@@ -263,7 +263,7 @@ public class EbSegmentValidatorTests
     {
         var result = ValidateEb("1", "", "", "", "", "", "", "", code, "5");
 
-        Assert.True(result.IsValid);
+        result.IsValid.ShouldBeTrue();
     }
 
     // ── Cycle 12 — EB10 quantity ──────────────────────────────────────────
@@ -274,8 +274,8 @@ public class EbSegmentValidatorTests
         // EB09 + EB10 both present to satisfy pairing rule
         var result = ValidateEb("1", "", "", "", "", "", "", "", "VS", "-5");
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.EbNegativeQuantity);
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.Code == X12ErrorCode.EbNegativeQuantity);
     }
 
     [Fact]
@@ -283,7 +283,7 @@ public class EbSegmentValidatorTests
     {
         var result = ValidateEb("1", "", "", "", "", "", "", "", "VS", "0");
 
-        Assert.True(result.IsValid);
+        result.IsValid.ShouldBeTrue();
     }
 
     // ── Cycle 13 — EB11 authorization indicator ───────────────────────────
@@ -293,8 +293,8 @@ public class EbSegmentValidatorTests
     {
         var result = ValidateEb("1", "", "", "", "", "", "", "", "", "", "X");
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.EbInvalidAuthorizationIndicator);
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.Code == X12ErrorCode.EbInvalidAuthorizationIndicator);
     }
 
     [Theory]
@@ -303,7 +303,7 @@ public class EbSegmentValidatorTests
     {
         var result = ValidateEb("1", "", "", "", "", "", "", "", "", "", code);
 
-        Assert.True(result.IsValid);
+        result.IsValid.ShouldBeTrue();
     }
 
     // ── Cycle 14 — EB12 in-plan network indicator ─────────────────────────
@@ -313,8 +313,8 @@ public class EbSegmentValidatorTests
     {
         var result = ValidateEb("1", "", "", "", "", "", "", "", "", "", "", "X");
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.EbInvalidInPlanNetworkIndicator);
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.Code == X12ErrorCode.EbInvalidInPlanNetworkIndicator);
     }
 
     [Theory]
@@ -323,7 +323,7 @@ public class EbSegmentValidatorTests
     {
         var result = ValidateEb("1", "", "", "", "", "", "", "", "", "", "", code);
 
-        Assert.True(result.IsValid);
+        result.IsValid.ShouldBeTrue();
     }
 
     // ── Cycle 15 — EB09/EB10 pairing rule ────────────────────────────────
@@ -333,8 +333,8 @@ public class EbSegmentValidatorTests
     {
         var result = ValidateEb("1", "", "", "", "", "", "", "", "VS", "");
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.EbQuantityQualifierWithoutQuantity);
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.Code == X12ErrorCode.EbQuantityQualifierWithoutQuantity);
     }
 
     [Fact]
@@ -342,8 +342,8 @@ public class EbSegmentValidatorTests
     {
         var result = ValidateEb("1", "", "", "", "", "", "", "", "", "5");
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.EbQuantityQualifierWithoutQuantity);
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.Code == X12ErrorCode.EbQuantityQualifierWithoutQuantity);
     }
 
     [Fact]
@@ -351,7 +351,7 @@ public class EbSegmentValidatorTests
     {
         var result = ValidateEb("1", "", "", "", "", "", "", "", "VS", "5");
 
-        Assert.True(result.IsValid);
+        result.IsValid.ShouldBeTrue();
     }
 
     [Fact]
@@ -359,7 +359,7 @@ public class EbSegmentValidatorTests
     {
         var result = EbSegmentValidator.ValidateRaw("EB*1~");
 
-        Assert.True(result.IsValid);
+        result.IsValid.ShouldBeTrue();
     }
 
     // ── Cycle 16 — EB06 relational rule ──────────────────────────────────
@@ -369,8 +369,8 @@ public class EbSegmentValidatorTests
     {
         var result = ValidateEb("1", "", "", "", "", "29");
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.EbTimePeriodRequiresAmount);
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.Code == X12ErrorCode.EbTimePeriodRequiresAmount);
     }
 
     [Fact]
@@ -378,7 +378,7 @@ public class EbSegmentValidatorTests
     {
         var result = ValidateEb("1", "", "", "", "", "29", "500");
 
-        Assert.True(result.IsValid);
+        result.IsValid.ShouldBeTrue();
     }
 
     [Fact]
@@ -386,7 +386,7 @@ public class EbSegmentValidatorTests
     {
         var result = ValidateEb("1", "", "", "", "", "29", "", "20");
 
-        Assert.True(result.IsValid);
+        result.IsValid.ShouldBeTrue();
     }
 
     [Fact]
@@ -395,7 +395,7 @@ public class EbSegmentValidatorTests
         // EB09 + EB10 both supplied to satisfy pairing rule
         var result = ValidateEb("1", "", "", "", "", "29", "", "", "VS", "3");
 
-        Assert.True(result.IsValid);
+        result.IsValid.ShouldBeTrue();
     }
 
     // ── Cycle 17 — fully populated valid segment ──────────────────────────
@@ -411,7 +411,7 @@ public class EbSegmentValidatorTests
             "1", "FAM", "30:35", "HM", "BLUE PLUS PPO",
             "29", "500.00", "20.00", "VS", "10", "Y", "Y");
 
-        Assert.True(result.IsValid);
-        Assert.Empty(result.Errors);
+        result.IsValid.ShouldBeTrue();
+        result.Errors.ShouldBeEmpty();
     }
 }

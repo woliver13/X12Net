@@ -21,8 +21,8 @@ public class X12ValidatorTests
     {
         var result = X12Validator.Validate(GE01MismatchInterchange);
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.GeTransactionCountMismatch);
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.Code == X12ErrorCode.GeTransactionCountMismatch);
     }
 
 
@@ -43,8 +43,8 @@ public class X12ValidatorTests
     {
         var result = X12Validator.Validate(ValidInterchange);
 
-        Assert.True(result.IsValid);
-        Assert.Empty(result.Errors);
+        result.IsValid.ShouldBeTrue();
+        result.Errors.ShouldBeEmpty();
     }
 
     // ── Cycle 2 ───────────────────────────────────────────────────────────
@@ -70,8 +70,8 @@ public class X12ValidatorTests
 
         var result = X12Validator.Validate(bad);
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.IsaSenderIdTooLong);
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.Code == X12ErrorCode.IsaSenderIdTooLong);
     }
 
     // ── Cycle 3 ───────────────────────────────────────────────────────────
@@ -83,8 +83,8 @@ public class X12ValidatorTests
 
         var result = X12Validator.Validate(bad);
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.ControlNumberMismatch);
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.Code == X12ErrorCode.ControlNumberMismatch);
     }
 
     // ── Cycle 4 ───────────────────────────────────────────────────────────
@@ -97,8 +97,8 @@ public class X12ValidatorTests
 
         var result = X12Validator.Validate(bad);
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.SeSegmentCountMismatch);
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.Code == X12ErrorCode.SeSegmentCountMismatch);
     }
 
     // ── Cycle 4 (Phase 4) ─────────────────────────────────────────────────
@@ -111,8 +111,8 @@ public class X12ValidatorTests
 
         var result = X12Validator.Validate(bad);
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.GroupControlNumberMismatch);
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.Code == X12ErrorCode.GroupControlNumberMismatch);
     }
 
     // ── Cycle 5 ───────────────────────────────────────────────────────────
@@ -125,8 +125,8 @@ public class X12ValidatorTests
 
         var result = X12Validator.Validate(bad);
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.MissingRequiredSegment);
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.Code == X12ErrorCode.MissingRequiredSegment);
     }
 
     // ── Cycle 1 (Issue 3) ─────────────────────────────────────────────────
@@ -142,8 +142,8 @@ public class X12ValidatorTests
 
         var result = X12Validator.Validate(ValidInterchange, new[] { noAk1 });
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.Message.Contains("AK1 is forbidden"));
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.Message.Contains("AK1 is forbidden"));
     }
 
     // ── Issue 6 — non-numeric control fields ─────────────────────────────
@@ -155,8 +155,8 @@ public class X12ValidatorTests
 
         var result = X12Validator.Validate(bad);
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.MalformedControlField);
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.Code == X12ErrorCode.MalformedControlField);
     }
 
     [Fact]
@@ -166,8 +166,8 @@ public class X12ValidatorTests
 
         var result = X12Validator.Validate(bad);
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.MalformedControlField);
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.Code == X12ErrorCode.MalformedControlField);
     }
 
     [Fact]
@@ -177,8 +177,8 @@ public class X12ValidatorTests
 
         var result = X12Validator.Validate(bad);
 
-        Assert.False(result.IsValid);
-        Assert.Contains(result.Errors, e => e.Code == X12ErrorCode.MalformedControlField);
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldContain(e => e.Code == X12ErrorCode.MalformedControlField);
     }
 
     // ── Cycle 2 (Issue 3) ─────────────────────────────────────────────────
@@ -186,7 +186,7 @@ public class X12ValidatorTests
     [Fact]
     public void DefaultRules_contains_all_built_in_rules()
     {
-        Assert.Equal(7, X12Validator.DefaultRules.Count);
+        X12Validator.DefaultRules.Count.ShouldBe(7);
     }
 
     [Fact]
@@ -198,6 +198,6 @@ public class X12ValidatorTests
         // Running with no rules at all should return valid (nothing checked)
         var result = X12Validator.Validate(noIea, builtInRules: false);
 
-        Assert.True(result.IsValid);
+        result.IsValid.ShouldBeTrue();
     }
 }

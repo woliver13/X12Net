@@ -16,11 +16,11 @@ public class EdgeCaseTests
         using var reader = new X12Reader(input, delimiters);
         var seg = reader.ReadAllSegments().Single();
 
-        Assert.Equal("NM1",   seg.SegmentId);
-        Assert.Equal("IL",    seg[1]);
-        Assert.Equal("1",     seg[2]);
-        Assert.Equal("SMITH", seg[3]);
-        Assert.Equal("",      seg[4]);
+        seg.SegmentId.ShouldBe("NM1");
+        seg[1].ShouldBe("IL");
+        seg[2].ShouldBe("1");
+        seg[3].ShouldBe("SMITH");
+        seg[4].ShouldBe("");
     }
 
     // ── Cycle 2 ───────────────────────────────────────────────────────────
@@ -35,9 +35,9 @@ public class EdgeCaseTests
         using var reader = new X12Reader(edi);
         var seg = reader.ReadAllSegments().Single();
 
-        Assert.Equal("EB",    seg.SegmentId);
-        Assert.Equal("1",     seg[1]);
-        Assert.Equal("30:UC", seg[2]);   // composite preserved through round-trip
+        seg.SegmentId.ShouldBe("EB");
+        seg[1].ShouldBe("1");
+        seg[2].ShouldBe("30:UC");   // composite preserved through round-trip
     }
 
     // ── Cycle 1 ───────────────────────────────────────────────────────────
@@ -51,14 +51,14 @@ public class EdgeCaseTests
         using var reader = new X12Reader(input);
         var seg = reader.ReadAllSegments().Single();
 
-        Assert.Equal("NM1", seg.SegmentId);
-        Assert.Equal(7, seg.Elements.Count);
-        Assert.Equal("IL",    seg[1]);
-        Assert.Equal("1",     seg[2]);
-        Assert.Equal("SMITH", seg[3]);
-        Assert.Equal("JOHN",  seg[4]);
-        Assert.Equal("",      seg[5]);   // empty element
-        Assert.Equal("A",     seg[6]);
-        Assert.Equal("MI",    seg[7]);
+        seg.SegmentId.ShouldBe("NM1");
+        seg.Elements.Count.ShouldBe(7);
+        seg[1].ShouldBe("IL");
+        seg[2].ShouldBe("1");
+        seg[3].ShouldBe("SMITH");
+        seg[4].ShouldBe("JOHN");
+        seg[5].ShouldBe("");   // empty element
+        seg[6].ShouldBe("A");
+        seg[7].ShouldBe("MI");
     }
 }

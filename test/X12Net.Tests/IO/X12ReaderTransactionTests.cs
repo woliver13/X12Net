@@ -30,9 +30,9 @@ public class X12ReaderTransactionTests
     {
         var txns = ReadAll(TwoGroupInterchange);
 
-        Assert.Equal(2, txns.Count);
-        Assert.Equal("999", txns[0].ST[1]);
-        Assert.Equal("271", txns[1].ST[1]);
+        txns.Count.ShouldBe(2);
+        txns[0].ST[1].ShouldBe("999");
+        txns[1].ST[1].ShouldBe("271");
     }
 
     // ── Cycle 2 ───────────────────────────────────────────────────────────
@@ -43,12 +43,12 @@ public class X12ReaderTransactionTests
         var txns = ReadAll(TwoGroupInterchange);
 
         // Body of tx[0]: AK1 only (GS/GE are envelope, not body)
-        Assert.Single(txns[0].Segments);
-        Assert.Equal("AK1", txns[0].Segments[0].SegmentId);
+        txns[0].Segments.ShouldHaveSingleItem();
+        txns[0].Segments[0].SegmentId.ShouldBe("AK1");
 
         // Body of tx[1]: BHT only
-        Assert.Single(txns[1].Segments);
-        Assert.Equal("BHT", txns[1].Segments[0].SegmentId);
+        txns[1].Segments.ShouldHaveSingleItem();
+        txns[1].Segments[0].SegmentId.ShouldBe("BHT");
     }
 
     // ── Cycle 1 (Phase 4) ─────────────────────────────────────────────────
@@ -63,9 +63,9 @@ public class X12ReaderTransactionTests
         await foreach (var st in reader.ReadTransactionsAsync((st, body, se) => st))
             stSegs.Add(st);
 
-        Assert.Equal(2, stSegs.Count);
-        Assert.Equal("999", stSegs[0][1]);
-        Assert.Equal("271", stSegs[1][1]);
+        stSegs.Count.ShouldBe(2);
+        stSegs[0][1].ShouldBe("999");
+        stSegs[1][1].ShouldBe("271");
     }
 
     // ── Cycle 1 (Phase 6) ─────────────────────────────────────────────────
@@ -78,7 +78,7 @@ public class X12ReaderTransactionTests
         using var reader = new X12Reader(TwoGroupInterchange, delimiters);
 
         var segments = new List<string>();
-        await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+        await Should.ThrowAsync<OperationCanceledException>(async () =>
         {
             await foreach (var seg in reader.ReadAllSegmentsAsync(cts.Token))
             {
@@ -87,7 +87,7 @@ public class X12ReaderTransactionTests
             }
         });
 
-        Assert.Single(segments);  // only ISA was yielded before cancellation
+        segments.ShouldHaveSingleItem();  // only ISA was yielded before cancellation
     }
 
     // ── Cycle 1 (Phase 5) ─────────────────────────────────────────────────
@@ -100,7 +100,7 @@ public class X12ReaderTransactionTests
         using var reader = new X12Reader(TwoGroupInterchange, delimiters);
 
         var stSegs = new List<X12Segment>();
-        await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+        await Should.ThrowAsync<OperationCanceledException>(async () =>
         {
             await foreach (var st in reader.ReadTransactionsAsync((st, body, se) => st, cts.Token))
             {
@@ -109,7 +109,7 @@ public class X12ReaderTransactionTests
             }
         });
 
-        Assert.Single(stSegs);    // only the first transaction was yielded
+        stSegs.ShouldHaveSingleItem();    // only the first transaction was yielded
     }
 
     // ── Cycle 1 (Issue 1) ─────────────────────────────────────────────────
@@ -122,7 +122,7 @@ public class X12ReaderTransactionTests
 
         var ids = reader.ReadTransactions((st, body, se) => st[1]).ToList();
 
-        Assert.Equal(new[] { "999", "271" }, ids);
+        ids.ShouldBe(new[] { "999", "271" });
     }
 
     // ── Cycle 2 (Issue 1) ─────────────────────────────────────────────────
@@ -135,7 +135,7 @@ public class X12ReaderTransactionTests
         using var reader = new X12Reader(TwoGroupInterchange, delimiters);
 
         var ids = new List<string>();
-        await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+        await Should.ThrowAsync<OperationCanceledException>(async () =>
         {
             await foreach (var id in reader.ReadTransactionsAsync(
                 (st, body, se) => st[1], cts.Token))
@@ -145,8 +145,8 @@ public class X12ReaderTransactionTests
             }
         });
 
-        Assert.Single(ids);
-        Assert.Equal("999", ids[0]);
+        ids.ShouldHaveSingleItem();
+        ids[0].ShouldBe("999");
     }
 
     // ── Cycle 5 (Phase 4) ─────────────────────────────────────────────────
@@ -158,6 +158,6 @@ public class X12ReaderTransactionTests
         var delimiters = X12Delimiters.FromIsa(TwoGroupInterchange);
         using var reader = new X12Reader(TwoGroupInterchange, delimiters, maxSegments: 5);
 
-        Assert.Throws<X12MemoryCapException>(() => reader.ReadTransactions((st, body, se) => st).ToList());
+        Should.Throw<X12MemoryCapException>(() => reader.ReadTransactions((st, body, se) => st).ToList());
     }
 }
