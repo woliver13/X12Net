@@ -24,11 +24,11 @@ public class X12EnvelopeTests
 
         var envelope = X12Envelope.Parse(edi);
 
-        Assert.Equal("ACME",    envelope.SenderId);
-        Assert.Equal("PARTNER", envelope.ReceiverId);
-        Assert.Equal(42,        envelope.InterchangeControlNumber);
-        Assert.Equal(1,         envelope.DeclaredGroupCount);
-        Assert.True(envelope.IsValid);
+        envelope.SenderId.ShouldBe("ACME");
+        envelope.ReceiverId.ShouldBe("PARTNER");
+        envelope.InterchangeControlNumber.ShouldBe(42);
+        envelope.DeclaredGroupCount.ShouldBe(1);
+        envelope.IsValid.ShouldBeTrue();
     }
 
 
@@ -57,11 +57,11 @@ public class X12EnvelopeTests
         using var reader = new X12Reader(txOnly);
         var segments = reader.ReadAllSegments().ToList();
 
-        Assert.Equal(4, segments.Count);
-        Assert.Equal("ST",  segments[0].SegmentId);
-        Assert.Equal("AK1", segments[1].SegmentId);
-        Assert.Equal("AK9", segments[2].SegmentId);
-        Assert.Equal("SE",  segments[3].SegmentId);
+        segments.Count.ShouldBe(4);
+        segments[0].SegmentId.ShouldBe("ST");
+        segments[1].SegmentId.ShouldBe("AK1");
+        segments[2].SegmentId.ShouldBe("AK9");
+        segments[3].SegmentId.ShouldBe("SE");
     }
 
     // ── Cycle 21 ──────────────────────────────────────────────────────────
@@ -71,11 +71,11 @@ public class X12EnvelopeTests
     {
         var env = X12Envelope.Parse(FullInterchange);
 
-        Assert.Equal("SENDER",    env.SenderId);
-        Assert.Equal("RECEIVER",  env.ReceiverId);
-        Assert.Equal("201909",    env.Date);
-        Assert.Equal("1200",      env.Time);
-        Assert.Equal(42,          env.InterchangeControlNumber);
+        env.SenderId.ShouldBe("SENDER");
+        env.ReceiverId.ShouldBe("RECEIVER");
+        env.Date.ShouldBe("201909");
+        env.Time.ShouldBe("1200");
+        env.InterchangeControlNumber.ShouldBe(42);
     }
 
     // ── Cycle 22 ──────────────────────────────────────────────────────────
@@ -86,7 +86,7 @@ public class X12EnvelopeTests
         var env = X12Envelope.Parse(FullInterchange);
 
         // IEA01 (number of functional groups) must match actual GS count
-        Assert.True(env.IsValid, env.ValidationMessage);
+        env.IsValid.ShouldBeTrue(env.ValidationMessage);
     }
 
     [Fact]
@@ -96,8 +96,8 @@ public class X12EnvelopeTests
         string bad = FullInterchange.Replace("IEA*1*", "IEA*9*");
         var env = X12Envelope.Parse(bad);
 
-        Assert.False(env.IsValid);
-        Assert.Contains("group count", env.ValidationMessage, StringComparison.OrdinalIgnoreCase);
+        env.IsValid.ShouldBeFalse();
+        env.ValidationMessage.ShouldContain("group count", Case.Insensitive);
     }
 
     // ── Cycle 23 ──────────────────────────────────────────────────────────
@@ -112,9 +112,9 @@ public class X12EnvelopeTests
 
         string output = writer.ToString();
 
-        Assert.StartsWith("ST*", output);
-        Assert.DoesNotContain("ISA", output);
-        Assert.DoesNotContain("GS",  output);
-        Assert.EndsWith("SE*2*0001~", output);
+        output.ShouldStartWith("ST*");
+        output.ShouldNotContain("ISA");
+        output.ShouldNotContain("GS");
+        output.ShouldEndWith("SE*2*0001~");
     }
 }

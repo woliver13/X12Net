@@ -20,11 +20,11 @@ public class X12InterchangeBuilderTests
             .Build();
 
         // ISA element 3 (index 3 in the raw string) should be the custom separator
-        Assert.Equal('|', edi[3]);
+        edi[3].ShouldBe('|');
         // Segments should be terminated with newline
-        Assert.Contains('\n', edi);
+        edi.ShouldContain("\n");
         // Default '*' should NOT appear as element separator
-        Assert.DoesNotContain("ISA*", edi);
+        edi.ShouldNotContain("ISA*");
     }
 
     // ── Cycle 2 (Phase 8) ─────────────────────────────────────────────────
@@ -47,10 +47,10 @@ public class X12InterchangeBuilderTests
         var result = X12Net.Validation.X12Validator.Validate(edi);
         var interchange = X12Net.DOM.X12Interchange.Parse(edi);
 
-        Assert.True(result.IsValid, string.Join("; ", result.Errors.Select(e => e.Message)));
-        Assert.Equal(2, interchange.FunctionalGroups.Count);
-        Assert.Equal("999", interchange.FunctionalGroups[0].Transactions[0].ST[1]);
-        Assert.Equal("271", interchange.FunctionalGroups[1].Transactions[0].ST[1]);
+        result.IsValid.ShouldBeTrue(string.Join("; ", result.Errors.Select(e => e.Message)));
+        interchange.FunctionalGroups.Count.ShouldBe(2);
+        interchange.FunctionalGroups[0].Transactions[0].ST[1].ShouldBe("999");
+        interchange.FunctionalGroups[1].Transactions[0].ST[1].ShouldBe("271");
     }
 
     // ── Cycle 1 (Phase 7) ─────────────────────────────────────────────────
@@ -69,7 +69,7 @@ public class X12InterchangeBuilderTests
 
         var result = X12Net.Validation.X12Validator.Validate(edi);
 
-        Assert.True(result.IsValid, string.Join("; ", result.Errors.Select(e => e.Message)));
+        result.IsValid.ShouldBeTrue(string.Join("; ", result.Errors.Select(e => e.Message)));
     }
 
     // ── Cycle 4 (Phase 6) ─────────────────────────────────────────────────
@@ -88,10 +88,10 @@ public class X12InterchangeBuilderTests
 
         var interchange = X12Interchange.Parse(edi);
 
-        Assert.Equal("ISA", interchange.ISA.SegmentId);
-        Assert.Single(interchange.FunctionalGroups);
-        Assert.Equal("999", interchange.FunctionalGroups[0].Transactions[0].ST[1]);
-        Assert.Equal('|', interchange.Delimiters.ElementSeparator);
+        interchange.ISA.SegmentId.ShouldBe("ISA");
+        interchange.FunctionalGroups.ShouldHaveSingleItem();
+        interchange.FunctionalGroups[0].Transactions[0].ST[1].ShouldBe("999");
+        interchange.Delimiters.ElementSeparator.ShouldBe('|');
     }
 
     // ── Cycle 2 (Phase 4) ─────────────────────────────────────────────────
@@ -110,11 +110,11 @@ public class X12InterchangeBuilderTests
 
         var interchange = X12Interchange.Parse(edi);
 
-        Assert.Equal("ISA", interchange.ISA.SegmentId);
-        Assert.Equal("IEA", interchange.IEA.SegmentId);
-        Assert.Single(interchange.FunctionalGroups);
-        Assert.Single(interchange.FunctionalGroups[0].Transactions);
-        Assert.Equal("999", interchange.FunctionalGroups[0].Transactions[0].ST[1]);
+        interchange.ISA.SegmentId.ShouldBe("ISA");
+        interchange.IEA.SegmentId.ShouldBe("IEA");
+        interchange.FunctionalGroups.ShouldHaveSingleItem();
+        interchange.FunctionalGroups[0].Transactions.ShouldHaveSingleItem();
+        interchange.FunctionalGroups[0].Transactions[0].ST[1].ShouldBe("999");
     }
 
     // ── Cycle 15 ──────────────────────────────────────────────────────────
@@ -132,8 +132,8 @@ public class X12InterchangeBuilderTests
 
         // ISA is always exactly 106 chars before the first non-ISA segment
         string isa = output[..106];
-        Assert.StartsWith("ISA*", isa);
-        Assert.Equal(106, isa.Length);
+        isa.ShouldStartWith("ISA*");
+        isa.Length.ShouldBe(106);
     }
 
     // ── Cycle 16 ──────────────────────────────────────────────────────────
@@ -151,8 +151,8 @@ public class X12InterchangeBuilderTests
 
         string output = builder.Build();
 
-        Assert.Contains("GS*", output);
-        Assert.Contains("GE*", output);
+        output.ShouldContain("GS*");
+        output.ShouldContain("GE*");
     }
 
     // ── Cycle 17 ──────────────────────────────────────────────────────────
@@ -173,9 +173,9 @@ public class X12InterchangeBuilderTests
         string output = builder.Build();
 
         // ISA13 = interchange control number (9 chars, zero-padded), at fixed position
-        Assert.Contains("*000000042*", output);  // ISA control number
-        Assert.Contains("GE*1*7~",    output);   // GE02 = group control number
-        Assert.Contains("IEA*1*000000042~", output);
+        output.ShouldContain("*000000042*");  // ISA control number
+        output.ShouldContain("GE*1*7~");      // GE02 = group control number
+        output.ShouldContain("IEA*1*000000042~");
     }
 
     // ── Issue #9 ─────────────────────────────────────────────────────────
@@ -197,7 +197,7 @@ public class X12InterchangeBuilderTests
 
         string edi = builder.Build();
 
-        Assert.Contains($"GE*{transactionCount}*1~", edi);
+        edi.ShouldContain($"GE*{transactionCount}*1~");
     }
 
     [Fact]
@@ -219,7 +219,7 @@ public class X12InterchangeBuilderTests
 
         var result = X12Net.Validation.X12Validator.Validate(edi);
 
-        Assert.True(result.IsValid, string.Join("; ", result.Errors.Select(e => e.Message)));
+        result.IsValid.ShouldBeTrue(string.Join("; ", result.Errors.Select(e => e.Message)));
     }
 
     // ── Issue #7 ─────────────────────────────────────────────────────────
@@ -237,7 +237,7 @@ public class X12InterchangeBuilderTests
             .EndFunctionalGroup()
             .Build();
 
-        Assert.Contains("GS*FA*SENDER*RECEIVER*20190901*0930*", edi);
+        edi.ShouldContain("GS*FA*SENDER*RECEIVER*20190901*0930*");
     }
 
     [Fact]
@@ -254,7 +254,7 @@ public class X12InterchangeBuilderTests
             .EndFunctionalGroup()
             .Build();
 
-        Assert.Contains($"GS*FA*SENDER*RECEIVER*20190901*{interchangeTime}*", edi);
+        edi.ShouldContain($"GS*FA*SENDER*RECEIVER*20190901*{interchangeTime}*");
     }
 
     // ── Cycle 18 ──────────────────────────────────────────────────────────
@@ -278,7 +278,7 @@ public class X12InterchangeBuilderTests
         using var reader = new X12Reader(output);
         var segments = reader.ReadAllSegments().Select(s => s.SegmentId).ToList();
 
-        Assert.Equal(new[] { "ISA", "GS", "ST", "AK1", "AK9", "SE", "GE", "IEA" }, segments);
+        segments.ShouldBe(new[] { "ISA", "GS", "ST", "AK1", "AK9", "SE", "GE", "IEA" });
     }
 
     // ── Issue #11 ─────────────────────────────────────────────────────────
@@ -290,7 +290,7 @@ public class X12InterchangeBuilderTests
                       repetitionSeparator: '!')
             .Build();
 
-        Assert.Contains("*!*", edi[..106]);
+        edi[..106].ShouldContain("*!*");
     }
 
     [Fact]
@@ -300,7 +300,7 @@ public class X12InterchangeBuilderTests
                       isaVersion: "00401")
             .Build();
 
-        Assert.Contains("*00401*", edi[..106]);
+        edi[..106].ShouldContain("*00401*");
     }
 
     [Fact]
@@ -314,11 +314,11 @@ public class X12InterchangeBuilderTests
             .EndFunctionalGroup()
             .Build();
 
-        Assert.Contains("*00401*", edi[..106]);
-        Assert.Contains("*:*",     edi[..106]);
+        edi[..106].ShouldContain("*00401*");
+        edi[..106].ShouldContain("*:*");
 
         using var reader = new X12Reader(edi);
         var segIds = reader.ReadAllSegments().Select(s => s.SegmentId).ToList();
-        Assert.Equal(new[] { "ISA", "GS", "ST", "SE", "GE", "IEA" }, segIds);
+        segIds.ShouldBe(new[] { "ISA", "GS", "ST", "SE", "GE", "IEA" });
     }
 }
