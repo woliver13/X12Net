@@ -21,10 +21,8 @@ public class X12ToolCommandTests
     {
         var result = X12Tool.Parse(ValidInterchange);
 
-        Assert.Equal(
-            new[] { "ISA", "GS", "ST", "AK1", "AK9", "SE", "GE", "IEA" },
-            result.SegmentIds);
-        Assert.True(result.Success);
+        result.SegmentIds.ShouldBe(new[] { "ISA", "GS", "ST", "AK1", "AK9", "SE", "GE", "IEA" });
+        result.Success.ShouldBeTrue();
     }
 
     // ── Cycle 14 ──────────────────────────────────────────────────────────
@@ -34,8 +32,8 @@ public class X12ToolCommandTests
     {
         var result = X12Tool.Validate(ValidInterchange);
 
-        Assert.True(result.IsValid);
-        Assert.Empty(result.Errors);
+        result.IsValid.ShouldBeTrue();
+        result.Errors.ShouldBeEmpty();
     }
 
     // ── Cycle 15 ──────────────────────────────────────────────────────────
@@ -47,9 +45,9 @@ public class X12ToolCommandTests
 
         var result = X12Tool.Validate(bad);
 
-        Assert.False(result.IsValid);
-        Assert.NotEmpty(result.Errors);
-        Assert.Contains("control number", result.Errors[0], StringComparison.OrdinalIgnoreCase);
+        result.IsValid.ShouldBeFalse();
+        result.Errors.ShouldNotBeEmpty();
+        result.Errors[0].ShouldContain("control number", Case.Insensitive);
     }
 
     // ── Cycle 16 ──────────────────────────────────────────────────────────
@@ -63,9 +61,9 @@ public class X12ToolCommandTests
             elementIndex: 2,           // GS02 = application sender code
             newValue:     "NEWSENDER");
 
-        Assert.True(result.Success);
-        Assert.Contains("GS*FA*NEWSENDER*", result.Output);
-        Assert.Contains("ISA*00*", result.Output);
+        result.Success.ShouldBeTrue();
+        result.Output.ShouldContain("GS*FA*NEWSENDER*");
+        result.Output.ShouldContain("ISA*00*");
     }
 
     // ── Cycle 1 (Issue 4) ─────────────────────────────────────────────────
@@ -75,8 +73,8 @@ public class X12ToolCommandTests
     {
         var result = X12Tool.Parse(ValidInterchange);
 
-        Assert.True(result.Success);
-        Assert.Equal(new[] { "ISA", "GS", "ST", "AK1", "AK9", "SE", "GE", "IEA" }, result.SegmentIds);
+        result.Success.ShouldBeTrue();
+        result.SegmentIds.ShouldBe(new[] { "ISA", "GS", "ST", "AK1", "AK9", "SE", "GE", "IEA" });
     }
 
     [Fact]
@@ -84,8 +82,8 @@ public class X12ToolCommandTests
     {
         var result = X12Tool.Validate(ValidInterchange);
 
-        Assert.True(result.IsValid);
-        Assert.Empty(result.Errors);
+        result.IsValid.ShouldBeTrue();
+        result.Errors.ShouldBeEmpty();
     }
 
     [Fact]
@@ -93,7 +91,7 @@ public class X12ToolCommandTests
     {
         var result = X12Tool.Edit(ValidInterchange, "GS", 2, "NEWSENDER");
 
-        Assert.True(result.Success);
-        Assert.Contains("GS*FA*NEWSENDER*", result.Output);
+        result.Success.ShouldBeTrue();
+        result.Output.ShouldContain("GS*FA*NEWSENDER*");
     }
 }
