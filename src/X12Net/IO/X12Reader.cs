@@ -1,5 +1,7 @@
 using System.IO;
 using System.Text;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using woliver13.X12Net.Core;
 
 namespace woliver13.X12Net.IO;
@@ -10,11 +12,12 @@ namespace woliver13.X12Net.IO;
 /// </summary>
 public sealed class X12Reader : IDisposable
 {
-    private readonly string?          _input;
-    private readonly Stream?          _stream;
-    private readonly Encoding?        _encoding;
-    private readonly int              _maxSegments;
-    private readonly X12Delimiters?   _delimiters;
+    private readonly string?             _input;
+    private readonly Stream?             _stream;
+    private readonly Encoding?           _encoding;
+    private readonly int                 _maxSegments;
+    private readonly X12Delimiters?      _delimiters;
+    private readonly ILogger<X12Reader>  _logger;
     private bool _disposed;
 
     /// <summary>
@@ -26,20 +29,24 @@ public sealed class X12Reader : IDisposable
     /// if the interchange contains more segments than this limit.
     /// Use 0 (default) for no limit.
     /// </param>
-    public X12Reader(string input, int maxSegments = 0)
+    /// <param name="logger">Optional logger; defaults to <see cref="NullLogger{T}.Instance"/>.</param>
+    public X12Reader(string input, int maxSegments = 0, ILogger<X12Reader>? logger = null)
     {
         _input       = input ?? throw new ArgumentNullException(nameof(input));
         _maxSegments = maxSegments;
+        _logger      = logger ?? NullLogger<X12Reader>.Instance;
     }
 
     /// <summary>
     /// Initializes an <see cref="X12Reader"/> with explicit delimiters (no auto-detection).
     /// </summary>
-    public X12Reader(string input, X12Delimiters delimiters, int maxSegments = 0)
+    /// <param name="logger">Optional logger; defaults to <see cref="NullLogger{T}.Instance"/>.</param>
+    public X12Reader(string input, X12Delimiters delimiters, int maxSegments = 0, ILogger<X12Reader>? logger = null)
     {
         _input       = input ?? throw new ArgumentNullException(nameof(input));
         _delimiters  = delimiters;
         _maxSegments = maxSegments;
+        _logger      = logger ?? NullLogger<X12Reader>.Instance;
     }
 
     /// <summary>
@@ -57,16 +64,18 @@ public sealed class X12Reader : IDisposable
     /// if the interchange contains more segments than this limit.
     /// Use 0 (default) for no limit.
     /// </param>
+    /// <param name="logger">Optional logger; defaults to <see cref="NullLogger{T}.Instance"/>.</param>
     /// <remarks>
     /// When using the async API (<see cref="ReadAllSegmentsAsync"/> /
     /// <see cref="ReadTransactionsAsync{T}"/>), the stream is read asynchronously before
     /// parsing begins, providing genuine async I/O unlike the string-based overloads.
     /// </remarks>
-    public X12Reader(Stream stream, Encoding? encoding = null, int maxSegments = 0)
+    public X12Reader(Stream stream, Encoding? encoding = null, int maxSegments = 0, ILogger<X12Reader>? logger = null)
     {
         _stream      = stream ?? throw new ArgumentNullException(nameof(stream));
         _encoding    = encoding;
         _maxSegments = maxSegments;
+        _logger      = logger ?? NullLogger<X12Reader>.Instance;
     }
 
     // ── Synchronous API ───────────────────────────────────────────────────
@@ -75,6 +84,7 @@ public sealed class X12Reader : IDisposable
     public IEnumerable<X12Segment> ReadAllSegments()
     {
         ThrowIfDisposed();
+        _logger.LogDebug("Reading all segments (maxSegments={Max}).", _maxSegments);
         var content  = ReadContent();
         var resolved = _delimiters ?? X12Delimiters.FromIsa(content);
         return EnumerateWithCap(ParseSegments(content, resolved));
@@ -93,6 +103,7 @@ public sealed class X12Reader : IDisposable
         [System.Runtime.CompilerServices.EnumeratorCancellation] CancellationToken cancellationToken = default)
     {
         ThrowIfDisposed();
+        _logger.LogDebug("Reading all segments asynchronously (maxSegments={Max}).", _maxSegments);
         var content  = await ReadContentAsync().ConfigureAwait(false);
         var resolved = _delimiters ?? X12Delimiters.FromIsa(content);
         foreach (var segment in EnumerateWithCap(ParseSegments(content, resolved)))

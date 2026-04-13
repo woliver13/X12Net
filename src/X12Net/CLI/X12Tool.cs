@@ -1,3 +1,5 @@
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 using woliver13.X12Net.DOM;
 using woliver13.X12Net.IO;
 using woliver13.X12Net.Validation;
@@ -68,16 +70,20 @@ public static class X12Tool
     /// <summary>
     /// Parses <paramref name="input"/> and returns the segment IDs in document order.
     /// </summary>
-    public static ParseResult Parse(string input)
+    /// <param name="logger">Optional logger; defaults to <see cref="NullLogger.Instance"/>.</param>
+    public static ParseResult Parse(string input, ILogger? logger = null)
     {
+        logger ??= NullLogger.Instance;
         try
         {
             using var reader = new X12Reader(input);
             var ids = reader.ReadAllSegments().Select(s => s.SegmentId).ToList();
+            logger.LogInformation("Parsed {SegmentCount} segment(s).", ids.Count);
             return new ParseResult(true, ids);
         }
         catch (Exception ex)
         {
+            logger.LogError(ex, "Parse failed: {Message}", ex.Message);
             return new ParseResult(false, Array.Empty<string>(), ex.Message);
         }
     }
@@ -85,27 +91,41 @@ public static class X12Tool
     /// <summary>
     /// Validates the structural integrity of <paramref name="input"/>.
     /// </summary>
-    public static ValidateResult Validate(string input) =>
-        new(X12Validator.Validate(input));
+    /// <param name="logger">Optional logger; defaults to <see cref="NullLogger.Instance"/>.</param>
+    public static ValidateResult Validate(string input, ILogger? logger = null)
+    {
+        logger ??= NullLogger.Instance;
+        var result = new ValidateResult(X12Validator.Validate(input));
+        if (result.IsValid)
+            logger.LogInformation("Validation passed.");
+        else
+            logger.LogWarning("Validation failed with {ErrorCount} error(s).", result.Errors.Count);
+        return result;
+    }
 
     /// <summary>
     /// Sets the element at <paramref name="elementIndex"/> (1-based) of the first
     /// <paramref name="segmentId"/> segment to <paramref name="newValue"/>.
     /// </summary>
+    /// <param name="logger">Optional logger; defaults to <see cref="NullLogger.Instance"/>.</param>
     public static EditResult Edit(
-        string input,
-        string segmentId,
-        int    elementIndex,
-        string newValue)
+        string   input,
+        string   segmentId,
+        int      elementIndex,
+        string   newValue,
+        ILogger? logger = null)
     {
+        logger ??= NullLogger.Instance;
         try
         {
             var doc = X12Document.Parse(input);
             doc[segmentId, elementIndex] = newValue;
+            logger.LogInformation("Edited {SegmentId}[{Index}].", segmentId, elementIndex);
             return new EditResult(true, doc.ToString());
         }
         catch (Exception ex)
         {
+            logger.LogError(ex, "Edit failed: {Message}", ex.Message);
             return new EditResult(false, input, ex.Message);
         }
     }
