@@ -1,3 +1,5 @@
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using woliver13.X12Net.CLI;
 
@@ -6,8 +8,16 @@ using woliver13.X12Net.CLI;
 //   validate <edi-text>                          — structural validation
 //   edit     <edi-text> <seg> <elem-idx> <value> — edit one element
 
-using var loggerFactory = LoggerFactory.Create(b => b.AddConsole());
-var logger = loggerFactory.CreateLogger("x12tool");
+using var host = Host.CreateDefaultBuilder(args)
+    .ConfigureServices((_, services) =>
+    {
+        services.AddApplication();
+        services.AddInfrastructure();
+    })
+    .Build();
+
+var logger = host.Services.GetRequiredService<ILoggerFactory>().CreateLogger("x12tool");
+var tool   = host.Services.GetRequiredService<IX12ToolService>();
 
 try
 {
@@ -26,7 +36,7 @@ try
     {
         case "parse":
         {
-            var result = X12Tool.Parse(input, logger);
+            var result = tool.Parse(input);
             if (!result.Success) { logger.LogError("{Error}", result.Error); return ExitCode.UnexpectedError; }
             foreach (var id in result.SegmentIds)
                 Console.WriteLine(id);
@@ -34,7 +44,7 @@ try
         }
         case "validate":
         {
-            var result = X12Tool.Validate(input, logger);
+            var result = tool.Validate(input);
             if (result.IsValid) { Console.WriteLine("OK"); return ExitCode.Success; }
             foreach (var err in result.Errors)
                 logger.LogWarning("{ValidationError}", err);
@@ -52,7 +62,7 @@ try
                 logger.LogError("element-index must be an integer.");
                 return ExitCode.UsageError;
             }
-            var result = X12Tool.Edit(input, args[2], idx, args[4], logger);
+            var result = tool.Edit(input, args[2], idx, args[4]);
             if (!result.Success) { logger.LogError("{Error}", result.Error); return ExitCode.UnexpectedError; }
             Console.Write(result.Output);
             return ExitCode.Success;
