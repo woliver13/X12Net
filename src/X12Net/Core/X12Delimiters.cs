@@ -33,6 +33,10 @@ public readonly struct X12Delimiters : IEquatable<X12Delimiters>
     public static X12Delimiters FromIsa(string input)
     {
         try   { return X12IsaParser.Parse(input); }
+        // Intentional swallow: input that is too short or missing an ISA header
+        // (e.g. a bare segment string) is valid in several read paths. Falling back
+        // to Default delimiters lets callers handle partial input gracefully without
+        // propagating an ArgumentException through every call site.
         catch (ArgumentException) { return Default; }
     }
 

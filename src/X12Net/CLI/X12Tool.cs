@@ -83,7 +83,7 @@ public static class X12Tool
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, "Parse failed: {Message}", ex.Message);
+            ExceptionLogger.LogFullChain(logger, ex, "Parse");
             return new ParseResult(false, Array.Empty<string>(), ex.Message);
         }
     }
@@ -125,7 +125,7 @@ public static class X12Tool
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, "Edit failed: {Message}", ex.Message);
+            ExceptionLogger.LogFullChain(logger, ex, "Edit");
             return new EditResult(false, input, ex.Message);
         }
     }
