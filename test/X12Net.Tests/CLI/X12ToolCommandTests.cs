@@ -1,6 +1,6 @@
-using X12Net.CLI;
+using woliver13.X12Net.CLI;
 
-namespace X12Net.Tests.CLI;
+namespace woliver13.X12Net.Tests.CLI;
 
 public class X12ToolCommandTests
 {

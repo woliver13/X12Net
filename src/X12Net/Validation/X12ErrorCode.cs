@@ -1,4 +1,4 @@
-namespace X12Net.Validation;
+namespace woliver13.X12Net.Validation;
 
 /// <summary>Identifies the category of a validation failure.</summary>
 public enum X12ErrorCode

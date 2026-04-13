@@ -1,8 +1,8 @@
-using X12Net.DOM;
-using X12Net.IO;
-using X12Net.Validation;
+using woliver13.X12Net.DOM;
+using woliver13.X12Net.IO;
+using woliver13.X12Net.Validation;
 
-namespace X12Net.CLI;
+namespace woliver13.X12Net.CLI;
 
 /// <summary>Result of <see cref="X12Tool.Parse"/>.</summary>
 public sealed class ParseResult

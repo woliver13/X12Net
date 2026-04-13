@@ -1,4 +1,4 @@
-namespace X12Net.Core;
+namespace woliver13.X12Net.Core;
 
 /// <summary>An atomic unit produced by <see cref="X12Tokenizer"/>.</summary>
 public sealed class X12Token

@@ -1,6 +1,6 @@
-using X12Net.IO;
+using woliver13.X12Net.IO;
 
-namespace X12Net.Validation;
+namespace woliver13.X12Net.Validation;
 
 /// <summary>
 /// Validates a 271 Health Care Eligibility/Benefit Response interchange by

@@ -1,4 +1,4 @@
-namespace X12Net.DOM;
+namespace woliver13.X12Net.DOM;
 
 /// <summary>
 /// A mutable view of an EDI X12 segment held inside an <see cref="X12Document"/>.

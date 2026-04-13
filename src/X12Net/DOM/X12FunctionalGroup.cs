@@ -1,6 +1,6 @@
-using X12Net.Core;
+using woliver13.X12Net.Core;
 
-namespace X12Net.DOM;
+namespace woliver13.X12Net.DOM;
 
 /// <summary>
 /// A GS/GE functional group within an interchange.

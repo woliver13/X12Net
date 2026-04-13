@@ -1,7 +1,7 @@
 using FluentValidation;
 using FluentValidation.Results;
 
-namespace X12Net.Validation;
+namespace woliver13.X12Net.Validation;
 
 /// <summary>
 /// FluentValidation adapter for <see cref="X12Validator"/>.

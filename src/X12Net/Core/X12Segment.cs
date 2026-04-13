@@ -1,4 +1,4 @@
-namespace X12Net.Core;
+namespace woliver13.X12Net.Core;
 
 /// <summary>
 /// A parsed EDI X12 segment: its identifier and all element values in order.

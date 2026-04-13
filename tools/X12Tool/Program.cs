@@ -1,4 +1,4 @@
-using X12Net.CLI;
+using woliver13.X12Net.CLI;
 
 // x12tool <command> [options]
 //   parse    <edi-text>                          — list segment IDs

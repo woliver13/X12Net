@@ -1,9 +1,9 @@
-using X12Net.Core;
-using X12Net.DOM;
-using X12Net.IO;
-using X12Net.Validation;
+using woliver13.X12Net.Core;
+using woliver13.X12Net.DOM;
+using woliver13.X12Net.IO;
+using woliver13.X12Net.Validation;
 
-namespace X12Net.Schema;
+namespace woliver13.X12Net.Schema;
 
 /// <summary>
 /// Validates a raw EDI X12 transaction against an <see cref="X12TransactionSchema"/>,

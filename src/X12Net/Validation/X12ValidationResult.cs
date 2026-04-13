@@ -1,4 +1,4 @@
-namespace X12Net.Validation;
+namespace woliver13.X12Net.Validation;
 
 /// <summary>The outcome of an <see cref="X12Validator"/> run.</summary>
 public sealed class X12ValidationResult

@@ -1,6 +1,6 @@
-using X12Net.Core;
+using woliver13.X12Net.Core;
 
-namespace X12Net.Validation;
+namespace woliver13.X12Net.Validation;
 
 /// <summary>
 /// A single validation rule: inspects a flat list of segments and appends any

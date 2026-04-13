@@ -1,11 +1,11 @@
 using BenchmarkDotNet.Attributes;
-using X12Net.DOM;
-using X12Net.Envelopes;
-using X12Net.IO;
-using X12Net.Schema;
-using X12Net.Transactions;
+using woliver13.X12Net.DOM;
+using woliver13.X12Net.Envelopes;
+using woliver13.X12Net.IO;
+using woliver13.X12Net.Schema;
+using woliver13.X12Net.Transactions;
 
-namespace X12Net.Benchmarks;
+namespace woliver13.X12Net.Benchmarks;
 
 /// <summary>
 /// Measures the throughput and allocation profile of each major parsing and

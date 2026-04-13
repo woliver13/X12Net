@@ -1,8 +1,8 @@
 using System.Globalization;
-using X12Net.Core;
-using X12Net.IO;
+using woliver13.X12Net.Core;
+using woliver13.X12Net.IO;
 
-namespace X12Net.Validation;
+namespace woliver13.X12Net.Validation;
 
 /// <summary>
 /// Validates the element-level content of an EDI X12 EB segment as used in a

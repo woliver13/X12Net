@@ -1,7 +1,7 @@
 using System.Text;
-using X12Net.Core;
+using woliver13.X12Net.Core;
 
-namespace X12Net.DOM;
+namespace woliver13.X12Net.DOM;
 
 /// <summary>
 /// An ST/SE transaction set within a functional group.

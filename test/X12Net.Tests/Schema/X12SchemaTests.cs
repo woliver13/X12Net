@@ -1,7 +1,7 @@
-using X12Net.Schema;
-using X12Net.Validation;
+using woliver13.X12Net.Schema;
+using woliver13.X12Net.Validation;
 
-namespace X12Net.Tests.Schema;
+namespace woliver13.X12Net.Tests.Schema;
 
 public class X12SchemaTests
 {

@@ -1,7 +1,7 @@
 using System.Text;
-using X12Net.Core;
+using woliver13.X12Net.Core;
 
-namespace X12Net.Envelopes;
+namespace woliver13.X12Net.Envelopes;
 
 /// <summary>
 /// Fluent builder that constructs a complete, standards-compliant EDI X12 interchange

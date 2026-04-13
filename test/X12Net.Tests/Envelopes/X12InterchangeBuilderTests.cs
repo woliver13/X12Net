@@ -1,8 +1,8 @@
-using X12Net.DOM;
-using X12Net.Envelopes;
-using X12Net.IO;
+using woliver13.X12Net.DOM;
+using woliver13.X12Net.Envelopes;
+using woliver13.X12Net.IO;
 
-namespace X12Net.Tests.Envelopes;
+namespace woliver13.X12Net.Tests.Envelopes;
 
 public class X12InterchangeBuilderTests
 {

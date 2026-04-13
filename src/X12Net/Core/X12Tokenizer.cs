@@ -1,4 +1,4 @@
-namespace X12Net.Core;
+namespace woliver13.X12Net.Core;
 
 /// <summary>
 /// Converts raw EDI X12 text into a flat stream of <see cref="X12Token"/> values.

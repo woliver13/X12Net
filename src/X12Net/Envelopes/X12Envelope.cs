@@ -1,6 +1,6 @@
-using X12Net.DOM;
+using woliver13.X12Net.DOM;
 
-namespace X12Net.Envelopes;
+namespace woliver13.X12Net.Envelopes;
 
 /// <summary>
 /// Parses and validates the ISA/IEA envelope of an EDI X12 interchange.

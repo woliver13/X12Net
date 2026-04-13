@@ -1,7 +1,7 @@
-using X12Net.Core;
-using X12Net.IO;
+using woliver13.X12Net.Core;
+using woliver13.X12Net.IO;
 
-namespace X12Net.Schema;
+namespace woliver13.X12Net.Schema;
 
 /// <summary>
 /// A schema-driven view of a parsed EDI X12 interchange.

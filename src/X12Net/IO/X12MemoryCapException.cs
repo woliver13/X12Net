@@ -1,4 +1,4 @@
-namespace X12Net.IO;
+namespace woliver13.X12Net.IO;
 
 /// <summary>
 /// Thrown when an <see cref="X12Reader"/> is configured with a segment cap and

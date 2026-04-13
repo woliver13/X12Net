@@ -1,4 +1,4 @@
-namespace X12Net.Core;
+namespace woliver13.X12Net.Core;
 
 /// <summary>
 /// Extracts the three delimiter characters from the first ISA segment in a string

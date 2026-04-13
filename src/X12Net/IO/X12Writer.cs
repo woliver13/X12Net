@@ -1,6 +1,6 @@
 using System.Text;
 
-namespace X12Net.IO;
+namespace woliver13.X12Net.IO;
 
 /// <summary>
 /// Builds EDI X12 interchange text segment by segment.

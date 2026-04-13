@@ -1,6 +1,6 @@
-using X12Net.DOM;
+using woliver13.X12Net.DOM;
 
-namespace X12Net.Tests.DOM;
+namespace woliver13.X12Net.Tests.DOM;
 
 public class X12InterchangeTests
 {

@@ -1,7 +1,7 @@
-using X12Net.IO;
-using X12Net.Validation;
+using woliver13.X12Net.IO;
+using woliver13.X12Net.Validation;
 
-namespace X12Net.Tests.Validation;
+namespace woliver13.X12Net.Tests.Validation;
 
 public class EbSegmentValidatorTests
 {

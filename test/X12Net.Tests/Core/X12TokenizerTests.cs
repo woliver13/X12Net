@@ -1,6 +1,6 @@
-using X12Net.Core;
+using woliver13.X12Net.Core;
 
-namespace X12Net.Tests.Core;
+namespace woliver13.X12Net.Tests.Core;
 
 public class X12TokenizerTests
 {

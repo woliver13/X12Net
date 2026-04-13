@@ -1,8 +1,8 @@
 using System.Text;
-using X12Net.Core;
-using X12Net.IO;
+using woliver13.X12Net.Core;
+using woliver13.X12Net.IO;
 
-namespace X12Net.DOM;
+namespace woliver13.X12Net.DOM;
 
 /// <summary>
 /// The top-level hierarchical model of an EDI X12 interchange.

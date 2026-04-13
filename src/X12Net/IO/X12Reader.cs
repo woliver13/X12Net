@@ -1,8 +1,8 @@
 using System.IO;
 using System.Text;
-using X12Net.Core;
+using woliver13.X12Net.Core;
 
-namespace X12Net.IO;
+namespace woliver13.X12Net.IO;
 
 /// <summary>
 /// Reads EDI X12 text and surfaces it as a sequence of <see cref="X12Segment"/> objects.

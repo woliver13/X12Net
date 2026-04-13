@@ -1,4 +1,4 @@
-namespace X12Net.Schema;
+namespace woliver13.X12Net.Schema;
 
 /// <summary>Describes the named elements of one segment type within a transaction set.</summary>
 public sealed class X12SegmentSchema

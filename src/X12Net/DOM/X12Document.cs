@@ -1,7 +1,7 @@
-using X12Net.Core;
-using X12Net.IO;
+using woliver13.X12Net.Core;
+using woliver13.X12Net.IO;
 
-namespace X12Net.DOM;
+namespace woliver13.X12Net.DOM;
 
 /// <summary>
 /// An in-memory, editable representation of an EDI X12 interchange.

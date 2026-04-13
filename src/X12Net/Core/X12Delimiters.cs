@@ -1,4 +1,4 @@
-namespace X12Net.Core;
+namespace woliver13.X12Net.Core;
 
 /// <summary>
 /// The three delimiter characters used in an EDI X12 interchange.

@@ -1,4 +1,4 @@
-namespace X12Net.Schema;
+namespace woliver13.X12Net.Schema;
 
 /// <summary>
 /// A registry of <see cref="X12TransactionSchema"/> instances.

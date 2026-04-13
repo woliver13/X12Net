@@ -1,7 +1,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace X12Net.Samples;
+namespace woliver13.X12Net.Samples;
 
 /// <summary>
 /// Provides anonymized sample EDI X12 interchanges as strings, loaded from

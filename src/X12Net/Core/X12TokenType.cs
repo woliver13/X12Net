@@ -1,4 +1,4 @@
-namespace X12Net.Core;
+namespace woliver13.X12Net.Core;
 
 /// <summary>Classifies a token emitted by <see cref="X12Tokenizer"/>.</summary>
 public enum X12TokenType

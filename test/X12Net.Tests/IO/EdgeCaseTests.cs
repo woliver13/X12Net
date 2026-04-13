@@ -1,6 +1,6 @@
-using X12Net.IO;
+using woliver13.X12Net.IO;
 
-namespace X12Net.Tests.IO;
+namespace woliver13.X12Net.Tests.IO;
 
 public class EdgeCaseTests
 {

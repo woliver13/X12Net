@@ -1,6 +1,6 @@
-using X12Net.Transactions;
+using woliver13.X12Net.Transactions;
 
-namespace X12Net.Tests.Transactions;
+namespace woliver13.X12Net.Tests.Transactions;
 
 public class Ts999Tests
 {

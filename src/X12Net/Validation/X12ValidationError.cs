@@ -1,4 +1,4 @@
-namespace X12Net.Validation;
+namespace woliver13.X12Net.Validation;
 
 /// <summary>A single validation failure produced by <see cref="X12Validator"/>.</summary>
 public sealed class X12ValidationError

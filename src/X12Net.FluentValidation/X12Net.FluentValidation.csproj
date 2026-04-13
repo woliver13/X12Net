@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>net8.0;netstandard2.0</TargetFrameworks>
-    <RootNamespace>X12Net.Validation</RootNamespace>
+    <RootNamespace>woliver13.X12Net.Validation</RootNamespace>
     <AssemblyName>X12Net.FluentValidation</AssemblyName>
 
     <!-- NuGet identity -->

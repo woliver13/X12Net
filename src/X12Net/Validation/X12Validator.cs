@@ -1,7 +1,7 @@
-using X12Net.Core;
-using X12Net.IO;
+using woliver13.X12Net.Core;
+using woliver13.X12Net.IO;
 
-namespace X12Net.Validation;
+namespace woliver13.X12Net.Validation;
 
 /// <summary>
 /// Validates the structural integrity of an EDI X12 interchange.
