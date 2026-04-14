@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;netstandard2.0</TargetFrameworks>
+    <RootNamespace>woliver13.HL7Net</RootNamespace>
+    <AssemblyName>HL7Net</AssemblyName>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+
+    <!-- NuGet identity -->
+    <PackageId>HL7Net</PackageId>
+    <Title>HL7Net</Title>
+    <Description>A modern, high-performance C# library for parsing, generating, and editing HL7 v2.x documents.</Description>
+    <PackageTags>hl7;hl7v2;edi;healthcare</PackageTags>
+    <Version>0.1.0</Version>
+    <PackageProjectUrl>https://github.com/woliver13/X12Net</PackageProjectUrl>
+
+    <!-- Docs / symbols -->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>HL7Net.Tests</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- AsyncInterfaces is inbox on net8.0; only needed for netstandard2.0 -->
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0"
+                      Condition="'$(TargetFramework)' == 'netstandard2.0'" />
+  </ItemGroup>
+
+</Project>
