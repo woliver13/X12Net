@@ -6,7 +6,18 @@
       "Bash(dotnet test:*)",
       "Bash(gh issue:*)",
       "Bash(git add:*)",
-      "Bash(git commit -m ':*)"
+      "Bash(git commit -m ':*)",
+      "Bash(gh repo:*)",
+      "Bash(find src:*)",
+      "Bash(git push:*)",
+      "Bash(dotnet sln:*)",
+      "Bash(gh pr create --title 'Fix #38: HL7Net — HL7 v2.x parse, write, and DOM support' --body ':*)",
+      "Bash(grep -n \"\\\\\\\\[0\\\\\\\\]\\\\|\\\\\\\\[1\\\\\\\\]\\\\|\\\\\\\\[2\\\\\\\\]\\\\|\\\\\\\\[3\\\\\\\\]\\\\|\\\\\\\\[4\\\\\\\\]\\\\|\\\\\\\\[5\\\\\\\\]\\\\|\\\\\\\\[6\\\\\\\\]\" src/X12Net/**/*.cs)",
+      "Bash(xargs grep *)",
+      "Bash(dotnet new *)",
+      "Bash(dotnet tool *)",
+      "Bash(git stash *)",
+      "Bash(git checkout *)"
     ]
   }
 }
