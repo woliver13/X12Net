@@ -1,5 +1,5 @@
+using System.Text;
 using woliver13.X12Net.Core;
-using woliver13.X12Net.IO;
 
 namespace woliver13.X12Net.DOM;
 
@@ -37,10 +37,9 @@ public sealed class X12Document
     public static X12Document Parse(string input)
     {
         var d = X12Delimiters.FromIsa(input);
-        using var reader = new X12Reader(input, d);
 
-        var segments = reader
-            .ReadAllSegments()
+        var segments = X12SegmentParser
+            .ParseAll(input, d)
             .Select(s => new X12MutableSegment(s.SegmentId, s.Elements))
             .ToList();
 
@@ -86,10 +85,18 @@ public sealed class X12Document
     /// <summary>Serializes the document back to EDI X12 text.</summary>
     public override string ToString()
     {
-        var writer = new X12Writer(_elementSeparator, _componentSeparator, _segmentTerminator);
+        var sb = new StringBuilder();
         foreach (var seg in _segments)
-            writer.WriteSegment(seg.SegmentId, seg.Elements.ToArray());
-        return writer.ToString();
+        {
+            sb.Append(seg.SegmentId);
+            foreach (var el in seg.Elements)
+            {
+                sb.Append(_elementSeparator);
+                sb.Append(el);
+            }
+            sb.Append(_segmentTerminator);
+        }
+        return sb.ToString();
     }
 
     // ── Helpers ───────────────────────────────────────────────────────────
