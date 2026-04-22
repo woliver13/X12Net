@@ -17,7 +17,12 @@
       "Bash(dotnet new *)",
       "Bash(dotnet tool *)",
       "Bash(git stash *)",
-      "Bash(git checkout *)"
+      "Bash(git checkout *)",
+      "Bash(git reset *)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(git rm *)",
+      "Bash(git commit -m ' *)",
+      "Bash(gh pr create --title 'Fix #44: local code coverage tooling \\(Coverlet + ReportGenerator\\)' --body ' *)"
     ]
   }
 }
