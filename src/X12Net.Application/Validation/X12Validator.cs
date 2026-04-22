@@ -71,12 +71,12 @@ public static class X12Validator
         var isa = segments.First(s => s.SegmentId == "ISA");
 
         // ISA06 = sender ID (element index 6), ISA08 = receiver ID (element index 8)
-        // Each must be exactly 15 chars in the fixed-width ISA — raw value is already padded;
-        // we flag values that are longer than 15 before padding.
-        if (isa[6].TrimEnd().Length > 15)
+        // Each must be exactly X12Constants.IsaIdFieldWidth chars in the fixed-width ISA —
+        // raw value is already padded; we flag values that are longer before padding.
+        if (isa[6].TrimEnd().Length > X12Constants.IsaIdFieldWidth)
             errors.Add(new X12ValidationError(
                 X12ErrorCode.IsaSenderIdTooLong,
-                $"ISA06 sender ID '{isa[6].TrimEnd()}' exceeds 15 characters."));
+                $"ISA06 sender ID '{isa[6].TrimEnd()}' exceeds {X12Constants.IsaIdFieldWidth} characters."));
     }
 
     private static void CheckInterchangeControlNumber(
