@@ -7,7 +7,7 @@ namespace woliver13.X12Net.Core;
 /// </summary>
 public static class X12Tokenizer
 {
-    private const int MinIsaLength = 106;  // quick pre-check before delegating to X12IsaParser
+    // quick pre-check before delegating to X12IsaParser — see X12Constants.IsaMinLength
 
     // ── Public API ────────────────────────────────────────────────────────
 
@@ -34,7 +34,7 @@ public static class X12Tokenizer
             yield break;
 
         // Auto-detect when the input starts with ISA and is long enough
-        if (input.Length >= MinIsaLength && input.StartsWith("ISA", StringComparison.Ordinal))
+        if (input.Length >= X12Constants.IsaMinLength && input.StartsWith("ISA", StringComparison.Ordinal))
         {
             var d          = DetectDelimiters(input);
             elementSeparator   = d.ElementSeparator;

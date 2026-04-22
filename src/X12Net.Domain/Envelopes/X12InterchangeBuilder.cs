@@ -195,11 +195,11 @@ public sealed class X12InterchangeBuilder
 
     private string BuildISA()
     {
-        // ISA is fixed-width: 106 characters total.
-        // Fields: ISA01-ISA16, delimited by element separator, closed by segment terminator at [105].
+        // ISA is fixed-width: X12Constants.IsaMinLength characters total.
+        // Fields: ISA01-ISA16, delimited by element separator, closed by segment terminator at [X12Constants.IsaBodyLength].
         string icnPadded      = _icn.ToString().PadLeft(9, '0');
-        string senderPadded   = _senderId.PadRight(15).Substring(0, 15);
-        string receiverPadded = _receiverId.PadRight(15).Substring(0, 15);
+        string senderPadded   = _senderId.PadRight(X12Constants.IsaIdFieldWidth).Substring(0, X12Constants.IsaIdFieldWidth);
+        string receiverPadded = _receiverId.PadRight(X12Constants.IsaIdFieldWidth).Substring(0, X12Constants.IsaIdFieldWidth);
 
         // The ISA segment, without terminator:
         // ISA*00*          *00*          *ZZ*<sender15>*ZZ*<receiver15>*<date>*<time>*<ISA11>*<ISA12>*<icn9>*0*P*<ISA16>
@@ -222,10 +222,10 @@ public sealed class X12InterchangeBuilder
             $"P{_elementSep}" +
             $"{_componentSep}";
 
-        // body must be exactly 105 chars before the terminator
-        if (body.Length != 105)
+        // body must be exactly X12Constants.IsaBodyLength chars before the terminator
+        if (body.Length != X12Constants.IsaBodyLength)
             throw new InvalidOperationException(
-                $"ISA body is {body.Length} chars; expected 105. Check field widths.");
+                $"ISA body is {body.Length} chars; expected {X12Constants.IsaBodyLength}. Check field widths.");
 
         return body + _segmentTerm;
     }
