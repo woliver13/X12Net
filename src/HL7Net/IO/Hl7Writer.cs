@@ -12,7 +12,8 @@ public sealed class Hl7Writer
     /// <summary>Initializes an <see cref="Hl7Writer"/> with the given delimiters.</summary>
     public Hl7Writer(Hl7Delimiters delimiters)
     {
-        _delimiters = delimiters ?? throw new ArgumentNullException(nameof(delimiters));
+        ThrowHelper.ThrowIfNull(delimiters, nameof(delimiters));
+        _delimiters = delimiters;
     }
 
     /// <summary>

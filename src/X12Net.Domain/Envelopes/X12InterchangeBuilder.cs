@@ -255,5 +255,5 @@ public sealed class X12InterchangeBuilder
 
     // Truncates value to width if it is too long; pads with spaces on the right if it is too short.
     private static string FixedWidth(string value, int width) =>
-        value.Length >= width ? value[..width] : value.PadRight(width);
+        value.Length >= width ? value.Substring(0, width) : value.PadRight(width);
 }
