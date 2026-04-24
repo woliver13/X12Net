@@ -7,11 +7,16 @@ namespace woliver13.X12Net.Core;
 public readonly struct X12Delimiters : IEquatable<X12Delimiters>
 {
     /// <summary>Initializes delimiter values.</summary>
-    public X12Delimiters(char elementSeparator, char componentSeparator, char segmentTerminator)
+    public X12Delimiters(
+        char elementSeparator,
+        char componentSeparator,
+        char segmentTerminator,
+        char repetitionSeparator = '^')
     {
-        ElementSeparator   = elementSeparator;
-        ComponentSeparator = componentSeparator;
-        SegmentTerminator  = segmentTerminator;
+        ElementSeparator    = elementSeparator;
+        ComponentSeparator  = componentSeparator;
+        SegmentTerminator   = segmentTerminator;
+        RepetitionSeparator = repetitionSeparator;
     }
 
     /// <summary>Separates elements within a segment (ISA position 3; typically <c>*</c>).</summary>
@@ -23,8 +28,11 @@ public readonly struct X12Delimiters : IEquatable<X12Delimiters>
     /// <summary>Terminates each segment (character after ISA16; typically <c>~</c>).</summary>
     public char SegmentTerminator { get; }
 
+    /// <summary>Separates repetitions within an element (ISA11 in 005010+; typically <c>^</c>).</summary>
+    public char RepetitionSeparator { get; }
+
     /// <summary>Default delimiters used when no ISA header is present.</summary>
-    public static readonly X12Delimiters Default = new('*', ':', '~');
+    public static readonly X12Delimiters Default = new('*', ':', '~', '^');
 
     /// <summary>
     /// Detects delimiters from an ISA header.
@@ -42,9 +50,10 @@ public readonly struct X12Delimiters : IEquatable<X12Delimiters>
 
     /// <inheritdoc/>
     public bool Equals(X12Delimiters other) =>
-        ElementSeparator   == other.ElementSeparator &&
-        ComponentSeparator == other.ComponentSeparator &&
-        SegmentTerminator  == other.SegmentTerminator;
+        ElementSeparator    == other.ElementSeparator   &&
+        ComponentSeparator  == other.ComponentSeparator &&
+        SegmentTerminator   == other.SegmentTerminator  &&
+        RepetitionSeparator == other.RepetitionSeparator;
 
     /// <inheritdoc/>
     public override bool Equals(object? obj) => obj is X12Delimiters d && Equals(d);
@@ -58,11 +67,12 @@ public readonly struct X12Delimiters : IEquatable<X12Delimiters>
             hash = hash * 31 + ElementSeparator.GetHashCode();
             hash = hash * 31 + ComponentSeparator.GetHashCode();
             hash = hash * 31 + SegmentTerminator.GetHashCode();
+            hash = hash * 31 + RepetitionSeparator.GetHashCode();
             return hash;
         }
     }
 
     /// <inheritdoc/>
     public override string ToString() =>
-        $"ElementSep='{ElementSeparator}' ComponentSep='{ComponentSeparator}' SegTerm='{SegmentTerminator}'";
+        $"ElementSep='{ElementSeparator}' ComponentSep='{ComponentSeparator}' SegTerm='{SegmentTerminator}' RepSep='{RepetitionSeparator}'";
 }
