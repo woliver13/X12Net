@@ -21,8 +21,6 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
 
-    <!-- Quality gate: treat warnings as errors in Release so CI catches doc gaps -->
-    <TreatWarningsAsErrors Condition="'$(Configuration)' == 'Release'">true</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <!-- Bundle README.md into the NuGet package root -->

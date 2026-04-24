@@ -4,10 +4,7 @@
     <TargetFrameworks>net8.0;netstandard2.0</TargetFrameworks>
     <RootNamespace>woliver13.X12Net</RootNamespace>
     <AssemblyName>X12Net.Application</AssemblyName>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <TreatWarningsAsErrors Condition="'$(Configuration)' == 'Release'">true</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>

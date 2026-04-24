@@ -13,6 +13,9 @@
     <Deterministic>true</Deterministic>
     <!-- Set ContinuousIntegrationBuild automatically when running in GitHub Actions -->
     <ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">true</ContinuousIntegrationBuild>
+
+    <!-- Treat warnings as errors in Release so CI catches regressions -->
+    <TreatWarningsAsErrors Condition="'$(Configuration)' == 'Release'">true</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <!-- Explicitly opt-in to SDK-bundled .NET platform analyzers (default on net5+; making it visible here) -->
