@@ -32,7 +32,8 @@ public sealed class X12Reader : IDisposable
     /// <param name="logger">Optional logger; defaults to <see cref="NullLogger{T}.Instance"/>.</param>
     public X12Reader(string input, int maxSegments = 0, ILogger<X12Reader>? logger = null)
     {
-        _input       = input ?? throw new ArgumentNullException(nameof(input));
+        ThrowHelper.ThrowIfNull(input, nameof(input));
+        _input       = input;
         _maxSegments = maxSegments;
         _logger      = logger ?? NullLogger<X12Reader>.Instance;
     }
@@ -43,7 +44,8 @@ public sealed class X12Reader : IDisposable
     /// <param name="logger">Optional logger; defaults to <see cref="NullLogger{T}.Instance"/>.</param>
     public X12Reader(string input, X12Delimiters delimiters, int maxSegments = 0, ILogger<X12Reader>? logger = null)
     {
-        _input       = input ?? throw new ArgumentNullException(nameof(input));
+        ThrowHelper.ThrowIfNull(input, nameof(input));
+        _input       = input;
         _delimiters  = delimiters;
         _maxSegments = maxSegments;
         _logger      = logger ?? NullLogger<X12Reader>.Instance;
@@ -72,7 +74,8 @@ public sealed class X12Reader : IDisposable
     /// </remarks>
     public X12Reader(Stream stream, Encoding? encoding = null, int maxSegments = 0, ILogger<X12Reader>? logger = null)
     {
-        _stream      = stream ?? throw new ArgumentNullException(nameof(stream));
+        ThrowHelper.ThrowIfNull(stream, nameof(stream));
+        _stream      = stream;
         _encoding    = encoding;
         _maxSegments = maxSegments;
         _logger      = logger ?? NullLogger<X12Reader>.Instance;

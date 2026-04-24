@@ -19,7 +19,8 @@ public sealed class Hl7Reader
     /// <param name="maxSegments">Maximum segments to read before throwing. Defaults to 10 000.</param>
     public Hl7Reader(string text, int maxSegments = DefaultMaxSegments)
     {
-        _text        = text ?? throw new ArgumentNullException(nameof(text));
+        ThrowHelper.ThrowIfNull(text, nameof(text));
+        _text        = text;
         _maxSegments = maxSegments;
     }
 
