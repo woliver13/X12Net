@@ -24,6 +24,14 @@ public sealed class X12Segment
     /// <summary>Gets the element at <paramref name="index"/> (1-based, matching X12 field numbering).</summary>
     public string this[int index] => Elements[index - 1];
 
+    /// <summary>
+    /// Returns the individual repetitions within the element at <paramref name="elementIndex"/>
+    /// by splitting on <paramref name="repetitionSeparator"/>.
+    /// When the element contains no repetition separator the result has a single entry.
+    /// </summary>
+    public IReadOnlyList<string> GetRepetitions(int elementIndex, char repetitionSeparator) =>
+        Elements[elementIndex - 1].Split(repetitionSeparator);
+
     /// <summary>Serializes the segment back to EDI text.</summary>
     internal string ToEdi(X12Delimiters delimiters)
     {

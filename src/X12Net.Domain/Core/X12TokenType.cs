@@ -14,4 +14,7 @@ public enum X12TokenType
 
     /// <summary>Marks the end of a segment.</summary>
     SegmentTerminator,
+
+    /// <summary>A repeated value within an element, separated by the repetition separator (ISA11).</summary>
+    RepetitionData,
 }
