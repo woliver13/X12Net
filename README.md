@@ -473,6 +473,108 @@ Generated transaction types: `Ts999`, `Ts835`, `Ts837P`, `Ts837I`, `Ts837D`,
 
 ---
 
+## Extending the validator
+
+Pass additional rules to `X12Validator.Validate` via `extraRules`. Each rule is a delegate
+that receives the full segment list and appends errors. Built-in rules still run unless
+`builtInRules: false` is passed.
+
+```csharp
+using X12Net.Validation;
+
+// Reject any interchange that contains an AK1 segment (contrived example)
+X12ValidationRule noAk1 = (segments, errors) =>
+{
+    if (segments.Any(s => s.SegmentId == "AK1"))
+        errors.Add(new X12ValidationError(X12ErrorCode.MissingRequiredSegment,
+            "AK1 is not permitted in this context."));
+};
+
+var result = X12Validator.Validate(edi, extraRules: new[] { noAk1 });
+```
+
+To run only custom rules and skip the built-in structural checks:
+
+```csharp
+var result = X12Validator.Validate(edi, extraRules: new[] { myRule }, builtInRules: false);
+```
+
+---
+
+## Performance characteristics
+
+| Scenario | Recommended API | Notes |
+|----------|----------------|-------|
+| Count or scan segments without keeping them all in memory | `X12Reader` | Yields one `X12Segment` at a time; allocates only what you touch |
+| Edit element values and re-serialize | `X12Document` | Holds all segments in a mutable list; trades memory for convenience |
+| Walk the ISA → GS → ST hierarchy | `X12Interchange` | Builds the full tree up front; segments are read-only |
+| Access typed fields by name | Source-generated types (`Ts999`, etc.) | Thin wrappers over `X12Transaction`; no extra allocations |
+
+The `maxSegments` cap on `X12Reader` is a guard against malformed or malicious input that
+would otherwise allocate an unbounded number of segments. Set it when parsing untrusted data;
+leave it at the default (0 = no cap) for trusted internal files.
+
+Delimiter detection reads only the first 106 bytes of the ISA header. Both the sync and
+async `X12Reader` paths do this inline — there is no separate pre-read step.
+
+---
+
+## Error recovery
+
+`X12MemoryCapException` and `X12ValidationError` serve different purposes:
+
+- **`X12MemoryCapException`** is thrown during *parsing* when the segment count exceeds the
+  cap. The interchange is only partially read at that point; no structured result is available.
+  Catch it to record the file as unprocessable and move on.
+
+- **`X12ValidationError`** is returned by `X12Validator.Validate` *after* a successful full
+  parse. A non-empty error list means the interchange is structurally malformed but was fully
+  readable.
+
+Recommended pattern for untrusted input:
+
+```csharp
+X12ValidationResult result;
+try
+{
+    result = X12Validator.Validate(edi, maxSegments: 10_000);
+}
+catch (X12MemoryCapException ex)
+{
+    logger.LogError("File rejected: exceeded {Cap} segments.", ex.MaxSegments);
+    return;
+}
+
+if (!result.IsValid)
+{
+    foreach (var err in result.Errors)
+        logger.LogWarning("[{Code}] {Message}", err.Code, err.Message);
+    return;
+}
+
+// Safe to parse and process
+var interchange = X12Interchange.Parse(edi);
+```
+
+---
+
+## Limitations
+
+The following are known gaps. Open an issue if one affects your use case.
+
+- **Repetition separator (ISA11)** — `X12InterchangeBuilder` writes the repetition separator
+  into ISA11, but the parser does not split repeated elements (e.g. `2~3` arrives as the
+  literal string `"2~3"`). See [#40](https://github.com/woliver13/X12Net/issues/40).
+- **Sub-loops** — `X12Interchange` models one level of nesting (ISA → GS → ST). Transaction
+  sub-loops (e.g. the 2000/2100/2200 hierarchy inside an 837) are not modelled; access them
+  via the flat `tx.Segments` list or use the source-generated typed classes.
+- **Non-standard ISA widths** — the ISA header is assumed to be the standard 106-character
+  fixed-width format. Non-standard or truncated ISA headers are not supported.
+- **HL7 repetition separator** — detected in MSH-2 but not applied during parsing; repeated
+  field values arrive as raw strings. See [#41](https://github.com/woliver13/X12Net/issues/41).
+
+---
+
 ## X12Tool CLI
 
 A reference command-line tool ships in `tools/X12Tool`:
