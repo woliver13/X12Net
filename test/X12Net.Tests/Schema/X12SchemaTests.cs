@@ -188,6 +188,66 @@ public class X12SchemaTests
         Should.Throw<KeyNotFoundException>(() => _ = tx["MISSING", "Field1"]);
     }
 
+    // ── Issue #50: duplicate-guard and freeze ────────────────────────────
+
+    [Fact]
+    public void Register_throws_when_same_id_already_registered()
+    {
+        var registry = new X12SchemaRegistry();
+        var schema = new X12TransactionSchema("271", "Eligibility Response",
+            new X12SegmentSchema("EB", new[] { "EligibilityCode" }));
+
+        registry.Register(schema);
+
+        Should.Throw<InvalidOperationException>(() =>
+            registry.Register(new X12TransactionSchema("271", "Duplicate",
+                new X12SegmentSchema("EB", new[] { "EligibilityCode" }))));
+    }
+
+    [Fact]
+    public void TryRegister_registers_new_schema_and_returns_true()
+    {
+        var registry = new X12SchemaRegistry();
+        var schema = new X12TransactionSchema("270", "Eligibility Inquiry",
+            new X12SegmentSchema("BHT", new[] { "Code" }));
+
+        var result = registry.TryRegister(schema);
+
+        result.ShouldBeTrue();
+        registry.Get("270").ShouldNotBeNull();
+    }
+
+    [Fact]
+    public void TryRegister_returns_false_and_leaves_existing_schema_intact()
+    {
+        var registry = new X12SchemaRegistry();
+        var original = new X12TransactionSchema("271", "Original",
+            new X12SegmentSchema("EB", new[] { "EligibilityCode" }));
+        registry.Register(original);
+
+        var result = registry.TryRegister(new X12TransactionSchema("271", "Replacement",
+            new X12SegmentSchema("EB", new[] { "EligibilityCode" })));
+
+        result.ShouldBeFalse();
+        registry.Get("271")!.Description.ShouldBe("Original");
+    }
+
+    [Fact]
+    public void Freeze_makes_registry_read_only_and_throws_on_Register()
+    {
+        var registry = new X12SchemaRegistry();
+        registry.Register(new X12TransactionSchema("271", "Eligibility Response",
+            new X12SegmentSchema("EB", new[] { "EligibilityCode" })));
+
+        registry.IsReadOnly.ShouldBeFalse();
+        registry.Freeze();
+        registry.IsReadOnly.ShouldBeTrue();
+
+        Should.Throw<InvalidOperationException>(() =>
+            registry.Register(new X12TransactionSchema("270", "Eligibility Inquiry",
+                new X12SegmentSchema("BHT", new[] { "Code" }))));
+    }
+
     // ── Cycle 12 ──────────────────────────────────────────────────────────
 
     [Fact]
