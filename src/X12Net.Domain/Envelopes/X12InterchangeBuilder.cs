@@ -198,8 +198,8 @@ public sealed class X12InterchangeBuilder
         // ISA is fixed-width: X12Constants.IsaMinLength characters total.
         // Fields: ISA01-ISA16, delimited by element separator, closed by segment terminator at [X12Constants.IsaBodyLength].
         string icnPadded      = _icn.ToString().PadLeft(9, '0');
-        string senderPadded   = _senderId.PadRight(X12Constants.IsaIdFieldWidth).Substring(0, X12Constants.IsaIdFieldWidth);
-        string receiverPadded = _receiverId.PadRight(X12Constants.IsaIdFieldWidth).Substring(0, X12Constants.IsaIdFieldWidth);
+        string senderPadded   = FixedWidth(_senderId, X12Constants.IsaIdFieldWidth);
+        string receiverPadded = FixedWidth(_receiverId, X12Constants.IsaIdFieldWidth);
 
         // The ISA segment, without terminator:
         // ISA*00*          *00*          *ZZ*<sender15>*ZZ*<receiver15>*<date>*<time>*<ISA11>*<ISA12>*<icn9>*0*P*<ISA16>
@@ -252,4 +252,8 @@ public sealed class X12InterchangeBuilder
 
     private string BuildIEA() =>
         $"IEA{_elementSep}{_groups.Count}{_elementSep}{_icn.ToString().PadLeft(9, '0')}{_segmentTerm}";
+
+    // Truncates value to width if it is too long; pads with spaces on the right if it is too short.
+    private static string FixedWidth(string value, int width) =>
+        value.Length >= width ? value[..width] : value.PadRight(width);
 }
