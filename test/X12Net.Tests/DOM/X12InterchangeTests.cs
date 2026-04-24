@@ -233,4 +233,44 @@ public class X12InterchangeTests
         interchange.FunctionalGroups[0].Transactions[0].ST[1].ShouldBe("999"); // ST01
         interchange.FunctionalGroups[1].Transactions[0].ST[1].ShouldBe("271"); // ST01
     }
+
+    // ── ConsumeUntil characterisation tests ───────────────────────────────
+
+    [Fact]
+    public void ParseTransaction_body_is_empty_when_no_segments_between_ST_and_SE()
+    {
+        // ST immediately followed by SE — no body segments
+        const string edi =
+            "ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *201909*1200*^*00501*000000001*0*P*:~" +
+            "GS*FA*SENDER*RECEIVER*20190901*1200*1*X*005010X231A1~" +
+            "ST*999*0001~" +
+            "SE*1*0001~" +
+            "GE*1*1~" +
+            "IEA*1*000000001~";
+
+        var interchange = X12Interchange.Parse(edi);
+        var tx = interchange.FunctionalGroups[0].Transactions[0];
+
+        tx.ST.SegmentId.ShouldBe("ST");
+        tx.SE.SegmentId.ShouldBe("SE");
+        tx.Segments.ShouldBeEmpty();
+    }
+
+    [Fact]
+    public void ParseGroup_has_no_transactions_when_GS_immediately_precedes_GE()
+    {
+        // GS immediately followed by GE — empty functional group
+        const string edi =
+            "ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *201909*1200*^*00501*000000001*0*P*:~" +
+            "GS*FA*SENDER*RECEIVER*20190901*1200*1*X*005010X231A1~" +
+            "GE*0*1~" +
+            "IEA*1*000000001~";
+
+        var interchange = X12Interchange.Parse(edi);
+        var group = interchange.FunctionalGroups[0];
+
+        group.GS.SegmentId.ShouldBe("GS");
+        group.GE.SegmentId.ShouldBe("GE");
+        group.Transactions.ShouldBeEmpty();
+    }
 }

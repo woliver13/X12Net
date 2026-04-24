@@ -102,89 +102,70 @@ public sealed class X12Interchange
 
     private static X12Interchange Build(List<X12Segment> segments, X12Delimiters delimiters)
     {
-        X12Segment? isa = null;
-        X12Segment? iea = null;
+        var isa = segments.FirstOrDefault(s => s.SegmentId == "ISA")
+            ?? throw new InvalidOperationException("No ISA segment found.");
+
+        var (interchangeBody, iea, _) = ConsumeUntil(segments, segments.IndexOf(isa), "IEA");
+
         var groups = new List<X12FunctionalGroup>();
-
         int i = 0;
-        while (i < segments.Count)
+        while (i < interchangeBody.Count)
         {
-            var seg = segments[i];
-            switch (seg.SegmentId)
+            if (interchangeBody[i].SegmentId == "GS")
             {
-                case "ISA":
-                    isa = seg;
-                    i++;
-                    break;
-
-                case "IEA":
-                    iea = seg;
-                    i++;
-                    break;
-
-                case "GS":
-                    var (group, advance) = ParseGroup(segments, i);
-                    groups.Add(group);
-                    i += advance;
-                    break;
-
-                default:
-                    i++;
-                    break;
+                var (group, consumed) = ParseGroup(interchangeBody, i);
+                groups.Add(group);
+                i += consumed;
             }
+            else i++;
         }
-
-        if (isa is null) throw new InvalidOperationException("No ISA segment found.");
-        if (iea is null) throw new InvalidOperationException("No IEA segment found.");
 
         return new X12Interchange(isa, groups, iea, delimiters);
     }
 
     private static (X12FunctionalGroup group, int segmentsConsumed) ParseGroup(
-        List<X12Segment> segments, int start)
+        IReadOnlyList<X12Segment> segments, int start)
     {
         var gs = segments[start];
-        X12Segment? ge = null;
-        var transactions = new List<X12Transaction>();
+        var (groupBody, ge, next) = ConsumeUntil(segments, start, "GE");
 
-        int i = start + 1;
-        while (i < segments.Count)
+        var transactions = new List<X12Transaction>();
+        int i = 0;
+        while (i < groupBody.Count)
         {
-            var seg = segments[i];
-            if (seg.SegmentId == "GE") { ge = seg; i++; break; }
-            if (seg.SegmentId == "ST")
+            if (groupBody[i].SegmentId == "ST")
             {
-                var (tx, advance) = ParseTransaction(segments, i);
+                var (tx, consumed) = ParseTransaction(groupBody, i);
                 transactions.Add(tx);
-                i += advance;
+                i += consumed;
             }
-            else
-            {
-                i++;
-            }
+            else i++;
         }
 
-        if (ge is null) throw new InvalidOperationException("No GE segment found for GS.");
-        return (new X12FunctionalGroup(gs, transactions, ge), i - start);
+        return (new X12FunctionalGroup(gs, transactions, ge), next - start);
     }
 
     private static (X12Transaction tx, int segmentsConsumed) ParseTransaction(
-        List<X12Segment> segments, int start)
+        IReadOnlyList<X12Segment> segments, int start)
     {
         var st = segments[start];
-        X12Segment? se = null;
+        var (body, se, next) = ConsumeUntil(segments, start, "SE");
+        return (new X12Transaction(st, body, se), next - start);
+    }
+
+    // Collects all segments from segments[startIndex+1] up to (but not including) the
+    // first segment whose SegmentId equals closingId. Returns the body, the closer, and
+    // the index one past the closer (for the caller to resume scanning).
+    private static (IReadOnlyList<X12Segment> body, X12Segment closer, int next)
+        ConsumeUntil(IReadOnlyList<X12Segment> segments, int startIndex, string closingId)
+    {
         var body = new List<X12Segment>();
-
-        int i = start + 1;
-        while (i < segments.Count)
+        for (int i = startIndex + 1; i < segments.Count; i++)
         {
-            var seg = segments[i];
-            if (seg.SegmentId == "SE") { se = seg; i++; break; }
-            body.Add(seg);
-            i++;
+            if (segments[i].SegmentId == closingId)
+                return (body, segments[i], i + 1);
+            body.Add(segments[i]);
         }
-
-        if (se is null) throw new InvalidOperationException("No SE segment found for ST.");
-        return (new X12Transaction(st, body, se), i - start);
+        throw new InvalidOperationException($"No {closingId} segment found.");
     }
 }
