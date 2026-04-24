@@ -75,8 +75,7 @@ public sealed class X12Interchange
     /// <summary>Parses a raw EDI X12 interchange into a hierarchical <see cref="X12Interchange"/>.</summary>
     public static X12Interchange Parse(string input)
     {
-        var delimiters = X12Delimiters.FromIsa(input);
-        var all = X12SegmentParser.ParseAll(input, delimiters).ToList();
+        var (all, delimiters) = X12MessageParser.Parse(input);
         return Build(all, delimiters);
     }
 

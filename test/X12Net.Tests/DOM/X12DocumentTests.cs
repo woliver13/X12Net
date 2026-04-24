@@ -147,4 +147,48 @@ public class X12DocumentTests
         reparsed["GS", 1].ShouldBe("FA");
         reparsed["GS", 3].ShouldBe("RECEIVER");
     }
+
+    // ── X12MessageParser characterisation tests ───────────────────────────
+
+    // ISA header using | as element sep, ^ as component sep, \n as segment terminator
+    private const string NonstandardDelimiterInterchange =
+        "ISA|00|          |00|          |ZZ|SENDER         |ZZ|RECEIVER       |201909|1200|^|00501|000000001|0|P|:\n" +
+        "GS|FA|SENDER|RECEIVER|20190901|1200|1|X|005010X231A1\n" +
+        "ST|999|0001\n" +
+        "SE|1|0001\n" +
+        "GE|1|1\n" +
+        "IEA|1|000000001\n";
+
+    [Fact]
+    public void Both_Parse_methods_detect_identical_delimiters_for_nonstandard_interchange()
+    {
+        var doc         = X12Document.Parse(NonstandardDelimiterInterchange);
+        var interchange = X12Interchange.Parse(NonstandardDelimiterInterchange);
+
+        doc.Delimiters.ElementSeparator.ShouldBe(interchange.Delimiters.ElementSeparator);
+        doc.Delimiters.ComponentSeparator.ShouldBe(interchange.Delimiters.ComponentSeparator);
+        doc.Delimiters.SegmentTerminator.ShouldBe(interchange.Delimiters.SegmentTerminator);
+
+        doc.Delimiters.ElementSeparator.ShouldBe('|');
+        doc.Delimiters.ComponentSeparator.ShouldBe(':');
+        doc.Delimiters.SegmentTerminator.ShouldBe('\n');
+    }
+
+    [Fact]
+    public void Both_Parse_methods_yield_same_segment_count_from_same_input()
+    {
+        var doc         = X12Document.Parse(Fixtures.Edi.Valid999);
+        var interchange = X12Interchange.Parse(Fixtures.Edi.Valid999);
+
+        // X12Document counts all segments; X12Interchange exposes them via ISA+groups+IEA
+        int interchangeSegmentCount =
+            1 // ISA
+            + interchange.FunctionalGroups.Sum(g =>
+                1 // GS
+                + g.Transactions.Sum(t => 1 + t.Segments.Count + 1) // ST + body + SE
+                + 1) // GE
+            + 1; // IEA
+
+        doc.Segments.Count.ShouldBe(interchangeSegmentCount);
+    }
 }

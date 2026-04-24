@@ -36,10 +36,9 @@ public sealed class X12Document
     /// <summary>Parses raw EDI X12 text into an <see cref="X12Document"/>.</summary>
     public static X12Document Parse(string input)
     {
-        var d = X12Delimiters.FromIsa(input);
+        var (raw, d) = X12MessageParser.Parse(input);
 
-        var segments = X12SegmentParser
-            .ParseAll(input, d)
+        var segments = raw
             .Select(s => new X12MutableSegment(s.SegmentId, s.Elements))
             .ToList();
 
