@@ -32,6 +32,14 @@ public sealed class Hl7MutableSegment
     /// <summary>The number of fields in this segment.</summary>
     public int FieldCount => _fields.Count;
 
+    /// <summary>
+    /// Returns the individual repetitions within the field at <paramref name="fieldIndex"/>
+    /// by splitting on <paramref name="repetitionSeparator"/>.
+    /// When the field contains no repetition separator the result has a single entry.
+    /// </summary>
+    public IReadOnlyList<string> GetRepetitions(int fieldIndex, char repetitionSeparator) =>
+        this[fieldIndex].Split(repetitionSeparator);
+
     /// <summary>All field values (0-based internally).</summary>
     internal IReadOnlyList<string> Fields => _fields;
 }
