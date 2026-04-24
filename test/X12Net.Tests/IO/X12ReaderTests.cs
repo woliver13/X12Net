@@ -6,9 +6,7 @@ namespace woliver13.X12Net.Tests.IO;
 public class X12ReaderTests
 {
     // Two-segment interchange: ISA + GS (no IEA/GE for brevity)
-    private const string SimpleInput =
-        "ISA*00*          *00*          *ZZ*SENDER         *ZZ*RECEIVER       *201909*1200*^*00501*000000001*0*P*:~" +
-        "GS*FA*SENDER*RECEIVER*20190901*1200*1*X*005010X231A1~";
+    private const string SimpleInput = Fixtures.Edi.IsaGs;
 
     [Fact]
     public void Reader_returns_all_segments_from_simple_interchange()
