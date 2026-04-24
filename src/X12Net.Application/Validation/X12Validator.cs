@@ -73,10 +73,11 @@ public static class X12Validator
         // ISA06 = sender ID (element index 6), ISA08 = receiver ID (element index 8)
         // Each must be exactly X12Constants.IsaIdFieldWidth chars in the fixed-width ISA —
         // raw value is already padded; we flag values that are longer before padding.
-        if (isa[6].TrimEnd().Length > X12Constants.IsaIdFieldWidth)
+        var senderId = isa[6].TrimEnd();
+        if (senderId.Length > X12Constants.IsaIdFieldWidth)
             errors.Add(new X12ValidationError(
                 X12ErrorCode.IsaSenderIdTooLong,
-                $"ISA06 sender ID '{isa[6].TrimEnd()}' exceeds {X12Constants.IsaIdFieldWidth} characters."));
+                $"ISA06 sender ID '{senderId}' exceeds {X12Constants.IsaIdFieldWidth} characters."));
     }
 
     private static void CheckInterchangeControlNumber(
@@ -86,10 +87,12 @@ public static class X12Validator
         var iea = segments.First(s => s.SegmentId == "IEA");
 
         // ISA13 must equal IEA02
-        if (isa[13].TrimStart('0') != iea[2].TrimStart('0'))
+        var isaControlNumber = isa[13];
+        var ieaControlNumber = iea[2];
+        if (isaControlNumber.TrimStart('0') != ieaControlNumber.TrimStart('0'))
             errors.Add(new X12ValidationError(
                 X12ErrorCode.ControlNumberMismatch,
-                $"ISA13 control number '{isa[13]}' does not match IEA02 '{iea[2]}'."));
+                $"ISA13 control number '{isaControlNumber}' does not match IEA02 '{ieaControlNumber}'."));
     }
 
     private static void CheckGroupControlNumbers(
@@ -103,10 +106,12 @@ public static class X12Validator
             if (seg.SegmentId == "GE" && stack.Count > 0)
             {
                 var gs = stack.Pop();
-                if (gs[6].TrimStart('0') != seg[2].TrimStart('0'))
+                var gsControlNumber = gs[6];
+                var geControlNumber = seg[2];
+                if (gsControlNumber.TrimStart('0') != geControlNumber.TrimStart('0'))
                     errors.Add(new X12ValidationError(
                         X12ErrorCode.GroupControlNumberMismatch,
-                        $"GS06 '{gs[6]}' does not match GE02 '{seg[2]}'."));
+                        $"GS06 '{gsControlNumber}' does not match GE02 '{geControlNumber}'."));
             }
         }
     }
@@ -117,11 +122,12 @@ public static class X12Validator
         var iea    = segments.First(s => s.SegmentId == "IEA");
         int actual = segments.Count(s => s.SegmentId == "GS");
 
-        if (!int.TryParse(iea[1], out int declared))
+        var ieaDeclaredGroupCount = iea[1];
+        if (!int.TryParse(ieaDeclaredGroupCount, out int declared))
         {
             errors.Add(new X12ValidationError(
                 X12ErrorCode.MalformedControlField,
-                $"IEA01 '{iea[1]}' is not a valid integer."));
+                $"IEA01 '{ieaDeclaredGroupCount}' is not a valid integer."));
             return;
         }
 
@@ -144,11 +150,12 @@ public static class X12Validator
             if (seg.SegmentId == "ST" && inGroup) { stCount++; continue; }
             if (seg.SegmentId == "GE" && inGroup)
             {
-                if (!int.TryParse(seg[1], out int declared))
+                var geDeclaredTxCount = seg[1];
+                if (!int.TryParse(geDeclaredTxCount, out int declared))
                 {
                     errors.Add(new X12ValidationError(
                         X12ErrorCode.MalformedControlField,
-                        $"GE01 '{seg[1]}' is not a valid integer."));
+                        $"GE01 '{geDeclaredTxCount}' is not a valid integer."));
                 }
                 else if (declared != stCount)
                 {
@@ -174,11 +181,12 @@ public static class X12Validator
             if (seg.SegmentId == "SE" && stIndex is not null)
             {
                 int actual = (i - stIndex.Value) + 1; // ST through SE inclusive
-                if (!int.TryParse(seg[1], out int declared))
+                var seDeclaredCount = seg[1];
+                if (!int.TryParse(seDeclaredCount, out int declared))
                 {
                     errors.Add(new X12ValidationError(
                         X12ErrorCode.MalformedControlField,
-                        $"SE01 '{seg[1]}' is not a valid integer."));
+                        $"SE01 '{seDeclaredCount}' is not a valid integer."));
                 }
                 else if (declared != actual)
                 {
